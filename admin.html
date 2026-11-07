@@ -53,7 +53,7 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
 <div id="panel" hidden>
   <div class="card">
     <h3 style="color:#6d1f2f;margin-bottom:4px">الطلبات الجديدة <span id="pend" class="tag free"></span></h3>
-    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">الدعوة بتشتغل أول ما العميلة ترفع صورة التحويل. راجعي التحويل في InstaPay: لو تمام اضغطي ✅، ولو مش موجود اضغطي ❌ والدعوة هتتقفل.</p>
+    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">الدعوة مش هتظهر للضيوف غير لما تضغطي ✅. افتحي InstaPay واتأكدي إن التحويل وصل: لو تمام اضغطي ✅ والدعوة تتفعّل، ولو مش موجود اضغطي ❌.</p>
     <div id="orders"></div>
   </div>
   <div class="card">
@@ -80,7 +80,7 @@ const $=id=>document.getElementById(id);
 let PASS="";
 try{PASS=sessionStorage.getItem("fp")||"";}catch(e){}
 
-const ST={pending:"مستني مراجعة",approved:"مقبول ✅",rejected:"مرفوض ❌"};
+const ST={pending:"⏳ مستني موافقتك",approved:"مقبول ✅",rejected:"مرفوض ❌"};
 async function loadOrders(){
   const r=await SB.rpc("admin_orders",{p_pass:PASS});
   if(r.error)throw r.error;

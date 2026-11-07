@@ -462,6 +462,7 @@ body.inviting #builder{display:none}
 .mdl .havecode{display:block;margin:12px auto 0;background:none;border:0;color:#6d1f2f;text-decoration:underline;font-family:inherit;font-size:.9rem;cursor:pointer}
 .mdl .orderno{text-align:center;background:#f6ebe6;border-radius:12px;padding:8px;margin:6px 0 4px;color:#5b3a3f}
 .mdl .orderno b{color:#6d1f2f;letter-spacing:.05em;direction:ltr;display:inline-block}
+.mdl .pendnote{background:#fff4e0;color:#8a5a00;border-radius:12px;padding:10px 12px;font-size:.88rem;line-height:1.7;margin:6px 0;text-align:center}
 .mdl .private{margin-top:18px;background:#fff7ec;border:1px solid #e9d3ac;border-radius:16px;padding:14px;text-align:center}
 .mdl .private .big{direction:ltr;font-size:1.5rem;font-weight:700;letter-spacing:.2em;color:#6d1f2f;margin:6px 0}
 .mdl .private p{font-size:.85rem;color:#8a6b6f;line-height:1.7;margin-bottom:8px}
@@ -845,10 +846,11 @@ body.inviting #builder{display:none}
   <div id="getDone" hidden>
     <h3>دعوتك جاهزة 🎉</h3>
     <div class="orderno" id="orderNo" hidden></div>
+    <div class="pendnote" id="pendNote" hidden>⏳ بنراجع التحويل، ودعوتك هتتفعّل عند الضيوف خلال ساعة. تقدري تبعتي اللينك من دلوقتي، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».</div>
     <p class="sub">ده اللينك اللي تبعتيه لكل ضيوفك:</p>
     <div class="final" id="finalLink"></div>
     <div class="row2"><button class="btn primary" id="copyFinal">انسخي اللينك</button><a class="btn wa" id="shareFinal" target="_blank" rel="noopener">ابعتيه واتساب</a></div>
-    <div class="row2"><button class="btn ghost" id="viewFinal">افتحي الدعوة</button></div>
+    <div class="row2"><button class="btn ghost" id="viewFinal">شوفي دعوتك</button></div>
     <div class="private">
       <b>🔒 كود التعديل بتاعك</b>
       <div class="code big" id="privCode"></div>
@@ -1350,7 +1352,7 @@ $("linkBtn").onclick=()=>{const o=collect();
   $("payPrice").textContent=priceOf(o);$("payNum").textContent=CFG.instapay;
   if(edit.code){$("slugWrap").hidden=true;$("codeIn").value=edit.code;$("orderBox").hidden=true;$("codeBox").hidden=true;
     $("getSub").textContent="هتتحفظ التعديلات على نفس اللينك: "+CFG.site+edit.slug;$("saveBtn").textContent="حفظ التعديلات 💾";useCode=true;}
-  else{$("slugWrap").hidden=false;$("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، وحوّلي وارفعي صورة التحويل، ودعوتك هتشتغل على طول";setMode(false);}
+  else{$("slugWrap").hidden=false;$("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، وحوّلي وارفعي صورة التحويل، ودعوتك هتتفعّل خلال ساعة";setMode(false);}
   openM("getMdl");};
 $("slugIn").addEventListener("input",e=>{e.target.value=e.target.value.toLowerCase().replace(/[\s_]+/g,"-").replace(/[^a-z0-9-]/g,"");});
 function shrinkImage(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{
@@ -1372,7 +1374,7 @@ function showDone(slug,code,orderNo){
   $("shareFinal").href=`https://wa.me/?text=${encodeURIComponent(`يسعدنا دعوتكم لـ${o.kind||"فرحنا"} 🤍\n${link}`)}`;
   $("privCode").textContent=code;
   $("privWa").href=`https://wa.me/?text=${encodeURIComponent(`🔒 كود تعديل دعوتي من فرحتنا (متبعتهوش لحد):\n${code}\n\nللتعديل:\n${CFG.site}studio.html#e=${code}\n\nلينك الدعوة للضيوف:\n${link}`)}`;
-  $("orderNo").hidden=!orderNo;if(orderNo)$("orderNo").innerHTML=`رقم طلبك: <b>F-${orderNo}</b>`;
+  $("orderNo").hidden=!orderNo;$("pendNote").hidden=!orderNo;if(orderNo)$("orderNo").innerHTML=`رقم طلبك: <b>F-${orderNo}</b>`;
   $("getForm").hidden=true;$("getDone").hidden=false;}
 $("saveBtn").onclick=async()=>{
   const btn=$("saveBtn"),err=$("getErr");err.textContent="";
@@ -1410,7 +1412,7 @@ $("saveBtn").onclick=async()=>{
 };
 $("copyNum").onclick=async()=>{try{await navigator.clipboard.writeText(CFG.instapay);$("copyNum").textContent="اتنسخ ✅";setTimeout(()=>$("copyNum").textContent="نسخ",1500);}catch(e){toast("اضغطي مطوّل على الرقم وانسخيه");}};
 $("copyFinal").onclick=async()=>{try{await navigator.clipboard.writeText($("finalLink").textContent);toast("اتنسخ اللينك ✅");}catch(e){toast("اضغطي مطوّل على اللينك وانسخيه");}};
-$("viewFinal").onclick=()=>{location.href=$("finalLink").textContent;};
+$("viewFinal").onclick=()=>{closeM("getMdl");Music.stop();drawBuilder();showInvite(collect(),true);};
 $("editCodeBtn").onclick=()=>{$("editErr").textContent="";openM("editMdl");};
 $("loadBtn").onclick=()=>loadCode($("editCodeIn").value);
 async function loadCode(raw){
@@ -1436,7 +1438,8 @@ if(!data&&sm){
   const ld=document.createElement("div");ld.className="loading-inv";ld.innerHTML="💌<div>بنجهّز الدعوة…</div>";document.body.appendChild(ld);
   (async()=>{try{if(!SB)throw 0;const r=await SB.rpc("get_invite",{p_slug:sm[1].toLowerCase()});
       if(r.error||!r.data)throw 0;const d=r.data;
-      if(d._disabled){ld.innerHTML="💌<div>الدعوة دي مش متاحة حاليًا</div><small>كلّم صاحب الدعوة</small>";return;}if(d.songUrl)customUrl=d.songUrl;ld.remove();showInvite(d,false);}
+      if(d._disabled){ld.innerHTML="💌<div>الدعوة دي مش متاحة حاليًا</div><small>كلّم صاحب الدعوة</small>";return;}
+      if(d._pending){ld.innerHTML="💌<div>الدعوة قيد التجهيز</div><small>هتكون جاهزة خلال وقت قصير، جرّب تفتحها تاني بعد شوية 🤍</small>";return;}if(d.songUrl)customUrl=d.songUrl;ld.remove();showInvite(d,false);}
     catch(e){ld.innerHTML="💌<div>الدعوة دي مش موجودة</div><small>اتأكد من اللينك أو كلّم صاحب الدعوة</small>";}})();
 }
 else if(data){showInvite(data,false);}
