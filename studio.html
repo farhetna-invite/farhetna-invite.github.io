@@ -30,6 +30,7 @@ textarea{min-height:70px;resize:vertical}
 .tpl{border:2px solid transparent;border-radius:14px;padding:0;background:#faf6f2;overflow:hidden;text-align:center}
 .tpl[aria-pressed="true"]{border-color:#6d1f2f}
 .tpl .thumb{height:110px;display:block}
+.tpl{position:relative}.tpl .prem{position:absolute;top:6px;right:6px;background:linear-gradient(135deg,#e2c68e,#b8904a);color:#3b1a10;font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px}
 .tpl b{display:block;font-size:.9rem;padding:7px 4px 8px;color:#3a1a20}
 .pals{display:flex;gap:12px;flex-wrap:wrap}
 .sw{width:42px;height:42px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #ddd}
@@ -449,6 +450,9 @@ body.inviting #builder{display:none}
 .mdl .code{direction:ltr;text-align:center;letter-spacing:.25em;font-weight:700;text-transform:uppercase}
 .mdl .pay{background:#f6ebe6;border-radius:14px;padding:12px 14px;margin:14px 0 4px;font-size:.9rem;color:#5b3a3f;line-height:1.8}
 .mdl .pay b{color:#6d1f2f}
+.mdl .paynum{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1.5px dashed #c9a463;border-radius:12px;padding:8px 8px 8px 12px;margin:8px 0;direction:ltr}
+.mdl .paynum span{font-size:1.25rem;font-weight:700;letter-spacing:.06em;color:#6d1f2f}
+.mdl .paynum .cp{border:0;background:#6d1f2f;color:#fff;border-radius:10px;padding:8px 14px;font-weight:700;font-family:inherit}
 .mdl .row2{display:flex;gap:10px;margin-top:14px}
 .mdl .row2 .btn{flex:1}
 .mdl .btn.wa{background:#25d366;color:#fff}
@@ -808,8 +812,10 @@ body.inviting #builder{display:none}
     </div>
     <label for="codeIn">كود التفعيل</label>
     <input id="codeIn" class="code" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="XXXXXXXX" maxlength="12">
-    <div class="pay" id="payBox">لسه معاكيش كود؟ حوّلي <b id="payPrice"></b> على InstaPay أو فودافون كاش، وابعتي صورة التحويل على واتساب، وهنبعتلك الكود على طول.
-      <div class="row2"><a class="btn wa" id="payWa" target="_blank" rel="noopener">ابعتي على واتساب</a></div>
+    <div class="pay" id="payBox"><b>لسه معاكيش كود؟</b><br>١- حوّلي <b id="payPrice"></b> على InstaPay للرقم:
+      <div class="paynum"><span id="payNum"></span><button type="button" class="cp" id="copyNum">نسخ</button></div>
+      ٢- ابعتي صورة التحويل على واتساب، وهنبعتلك الكود على طول.
+      <div class="row2"><a class="btn wa" id="payWa" target="_blank" rel="noopener">ابعتي صورة التحويل على واتساب</a></div>
     </div>
     <div class="err" id="getErr"></div>
     <div class="row2"><button class="btn primary" id="saveBtn">تفعيل وحفظ الدعوة</button></div>
@@ -840,7 +846,10 @@ const CFG={
   sbUrl:"https://fjoyqftndulavcjcxaya.supabase.co",
   sbKey:"sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui",
   whatsapp:"201280067110",
-  price:"٢٠٠ جنيه",
+  price:"٢٥٠ جنيه",
+  pricePremium:"٣٥٠ جنيه",
+  premium:["royal","garden","velvet"],
+  instapay:"01280067110",
   site:"https://farhetna-invite.github.io/"
 };
 let SB=null;try{if(window.supabase)SB=window.supabase.createClient(CFG.sbUrl,CFG.sbKey,{auth:{persistSession:false}});}catch(e){}
@@ -932,7 +941,7 @@ function thumb(k){
 }
 Object.keys(TPL).forEach(k=>{
   const b=document.createElement("button");b.className="tpl";b.dataset.k=k;
-  b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`;
+  b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`+(CFG.premium.includes(k)?`<span class="prem">فاخر ✦</span>`:"");
   b.onclick=()=>{state.tpl=k;state.pal=0;drawBuilder();save();};
   $("tpls").appendChild(b);
 });
@@ -1304,12 +1313,13 @@ function payload(o){const d=Object.assign({},o);if(d.music==="custom"){d.songUrl
 $("linkBtn").onclick=()=>{const o=collect();
   if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
   $("getForm").hidden=false;$("getDone").hidden=true;$("getErr").textContent="";
-  $("payPrice").textContent=CFG.price;
+  const pr=CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;
+  $("payPrice").textContent=pr;$("payNum").textContent=CFG.instapay;
   if(edit.code){$("slugWrap").hidden=true;$("codeIn").value=edit.code;$("payBox").hidden=true;
     $("getSub").textContent="هتتحفظ التعديلات على نفس اللينك: "+CFG.site+edit.slug;$("saveBtn").textContent="حفظ التعديلات";}
   else{$("slugWrap").hidden=false;$("payBox").hidden=false;$("saveBtn").textContent="تفعيل وحفظ الدعوة";
     $("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، واكتبي كود التفعيل";}
-  $("payWa").href=waLink(`أهلاً فرحتنا 🤍 عايزة كود تفعيل لدعوة ${o.groom} و${o.bride} (${(TPL[o.tpl]||{}).name||""})، وهبعت صورة التحويل.`);
+  $("payWa").href=waLink(`أهلاً فرحتنا 🤍 حوّلت ${pr} على InstaPay، ودي صورة التحويل 👇\nعايزة كود تفعيل لدعوة ${o.groom} و${o.bride} (${(TPL[o.tpl]||{}).name||""})`);
   openM("getMdl");};
 $("slugIn").addEventListener("input",e=>{e.target.value=e.target.value.toLowerCase().replace(/[\s_]+/g,"-").replace(/[^a-z0-9-]/g,"");});
 $("saveBtn").onclick=async()=>{
@@ -1343,6 +1353,7 @@ $("saveBtn").onclick=async()=>{
   }catch(e){err.textContent=(e&&e.message==="song")?"الأغنية ماترفعتش، جربي ملف أصغر أو اختاري مزيكا جاهزة":errOf(e);}
   finally{btn.disabled=false;btn.textContent=old;}
 };
+$("copyNum").onclick=async()=>{try{await navigator.clipboard.writeText(CFG.instapay);$("copyNum").textContent="اتنسخ ✅";setTimeout(()=>$("copyNum").textContent="نسخ",1500);}catch(e){toast("اضغطي مطوّل على الرقم وانسخيه");}};
 $("copyFinal").onclick=async()=>{try{await navigator.clipboard.writeText($("finalLink").textContent);toast("اتنسخ اللينك ✅");}catch(e){toast("اضغطي مطوّل على اللينك وانسخيه");}};
 $("viewFinal").onclick=()=>{location.href=$("finalLink").textContent;};
 $("editCodeBtn").onclick=()=>{$("editErr").textContent="";openM("editMdl");};
