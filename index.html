@@ -136,7 +136,7 @@ footer a{color:var(--wine);font-weight:700;text-decoration:none}
       <p>ظرف بيتفتح بلمسة، مزيكا، عدّ تنازلي، خريطة وتأكيد حضور على واتساب. تبعتيها لكل ضيوفك في ثانية، وتفضل معاكي لحد يوم الفرح.</p>
       <div class="cta">
         <a class="btn solid" href="#templates">شوفي التصميمات</a>
-        <a class="btn ghost wa-link" href="#" target="_blank" rel="noopener">كلمينا على واتساب</a>
+        <a class="btn ghost" href="studio.html">اعملي دعوتك بنفسك ✏️</a>
       </div>
       <div class="stats">
         <div><b>٦+</b><span>تصميمات فاخرة</span></div>
@@ -233,9 +233,9 @@ footer a{color:var(--wine);font-weight:700;text-decoration:none}
   <div class="kicker reveal">سهلة جدًا</div>
   <h2 class="title reveal">إزاي تطلبي دعوتك؟</h2>
   <div class="steps">
-    <div class="step reveal"><div><h3>اختاري التصميم</h3><p>شوفي النماذج واختاري اللي عاجبك، وابعتيلنا على واتساب.</p></div></div>
-    <div class="step reveal"><div><h3>ابعتي التفاصيل</h3><p>الأسامي، الميعاد، المكان، والمزيكا اللي تحبيها، وحوّلي على InstaPay أو فودافون كاش.</p></div></div>
-    <div class="step reveal"><div><h3>استلمي اللينك</h3><p>خلال ٢٤ ساعة تستلمي دعوتك، تراجعيها، ونعدّل لحد ما تبقى زي ما تحبي.</p></div></div>
+    <div class="step reveal"><div><h3>اعمليها بنفسك</h3><p>ادخلي على «اعملي دعوتك بنفسك»، اختاري التصميم واكتبي بياناتك، وشوفي المعاينة ببلاش.</p></div></div>
+    <div class="step reveal"><div><h3>حوّلي واستلمي الكود</h3><p>حوّلي على InstaPay أو فودافون كاش وابعتي الإيصال على واتساب، ونبعتلك كود التفعيل.</p></div></div>
+    <div class="step reveal"><div><h3>ابعتي اللينك لضيوفك</h3><p>اكتبي الكود وتاخدي لينك قصير باسمكم، وتقدري تعدّلي في أي وقت بنفس الكود. ولو احتجتي مساعدة إحنا معاكي على واتساب.</p></div></div>
   </div>
 </div></section>
 
@@ -264,7 +264,7 @@ footer a{color:var(--wine);font-weight:700;text-decoration:none}
   <div class="faq" style="text-align:right">
     <details><summary>يعني إيه دعوة ديجيتال؟</summary><p>دعوة على شكل صفحة بتتفتح من لينك على الموبايل، فيها كل تفاصيل الفرح بحركة ومزيكا، وتتبعت على واتساب أو أي مكان.</p></details>
     <details><summary>أقدر أبعتها لكام ضيف؟</summary><p>لعدد مفتوح. هو لينك واحد تبعتيه لكل الناس من غير أي تكلفة زيادة.</p></details>
-    <details><summary>أقدر أعدّل بعد ما أبعتها؟</summary><p>أيوه، أي تعديل لحد يوم الفرح بنعمله ليكي واللينك بيفضل زي ما هو.</p></details>
+    <details><summary>أقدر أعدّل بعد ما أبعتها؟</summary><p>أيوه، ادخلي بكود التفعيل وعدّلي في أي وقت، واللينك بيفضل زي ما هو. ولو حبيتي إحنا نعدّلها، كلمينا على واتساب.</p></details>
     <details><summary>بتاخد وقت قد إيه؟</summary><p>الدعوة الجاهزة بتكون عندك خلال ٢٤ ساعة من استلام التفاصيل.</p></details>
     <details><summary>تنفع للخطوبة وكتب الكتاب؟</summary><p>أكيد، تنفع لأي مناسبة: فرح، خطوبة، كتب كتاب، حنة.</p></details>
     <details><summary>الدفع بيبقى إزاي؟</summary><p>تحويل على InstaPay أو فودافون كاش، وبعدها نبدأ في دعوتك على طول.</p></details>
@@ -275,7 +275,7 @@ footer a{color:var(--wine);font-weight:700;text-decoration:none}
 <div class="final reveal">
   <h2>جاهزة نبدأ دعوتك؟</h2>
   <p>ابعتيلنا على واتساب بالتصميم اللي عجبك، ودعوتك تكون جاهزة خلال يوم.</p>
-  <a class="btn gold wa-link" href="#" target="_blank" rel="noopener">اطلبي دعوتك دلوقتي</a>
+  <a class="btn gold" href="studio.html">اعملي دعوتك دلوقتي</a>
 </div>
 
 <footer>
@@ -295,7 +295,7 @@ const SITE = {
 };
 
 // Old invitation links (#i=...) go straight to the invitation page
-if (/[#&]i=/.test(location.hash)) location.replace("studio.html" + location.hash);
+if (/[#&](i|s)=/.test(location.hash)) location.replace("studio.html" + location.hash);
 
 const wa = msg => SITE.whatsapp
   ? `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(msg)}`

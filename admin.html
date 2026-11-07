@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>فرحتنا | لوحة الأكواد</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Cairo,system-ui,sans-serif;background:#f7efe6;color:#3a1a20;padding:24px 16px 60px}
+.wrap{max-width:520px;margin:0 auto}
+h1{font-family:"Aref Ruqaa",serif;color:#6d1f2f;text-align:center;font-size:2rem}
+.sub{text-align:center;color:#8a6b6f;margin-bottom:20px}
+.card{background:#fff;border-radius:18px;padding:18px;box-shadow:0 2px 14px rgba(0,0,0,.06);margin-bottom:16px}
+label{display:block;font-size:.85rem;color:#8a6b6f;margin:8px 0 5px}
+input{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid #e3d6d0;border-radius:12px;background:#fffdfb}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;border:0;border-radius:14px;padding:13px;font:inherit;font-weight:700;font-size:1rem;margin-top:12px;cursor:pointer;text-decoration:none}
+.p{background:#6d1f2f;color:#fff}.w{background:#25d366;color:#fff}.g{background:#fff;color:#6d1f2f;border:1.5px solid #6d1f2f}
+.code{font-size:2rem;font-weight:700;letter-spacing:.25em;text-align:center;direction:ltr;color:#6d1f2f;background:#f6ebe6;border-radius:14px;padding:14px;margin-top:12px}
+.err{color:#b3261e;text-align:center;margin-top:8px;min-height:1.2em}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+td,th{padding:8px 4px;border-bottom:1px solid #f0e6e1;text-align:right}
+td.c{direction:ltr;font-weight:700;letter-spacing:.08em}
+.tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.75rem}
+.used{background:#e6f4ea;color:#1e6b34}.free{background:#fff4e0;color:#8a5a00}
+a.l{color:#6d1f2f;direction:ltr;display:inline-block}
+[hidden]{display:none!important}
+</style>
+</head>
+<body><div class="wrap">
+<h1>فرحتنا</h1><p class="sub">لوحة أكواد التفعيل (ليكي إنتي بس)</p>
+
+<div class="card" id="login">
+  <label for="pw">باسورد اللوحة</label>
+  <input id="pw" type="password" autocomplete="current-password">
+  <button class="btn p" id="go">دخول</button>
+  <div class="err" id="lerr"></div>
+</div>
+
+<div id="panel" hidden>
+  <div class="card">
+    <label for="note">اسم العميلة (علشان تفتكريها)</label>
+    <input id="note" placeholder="مثلاً: مليكة – فرح ١٥ أبريل">
+    <button class="btn p" id="newc">اعملي كود جديد ✨</button>
+    <div id="out" hidden>
+      <div class="code" id="codeOut"></div>
+      <button class="btn g" id="copyc">انسخي الكود</button>
+      <a class="btn w" id="sendc" target="_blank" rel="noopener">ابعتيه للعميلة على واتساب</a>
+    </div>
+    <div class="err" id="perr"></div>
+  </div>
+  <div class="card">
+    <h3 style="color:#6d1f2f;margin-bottom:8px">كل الأكواد</h3>
+    <table><thead><tr><th>الكود</th><th>العميلة</th><th>الدعوة</th></tr></thead><tbody id="list"></tbody></table>
+  </div>
+</div>
+</div>
+<script>
+const SB = supabase.createClient("https://fjoyqftndulavcjcxaya.supabase.co","sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui",{auth:{persistSession:false}});
+const SITE="https://farhetna-invite.github.io/";
+const $=id=>document.getElementById(id);
+let PASS="";
+try{PASS=sessionStorage.getItem("fp")||"";}catch(e){}
+
+async function load(){
+  const r=await SB.rpc("admin_list",{p_pass:PASS});
+  if(r.error)throw r.error;
+  const tb=$("list");tb.innerHTML="";
+  (r.data||[]).forEach(x=>{
+    const tr=document.createElement("tr");
+    const c=document.createElement("td");c.className="c";c.textContent=x.code;
+    const n=document.createElement("td");n.textContent=x.note||"—";
+    const s=document.createElement("td");
+    if(x.slug){const a=document.createElement("a");a.className="l";a.href=SITE+x.slug;a.target="_blank";a.textContent=x.slug;s.appendChild(a);}
+    else{const t=document.createElement("span");t.className="tag free";t.textContent="لسه ما اتفعّلش";s.appendChild(t);}
+    tr.append(c,n,s);tb.appendChild(tr);
+  });
+}
+async function enter(){
+  $("lerr").textContent="";
+  try{await load();$("login").hidden=true;$("panel").hidden=false;try{sessionStorage.setItem("fp",PASS);}catch(e){}}
+  catch(e){$("lerr").textContent=(e.message||"").includes("denied")?"الباسورد غلط":"في مشكلة في الاتصال، جربي تاني";}
+}
+$("go").onclick=()=>{PASS=$("pw").value;enter();};
+$("pw").addEventListener("keydown",e=>{if(e.key==="Enter"){PASS=$("pw").value;enter();}});
+if(PASS)enter();
+
+$("newc").onclick=async()=>{
+  $("perr").textContent="";$("newc").disabled=true;
+  try{
+    const r=await SB.rpc("admin_new_code",{p_pass:PASS,p_note:$("note").value});
+    if(r.error)throw r.error;
+    $("codeOut").textContent=r.data;$("out").hidden=false;
+    const msg=`أهلاً 🤍 ده كود تفعيل دعوتك من فرحتنا:\n${r.data}\n\nادخلي على ${SITE}studio.html واعملي دعوتك، وبعدين اضغطي «احصلي على لينك دعوتك» واكتبي الكود.\nولو حبيتي تعدّلي بعدين، اضغطي «عندك كود؟ عدّلي دعوتك» واكتبي نفس الكود.`;
+    $("sendc").href="https://wa.me/?text="+encodeURIComponent(msg);
+    $("note").value="";load();
+  }catch(e){$("perr").textContent="ماقدرناش نعمل كود، جربي تاني";}
+  finally{$("newc").disabled=false;}
+};
+$("copyc").onclick=async()=>{try{await navigator.clipboard.writeText($("codeOut").textContent);$("copyc").textContent="اتنسخ ✅";setTimeout(()=>$("copyc").textContent="انسخي الكود",1500);}catch(e){}};
+</script>
+</body>
+</html>
