@@ -453,6 +453,19 @@ body.inviting #builder{display:none}
 .mdl .paynum{display:flex;align-items:center;justify-content:space-between;gap:10px;background:#fff;border:1.5px dashed #c9a463;border-radius:12px;padding:8px 8px 8px 12px;margin:8px 0;direction:ltr}
 .mdl .paynum span{font-size:1.25rem;font-weight:700;letter-spacing:.06em;color:#6d1f2f}
 .mdl .paynum .cp{border:0;background:#6d1f2f;color:#fff;border-radius:10px;padding:8px 14px;font-weight:700;font-family:inherit}
+.mdl .stp{display:flex;align-items:center;gap:8px;margin-top:10px;font-weight:700;color:#5b3a3f}
+.mdl .stp i{font-style:normal;width:24px;height:24px;border-radius:50%;background:#6d1f2f;color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:.8rem;flex:none}
+.mdl .rcpt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:1.5px dashed #c9a463;border-radius:14px;background:#fff;padding:16px;margin:8px 0;cursor:pointer;color:#6d1f2f;font-weight:700;text-align:center;font-size:.92rem}
+.mdl .rcpt input{display:none}
+.mdl .rcpt img{max-height:150px;border-radius:10px}
+.mdl .rcpt.ok{border-style:solid;border-color:#3c9a5f;color:#1e6b34}
+.mdl .havecode{display:block;margin:12px auto 0;background:none;border:0;color:#6d1f2f;text-decoration:underline;font-family:inherit;font-size:.9rem;cursor:pointer}
+.mdl .orderno{text-align:center;background:#f6ebe6;border-radius:12px;padding:8px;margin:6px 0 4px;color:#5b3a3f}
+.mdl .orderno b{color:#6d1f2f;letter-spacing:.05em;direction:ltr;display:inline-block}
+.mdl .private{margin-top:18px;background:#fff7ec;border:1px solid #e9d3ac;border-radius:16px;padding:14px;text-align:center}
+.mdl .private .big{direction:ltr;font-size:1.5rem;font-weight:700;letter-spacing:.2em;color:#6d1f2f;margin:6px 0}
+.mdl .private p{font-size:.85rem;color:#8a6b6f;line-height:1.7;margin-bottom:8px}
+.mdl .private .btn{width:100%}
 .mdl .row2{display:flex;gap:10px;margin-top:14px}
 .mdl .row2 .btn{flex:1}
 .mdl .btn.wa{background:#25d366;color:#fff}
@@ -810,22 +823,38 @@ body.inviting #builder{display:none}
       <label for="slugIn">اسم اللينك (حروف إنجليزي وأرقام و - بس)</label>
       <div class="slugrow"><span>farhetna-invite.github.io/</span><input id="slugIn" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="omar-malika"></div>
     </div>
-    <label for="codeIn">كود التفعيل</label>
-    <input id="codeIn" class="code" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="XXXXXXXX" maxlength="12">
-    <div class="pay" id="payBox"><b>لسه معاكيش كود؟</b><br>١- حوّلي <b id="payPrice"></b> على InstaPay للرقم:
-      <div class="paynum"><span id="payNum"></span><button type="button" class="cp" id="copyNum">نسخ</button></div>
-      ٢- ابعتي صورة التحويل على واتساب، وهنبعتلك الكود على طول.
-      <div class="row2"><a class="btn wa" id="payWa" target="_blank" rel="noopener">ابعتي صورة التحويل على واتساب</a></div>
+    <div id="orderBox">
+      <div class="pay">
+        <div class="stp"><i>١</i> حوّلي <b id="payPrice"></b> على InstaPay للرقم:</div>
+        <div class="paynum"><span id="payNum"></span><button type="button" class="cp" id="copyNum">نسخ</button></div>
+        <div class="stp"><i>٢</i> ارفعي صورة التحويل (سكرين شوت)</div>
+        <label class="rcpt" id="rcptLbl"><input type="file" id="rcptIn" accept="image/*"><img id="rcptPrev" alt="" hidden><span id="rcptTxt">📎 اضغطي هنا واختاري صورة التحويل</span></label>
+        <div class="stp"><i>٣</i> رقم موبايلك (علشان لو احتجنا نكلمك)</div>
+        <input id="phoneIn" type="tel" inputmode="tel" placeholder="01xxxxxxxxx" dir="ltr" style="text-align:right">
+      </div>
+      <button type="button" class="havecode" id="haveCode">معاكي كود تفعيل من فرحتنا؟</button>
+    </div>
+    <div id="codeBox" hidden>
+      <label for="codeIn">كود التفعيل</label>
+      <input id="codeIn" class="code" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="XXXXXXXX" maxlength="12">
+      <button type="button" class="havecode" id="noCode">مش معايا كود، هحوّل وأرفع صورة التحويل</button>
     </div>
     <div class="err" id="getErr"></div>
-    <div class="row2"><button class="btn primary" id="saveBtn">تفعيل وحفظ الدعوة</button></div>
+    <div class="row2"><button class="btn primary" id="saveBtn">تأكيد ونشر الدعوة 💌</button></div>
   </div>
   <div id="getDone" hidden>
     <h3>دعوتك جاهزة 🎉</h3>
-    <p class="sub">ده اللينك اللي تبعتيه لكل ضيوفك. ولو حبيتي تعدّلي بعدين، ادخلي بنفس الكود واللينك مش هيتغير.</p>
+    <div class="orderno" id="orderNo" hidden></div>
+    <p class="sub">ده اللينك اللي تبعتيه لكل ضيوفك:</p>
     <div class="final" id="finalLink"></div>
     <div class="row2"><button class="btn primary" id="copyFinal">انسخي اللينك</button><a class="btn wa" id="shareFinal" target="_blank" rel="noopener">ابعتيه واتساب</a></div>
     <div class="row2"><button class="btn ghost" id="viewFinal">افتحي الدعوة</button></div>
+    <div class="private">
+      <b>🔒 كود التعديل بتاعك</b>
+      <div class="code big" id="privCode"></div>
+      <p>بالكود ده تعدّلي دعوتك في أي وقت، واللينك مش هيتغير. احتفظي بيه ومتبعتيهوش لحد.</p>
+      <a class="btn wa" id="privWa" target="_blank" rel="noopener">ابعتيه لنفسك على واتساب</a>
+    </div>
   </div>
 </div></div>
 
@@ -1310,55 +1339,82 @@ document.querySelectorAll(".mdl").forEach(m=>{m.addEventListener("click",e=>{if(
 function waLink(t){return `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(t)}`;}
 function errOf(e){const m=(e&&(e.message||e.details||""))+"";for(const k in MSG)if(m.includes(k))return MSG[k];return MSG.net;}
 function payload(o){const d=Object.assign({},o);if(d.music==="custom"){d.songUrl=edit.songUrl||null;if(!d.songUrl)d.music="piano";}return d;}
+let receiptData=null,useCode=false;
+function setMode(code){useCode=code;$("orderBox").hidden=code;$("codeBox").hidden=!code;
+  $("saveBtn").textContent=edit.code?"حفظ التعديلات 💾":(code?"تفعيل ونشر الدعوة 💌":"تأكيد ونشر الدعوة 💌");}
+$("haveCode").onclick=()=>setMode(true);$("noCode").onclick=()=>setMode(false);
+function priceOf(o){return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
 $("linkBtn").onclick=()=>{const o=collect();
   if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
   $("getForm").hidden=false;$("getDone").hidden=true;$("getErr").textContent="";
-  const pr=CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;
-  $("payPrice").textContent=pr;$("payNum").textContent=CFG.instapay;
-  if(edit.code){$("slugWrap").hidden=true;$("codeIn").value=edit.code;$("payBox").hidden=true;
-    $("getSub").textContent="هتتحفظ التعديلات على نفس اللينك: "+CFG.site+edit.slug;$("saveBtn").textContent="حفظ التعديلات";}
-  else{$("slugWrap").hidden=false;$("payBox").hidden=false;$("saveBtn").textContent="تفعيل وحفظ الدعوة";
-    $("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، واكتبي كود التفعيل";}
-  $("payWa").href=waLink(`أهلاً فرحتنا 🤍 حوّلت ${pr} على InstaPay، ودي صورة التحويل 👇\nعايزة كود تفعيل لدعوة ${o.groom} و${o.bride} (${(TPL[o.tpl]||{}).name||""})`);
+  $("payPrice").textContent=priceOf(o);$("payNum").textContent=CFG.instapay;
+  if(edit.code){$("slugWrap").hidden=true;$("codeIn").value=edit.code;$("orderBox").hidden=true;$("codeBox").hidden=true;
+    $("getSub").textContent="هتتحفظ التعديلات على نفس اللينك: "+CFG.site+edit.slug;$("saveBtn").textContent="حفظ التعديلات 💾";useCode=true;}
+  else{$("slugWrap").hidden=false;$("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، وحوّلي وارفعي صورة التحويل، ودعوتك هتشتغل على طول";setMode(false);}
   openM("getMdl");};
 $("slugIn").addEventListener("input",e=>{e.target.value=e.target.value.toLowerCase().replace(/[\s_]+/g,"-").replace(/[^a-z0-9-]/g,"");});
+function shrinkImage(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{
+  const m=1100,sc=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);
+  c.getContext("2d").drawImage(im,0,0,c.width,c.height);let q=.75,d=c.toDataURL("image/jpeg",q);while(d.length>600000&&q>.35){q-=.1;d=c.toDataURL("image/jpeg",q);}res(d);};im.src=r.result;};r.readAsDataURL(file);});}
+$("rcptIn").onchange=async e=>{const f=e.target.files[0];if(!f)return;$("rcptTxt").textContent="بيتجهز…";
+  try{receiptData=await shrinkImage(f);$("rcptPrev").src=receiptData;$("rcptPrev").hidden=false;$("rcptTxt").textContent="✔ اترفعت صورة التحويل (اضغطي لو عايزة تغيّريها)";$("rcptLbl").classList.add("ok");}
+  catch(err){receiptData=null;$("rcptTxt").textContent="الصورة دي مش شغالة، جربي سكرين شوت تاني";}};
+async function uploadSong(slug){
+  const o=collect();if(!(o.music==="custom"&&customFile))return;
+  const ext=((customFile.name.split(".").pop()||"mp3").toLowerCase().replace(/[^a-z0-9]/g,""))||"mp3";
+  const path=`${slug}/${Date.now()}.${ext}`;
+  const up=await SB.storage.from("songs").upload(path,customFile,{contentType:customFile.type||"audio/mpeg",upsert:false});
+  if(up.error)throw new Error("song");
+  edit.songUrl=SB.storage.from("songs").getPublicUrl(path).data.publicUrl;customFile=null;}
+function showDone(slug,code,orderNo){
+  const o=collect(),link=CFG.site+slug;
+  $("finalLink").textContent=link;
+  $("shareFinal").href=`https://wa.me/?text=${encodeURIComponent(`يسعدنا دعوتكم لـ${o.kind||"فرحنا"} 🤍\n${link}`)}`;
+  $("privCode").textContent=code;
+  $("privWa").href=`https://wa.me/?text=${encodeURIComponent(`🔒 كود تعديل دعوتي من فرحتنا (متبعتهوش لحد):\n${code}\n\nللتعديل:\n${CFG.site}studio.html#e=${code}\n\nلينك الدعوة للضيوف:\n${link}`)}`;
+  $("orderNo").hidden=!orderNo;if(orderNo)$("orderNo").innerHTML=`رقم طلبك: <b>F-${orderNo}</b>`;
+  $("getForm").hidden=true;$("getDone").hidden=false;}
 $("saveBtn").onclick=async()=>{
   const btn=$("saveBtn"),err=$("getErr");err.textContent="";
   if(!SB){err.textContent=MSG.net;return;}
-  const code=$("codeIn").value.trim().toUpperCase(),slug=edit.code?null:$("slugIn").value.trim();
-  if(code.length<6){err.textContent="اكتبي كود التفعيل";return;}
+  const o=collect(),slug=edit.code?null:$("slugIn").value.trim();
   if(!edit.code&&!slugOk(slug)){err.textContent=MSG.bad_slug;return;}
+  const viaOrder=!edit.code&&!useCode;
+  const code=$("codeIn").value.trim().toUpperCase();
+  if(viaOrder){if(!receiptData){err.textContent="ارفعي صورة التحويل الأول";return;}
+    const ph=$("phoneIn").value.replace(/\D/g,"");if(ph.length<10){err.textContent="اكتبي رقم موبايلك";return;}}
+  else if(code.length<6){err.textContent="اكتبي كود التفعيل";return;}
   btn.disabled=true;const old=btn.textContent;btn.textContent="بيتحفظ…";
   try{
-    const chk=await SB.rpc("check_code",{p_code:code,p_slug:slug});
-    if(chk.error)throw chk.error;
-    const r=chk.data||"";
-    if(r==="bad_code"||r==="bad_slug"||r==="slug_taken")throw new Error(r);
-    const finalSlug=r.startsWith("edit:")?r.slice(5):slug;
-    const o=collect();
-    if(o.music==="custom"&&customFile){
-      const ext=((customFile.name.split(".").pop()||"mp3").toLowerCase().replace(/[^a-z0-9]/g,""))||"mp3";
-      const path=`${finalSlug}/${Date.now()}.${ext}`;
-      const up=await SB.storage.from("songs").upload(path,customFile,{contentType:customFile.type||"audio/mpeg",upsert:false});
-      if(up.error)throw new Error("song");
-      edit.songUrl=SB.storage.from("songs").getPublicUrl(path).data.publicUrl;customFile=null;
+    if(viaOrder){
+      await uploadSong(slug);
+      const r=await SB.rpc("create_order",{p_slug:slug,p_data:payload(collect()),p_receipt:receiptData,p_phone:$("phoneIn").value.trim(),p_price:priceOf(o)});
+      if(r.error)throw r.error;
+      edit.code=r.data.code;edit.slug=r.data.slug;receiptData=null;
+      showDone(r.data.slug,r.data.code,r.data.order);
+    }else{
+      const chk=await SB.rpc("check_code",{p_code:code,p_slug:slug});
+      if(chk.error)throw chk.error;
+      const r=chk.data||"";
+      if(r==="bad_code"||r==="bad_slug"||r==="slug_taken")throw new Error(r);
+      const finalSlug=r.startsWith("edit:")?r.slice(5):slug;
+      await uploadSong(finalSlug);
+      const sv=await SB.rpc("save_invite",{p_code:code,p_slug:finalSlug,p_data:payload(collect())});
+      if(sv.error)throw sv.error;
+      edit.code=code;edit.slug=sv.data;
+      showDone(sv.data,code,null);
     }
-    const sv=await SB.rpc("save_invite",{p_code:code,p_slug:finalSlug,p_data:payload(o)});
-    if(sv.error)throw sv.error;
-    edit.code=code;edit.slug=sv.data;
-    const link=CFG.site+sv.data;
-    $("finalLink").textContent=link;
-    $("shareFinal").href=`https://wa.me/?text=${encodeURIComponent(`يسعدنا دعوتكم لـ${o.kind||"فرحنا"} 🤍\n${link}`)}`;
-    $("getForm").hidden=true;$("getDone").hidden=false;
-  }catch(e){err.textContent=(e&&e.message==="song")?"الأغنية ماترفعتش، جربي ملف أصغر أو اختاري مزيكا جاهزة":errOf(e);}
+    $("linkBtn").textContent="حفظ التعديلات 💾";
+  }catch(e){const m=(e&&e.message)||"";err.textContent=m==="song"?"الأغنية ماترفعتش، جربي ملف أصغر أو اختاري مزيكا جاهزة":m.includes("bad_receipt")?"صورة التحويل مش واضحة، جربي سكرين شوت تاني":errOf(e);}
   finally{btn.disabled=false;btn.textContent=old;}
 };
 $("copyNum").onclick=async()=>{try{await navigator.clipboard.writeText(CFG.instapay);$("copyNum").textContent="اتنسخ ✅";setTimeout(()=>$("copyNum").textContent="نسخ",1500);}catch(e){toast("اضغطي مطوّل على الرقم وانسخيه");}};
 $("copyFinal").onclick=async()=>{try{await navigator.clipboard.writeText($("finalLink").textContent);toast("اتنسخ اللينك ✅");}catch(e){toast("اضغطي مطوّل على اللينك وانسخيه");}};
 $("viewFinal").onclick=()=>{location.href=$("finalLink").textContent;};
 $("editCodeBtn").onclick=()=>{$("editErr").textContent="";openM("editMdl");};
-$("loadBtn").onclick=async()=>{
-  const code=$("editCodeIn").value.trim().toUpperCase(),err=$("editErr");err.textContent="";
+$("loadBtn").onclick=()=>loadCode($("editCodeIn").value);
+async function loadCode(raw){
+  const code=(raw||"").trim().toUpperCase(),err=$("editErr");err.textContent="";
   if(code.length<6){err.textContent="اكتبي كود التفعيل";return;}
   if(!SB){err.textContent=MSG.net;return;}
   const btn=$("loadBtn");btn.disabled=true;
@@ -1370,7 +1426,7 @@ $("loadBtn").onclick=async()=>{
     drawBuilder();closeM("editMdl");toast("اتفتحت دعوتك، عدّلي واضغطي «حفظ التعديلات» 💌");
     $("linkBtn").textContent="حفظ التعديلات 💾";
   }catch(e){err.textContent=errOf(e);}finally{btn.disabled=false;}
-};
+}
 
 /* ---------------- boot ---------------- */
 let data=null;const h=location.hash.match(/[#&]i=([^&]+)/)||location.search.match(/[?&]i=([^&]+)/);
@@ -1379,11 +1435,14 @@ const sm=location.hash.match(/[#&]s=([a-z0-9-]+)/i)||location.search.match(/[?&]
 if(!data&&sm){
   const ld=document.createElement("div");ld.className="loading-inv";ld.innerHTML="💌<div>بنجهّز الدعوة…</div>";document.body.appendChild(ld);
   (async()=>{try{if(!SB)throw 0;const r=await SB.rpc("get_invite",{p_slug:sm[1].toLowerCase()});
-      if(r.error||!r.data)throw 0;const d=r.data;if(d.songUrl)customUrl=d.songUrl;ld.remove();showInvite(d,false);}
+      if(r.error||!r.data)throw 0;const d=r.data;
+      if(d._disabled){ld.innerHTML="💌<div>الدعوة دي مش متاحة حاليًا</div><small>كلّم صاحب الدعوة</small>";return;}if(d.songUrl)customUrl=d.songUrl;ld.remove();showInvite(d,false);}
     catch(e){ld.innerHTML="💌<div>الدعوة دي مش موجودة</div><small>اتأكد من اللينك أو كلّم صاحب الدعوة</small>";}})();
 }
 else if(data){showInvite(data,false);}
-else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}drawBuilder();}
+else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}drawBuilder();
+  const em=location.hash.match(/[#&]e=([A-Za-z0-9]+)/);
+  if(em){$("editCodeIn").value=em[1].toUpperCase();openM("editMdl");loadCode(em[1]);}}
 window.__test={showInvite,collect,state};
 })();
 </script>

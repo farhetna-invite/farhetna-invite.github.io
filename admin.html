@@ -27,6 +27,17 @@ td.c{direction:ltr;font-weight:700;letter-spacing:.08em}
 .used{background:#e6f4ea;color:#1e6b34}.free{background:#fff4e0;color:#8a5a00}
 a.l{color:#6d1f2f;direction:ltr;display:inline-block}
 [hidden]{display:none!important}
+.ord{border:1px solid #f0e6e1;border-radius:14px;padding:12px;margin-top:10px}
+.ord .top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ord .no{font-weight:700;color:#6d1f2f;direction:ltr}
+.ord .meta{font-size:.85rem;color:#8a6b6f;margin:6px 0;line-height:1.8}
+.ord img{width:100%;max-height:260px;object-fit:contain;border-radius:10px;background:#f6ebe6;cursor:zoom-in}
+.ord .acts{display:flex;gap:8px;margin-top:8px}
+.ord .acts button{flex:1;margin-top:0;padding:10px}
+.ok{background:#1e6b34;color:#fff}.no-btn{background:#fff;color:#b3261e;border:1.5px solid #b3261e}
+.st-approved{background:#e6f4ea;color:#1e6b34}.st-pending{background:#fff4e0;color:#8a5a00}.st-rejected{background:#fde8e6;color:#b3261e}
+.zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.zoom img{max-width:100%;max-height:100%}
 </style>
 </head>
 <body><div class="wrap">
@@ -40,6 +51,11 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
 </div>
 
 <div id="panel" hidden>
+  <div class="card">
+    <h3 style="color:#6d1f2f;margin-bottom:4px">الطلبات الجديدة <span id="pend" class="tag free"></span></h3>
+    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">الدعوة بتشتغل أول ما العميلة ترفع صورة التحويل. راجعي التحويل في InstaPay: لو تمام اضغطي ✅، ولو مش موجود اضغطي ❌ والدعوة هتتقفل.</p>
+    <div id="orders"></div>
+  </div>
   <div class="card">
     <label for="note">اسم العميلة (علشان تفتكريها)</label>
     <input id="note" placeholder="مثلاً: مليكة – فرح ١٥ أبريل">
@@ -64,6 +80,35 @@ const $=id=>document.getElementById(id);
 let PASS="";
 try{PASS=sessionStorage.getItem("fp")||"";}catch(e){}
 
+const ST={pending:"مستني مراجعة",approved:"مقبول ✅",rejected:"مرفوض ❌"};
+async function loadOrders(){
+  const r=await SB.rpc("admin_orders",{p_pass:PASS});
+  if(r.error)throw r.error;
+  const box=$("orders");box.innerHTML="";const list=r.data||[];
+  const pend=list.filter(x=>x.status==="pending").length;$("pend").textContent=pend?pend+" مستني":"";
+  if(!list.length){box.innerHTML='<p style="color:#8a6b6f;text-align:center;padding:10px">لسه مفيش طلبات</p>';return;}
+  list.forEach(x=>{
+    const d=document.createElement("div");d.className="ord";
+    const top=document.createElement("div");top.className="top";
+    const no=document.createElement("span");no.className="no";no.textContent="F-"+x.id;
+    const st=document.createElement("span");st.className="tag st-"+x.status;st.textContent=ST[x.status]||x.status;
+    top.append(no,st);
+    const meta=document.createElement("div");meta.className="meta";
+    const a=document.createElement("a");a.className="l";a.href=SITE+x.slug;a.target="_blank";a.textContent=x.slug;
+    meta.append("الدعوة: ",a,document.createElement("br"),"المبلغ: "+(x.price||"—")+" · موبايل: ");
+    const ph=document.createElement("a");ph.className="l";ph.href="https://wa.me/2"+(x.phone||"").replace(/\D/g,"").replace(/^2/,"");ph.target="_blank";ph.textContent=x.phone||"—";meta.append(ph);
+    meta.append(document.createElement("br"),new Date(x.created_at).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"}));
+    const img=document.createElement("img");img.alt="صورة التحويل";img.src=x.receipt||"";
+    img.onclick=()=>{const z=document.createElement("div");z.className="zoom";const i=document.createElement("img");i.src=img.src;z.appendChild(i);z.onclick=()=>z.remove();document.body.appendChild(z);};
+    const acts=document.createElement("div");acts.className="acts";
+    const ok=document.createElement("button");ok.className="btn ok";ok.textContent="✅ التحويل وصل";
+    const no2=document.createElement("button");no2.className="btn no-btn";no2.textContent="❌ مفيش تحويل";
+    ok.onclick=()=>setOrder(x.id,"approved");no2.onclick=()=>{if(window.confirm?confirm("الدعوة هتتقفل عند الضيوف. متأكدة؟"):true)setOrder(x.id,"rejected");};
+    acts.append(ok,no2);
+    d.append(top,meta,img,acts);box.appendChild(d);
+  });
+}
+async function setOrder(id,st){const r=await SB.rpc("admin_set_order",{p_pass:PASS,p_id:id,p_status:st});if(r.error){alert("حصلت مشكلة، جربي تاني");return;}loadOrders();}
 async function load(){
   const r=await SB.rpc("admin_list",{p_pass:PASS});
   if(r.error)throw r.error;
@@ -80,7 +125,7 @@ async function load(){
 }
 async function enter(){
   $("lerr").textContent="";
-  try{await load();$("login").hidden=true;$("panel").hidden=false;try{sessionStorage.setItem("fp",PASS);}catch(e){}}
+  try{await load();await loadOrders();$("login").hidden=true;$("panel").hidden=false;try{sessionStorage.setItem("fp",PASS);}catch(e){}}
   catch(e){$("lerr").textContent=(e.message||"").includes("denied")?"الباسورد غلط":"في مشكلة في الاتصال، جربي تاني";}
 }
 $("go").onclick=()=>{PASS=$("pw").value;enter();};
