@@ -612,7 +612,7 @@ body.inviting #builder{display:none}
 .minv .st.active{background:#e6f4ea;color:#1e6b34}.minv .st.pending{background:#fff4e0;color:#8a5a00}.minv .st.disabled{background:#fde8e6;color:#b3261e}
 .minv .l{direction:ltr;text-align:left;font-size:.82rem;color:#8a6b6f;margin:6px 0;word-break:break-all}
 .minv .a{display:flex;gap:8px}.minv .a>*{flex:1;text-align:center;text-decoration:none;padding:9px 6px;border-radius:12px;font-weight:700;font-size:.88rem;border:0}
-.minv .a .e{background:#6d1f2f;color:#fff}.minv .a .w{background:#25d366;color:#fff}
+.minv .a .e{background:#6d1f2f;color:#fff}.minv .a .g{background:#f3e6d8;color:#6d1f2f}.gpg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.gpg a{position:relative;aspect-ratio:1;background-size:cover;background-position:center;border-radius:10px;overflow:hidden}.gpg a span{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);color:#fff;font-size:.72rem;padding:3px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.minv .a .w{background:#25d366;color:#fff}
 
 /* ===== ivy (Ivory Lily – English) ===== */
 .op-ivy{background:#e9e1d6;overflow:hidden;perspective:1500px}
@@ -686,6 +686,22 @@ body.inviting #builder{display:none}
 .iv-opt button[aria-pressed="true"]{background:#3a3128;color:#f4ede2;border-color:#3a3128}
 .iv-form .iv-btn{width:100%;margin-top:18px;text-align:center;cursor:pointer}
 .iv-err{color:#a0503c;font-size:.95rem;margin-top:8px;min-height:1em}
+.iv-alb-t{font-family:"Cormorant Garamond",serif;font-size:1.25rem;color:#5f4d36;line-height:1.5;margin:12px auto 0;max-width:320px}
+.iv-alb-ar{font-family:Amiri,serif;font-weight:700;direction:rtl;font-size:1.15rem;color:#7a6548;margin:4px 0 0}
+.iv-alb{background:#fbf8f2;border:1px solid #e0d3be;padding:22px 18px;margin-top:22px;text-align:left}
+.iv-alb-l{display:flex;justify-content:space-between;font-family:Cinzel,serif;font-weight:700;font-size:.85rem;letter-spacing:.12em;color:#6e5c44;margin:2px 0 8px}
+.iv-alb-l span{font-family:Amiri,serif;letter-spacing:0;font-size:1.05rem}
+.iv-alb input#ivAlbName{width:100%;min-height:54px;border:1px solid #cdbb9c;background:#fff;font:inherit;font-size:18px;padding:10px 14px;color:#3a3128;border-radius:4px}
+.iv-alb-pick{display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:16px;padding:22px 10px;border:1.5px dashed #bfa98a;background:rgba(255,255,255,.6);cursor:pointer;text-align:center}
+.iv-alb-pick .ic{font-size:2rem;color:#8f7a5c;line-height:1}.iv-alb-pick b{font-family:Cinzel,serif;font-size:.95rem;letter-spacing:.12em;color:#3a3128}.iv-alb-pick small{font-size:.95rem;color:#8f7a5c}
+.iv-alb-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:12px}.iv-alb-g:empty{display:none}
+.iv-alb-g div{position:relative;aspect-ratio:1;background-size:cover;background-position:center;border-radius:3px}
+.iv-alb-g div button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(58,49,40,.75);color:#fff;font-size:15px;line-height:28px;padding:0}
+.iv-alb-g div.up::after{content:"";position:absolute;inset:0;background:rgba(251,248,242,.55)}.iv-alb-g div.dn::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:#fff;background:rgba(58,49,40,.35)}
+.iv-alb .iv-btn{width:100%;margin-top:16px;text-align:center;cursor:pointer;font-size:.85rem;padding:16px 10px}
+.iv-alb-lock{font-size:.95rem;color:#7a6548;text-align:center;margin:14px 0 0;line-height:1.6}
+.iv-alb-ok{display:none;margin-top:22px;background:#fbf8f2;border:1px solid #e0d3be;padding:26px 18px}.iv-alb-ok p{font-family:"Cormorant Garamond",serif;font-size:1.25rem;color:#5f4d36;margin:8px 0 0}
+#ivAlbSec.ok .iv-alb{display:none}#ivAlbSec.ok .iv-alb-ok{display:block;animation:fadeIn .8s ease}
 .iv-end{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background-size:cover;background-position:center;padding:10vh 16%}
 [data-tpl="ivy"] .mute{background:#8f7a5c}
 [data-tpl="ivy"]{background:#efe8de}
@@ -1745,6 +1761,20 @@ body.inviting #builder{display:none}
         <label>WILL YOU ATTEND?</label><div class="iv-opt"><button type="button" data-v="yes" aria-pressed="false">Yes, I'll be there</button><button type="button" data-v="no" aria-pressed="false">Sorry, I can't make it</button></div>
         <label>LEAVE A MESSAGE</label><textarea id="ivMsg" placeholder="Your wishes for the couple"></textarea>
         <div class="iv-err" id="ivErr"></div><a class="iv-btn dark" id="ivSend">SEND MY REPLY</a></div></div>
+    <div class="iv-sec" id="ivAlbSec"><div class="iv-cnr tr"></div>
+      <div class="sub rv">SHARE YOUR MOMENTS</div><h2 class="rv">Our Album</h2>
+      <p class="iv-alb-t rv">Captured a beautiful moment from our night? Add your photos here.</p>
+      <p class="iv-alb-ar rv">صوّرت لحظة حلوة؟ ضيف صورك هنا 🤍</p>
+      <div class="iv-alb rv" id="ivAlb">
+        <label class="iv-alb-l" for="ivAlbName">YOUR NAME <span>اسمك</span></label><input id="ivAlbName" placeholder="Your name" autocomplete="name">
+        <label class="iv-alb-pick" id="ivAlbPick"><input type="file" id="ivAlbIn" accept="image/*" multiple hidden><span class="ic">＋</span><b>Choose photos</b><small>اختار صور · up to 10</small></label>
+        <div class="iv-alb-g" id="ivAlbG"></div>
+        <div class="iv-err" id="ivAlbErr"></div>
+        <a class="iv-btn dark" id="ivAlbSend">SEND TO THE COUPLE</a>
+        <p class="iv-alb-lock">🔒 Your photos go privately to the couple — only they can see them.<br>صورك بتوصل للعرسان بس، ومحدش غيرهم يقدر يشوفها</p>
+      </div>
+      <div class="iv-alb-ok" id="ivAlbOk"><div class="iv-sc" style="font-size:2.6rem">Thank you</div><p id="ivAlbOkT"></p><a class="iv-btn" id="ivAlbMore">ADD MORE PHOTOS</a></div>
+    </div>
     <div class="iv-end" id="ivEnd"><div class="iv-sc" style="font-size:2.4rem">Hope to see you there!</div><div class="iv-cap" id="ivEndN" style="font-size:.95rem;margin-top:12px;letter-spacing:.15em"></div><div style="font-size:1.6rem;color:#b39b75;margin-top:8px">♡</div></div>
   </section>
   <section id="fyk">
@@ -2111,15 +2141,15 @@ const TPL={
     P("#efe6da","#5b6c84","#46566c","#d8c8ae","#fbf8f1","#6f604c","#c9b48e","#9b8a72")]},
   ivy:{name:"Ivory Lily",opener:"ivy",pals:[
     P("#efe8de","#8f7a5c","#6e5c44","#e0d3be","#fbf8f2","#6e5c44","#bfa98a","#a08c6c")]},
-  fyk:{name:"فيونكة",opener:"fyk",pals:[
+  fyk:{name:"Satin Bow",opener:"fyk",pals:[
     P("#f6e6de","#c27f8b","#9a5562","#f2d6dc","#fbf1ec","#8a5a64","#c9a07a","#b9939a")]},
-  bab:{name:"باب الورد",opener:"bab",pals:[
+  bab:{name:"Rose Gate",opener:"bab",pals:[
     P("#f6eee2","#9a7444","#7a5a2c","#e6d6c0","#f6eee2","#6b5236","#b08a50","#a08a6c")]},
-  royal:{name:"قصر الورد",opener:"royal",pals:[
+  royal:{name:"Rose Palace",opener:"royal",pals:[
     P("#f9e5d1","#6e1424","#4a0d18","#e6d6c0","#f9e5d1","#3b2a22","#a57a35","#5c4637")]},
-  garden:{name:"حديقة الورد",opener:"seal",pals:[
+  garden:{name:"Rose Garden",opener:"seal",pals:[
     P("#f4ebdf","#6e1424","#4a0d18","#e6d6c0","#f4ebdf","#5b4a3a","#a8823f","#8a7a68")]},
-  velvet:{name:"مخمل ملكي",opener:"photo",pals:[
+  velvet:{name:"Royal Velvet",opener:"photo",pals:[
     P("#2a0a10","#7a1c2e","#5a1424","#e9c9cf","#faf3eb","#3a1418","#c9a463","#8a6b6f")]},
   islamic:{name:"زخارف إسلامية",opener:"doors",pals:[
     P("#0c1630","#13224a","#0a1430","#23396f","#f6f0e1","#13224a","#d4af5f","#7a7f92"),
@@ -2675,6 +2705,27 @@ function scratch(tile){const cv=tile.querySelector("canvas");tile.classList.remo
   cv.onpointerdown=e=>{down=true;last=null;cv.setPointerCapture&&cv.setPointerCapture(e.pointerId);draw(pt(e));if(!Music.playing&&cur&&cur.music&&cur.music!=="none"){}};
   cv.onpointermove=e=>{if(down)draw(pt(e));};cv.onpointerup=cv.onpointercancel=()=>{down=false;last=null;};}
 function checkDone(){if(document.querySelectorAll(".iv-tile.done").length===3)$("ivHint").textContent="save the date ♡";}
+let ivAlbFiles=[];
+function ivAlbDraw(){const g=$("ivAlbG");g.innerHTML="";ivAlbFiles.forEach((f,i)=>{const d=document.createElement("div");d.style.backgroundImage=`url(${f.u})`;if(f.st)d.className=f.st;
+    if(!f.st){const b=document.createElement("button");b.type="button";b.textContent="×";b.setAttribute("aria-label","Remove");b.onclick=()=>{ivAlbFiles.splice(i,1);ivAlbDraw();};d.appendChild(b);}g.appendChild(d);});
+  $("ivAlbPick").querySelector("b").textContent=ivAlbFiles.length?`${ivAlbFiles.length} photo${ivAlbFiles.length>1?"s":""} selected · add more`:"Choose photos";}
+function ivAlbInit(B,G){ivAlbFiles=[];ivAlbDraw();$("ivAlbSec").classList.remove("ok");$("ivAlbErr").textContent="";$("ivAlbName").value="";
+  $("ivAlbIn").onchange=async e=>{const fs=[...e.target.files];e.target.value="";$("ivAlbErr").textContent="";
+    for(const f of fs){if(ivAlbFiles.length>=10){$("ivAlbErr").textContent="Up to 10 photos at a time · ١٠ صور بس كل مرة";break;}
+      try{ivAlbFiles.push({u:await shrinkPhoto(f,1600)});}catch(err){}}ivAlbDraw();};
+  $("ivAlbMore").onclick=()=>{ivAlbFiles=[];ivAlbDraw();$("ivAlbSec").classList.remove("ok");};
+  $("ivAlbSend").onclick=async()=>{const btn=$("ivAlbSend"),err=$("ivAlbErr"),nm=$("ivAlbName").value.trim();err.textContent="";
+    if(!nm){err.textContent="Please write your name · اكتب اسمك";return;}if(!ivAlbFiles.length){err.textContent="Please choose at least one photo · اختار صورة";return;}
+    if(btn.dataset.busy)return;btn.dataset.busy=1;const old=btn.textContent;let ok=0;
+    try{for(let i=0;i<ivAlbFiles.length;i++){const f=ivAlbFiles[i];if(f.st==="dn"){ok++;continue;}f.st="up";ivAlbDraw();btn.textContent=`SENDING ${i+1} / ${ivAlbFiles.length}…`;
+        if(INV_SLUG&&SB){const b=await (await fetch(f.u)).blob();const path=`guests/${INV_SLUG}/${Date.now()}-${Math.random().toString(36).slice(2,10)}.jpg`;
+          const r=await SB.storage.from("photos").upload(path,b,{contentType:"image/jpeg",upsert:false});if(r.error)throw r.error;
+          const a=await SB.rpc("add_guest_photo",{p_slug:INV_SLUG,p_name:nm.slice(0,60),p_path:path});if(a.error)throw a.error;}
+        else await new Promise(r=>setTimeout(r,450));
+        f.st="dn";ok++;ivAlbDraw();}
+      $("ivAlbOkT").textContent=`${nm}, your ${ok} photo${ok>1?"s were":" was"} sent to ${B} & ${G} 🤍`;$("ivAlbSec").classList.add("ok");}
+    catch(e){err.textContent=(ok?`${ok} sent. `:"")+"Something went wrong, please try again · حصلت مشكلة، جرّب تاني";ivAlbFiles.forEach(f=>{if(f.st==="up")f.st="";});ivAlbDraw();}
+    finally{btn.textContent=old;delete btn.dataset.busy;}};}
 function renderIvy(o){
   const target=cairoTime(o.date,o.time),tz={timeZone:"Africa/Cairo"};
   const B=(o.brideEn||"").trim()||o.bride||"",G=(o.groomEn||"").trim()||o.groom||"";
@@ -2705,7 +2756,7 @@ function renderIvy(o){
   alb.forEach(u=>{const d=document.createElement("div");d.style.backgroundImage=`url("${u}")`;$("ivMem").appendChild(d);});
   const wa=(o.wa||"").replace(/\D/g,"");$("ivRsvpSec").style.display=wa?"":"none";
   document.querySelectorAll(".iv-opt button").forEach(b=>b.setAttribute("aria-pressed","false"));$("ivErr").textContent="";
-  $("ivSend").onclick=()=>{const nm=$("ivName").value.trim(),sel=document.querySelector('.iv-opt button[aria-pressed="true"]');
+  ivAlbInit(B,G);$("ivSend").onclick=()=>{const nm=$("ivName").value.trim(),sel=document.querySelector('.iv-opt button[aria-pressed="true"]');
     if(!nm){$("ivErr").textContent="Please write your name";return;}if(!sel){$("ivErr").textContent="Please choose if you'll attend";return;}
     let t=sel.dataset.v==="yes"?`Hello 🤍 This is ${nm}. I'll be there to celebrate the wedding of ${B} & ${G}, in sha Allah!`:`Hello 🤍 This is ${nm}. Sorry, I can't make it to the wedding of ${B} & ${G}. Congratulations!`;
     const m=$("ivMsg").value.trim();if(m)t+="\n\n"+m;window.open(`https://wa.me/${wa}?text=`+encodeURIComponent(t),"_blank");$("ivErr").textContent="WhatsApp opened, tap send to finish ♡";};
@@ -3173,15 +3224,25 @@ async function openAccount(){if(!USER){openAuth(null,openAccount);return;}
       const a=document.createElement("div");a.className="a";const e=document.createElement("button");e.className="e";e.textContent="عدّلي ✏️";
       e.onclick=()=>{closeM("acctMdl");$("editCodeIn").value=x.code||"";loadCode(x.code);};
       const w=document.createElement("a");w.className="w";w.target="_blank";w.rel="noopener";w.textContent="شاركي";
-      w.href=`https://wa.me/?text=${encodeURIComponent("يسعدنا دعوتكم 🤍\n"+CFG.site+x.slug)}`;a.append(e,w);d.append(t,l,a);box.appendChild(d);});
+      w.href=`https://wa.me/?text=${encodeURIComponent("يسعدنا دعوتكم 🤍\n"+CFG.site+x.slug)}`;const gp=document.createElement("button");gp.className="g";gp.textContent="صور الضيوف 📸";a.append(e,w);
+      const gw=document.createElement("div");gw.className="gpw";gp.onclick=()=>loadGuestPhotos(x.slug,gw,gp);
+      if(x.tpl==="ivy")a.appendChild(gp);d.append(t,l,a,gw);box.appendChild(d);});
   }catch(e){box.innerHTML='<p class="err" style="text-align:center">في مشكلة في الاتصال، جربي تاني</p>';}}
+async function loadGuestPhotos(slug,gw,btn){if(gw.dataset.open){gw.innerHTML="";delete gw.dataset.open;return;}gw.dataset.open=1;
+  gw.innerHTML='<p class="note" style="text-align:center">بنجيب الصور…</p>';
+  try{const r=await SB.rpc("my_guest_photos",{p_slug:slug});if(r.error)throw r.error;const rows=r.data||[];btn.textContent=`صور الضيوف (${rows.length}) 📸`;
+    if(!rows.length){gw.innerHTML='<p class="note" style="text-align:center;padding:8px">لسه محدش رفع صور</p>';return;}
+    gw.innerHTML='<p class="note" style="text-align:center">دوسي على أي صورة عشان تفتحيها وتحفظيها</p>';const g=document.createElement("div");g.className="gpg";
+    rows.forEach(p=>{const u=SB.storage.from("photos").getPublicUrl(p.path).data.publicUrl;const a=document.createElement("a");a.href=u;a.target="_blank";a.rel="noopener";
+      a.style.backgroundImage=`url("${u}")`;const n=document.createElement("span");n.textContent=p.name||"";a.appendChild(n);g.appendChild(a);});gw.appendChild(g);}
+  catch(e){gw.innerHTML='<p class="err" style="text-align:center">في مشكلة في الاتصال، جربي تاني</p>';}}
 $("acctBtn").onclick=()=>USER?openAccount():openAuth(null,openAccount);
 $("newInvBtn").onclick=()=>{closeM("acctMdl");edit.code=null;edit.slug=null;edit.songUrl=null;$("linkBtn").textContent="احصلي على لينك دعوتك 💌";window.scrollTo({top:0,behavior:"smooth"});toast("اختاري التصميم وابدئي 💌");};
 $("logoutBtn").onclick=async()=>{try{await SB.auth.signOut();}catch(e){}USER=null;showUser();closeM("acctMdl");toast("خرجتي من حسابك");};
 if(SB&&!/[#&](i|s)=/.test(location.hash)){SB.auth.getSession().then(r=>{USER=r.data&&r.data.session?r.data.session.user:null;showUser();}).catch(()=>{});
   SB.auth.onAuthStateChange((ev,ses)=>{USER=ses?ses.user:null;showUser();});}
 /* ---------------- boot ---------------- */
-let data=null;const h=location.hash.match(/[#&]i=([^&]+)/)||location.search.match(/[?&]i=([^&]+)/);
+let INV_SLUG=null;let data=null;const h=location.hash.match(/[#&]i=([^&]+)/)||location.search.match(/[?&]i=([^&]+)/);
 if(h){try{data=dec(h[1]);}catch(e){}}
 const sm=location.hash.match(/[#&]s=([a-z0-9-]+)/i)||location.search.match(/[?&]s=([a-z0-9-]+)/i);
 if(!data&&sm){
@@ -3189,7 +3250,7 @@ if(!data&&sm){
   (async()=>{try{if(!SB)throw 0;const r=await SB.rpc("get_invite",{p_slug:sm[1].toLowerCase()});
       if(r.error||!r.data)throw 0;const d=r.data;
       if(d._disabled){ld.innerHTML="💌<div>الدعوة دي مش متاحة حاليًا</div><small>كلّم صاحب الدعوة</small>";return;}
-      if(d._pending){ld.innerHTML="💌<div>الدعوة قيد التجهيز</div><small>هتكون جاهزة خلال وقت قصير، جرّب تفتحها تاني بعد شوية 🤍</small>";return;}if(d.songUrl)customUrl=d.songUrl;ld.remove();showInvite(d,false);}
+      if(d._pending){ld.innerHTML="💌<div>الدعوة قيد التجهيز</div><small>هتكون جاهزة خلال وقت قصير، جرّب تفتحها تاني بعد شوية 🤍</small>";return;}if(d.songUrl)customUrl=d.songUrl;INV_SLUG=sm[1].toLowerCase();ld.remove();showInvite(d,false);}
     catch(e){ld.innerHTML="💌<div>الدعوة دي مش موجودة</div><small>اتأكد من اللينك أو كلّم صاحب الدعوة</small>";}})();
 }
 else if(data){showInvite(data,false);}
