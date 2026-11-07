@@ -68,6 +68,12 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
     <div class="err" id="perr"></div>
   </div>
   <div class="card">
+    <h3 style="color:#6d1f2f;margin-bottom:4px">العميلات المسجلات <span id="ucount" class="tag free"></span></h3>
+    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">دي الداتا اللي تقدري ترفعيها على إعلانات فيسبوك وإنستجرام (Custom Audience). ✉️ = وافقت تستقبل عروض.</p>
+    <button class="btn g" id="csvBtn">⬇️ نزّلي الداتا (ملف Excel)</button>
+    <table style="margin-top:10px"><thead><tr><th>الاسم</th><th>الموبايل</th><th>دعوات</th></tr></thead><tbody id="users"></tbody></table>
+  </div>
+  <div class="card">
     <h3 style="color:#6d1f2f;margin-bottom:8px">كل الأكواد</h3>
     <table><thead><tr><th>الكود</th><th>العميلة</th><th>الدعوة</th></tr></thead><tbody id="list"></tbody></table>
   </div>
@@ -123,9 +129,25 @@ async function load(){
     tr.append(c,n,s);tb.appendChild(tr);
   });
 }
+let USERS=[];
+async function loadUsers(){
+  const r=await SB.rpc("admin_users",{p_pass:PASS});if(r.error){$("users").innerHTML='<tr><td colspan="3" style="color:#8a6b6f">شغّلي ملف accounts.sql في Supabase الأول</td></tr>';return;}
+  USERS=r.data||[];$("ucount").textContent=USERS.length+" عميلة";const tb=$("users");tb.innerHTML="";
+  if(!USERS.length){tb.innerHTML='<tr><td colspan="3" style="color:#8a6b6f">لسه محدش سجل</td></tr>';return;}
+  USERS.forEach(u=>{const tr=document.createElement("tr");const n=document.createElement("td");n.textContent=(u.name||"—")+(u.offers?" ✉️":"");
+    const small=document.createElement("div");small.style.cssText="font-size:.75rem;color:#8a6b6f;direction:ltr;text-align:right";small.textContent=u.email||"";n.appendChild(small);
+    const p=document.createElement("td");const a=document.createElement("a");a.className="l";a.target="_blank";a.href="https://wa.me/2"+(u.phone||"").replace(/\D/g,"").replace(/^2/,"");a.textContent=u.phone||"—";p.appendChild(a);
+    const c=document.createElement("td");c.textContent=u.invites;tr.append(n,p,c);tb.appendChild(tr);});
+}
+$("csvBtn").onclick=()=>{if(!USERS.length){alert("لسه مفيش داتا");return;}
+  const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+  const ph=v=>{let d=String(v||"").replace(/\D/g,"");if(d.startsWith("0"))d="2"+d;return d?"+"+d:"";};
+  const rows=[["fn","phone","email","country","offers","invites","signed_up"]].concat(USERS.map(u=>[u.name,ph(u.phone),u.email,"EG",u.offers?"yes":"no",u.invites,(u.created_at||"").slice(0,10)]));
+  const csv="\ufeff"+rows.map(r=>r.map(q).join(",")).join("\n");
+  const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="farhetna-customers.csv";document.body.appendChild(a);a.click();a.remove();};
 async function enter(){
   $("lerr").textContent="";
-  try{await load();await loadOrders();$("login").hidden=true;$("panel").hidden=false;try{sessionStorage.setItem("fp",PASS);}catch(e){}}
+  try{await load();await loadOrders();loadUsers();$("login").hidden=true;$("panel").hidden=false;try{sessionStorage.setItem("fp",PASS);}catch(e){}}
   catch(e){$("lerr").textContent=(e.message||"").includes("denied")?"الباسورد غلط":"في مشكلة في الاتصال، جربي تاني";}
 }
 $("go").onclick=()=>{PASS=$("pw").value;enter();};
