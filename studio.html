@@ -2158,11 +2158,20 @@ const TPL={
 };
 const TRACKS=[
   {id:"none",name:"من غير مزيكا"},
-  {id:"box",name:"صندوق موسيقى",sub:"ناعمة ورومانسية"},
-  {id:"piano",name:"بيانو هادي",sub:"كلاسيك وفخم"},
-  {id:"oud",name:"لحن شرقي",sub:"مقام حجاز"},
-  {id:"zaffa",name:"زفة",sub:"طبلة ورق ومزمار"},
-  {id:"bridal",name:"مارش الزفاف",sub:"لحن الدخلة الكلاسيك"},
+  {id:"zaffa",name:"زفة مصري",sub:"طبلة ومزمار",src:"music-zaffa.mp3"},
+  {id:"zaffa2",name:"زفة سريعة",sub:"إيقاع فرح",src:"music-zaffa2.mp3"},
+  {id:"oud",name:"عود شرقي",sub:"حجاز مع طبلة هادية",src:"music-oud.mp3"},
+  {id:"oudsolo",name:"تقاسيم عود",sub:"نهاوند هادي",src:"music-oudsolo.mp3"},
+  {id:"ney",name:"ناي وعود",sub:"روحاني وهادي",src:"music-ney.mp3"},
+  {id:"orient",name:"أوركسترا شرقي",sub:"كمنجات وطبلة",src:"music-orient.mp3"},
+  {id:"piano",name:"بيانو رومانسي",sub:"ناعم ودافي",src:"music-piano.mp3"},
+  {id:"piano2",name:"بيانو هادي",sub:"فالس رقيق",src:"music-piano2.mp3"},
+  {id:"waltz",name:"الرقصة الأولى",sub:"بيانو وكمنجات",src:"music-waltz.mp3"},
+  {id:"canon",name:"كانون",sub:"المقطوعة الكلاسيك للأفراح",src:"music-canon.mp3"},
+  {id:"bridal",name:"مارش الزفاف",sub:"Here comes the bride",src:"music-bridal.mp3"},
+  {id:"entrance",name:"دخلة ملكية",sub:"كمنجات فخمة",src:"music-entrance.mp3"},
+  {id:"harp",name:"هارب حالم",sub:"ناعمة وحالمة",src:"music-harp.mp3"},
+  {id:"box",name:"صندوق موسيقى",sub:"تهويدة رقيقة",src:"music-box.mp3"},
   {id:"custom",name:"ارفعي أغنيتك",sub:"ملف من الموبايل"}
 ];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
@@ -2368,7 +2377,11 @@ const Music={ctx:null,master:null,playing:null,timer:null,el:null,
   },
   play(id){this.stop();this.unlock();
     if(id==="custom"){if(!customUrl)return;this.el=new Audio(customUrl);this.el.loop=true;this.el.play().catch(()=>{});this.playing=id;return;}
-    if(!this.seq[id])return;this.init();if(!this.ctx)return;this.ctx.resume();
+    const tk=TRACKS.find(t=>t.id===id);
+    if(tk&&tk.src){this.playing=id;const el=new Audio(tk.src);el.loop=true;el.preload="auto";el.setAttribute("playsinline","");this.el=el;
+      el.onerror=()=>{if(this.el!==el)return;this.el=null;if(this.seq[id])this.playSeq(id);};el.play().catch(()=>{});return;}
+    this.playSeq(id);},
+  playSeq(id){if(!this.seq[id])return;this.init();if(!this.ctx)return;this.ctx.resume();
     this.playing=id;const s=this.seq[id],beat=60/s.bpm,barLen=beat*4;let bar=0,next=this.ctx.currentTime+.1;
     const sched=()=>{while(next<this.ctx.currentTime+1.2){s.bar(bar).forEach(([ty,m,b,d,v])=>this.note(ty,this.hz(m),next+b*beat,d,v));next+=barLen;bar++;}};
     sched();this.timer=setInterval(sched,300);},
