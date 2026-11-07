@@ -1443,7 +1443,7 @@ if(!data&&sm){
     catch(e){ld.innerHTML="💌<div>الدعوة دي مش موجودة</div><small>اتأكد من اللينك أو كلّم صاحب الدعوة</small>";}})();
 }
 else if(data){showInvite(data,false);}
-else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}drawBuilder();
+else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}const tm=location.hash.match(/[#&]t=([a-z]+)/);if(tm&&TPL[tm[1]]){state.tpl=tm[1];state.pal=0;}drawBuilder();
   const em=location.hash.match(/[#&]e=([A-Za-z0-9]+)/);
   if(em){$("editCodeIn").value=em[1].toUpperCase();openM("editMdl");loadCode(em[1]);}}
 window.__test={showInvite,collect,state};
