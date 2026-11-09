@@ -512,6 +512,16 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .lang-en .wa-help{left:auto;right:14px}
 .lang-en .cd-t,.lang-en .step,.lang-en .pc,.lang-en .qb,.lang-en .sg,.lang-en .faq6 p,.lang-en .faq6 .a{text-align:left}
 .lang-en .cd-t{align-items:flex-start}
+
+/* ===== hero video in a phone frame ===== */
+.pv{position:relative;z-index:4;width:min(66vw,292px);aspect-ratio:390/844;margin:26px auto 4px;padding:8px;border-radius:40px;
+  background:linear-gradient(150deg,#fffaf2 0%,#efe3d1 45%,#dcc9ad 100%);
+  box-shadow:0 34px 60px -30px rgba(52,62,44,.6),0 10px 24px -14px rgba(52,62,44,.35),inset 0 0 0 1px rgba(255,255,255,.85),0 0 0 1px rgba(85,104,74,.22)}
+.pv::after{content:"";position:absolute;inset:3px;border-radius:37px;border:1px solid rgba(185,138,69,.35);pointer-events:none}
+.pv-in{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:#f6ece1 url(hero-poster.jpg) center/cover;transform:translateZ(0)}
+.pv-in video{width:100%;height:100%;object-fit:cover;display:block}
+.pv-cam{position:absolute;z-index:2;top:16px;left:50%;width:58px;height:16px;margin-left:-29px;border-radius:10px;background:rgba(42,48,36,.88)}
+.js .pv{animation:rise 1.1s cubic-bezier(.2,.7,.2,1) 1.35s both}
 </style>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
@@ -548,11 +558,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     </div>
 
     <div class="copy">
-      <h1><span>فرحتكم تبدأ</span><span>بدعوة لا تُنسى</span></h1>
+      <h1><span>حكايتكم تستاهل</span><span>بداية جميلة</span></h1>
       <div class="div" aria-hidden="true"><i></i><svg viewBox="0 0 56 26"><path d="M6 22C18 16 32 10 50 4"/><path class="lf" d="M18 17c-2-5 0-9 5-10-1 4-2 8-5 10z"/><path class="lf" d="M21 15c4-3 9-2 11 1-4 2-8 2-11-1z"/><path class="lf" d="M30 11c-1-5 2-8 6-9-1 4-3 7-6 9z"/><path class="lf" d="M33 10c4-2 9-1 10 2-4 1-7 1-10-2z"/><path class="lf" d="M42 6c1-4 4-5 7-5-1 3-4 5-7 5z"/></svg><i></i></div>
-      <p><span>دعوات زفاف رقمية فاخرة وتفاعلية</span><span>تحكي حكايتكم من أول لحظة</span></p>
-      <a class="cta" href="#signature">اكتشفي التصميمات<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
-      <a class="cta2" href="pearl-silk/index.html" data-track="ViewContent" data-design="Pearl & Silk">جربي دعوة تفاعلية</a>
+      <p><span>صممي دعوة فرحك بنفسك في دقائق</span></p>
+      <a class="cta" href="studio.html" data-track="InitiateCheckout">صممي دعوتك<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
+      <a class="cta2" href="#howVideo" id="howBtn">شوفي إزاي</a>
+      <figure class="pv" id="howVideo" aria-label="فيديو قصير: إزاي تصممي دعوتك على فرحتنا">
+        <span class="pv-cam" aria-hidden="true"></span>
+        <div class="pv-in"><video id="howVid" muted playsinline loop preload="none" poster="hero-poster.jpg" data-src="hero.mp4" aria-hidden="true"></video></div>
+      </figure>
       <div class="feats">
         <div class="feat"><svg viewBox="0 0 24 24"><path d="M7 3.5h10l3.5 5L12 20.5 3.5 8.5z"/><path d="M3.5 8.5h17M9.5 8.5L12 20.5l2.5-12M7 3.5l2.5 5 2.5-5 2.5 5 2.5-5"/></svg><span>جودة عالية<b>وتفاصيل فاخرة</b></span></div>
         <i class="sep"></i>
@@ -1003,5 +1017,13 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 </script>
 <a class="wa-help" href="https://wa.me/201280067110?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%81%D8%B1%D8%AD%D8%AA%D9%86%D8%A7%20%F0%9F%A4%8D%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%D8%A9%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9" target="_blank" rel="noopener" data-track="Contact" aria-label="مساعدة على واتساب"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.4 12.4 0 0 0 5.3 22.2L3.6 28.5l6.5-1.7A12.4 12.4 0 1 0 16 3.5zm0 22.6a10.2 10.2 0 0 1-5.2-1.4l-.4-.2-3.9 1 1-3.8-.2-.4A10.2 10.2 0 1 1 16 26.1zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.4 8.4 0 0 1-4.1-3.6c-.3-.5.3-.5.9-1.6a.6.6 0 0 0 0-.5c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.3 3.3 0 0 0-1 2.5 5.8 5.8 0 0 0 1.2 3.1 13.3 13.3 0 0 0 5.1 4.5c1.9.8 2.6.9 3.6.7a3 3 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.4z"/></svg><span>محتاجة مساعدة؟</span></a>
 <script>(function(){var w=document.querySelector(".wa-help");if(!w||!("IntersectionObserver" in window))return;var hide=new Set();var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?hide.add(e.target):hide.delete(e.target)});w.classList.toggle("hide",hide.size>0)},{threshold:.15});document.querySelectorAll("#top,#signature,#designs,#packages,#start,footer,.help").forEach(function(x){io.observe(x)})})();</script>
+<script>(function(){var v=document.getElementById("howVid");if(!v)return;
+var rm=matchMedia("(prefers-reduced-motion: reduce)").matches,loaded=false,vis=false;
+function load(){if(loaded)return;loaded=true;v.src=v.getAttribute("data-src");v.load()}
+function play(){load();var p=v.play();if(p&&p.catch)p.catch(function(){})}
+if(!rm&&"IntersectionObserver" in window){var io=new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){if(document.readyState==="complete")play();else addEventListener("load",function(){setTimeout(function(){if(vis)play()},300)},{once:true})}else if(!v.paused)v.pause()},{threshold:.15});io.observe(v)}
+document.getElementById("howBtn").addEventListener("click",function(e){e.preventDefault();document.getElementById("howVideo").scrollIntoView({behavior:rm?"auto":"smooth",block:"center"});v.currentTime=0;play()});
+v.addEventListener("click",function(){v.paused?play():v.pause()});
+})();</script>
 </body>
 </html>

@@ -16,7 +16,7 @@ var D={
 /* ---------- homepage ---------- */
 "فرحتنا | دعوات زفاف رقمية":"Farhetna | Digital Wedding Invitations",
 "ظرف دعوة عاجي بنقوش بارزة وختم شمع أخضر بجانب ورد الليليوم":"Embossed ivory invitation envelope with a green wax seal beside white lilies",
-"فرحتكم تبدأ":"Your celebration begins","بدعوة لا تُنسى":"with an invitation to remember",
+"حكايتكم تستاهل":"Your Love Story Deserves","بداية جميلة":"a Beautiful Beginning.","صممي دعوة فرحك بنفسك في دقائق":"Create your dream wedding invitation in minutes.","صممي دعوتك":"Create Your Invitation","شوفي إزاي":"See How It Works","فيديو قصير: إزاي تصممي دعوتك على فرحتنا":"Short video: how to design your invitation on Farhetna","فرحتكم تبدأ":"Your celebration begins","بدعوة لا تُنسى":"with an invitation to remember",
 "دعوات زفاف رقمية فاخرة وتفاعلية":"Luxury interactive wedding invitations","تحكي حكايتكم من أول لحظة":"that tell your story from the first moment",
 "دعوات زفاف رقمية":"Digital wedding invitations","بلمسة استثنائية":"with an exceptional touch","تصاميم فاخرة وتفاعلية":"Luxurious, interactive designs","تروي قصة يومك المميز":"that tell the story of your special day",
 "جودة عالية":"High quality","وتفاصيل فاخرة":"& luxurious details","تصاميم متنوعة":"Varied designs","وفريدة":"& unique","تفاعلية":"Interactive","وسهلة المشاركة":"& easy to share",
