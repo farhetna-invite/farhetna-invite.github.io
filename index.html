@@ -718,22 +718,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   <a class="how-cta rv3" href="studio.html"><svg class="wand" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L15 9"/><path d="M14 6.5l1-2.5 1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1z"/><path d="M19 13l.5-1.2.5 1.2 1.2.5-1.2.5-.5 1.2-.5-1.2-1.2-.5z"/><path d="M8 4.5l.4-1 .4 1 1 .4-1 .4-.4 1-.4-1-1-.4z"/></svg>صممي دعوتك الآن<svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
   <img class="how-band" src="home-s3-band.webp" alt="" aria-hidden="true" loading="lazy">
 </section>
-<section class="rev" id="reviews" aria-labelledby="revTitle">
-  <img class="rev-gyp" src="home-s4-gyp.webp" alt="" aria-hidden="true" loading="lazy">
-  <div class="rev-head rv4">
-    <div class="div" aria-hidden="true"><i></i><svg viewBox="0 0 56 26"><path d="M6 22C18 16 32 10 50 4"/><path class="lf" d="M18 17c-2-5 0-9 5-10-1 4-2 8-5 10z"/><path class="lf" d="M21 15c4-3 9-2 11 1-4 2-8 2-11-1z"/><path class="lf" d="M30 11c-1-5 2-8 6-9-1 4-3 7-6 9z"/><path class="lf" d="M33 10c4-2 9-1 10 2-4 1-7 1-10-2z"/><path class="lf" d="M42 6c1-4 4-5 7-5-1 3-4 5-7 5z"/></svg><i></i></div>
-    <h2 id="revTitle">آراء عرايسنا</h2>
-    <p>تجارب حقيقية من عرايس اختاروا فرحتنا</p>
-    <svg class="heart-rule" viewBox="0 0 220 24" aria-hidden="true"><path d="M2 13c40-3 70-3 92-1M126 12c22-2 52-2 92 1"/><path d="M110 21s-9-5.4-9-11a4.6 4.6 0 0 1 9-1.6 4.6 4.6 0 0 1 9 1.6c0 5.6-9 11-9 11z"/></svg>
-  </div>
-  <div class="rcar rv4">
-    <button class="car-nav pv" type="button" aria-label="الرأي السابق"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-    <div class="rtrack" id="rtrack" tabindex="0" aria-roledescription="carousel" aria-label="آراء العرايس"></div>
-    <button class="car-nav nx" type="button" aria-label="الرأي التالي"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
-  </div>
-  <div class="dots rv4" id="rdots"></div>
-  <img class="rev-band" src="home-s4-band.webp" alt="" aria-hidden="true" loading="lazy">
-</section>
+
 <section class="pkg" id="packages" aria-labelledby="pkgTitle">
   <img class="pkg-lily" src="home-s5-lily-tl.webp" alt="" aria-hidden="true" loading="lazy">
   <div class="pkg-head rv5">
@@ -947,7 +932,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     {text:"أكتر حاجة عجبتني إن الدعوة شكلها فخم وفي نفس الوقت سعرها مناسب، وحسيت إنها إضافة حلوة لتفاصيل يومنا.",name:"دينا خالد",img:"home-s4-r3.webp"},
     {text:"فكرة لينك الدعوة مريحة جدًا، بدل ما أفضل أبعت المكان والتفاصيل لكل واحد لوحده. كل حاجة موجودة في مكان واحد.",name:"هبة مصطفى",img:"home-s4-r4.webp"},
     {text:"التصميمات كلها جميلة جدًا ومختلفة، وقدرت أختار اللي يناسب ذوقنا بالظبط. الموقع سهل الاستخدام والخدمة كانت لطيفة جدًا.",name:"رانيا السيد",img:"home-s4-r5.webp"}];
-  const sec=document.getElementById("reviews");
+  const sec=document.getElementById("reviews");if(!sec)return;
   const isLive=/(^|\.)farhetna-invite\.github\.io$/.test(location.hostname);
   const demo=!REAL_REVIEWS.length;
   const list=demo?(isLive?[]:DEMO_REVIEWS):REAL_REVIEWS;
