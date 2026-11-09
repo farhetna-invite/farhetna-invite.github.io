@@ -1412,6 +1412,13 @@ body.inviting .stbar{display:none}
       <div><label for="pBride">أهل العروسة</label><input id="pBride" placeholder="الأستاذ أحمد والسيدة منى"></div>
       <div><label for="pGroom">أهل العريس</label><input id="pGroom" placeholder="الأستاذ محمود والسيدة هالة"></div>
     </div>
+    <div id="iltExtra" hidden>
+      <label for="witnesses">الشهود <small style="color:#8a6b6f;font-weight:400">(اختياري — سطر لكل شاهد)</small></label>
+      <textarea id="witnesses" rows="2" placeholder="أحمد كمال&#10;طارق حسن"></textarea>
+      <label for="band">الفرقة أو الدي جي <small style="color:#8a6b6f;font-weight:400">(اختياري)</small></label>
+      <input id="band" placeholder="فرقة الأوتار الذهبية">
+      <p style="font-size:13px;color:#8a6b6f;margin-top:6px">💡 لو كتب الكتاب في مكان تاني، اكتبي في البرنامج: ٥:٠٠ م - كتب الكتاب @ مسجد السلام، مدينة نصر</p>
+    </div>
   </section>
   <section class="card">
     <h2><span class="step">٥</span>المزيكا</h2>
@@ -2149,7 +2156,7 @@ const CFG={
   whatsapp:"201280067110",
   price:"٢٥٠ جنيه",
   pricePremium:"٣٥٠ جنيه",
-  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd"],
+  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd","sgp","sgm","ilt"],
   instapay:"01280067110",
   site:"https://farhetna-invite.github.io/",
   pixel:"" // رقم Meta Pixel (فيسبوك/إنستجرام) لما يبقى عندك
@@ -2252,15 +2259,21 @@ const TRACKS=[
 /* Signature designs live in their own folders; the studio passes the couple's details to them */
 const SIG={bbl:{dir:"burgundy-bloom",name:"Burgundy Bloom",th:"home-t-bloom.webp"},ilr:{dir:"ivory-lace-royal",name:"Ivory Lace Royal",th:"home-t-ivoryroyal.webp"},
   pls:{dir:"pearl-silk",name:"Pearl & Silk",th:"home-t-pearl.webp"},bhy:{dir:"blue-hydrangea",name:"Blue Hydrangea",th:"home-t-hydrangea.webp"},
-  uws:{dir:"unwritten-story",name:"The Unwritten Story",th:"home-t-unwritten.webp"},bgd:{dir:"blushing-garden",name:"Blushing Garden",th:"home-t-blush.webp"}};
+  uws:{dir:"unwritten-story",name:"The Unwritten Story",th:"home-t-unwritten.webp"},bgd:{dir:"blushing-garden",name:"Blushing Garden",th:"home-t-blush.webp"},
+  sgp:{dir:"sage-peony",name:"Sage & Peony",th:"home-t-sage.webp"},
+  sgm:{dir:"sage-meadow",name:"Sage Meadow",th:"home-t-meadow.webp"},
+  ilt:{dir:"ivory-lantern",name:"Ivory Lantern",th:"home-t-lantern.webp"}};
 const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a20","#c9a463","#8a6b6f")],
   ilr:[P("#f3ead9","#efe4d0","#d9c9ad","#f7f0e2","#fffaf2","#5a4a35","#c9a463","#8a7a62"),P("#e9eee3","#a9b996","#7f9172","#cfd9c4","#fafcf7","#3d4a34","#c9a463","#7d8a72"),P("#e7eef5","#a9c2da","#7f9bb8","#cfdcea","#f8fbfe","#2f4258","#c9a463","#7a8798"),P("#f6e7e6","#e3b9b6","#c99592","#f0d4d2","#fffafa","#5a3a38","#c9a463","#9a7a78")],
   pls:[P("#f3e3d2","#efe0cc","#d8c2a2","#f7ecdf","#fffaf2","#6f5232","#c49a58","#8f714c")],
   bhy:[P("#e7eef5","#a9c2da","#7f9bb8","#cfdcea","#f8fbfe","#2f4258","#c9a463","#7a8798"),P("#e9eee3","#a9b996","#7f9172","#cfd9c4","#fafcf7","#3d4a34","#c9a463","#7d8a72"),P("#f6e7e6","#e3b9b6","#c99592","#f0d4d2","#fffafa","#5a3a38","#c9a463","#9a7a78"),P("#f3ead9","#efe4d0","#d9c9ad","#f7f0e2","#fffaf2","#5a4a35","#c9a463","#8a7a62")],
   uws:[P("#050403","#0b0805","#000","#2a1d0c","#f7dca4","#f7dca4","#f3c46e","#a08a63")],
-  bgd:[P("#eef1ea","#7d9a7a","#5d7a5a","#c9d8c5","#fbf7f3","#3d4a3a","#e3b0ae","#7d8a7e")]};
+  bgd:[P("#eef1ea","#7d9a7a","#5d7a5a","#c9d8c5","#fbf7f3","#3d4a3a","#e3b0ae","#7d8a7e")],
+  sgp:[P("#f1e7d8","#8fa58a","#4f6449","#e7b3b1","#fbf7ef","#3e463a","#c98a90","#7d8577")],
+  sgm:[P("#f4efe6","#8a9a74","#4e5f45","#c9d3b8","#faf7f1","#3e4339","#a8946c","#8a8b80")],
+  ilt:[P("#f4eadb","#9b7350","#7a5634","#e2d1b6","#fffdf9","#6e5844","#5d6843","#a8927a")]};
 Object.keys(SIG).forEach(k=>TPL[k]={name:SIG[k].name,opener:"ext",pals:SIG_PALS[k]});
-const SIG_ALBUM=["bbl","ilr","bhy","bgd"];
+const SIG_ALBUM=["bbl","ilr","bhy","bgd","sgm","ilt"];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
 let customUrl=null;
 
@@ -2316,7 +2329,7 @@ function thumb(k){
   }[k];
   return `<svg class="thumb" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice">${art}</svg>`;
 }
-["bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
+["ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
   const b=document.createElement("button");b.className="tpl";b.dataset.k=k;
   b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`+(CFG.premium.includes(k)?`<span class="prem">فاخر ✦</span>`:"");
   b.onclick=()=>{const was=!!SIG[state.tpl];state.tpl=k;state.pal=0;if(SIG[k]&&!was)state.music="design";if(!SIG[k]&&state.music==="design")state.music="box";drawBuilder();save();};
@@ -2343,14 +2356,14 @@ function drawBuilder(){
     s.setAttribute("aria-label","لون "+(i+1));s.onclick=()=>{state.pal=i;drawBuilder();save();};pals.appendChild(s);});
   document.querySelectorAll(".trk").forEach(d=>{d.setAttribute("aria-pressed",d.dataset.k===state.music);
     const pb=d.querySelector(".play");if(pb)pb.textContent=Music.playing===d.dataset.k?"■":"▶";});
-  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
+  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("iltExtra").hidden=state.tpl!=="ilt";$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
   const dp=$("dressPick");dp.innerHTML="";state.dress=state.dress||[];
   DRESS.forEach(c=>{const b=document.createElement("button");b.className="sw";b.style.background=c;b.setAttribute("aria-pressed",state.dress.includes(c));b.setAttribute("aria-label","لون");
     b.onclick=()=>{const i=state.dress.indexOf(c);if(i>=0)state.dress.splice(i,1);else state.dress.push(c);drawBuilder();save();};dp.appendChild(b);});
 }
 
 /* ---------------- data ---------------- */
-const FIELDS=["groom","bride","kind","intro","date","time","venue","addr","map","wa","program","dressNote","notes","gift","mono","poem","closing","story","pBride","pGroom","brideEn","groomEn","venueEn","dressEn"];
+const FIELDS=["groom","bride","kind","intro","date","time","venue","addr","map","wa","program","dressNote","notes","gift","mono","poem","closing","story","pBride","pGroom","brideEn","groomEn","venueEn","dressEn","witnesses","band"];
 /* ---- garden art helpers ---- */
 function gFlower(x,y,r,c){let s="";for(let k=0;k<6;k++){const a=k*60*Math.PI/180;s+=`<ellipse cx="${(x+Math.cos(a)*r*.55).toFixed(1)}" cy="${(y+Math.sin(a)*r*.55).toFixed(1)}" rx="${r*.55}" ry="${r*.42}" transform="rotate(${k*60} ${(x+Math.cos(a)*r*.55).toFixed(1)} ${(y+Math.sin(a)*r*.55).toFixed(1)})" fill="${c}" opacity=".92"/>`;}
   return s+`<circle cx="${x}" cy="${y}" r="${r*.42}" fill="${c}" stroke="rgba(150,80,70,.25)"/><circle cx="${x}" cy="${y}" r="${r*.18}" fill="rgba(170,110,80,.5)"/>`;}
@@ -3146,7 +3159,7 @@ $("opGld").addEventListener("click",function(){if(this.classList.contains("open"
   const fl=$("gsFall");this.appendChild(fl);setTimeout(()=>this.classList.add("gs-show"),3400);
   setTimeout(()=>{$("gld").insertBefore(fl,$("gld").firstChild);},8000);reveal(7900,"opGld");});
 function sigOpen(o,fromBuilder){
-  const d=Object.assign({},o);if(d.music==="custom"&&!d.songUrl&&edit.songUrl)d.songUrl=edit.songUrl;
+  const d=Object.assign({},o);if(INV_SLUG)d._slug=INV_SLUG;if(d.music==="custom"&&!d.songUrl&&edit.songUrl)d.songUrl=edit.songUrl;
   if(fromBuilder){try{sessionStorage.setItem("farhetna_preview",JSON.stringify(d))}catch(e){toast("الصور كبيرة على المعاينة، جربي صور أقل");return}
     let ov=$("sigView");if(!ov){ov=document.createElement("div");ov.id="sigView";ov.innerHTML='<iframe title="معاينة الدعوة" allow="autoplay"></iframe><button type="button" class="sigBack">→ رجوع للتعديل</button>';document.body.appendChild(ov);
       ov.querySelector(".sigBack").onclick=()=>{ov.classList.remove("on");ov.querySelector("iframe").src="about:blank";document.body.style.overflow=""};}
