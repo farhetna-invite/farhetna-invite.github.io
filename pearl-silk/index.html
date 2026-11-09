@@ -306,6 +306,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,canvas:focus-visible,[t
   </div>
   <canvas id="fx"></canvas>
 </div>
+<script src="../inv-data.js"></script>
 <script>
 /* ======== بيانات الدعوة (قابلة للتعديل) ======== */
 const D={
@@ -321,6 +322,7 @@ const D={
   ],
   rsvpBy:'برجاء الرد قبل ١ ديسمبر', maxGuests:5, inviteId:'demo-pearl-silk'
 };
+(()=>{const L=window.farhetnaData&&farhetnaData("pls");if(!L)return;const mu=L.music;delete L.music;Object.assign(D,L);if(mu){const au=document.getElementById("bgm");if(mu==="none")au.removeAttribute("src");else au.src=mu}})();
 (()=>{
 let RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 if(RM)document.documentElement.classList.add('rm');
@@ -655,7 +657,7 @@ function ribJob(dt){const st=ribState;if(st.drag!==null)return false;const K=RM?
     if(prev&&prev.name===name&&prev.att===choice&&prev.count===(choice==='yes'?count:0)){showDone(prev);return}  // identical resend: keep one record
     busy=true;const btn=$('sendBtn');btn.disabled=true;btn.textContent='جاري الإرسال…';msg('');
     const rec={name,att:choice,count:choice==='yes'?count:0,at:new Date().toISOString()};
-    try{await save(rec);showDone(rec,!!prev);vib([8,30,8])}
+    try{await save(rec);showDone(rec,!!prev);vib([8,30,8]);window.farhetnaRsvp&&farhetnaRsvp({name:rec.name,yes:rec.att==="yes",count:rec.count})}
     catch(e){msg('حصلت مشكلة ومقدرناش نحفظ الرد. جرّب تاني.','err')}
     finally{busy=false;btn.disabled=false;btn.textContent='إرسال الرد'}
   };

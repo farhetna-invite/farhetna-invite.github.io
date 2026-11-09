@@ -303,6 +303,7 @@ html[dir=rtl] .mute{right:auto;left:12px}
 <div class="lb" id="lb"><button class="x" id="lbX">×</button><button class="a p" id="lbP">‹</button><img id="lbI" alt=""><button class="a n" id="lbN">›</button><span class="c" id="lbC"></span></div>
 <audio id="aud" src="music.mp3" loop preload="none"></audio>
 
+<script src="../inv-data.js"></script>
 <script>
 /* ================= DATA (from the studio) ================= */
 const D={
@@ -315,7 +316,7 @@ const D={
   thanks:"Your love and support mean the world to us. We can't wait to celebrate with you.",
   wa:"201280067110",show:{day:true,details:true,thanks:true}
 };
-(()=>{try{if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
+(()=>{try{const L=window.farhetnaData&&farhetnaData("bgd");if(L){Object.assign(D,L);const au=document.querySelector("audio");if(au&&D.music){if(D.music==="none")au.removeAttribute("src");else au.src=D.music}return}if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
   Object.keys(x).forEach(k=>{const v=x[k];if(v===""||v==null||(Array.isArray(v)&&!v.length))return;D[k]=v});document.getElementById("demoFlag").textContent="معاينة"}catch(e){}})();
 (()=>{const q=new URLSearchParams(location.search);if(q.get("lang"))D.lang=q.get("lang")==="ar"?"ar":"en";if(q.get("hide"))q.get("hide").split(",").forEach(k=>D.show[k]=false);
   if(D.lang==="ar"&&D.groom==="Youssef")Object.assign(D,{groom:"يوسف",bride:"نور",venue:"فندق ريتز كارلتون النيل",city:"القاهرة",addr:"١١١٣ كورنيش النيل، وسط البلد، القاهرة",attire:"رسمي · ألوان هادية",
@@ -361,7 +362,7 @@ $("rsvpBy").textContent=D.rsvpBy?T.rsvpBy(new Date(D.rsvpBy+"T12:00:00").toLocal
 $("attire").textContent=D.attire||"";if(!D.attire)$("attire").parentElement.style.display="none";
 $("tyMsg").textContent=D.thanks;
 /* photo: black & white → tap brings it to colour, tap again opens the album */
-const PH=(D.album||[]).filter(Boolean);let pi=0,front="phA";
+const PH=(D.album||[]).filter(Boolean);let pi=0,front="phA";if(!PH.length)$("photo").style.display="none";
 if(PH.length){$("phA").src=PH[0];setInterval(()=>{if(!$("photo").closest(".act")||PH.length<2)return;pi=(pi+1)%PH.length;const nx=front==="phA"?"phB":"phA";$(nx).src=PH[pi];$(nx).style.opacity=1;$(front).style.opacity=0;front=nx},4500)}else $("photo").style.display="none";
 $("photo").onclick=()=>{const p=$("photo");if(!p.classList.contains("color")){p.classList.add("color");p.querySelector(".tag").style.opacity=0;const r=p.getBoundingClientRect();hearts(r.left+r.width/2,r.top+r.height*.3);return}openLb(pi)};
 let li=0;function openLb(i){li=(i+PH.length)%PH.length;$("lbI").src=PH[li];$("lbC").textContent=`${num(li+1)} / ${num(PH.length)}`;$("lb").classList.add("on")}
@@ -391,7 +392,7 @@ async function saveReply(r){await new Promise(res=>setTimeout(res,450));localSto
 function showOk(r){$("okT").textContent=r.yes?T.okY(r.name):T.okN(r.name);$("okP").textContent=r.yes?T.okYp:T.okNp;$("rpanel").classList.add("ok");$("rsvpMine").textContent=r.yes?T.mineY:T.mineN}
 $("fSend").onclick=async()=>{const n=$("fName").value.trim();$("fErr").textContent="";if(!n){$("fErr").textContent=T.needName;$("fName").focus();return}
   const b=$("fSend");b.disabled=true;b.style.opacity=.6;const r={name:n,yes,count:yes?cnt:0,msg:$("fMsg").value.trim(),at:new Date().toISOString()};let ok=false;try{ok=await saveReply(r)}catch(e){}
-  b.disabled=false;b.style.opacity=1;if(!ok){$("fErr").textContent=AR?"حصلت مشكلة في الحفظ، جرّب تاني":"Couldn't save — please try again";return}showOk(r);const rr=$("rpanel").getBoundingClientRect();hearts(rr.left+rr.width/2,rr.top+rr.height*.4)};
+  b.disabled=false;b.style.opacity=1;if(!ok){$("fErr").textContent=AR?"حصلت مشكلة في الحفظ، جرّب تاني":"Couldn't save — please try again";return}showOk(r);window.farhetnaRsvp&&farhetnaRsvp(r);const rr=$("rpanel").getBoundingClientRect();hearts(rr.left+rr.width/2,rr.top+rr.height*.4)};
 $("okChg").onclick=()=>$("rpanel").classList.remove("ok");
 try{const r=JSON.parse(localStorage.getItem(RK)||"null");if(r){$("fName").value=r.name;setYes(r.yes);cnt=r.count||1;$("fC").textContent=num(cnt);$("rsvpMine").textContent=r.yes?T.mineY:T.mineN;$("okT").textContent=r.yes?T.okY(r.name):T.okN(r.name);$("okP").textContent=r.yes?T.okYp:T.okNp}}catch(e){}
 

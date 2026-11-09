@@ -439,6 +439,7 @@ html[dir=rtl] .sheet h4{font:700 16px var(--ar)}
 <div class="lb" id="lb"><button class="x" id="lbX" aria-label="close">×</button><button class="a p" id="lbP">‹</button><img id="lbI" alt=""><button class="a n" id="lbN">›</button><span class="c" id="lbC"></span></div>
 <audio id="aud" src="music.mp3" loop preload="none"></audio>
 
+<script src="../inv-data.js"></script>
 <script>
 /* ================= DATA (in the studio this comes from the bride's form) ================= */
 const D={
@@ -454,7 +455,7 @@ const D={
   show:{date:true,time:true,venue:true,timeline:true,story:true,rsvp:true,thanks:true},
   look:{env:"burgundy",seal:"orig"}
 };
-(()=>{try{if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
+(()=>{try{const L=window.farhetnaData&&farhetnaData("bbl");if(L){Object.assign(D,L);const au=document.querySelector("audio");if(au&&D.music){if(D.music==="none")au.removeAttribute("src");else au.src=D.music}return}if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
   Object.keys(x).forEach(k=>{const v=x[k];if(v===""||v==null||(Array.isArray(v)&&!v.length))return;D[k]=v});
   if(D.music){const au=document.getElementById("aud");if(D.music==="none")au.removeAttribute("src");else au.src=D.music}
   document.getElementById("demoFlag").textContent="معاينة";}catch(e){}})();
@@ -579,7 +580,7 @@ $("fBack").onclick=()=>rcv.dataset.st="ask";
 $("fPlus").onclick=()=>{cnt=Math.min(10,cnt+1);setN()};$("fMinus").onclick=()=>{cnt=Math.max(1,cnt-1);setN()};
 function showDone(r){$("dT").textContent=r.yes?T.okY(r.name):T.okN(r.name);$("dP").textContent=r.yes?T.okYp:T.okNp;rcv.dataset.st="done"}
 $("fSend").onclick=()=>{const n=$("fName").value.trim();if(!n){$("fName").placeholder=T.needName;$("fName").focus();$("fName").style.borderColor="#b3261e";return}
-  const r={name:n,yes,count:yes?cnt:0,msg:$("fMsg").value.trim(),at:new Date().toISOString()};try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}showDone(r)};
+  const r={name:n,yes,count:yes?cnt:0,msg:$("fMsg").value.trim(),at:new Date().toISOString()};try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}showDone(r);window.farhetnaRsvp&&farhetnaRsvp(r)};
 $("dChg").onclick=()=>rcv.dataset.st="ask";
 try{const r=JSON.parse(localStorage.getItem(RK)||"null");if(r){$("fName").value=r.name;showDone(r)}}catch(e){}
 

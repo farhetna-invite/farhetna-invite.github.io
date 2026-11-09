@@ -1316,6 +1316,8 @@ body:not(.inviting){background:#f6ece1;color:#4b4a3d;font-family:"Noto Naskh Ara
 .stbar .rt{display:flex;gap:8px}
 body.inviting .stbar{display:none}
 .acctbar{display:none!important}
+#sigView{position:fixed;inset:0;z-index:250;background:#000;display:none}#sigView.on{display:block}#sigView iframe{width:100%;height:100%;border:0;display:block}
+#sigView .sigBack{position:absolute;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:2;background:rgba(251,246,240,.92);color:#3c4733;border:1px solid rgba(85,104,74,.35);border-radius:22px;padding:8px 14px;font:inherit;font-size:.9rem;cursor:pointer}
 #gpBox{margin:-6px 0 16px;text-align:center}#gpBox .gpw{text-align:start}
 .lang-en #builder,.lang-en .mdl .box{text-align:left}
 .lang-en #builder .trk .nm{text-align:left}
@@ -2147,7 +2149,7 @@ const CFG={
   whatsapp:"201280067110",
   price:"٢٥٠ جنيه",
   pricePremium:"٣٥٠ جنيه",
-  premium:["ivy","swn","olv","gld","lav","brd"],
+  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd"],
   instapay:"01280067110",
   site:"https://farhetna-invite.github.io/",
   pixel:"" // رقم Meta Pixel (فيسبوك/إنستجرام) لما يبقى عندك
@@ -2229,6 +2231,7 @@ const TPL={
     P("#2a0b12","#4f1422","#320b15","#742236","#f7efe2","#4f1422","#d6b066","#8b6b70")]}
 };
 const TRACKS=[
+  {id:"design",name:"مزيكا التصميم",sub:"المقطوعة الأصلية للتصميم"},
   {id:"none",name:"من غير مزيكا"},
   {id:"zaffa",name:"زفة مصري",sub:"طبلة ومزمار",src:"music-zaffa.mp3"},
   {id:"zaffa2",name:"زفة سريعة",sub:"إيقاع فرح",src:"music-zaffa2.mp3"},
@@ -2246,6 +2249,18 @@ const TRACKS=[
   {id:"box",name:"صندوق موسيقى",sub:"تهويدة رقيقة",src:"music-box.mp3"},
   {id:"custom",name:"ارفعي أغنيتك",sub:"ملف من الموبايل"}
 ];
+/* Signature designs live in their own folders; the studio passes the couple's details to them */
+const SIG={bbl:{dir:"burgundy-bloom",name:"Burgundy Bloom",th:"home-t-bloom.webp"},ilr:{dir:"ivory-lace-royal",name:"Ivory Lace Royal",th:"home-t-ivoryroyal.webp"},
+  pls:{dir:"pearl-silk",name:"Pearl & Silk",th:"home-t-pearl.webp"},bhy:{dir:"blue-hydrangea",name:"Blue Hydrangea",th:"home-t-hydrangea.webp"},
+  uws:{dir:"unwritten-story",name:"The Unwritten Story",th:"home-t-unwritten.webp"},bgd:{dir:"blushing-garden",name:"Blushing Garden",th:"home-t-blush.webp"}};
+const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a20","#c9a463","#8a6b6f")],
+  ilr:[P("#f3ead9","#efe4d0","#d9c9ad","#f7f0e2","#fffaf2","#5a4a35","#c9a463","#8a7a62"),P("#e9eee3","#a9b996","#7f9172","#cfd9c4","#fafcf7","#3d4a34","#c9a463","#7d8a72"),P("#e7eef5","#a9c2da","#7f9bb8","#cfdcea","#f8fbfe","#2f4258","#c9a463","#7a8798"),P("#f6e7e6","#e3b9b6","#c99592","#f0d4d2","#fffafa","#5a3a38","#c9a463","#9a7a78")],
+  pls:[P("#f3e3d2","#efe0cc","#d8c2a2","#f7ecdf","#fffaf2","#6f5232","#c49a58","#8f714c")],
+  bhy:[P("#e7eef5","#a9c2da","#7f9bb8","#cfdcea","#f8fbfe","#2f4258","#c9a463","#7a8798"),P("#e9eee3","#a9b996","#7f9172","#cfd9c4","#fafcf7","#3d4a34","#c9a463","#7d8a72"),P("#f6e7e6","#e3b9b6","#c99592","#f0d4d2","#fffafa","#5a3a38","#c9a463","#9a7a78"),P("#f3ead9","#efe4d0","#d9c9ad","#f7f0e2","#fffaf2","#5a4a35","#c9a463","#8a7a62")],
+  uws:[P("#050403","#0b0805","#000","#2a1d0c","#f7dca4","#f7dca4","#f3c46e","#a08a63")],
+  bgd:[P("#eef1ea","#7d9a7a","#5d7a5a","#c9d8c5","#fbf7f3","#3d4a3a","#e3b0ae","#7d8a7e")]};
+Object.keys(SIG).forEach(k=>TPL[k]={name:SIG[k].name,opener:"ext",pals:SIG_PALS[k]});
+const SIG_ALBUM=["bbl","ilr","bhy","bgd"];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
 let customUrl=null;
 
@@ -2280,6 +2295,7 @@ function islamicMedal(g,bg){
 const d0=new Date(Date.now()+60*864e5);$("date").value=d0.toISOString().slice(0,10);
 
 function thumb(k){
+  if(SIG[k])return `<svg class="thumb" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice"><image href="${SIG[k].th}" x="0" y="-60" width="160" height="285" preserveAspectRatio="xMidYMid slice"/></svg>`;
   const p=TPL[k].pals[0];
   const art={
     classic:`<rect width="160" height="110" fill="${p.bg}"/><rect x="50" y="12" width="60" height="86" rx="4" fill="${p.main}"/><path d="M50 12l30 40 30-40" fill="${p["main-l"]}"/><circle cx="80" cy="52" r="9" fill="${p.gold}"/>`,
@@ -2300,15 +2316,15 @@ function thumb(k){
   }[k];
   return `<svg class="thumb" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice">${art}</svg>`;
 }
-Object.keys(TPL).filter(k=>!HIDDEN_TPL.includes(k)).forEach(k=>{
+["bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
   const b=document.createElement("button");b.className="tpl";b.dataset.k=k;
   b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`+(CFG.premium.includes(k)?`<span class="prem">فاخر ✦</span>`:"");
-  b.onclick=()=>{state.tpl=k;state.pal=0;drawBuilder();save();};
+  b.onclick=()=>{const was=!!SIG[state.tpl];state.tpl=k;state.pal=0;if(SIG[k]&&!was)state.music="design";if(!SIG[k]&&state.music==="design")state.music="box";drawBuilder();save();};
   $("tpls").appendChild(b);
 });
 TRACKS.forEach(t=>{
   const d=document.createElement("div");d.className="trk";d.dataset.k=t.id;
-  d.innerHTML=`<button class="nm">${t.name}${t.sub?`<small>${t.sub}</small>`:""}</button>`+((t.id!=="none"&&t.id!=="custom")?`<button class="play" aria-label="اسمعي">▶</button>`:"");
+  d.innerHTML=`<button class="nm">${t.name}${t.sub?`<small>${t.sub}</small>`:""}</button>`+((t.id!=="none"&&t.id!=="custom"&&t.id!=="design")?`<button class="play" aria-label="اسمعي">▶</button>`:"");
   d.querySelector(".nm").onclick=()=>{state.music=t.id;drawBuilder();save();};
   const pb=d.querySelector(".play");
   if(pb)pb.onclick=()=>{ if(Music.playing===t.id){Music.stop();}else{Music.play(t.id);} drawBuilder(); };
@@ -2327,7 +2343,7 @@ function drawBuilder(){
     s.setAttribute("aria-label","لون "+(i+1));s.onclick=()=>{state.pal=i;drawBuilder();save();};pals.appendChild(s);});
   document.querySelectorAll(".trk").forEach(d=>{d.setAttribute("aria-pressed",d.dataset.k===state.music);
     const pb=d.querySelector(".play");if(pb)pb.textContent=Music.playing===d.dataset.k?"■":"▶";});
-  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].includes(state.tpl);$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].includes(state.tpl);
+  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
   const dp=$("dressPick");dp.innerHTML="";state.dress=state.dress||[];
   DRESS.forEach(c=>{const b=document.createElement("button");b.className="sw";b.style.background=c;b.setAttribute("aria-pressed",state.dress.includes(c));b.setAttribute("aria-label","لون");
     b.onclick=()=>{const i=state.dress.indexOf(c);if(i>=0)state.dress.splice(i,1);else state.dress.push(c);drawBuilder();save();};dp.appendChild(b);});
@@ -2676,7 +2692,7 @@ $("bAlbIn").onchange=async e=>{const fs=[...e.target.files].slice(0,4-PH.album.l
 async function uploadPhotos(slug){
   const up=async(u,i)=>{if(!u||/^http/.test(u))return u;const b=await (await fetch(u)).blob();const path=`${slug}/${Date.now()}-${i}.jpg`;
     const r=await SB.storage.from("photos").upload(path,b,{contentType:"image/jpeg",upsert:false});if(r.error)throw new Error("photo");return SB.storage.from("photos").getPublicUrl(path).data.publicUrl;};
-  if(!["bab","fyk","ivy","swn","olv","gld","lav","brd"].includes(state.tpl))return;
+  if(!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl))return;
   PH.hero=await up(PH.hero,0);for(let i=0;i<PH.album.length;i++)PH.album[i]=await up(PH.album[i],i+1);}
 function babGarland(el){let s="";
   const cr=(x,y,r)=>gRose(x,y,r,"#efe6d4","#fbf7ef"),bl=(x,y,r)=>gFlower(x,y,r,"#fffdf8");
@@ -3129,7 +3145,17 @@ let gsRaf=0;$("invite").addEventListener("scroll",()=>{if(!$("gld").classList.co
 $("opGld").addEventListener("click",function(){if(this.classList.contains("open"))return;startMusic();this.classList.add("open");
   const fl=$("gsFall");this.appendChild(fl);setTimeout(()=>this.classList.add("gs-show"),3400);
   setTimeout(()=>{$("gld").insertBefore(fl,$("gld").firstChild);},8000);reveal(7900,"opGld");});
+function sigOpen(o,fromBuilder){
+  const d=Object.assign({},o);if(d.music==="custom"&&!d.songUrl&&edit.songUrl)d.songUrl=edit.songUrl;
+  if(fromBuilder){try{sessionStorage.setItem("farhetna_preview",JSON.stringify(d))}catch(e){toast("الصور كبيرة على المعاينة، جربي صور أقل");return}
+    let ov=$("sigView");if(!ov){ov=document.createElement("div");ov.id="sigView";ov.innerHTML='<iframe title="معاينة الدعوة" allow="autoplay"></iframe><button type="button" class="sigBack">→ رجوع للتعديل</button>';document.body.appendChild(ov);
+      ov.querySelector(".sigBack").onclick=()=>{ov.classList.remove("on");ov.querySelector("iframe").src="about:blank";document.body.style.overflow=""};}
+    ov.querySelector("iframe").src=SIG[o.tpl].dir+"/index.html#k=preview";ov.classList.add("on");document.body.style.overflow="hidden";return;}
+  const j=JSON.stringify(d),b=btoa(unescape(encodeURIComponent(j))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+  location.replace(SIG[o.tpl].dir+"/index.html#d="+b);
+}
 function showInvite(o,fromBuilder){
+  if(SIG[o.tpl]){sigOpen(o,fromBuilder);return}
   Music.stop();cur=o;
   const op=render(o);
   if(o.tpl!=="garden"&&o.tpl!=="bab"&&o.tpl!=="fyk")$("rsvpSec").appendChild($("rsvpForm"));
@@ -3349,7 +3375,7 @@ if(!data&&sm){
     catch(e){ld.innerHTML="💌<div>الدعوة دي مش موجودة</div><small>اتأكد من اللينك أو كلّم صاحب الدعوة</small>";}})();
 }
 else if(data){showInvite(data,false);}
-else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}const tm=location.hash.match(/[#&]t=([a-z]+)/);if(tm&&TPL[tm[1]]){state.tpl=tm[1];state.pal=0;}if(HIDDEN_TPL.includes(state.tpl)){state.tpl="brd";state.pal=0;}drawBuilder();
+else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}const tm=location.hash.match(/[#&]t=([a-z]+)/);if(tm&&TPL[tm[1]]){state.tpl=tm[1];state.pal=0;if(SIG[tm[1]])state.music="design";}if(HIDDEN_TPL.includes(state.tpl)){state.tpl="brd";state.pal=0;}drawBuilder();
   const em=location.hash.match(/[#&]e=([A-Za-z0-9]+)/);
   if(em){$("editCodeIn").value=em[1].toUpperCase();openM("editMdl");loadCode(em[1]);}}
 window.__test={showInvite,collect,state};

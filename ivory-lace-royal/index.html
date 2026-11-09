@@ -394,6 +394,7 @@ body.locked:not(.shown) .hero{transform:scale(.965);filter:brightness(.97)}
 <button class="mute" id="mute" aria-label="المزيكا"><svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path id="mW" d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg></button>
 <audio id="aud" src="music.mp3" loop preload="none"></audio>
 
+<script src="../inv-data.js"></script>
 <script>
 /* ===== Demo data (in the studio this comes from the bride's form) ===== */
 const D={
@@ -407,7 +408,7 @@ const D={
 };
 
 /* ===== data from the Farhetna studio (preview) ===== */
-(()=>{try{if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
+(()=>{try{const L=window.farhetnaData&&farhetnaData("ilr");if(L){Object.assign(D,L);const au=document.querySelector("audio");if(au&&D.music){if(D.music==="none")au.removeAttribute("src");else au.src=D.music}return}if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
   Object.keys(x).forEach(k=>{const v=x[k];if(v===""||v==null||(Array.isArray(v)&&!v.length))return;D[k]=v});
   if(D.music){const au=document.getElementById("aud");if(D.music==="none")au.removeAttribute("src");else au.src=D.music}
   const dm=document.querySelector(".demo");if(dm)dm.textContent="معاينة";}catch(e){}})();
