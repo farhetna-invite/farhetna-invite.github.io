@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>استوديو فرحتنا · شكل الظرف والختم (معاينة)</title>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Naskh+Arabic:wght@400;600;700&family=Cormorant+Garamond:ital,wght@1,600&display=swap" rel="stylesheet">
+<style>
+:root{--wine:#6d1f2f;--ink:#3a1a20;--mut:#8a7468;--line:#ecdfd3}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;overflow:hidden}
+body{font-family:"Noto Naskh Arabic",serif;background:#bdcbde;color:var(--ink);-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+#fr{position:fixed;left:0;top:0;width:100%;height:100%;border:0;display:block;transition:height .45s cubic-bezier(.3,.7,.2,1)}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:10;max-width:560px;margin:auto;background:rgba(255,252,248,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:24px 24px 0 0;box-shadow:0 -10px 30px -12px rgba(40,25,30,.35);padding:6px 0 calc(10px + env(safe-area-inset-bottom));transition:transform .45s cubic-bezier(.3,.7,.2,1)}
+.sheet.min{transform:translateY(calc(100% - 54px - env(safe-area-inset-bottom)))}
+.handle{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:8px 16px 4px}
+.handle .t{font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.handle .t:before{content:"";width:36px;height:4px;border-radius:4px;background:#d8cabd;position:absolute;left:50%;top:6px;transform:translateX(-50%)}
+.handle .ar{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#f3ebe2;transition:transform .3s}
+.sheet.min .handle .ar{transform:rotate(180deg)}
+.handle .ar svg{width:14px;height:14px;fill:none;stroke:var(--wine);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.lab{font-size:12.5px;font-weight:700;padding:2px 16px 4px;color:var(--ink)}.lab span{font-weight:400;color:var(--mut);font-size:12px}
+.row{display:flex;gap:9px;overflow-x:auto;padding:2px 16px 6px;scrollbar-width:none;scroll-snap-type:x proximity}.row::-webkit-scrollbar{display:none}
+.opt{flex:0 0 auto;width:56px;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;font-weight:600;line-height:1.2;text-align:center;scroll-snap-align:start}
+.opt .th{position:relative;width:52px;height:52px;border-radius:14px;overflow:hidden;background:#efe7de;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);transition:box-shadow .2s}
+.opt .th img,.opt .th canvas{width:100%;height:100%;object-fit:cover;display:block}
+.seals .th,.chip .th{background:radial-gradient(circle at 50% 45%,#fff 0,#f1e9e0 75%)}
+.seals .th img,.seals .th canvas,.chip .th img{object-fit:contain;padding:8%;filter:drop-shadow(0 2px 2px rgba(60,40,30,.25))}
+.chip .th{border-radius:50%}
+.opt[aria-pressed="true"] .th{box-shadow:0 0 0 2.5px var(--wine)}
+.opt[aria-pressed="true"]{color:var(--wine)}
+.ini{display:none;padding:0 16px 8px}.ini.on{display:block}
+.ini input{width:100%;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;font:inherit;font-size:16px;text-align:center}
+.acts{display:flex;gap:8px;padding:6px 16px 0}
+.acts button{flex:1;padding:10px 8px;border-radius:14px;font-size:14.5px;font-weight:700}
+.replay{background:#f3ebe2;color:var(--wine)}
+.save{background:linear-gradient(135deg,#83283b,#5a1826);color:#fff;box-shadow:0 8px 18px -10px rgba(109,31,47,.8)}
+.toast{position:fixed;left:50%;top:18px;z-index:20;transform:translate(-50%,-20px);opacity:0;background:#2b2224;color:#fff;padding:10px 16px;border-radius:12px;font-size:13.5px;transition:.35s;pointer-events:none;width:max-content;max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<iframe id="fr" title="الدعوة" src="index.html"></iframe>
+<div class="sheet" id="sheet">
+  <button class="handle" id="handle"><span class="t">صمّمي ظرفك 🤍</span><span class="ar"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></button>
+  <div class="lab">لون الظرف</div><div class="row" id="envs"></div>
+  <div class="lab">شكل الختم <span>· شمع بارز</span></div><div class="row seals" id="seals"></div>
+  <div class="ini" id="iniBox"><input id="ini" maxlength="7" autocomplete="off" placeholder="الحروف: س & أ"></div>
+  <div class="lab">لون الختم</div><div class="row" id="scs"></div>
+  <div class="acts"><button class="replay" id="replay">▶︎ جرّبي الفتح</button><button class="save" id="save">حفظ الاختيار</button></div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="seal.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const ENVS=[["powder","أزرق بودري","Powder Blue"],["sage","أخضر سيج","Sage Green"],["blush","وردي بلاش","Blush Pink"],["ivory","آيفوري","Ivory"]];
+const SEALS=[["orig","الأصلي","Hydrangea"],["rose","وردة","Rose"],["jasmine","ياسمين","Jasmine"],["olive","غصن زيتون","Olive"],["initials","حروفكم","Initials"]];
+const SCS=[["offwhite","أوف وايت"],["pink","وردي هادي"],["match","لون الظرف"]];
+const MATCH={powder:"powder",sage:"sage",blush:"blush",ivory:"champ"};
+let st={env:"powder",seal:"orig",sc:"offwhite",ini:"س & أ"};
+try{Object.assign(st,JSON.parse(localStorage.getItem("farhetna_look_bh")||"{}"))}catch(e){}
+function opt(box,key,val,label,sub,inner,cls){const b=document.createElement("button");b.className="opt "+(cls||"");b.dataset.v=val;
+  b.innerHTML=`<span class="th">${inner}</span><span>${label}</span>`;b.onclick=()=>{st[key]=val;sync(true)};box.appendChild(b);return b}
+ENVS.forEach(([v,a,e])=>opt($("envs"),"env",v,a,e,`<img src="img/thumb/env-${v}.webp" alt="">`));
+SEALS.forEach(([v,a,e])=>opt($("seals"),"seal",v,a,e,v==="orig"?'<img alt="">':"<canvas></canvas>"));
+SCS.forEach(([v,a])=>opt($("scs"),"sc",v,a,"",'<img alt="">',"chip"));
+$("ini").value=st.ini;$("ini").oninput=()=>{st.ini=$("ini").value;sync(false)};
+const scFile=()=>st.sc==="match"?MATCH[st.env]:st.sc;
+const blanks={};function blank(c){return blanks[c]||(blanks[c]=new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=`img/seal/blank-${c}.webp`}))}
+let tok=0;
+async function drawThumbs(){const t=++tok,c=scFile();
+  document.querySelectorAll("#scs .opt").forEach(b=>{const f=b.dataset.v==="match"?MATCH[st.env]:b.dataset.v;b.querySelector("img").src=f==="offwhite"?"img/seal.webp":`img/seal/${f}.webp`});
+  document.querySelector('#seals [data-v="orig"] img').src=c==="offwhite"?"img/seal.webp":`img/seal/${c}.webp`;
+  const im=await blank(c);if(t!==tok)return;
+  try{await Promise.race([document.fonts.ready,new Promise(r=>setTimeout(r,1200))])}catch(e){}
+  for(const b of document.querySelectorAll("#seals .opt")){const v=b.dataset.v;if(v==="orig")continue;
+    FarhetnaSeal.stamp(b.querySelector("canvas"),im,{motif:v,text:st.ini||"س & أ"});await new Promise(r=>setTimeout(r,0));if(t!==tok)return}}
+let dt;
+function sync(thumbs){document.querySelectorAll(".opt").forEach(b=>{const k=b.parentElement.id==="envs"?"env":b.parentElement.id==="seals"?"seal":"sc";b.setAttribute("aria-pressed",st[k]===b.dataset.v)});
+  $("iniBox").classList.toggle("on",st.seal==="initials");
+  clearTimeout(dt);dt=setTimeout(()=>{post();drawThumbs()},thumbs?0:250)}
+function post(){$("fr").contentWindow&&$("fr").contentWindow.postMessage({type:"farhetna-look",look:Object.assign({},st)},"*")}
+$("fr").addEventListener("load",()=>{post();try{$("fr").contentDocument.getElementById("tap").addEventListener("click",()=>$("sheet").classList.add("min"))}catch(e){}});
+const sh=$("sheet");
+function lay(){const open=!sh.classList.contains("min");$("fr").style.height=open?(innerHeight-sh.offsetHeight+22)+"px":"100%"}
+new MutationObserver(lay).observe(sh,{attributes:true,attributeFilter:["class"]});addEventListener("resize",lay);new ResizeObserver(lay).observe(sh);
+$("handle").onclick=()=>sh.classList.toggle("min");
+$("replay").onclick=()=>{const q=new URLSearchParams({env:st.env,seal:st.seal,sc:st.sc,ini:st.ini});$("fr").src="index.html?"+q;$("sheet").classList.add("min")};
+$("save").onclick=()=>{try{localStorage.setItem("farhetna_look_bh",JSON.stringify(st))}catch(e){}
+  const e=ENVS.find(x=>x[0]===st.env)[1],s=SEALS.find(x=>x[0]===st.seal)[1],c=SCS.find(x=>x[0]===st.sc)[1];
+  const t=$("toast");t.textContent=`اتحفظ ✓ ظرف ${e} · ختم ${s} · ${c}`;t.classList.add("on");setTimeout(()=>t.classList.remove("on"),2600)};
+sync(true);
+</script>
+</body>
+</html>

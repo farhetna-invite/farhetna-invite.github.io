@@ -7,6 +7,7 @@
 <title>فرحتنا | لوحة الأكواد</title>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Cairo,system-ui,sans-serif;background:#f7efe6;color:#3a1a20;padding:24px 16px 60px}
@@ -54,6 +55,7 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
   <div class="card">
     <h3 style="color:#6d1f2f;margin-bottom:4px">الطلبات الجديدة <span id="pend" class="tag free"></span></h3>
     <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">الدعوة مش هتظهر للضيوف غير لما تضغطي ✅. افتحي InstaPay واتأكدي إن التحويل وصل: لو تمام اضغطي ✅ والدعوة تتفعّل، ولو مش موجود اضغطي ❌.</p>
+    <input id="osearch" type="search" placeholder="🔎 دوّري باسم العروسة أو رقم موبايلها" style="margin-bottom:8px">
     <div id="orders"></div>
   </div>
   <div class="card">
@@ -68,8 +70,8 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
     <div class="err" id="perr"></div>
   </div>
   <div class="card">
-    <h3 style="color:#6d1f2f;margin-bottom:4px">العميلات المسجلات <span id="ucount" class="tag free"></span></h3>
-    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">دي الداتا اللي تقدري ترفعيها على إعلانات فيسبوك وإنستجرام (Custom Audience). ✉️ = وافقت تستقبل عروض.</p>
+    <h3 style="color:#6d1f2f;margin-bottom:4px">العميلات <span id="ucount" class="tag free"></span></h3>
+    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">ملف الداتا فيه اسم وموبايل كل عروسة طلبت (من الطلبات) + العميلات اللي كانوا عاملين حساب قبل كده. تقدري ترفعيه على إعلانات فيسبوك وإنستجرام (Custom Audience).</p>
     <button class="btn g" id="csvBtn">⬇️ نزّلي الداتا (ملف Excel)</button>
     <table style="margin-top:10px"><thead><tr><th>الاسم</th><th>الموبايل</th><th>دعوات</th></tr></thead><tbody id="users"></tbody></table>
   </div>
@@ -90,8 +92,11 @@ const ST={pending:"⏳ مستني موافقتك",approved:"مقبول ✅",reje
 async function loadOrders(){
   const r=await SB.rpc("admin_orders",{p_pass:PASS});
   if(r.error)throw r.error;
-  const box=$("orders");box.innerHTML="";const list=r.data||[];
-  const pend=list.filter(x=>x.status==="pending").length;$("pend").textContent=pend?pend+" مستني":"";
+  ORDERS=r.data||[];drawOrders();}
+let ORDERS=[];
+function drawOrders(){const all=ORDERS;const q=($("osearch").value||"").trim();const qd=q.replace(/\D/g,"");
+  const box=$("orders");box.innerHTML="";const list=!q?all:all.filter(x=>(x.name||"").includes(q)||(qd.length>=3&&(x.phone||"").replace(/\D/g,"").includes(qd)));
+  const pend=all.filter(x=>x.status==="pending").length;$("pend").textContent=pend?pend+" مستني":"";
   if(!list.length){box.innerHTML='<p style="color:#8a6b6f;text-align:center;padding:10px">لسه مفيش طلبات</p>';return;}
   list.forEach(x=>{
     const d=document.createElement("div");d.className="ord";
@@ -101,9 +106,14 @@ async function loadOrders(){
     top.append(no,st);
     const meta=document.createElement("div");meta.className="meta";
     const a=document.createElement("a");a.className="l";a.href=SITE+x.slug;a.target="_blank";a.textContent=x.slug;
+    if(x.name){const nm=document.createElement("b");nm.textContent="👰 "+x.name;meta.append(nm,document.createElement("br"));}
     meta.append("الدعوة: ",a,document.createElement("br"),"المبلغ: "+(x.price||"—")+" · موبايل: ");
     const ph=document.createElement("a");ph.className="l";ph.href="https://wa.me/2"+(x.phone||"").replace(/\D/g,"").replace(/^2/,"");ph.target="_blank";ph.textContent=x.phone||"—";meta.append(ph);
     meta.append(document.createElement("br"),new Date(x.created_at).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"}));
+    if(x.code){const cd=document.createElement("div");cd.style.cssText="margin-top:6px";cd.append("كود التعديل: ");const cb=document.createElement("b");cb.dir="ltr";cb.style.letterSpacing=".12em";cb.textContent=x.code;cd.append(cb," ");
+      const sc=document.createElement("a");sc.className="l";sc.target="_blank";sc.rel="noopener";sc.textContent="ابعتيلها الكود 💬";
+      sc.href="https://wa.me/2"+(x.phone||"").replace(/\D/g,"").replace(/^2/,"")+"?text="+encodeURIComponent(`أهلاً${x.name?" "+x.name:""} 🤍 ده كود تعديل دعوتك من فرحتنا (متبعتهوش لحد):\n${x.code}\n\nللتعديل: ${SITE}studio.html#e=${x.code}\nلينك الدعوة: ${SITE}${x.slug}`);
+      cd.append(sc);meta.append(cd);}
     const img=document.createElement("img");img.alt="صورة التحويل";img.src=x.receipt||"";
     img.onclick=()=>{const z=document.createElement("div");z.className="zoom";const i=document.createElement("img");i.src=img.src;z.appendChild(i);z.onclick=()=>z.remove();document.body.appendChild(z);};
     const acts=document.createElement("div");acts.className="acts";
@@ -114,6 +124,7 @@ async function loadOrders(){
     d.append(top,meta,img,acts);box.appendChild(d);
   });
 }
+$("osearch").addEventListener("input",()=>drawOrders());
 async function setOrder(id,st){const r=await SB.rpc("admin_set_order",{p_pass:PASS,p_id:id,p_status:st});if(r.error){alert("حصلت مشكلة، جربي تاني");return;}loadOrders();}
 async function load(){
   const r=await SB.rpc("admin_list",{p_pass:PASS});
@@ -139,10 +150,13 @@ async function loadUsers(){
     const p=document.createElement("td");const a=document.createElement("a");a.className="l";a.target="_blank";a.href="https://wa.me/2"+(u.phone||"").replace(/\D/g,"").replace(/^2/,"");a.textContent=u.phone||"—";p.appendChild(a);
     const c=document.createElement("td");c.textContent=u.invites;tr.append(n,p,c);tb.appendChild(tr);});
 }
-$("csvBtn").onclick=()=>{if(!USERS.length){alert("لسه مفيش داتا");return;}
+$("csvBtn").onclick=()=>{if(!USERS.length&&!ORDERS.length){alert("لسه مفيش داتا");return;}
   const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
   const ph=v=>{let d=String(v||"").replace(/\D/g,"");if(d.startsWith("0"))d="2"+d;return d?"+"+d:"";};
-  const rows=[["fn","phone","email","country","offers","invites","signed_up"]].concat(USERS.map(u=>[u.name,ph(u.phone),u.email,"EG",u.offers?"yes":"no",u.invites,(u.created_at||"").slice(0,10)]));
+  const seen=new Set(),out=[];
+  ORDERS.forEach(o=>{const p=ph(o.phone);if(!p||seen.has(p))return;seen.add(p);out.push([o.name||"",p,"","EG","",o.status==="approved"?"paid":"order",(o.created_at||"").slice(0,10)]);});
+  USERS.forEach(u=>{const p=ph(u.phone);if(p&&seen.has(p))return;if(p)seen.add(p);out.push([u.name,p,u.email,"EG",u.offers?"yes":"no",u.invites,(u.created_at||"").slice(0,10)]);});
+  const rows=[["fn","phone","email","country","offers","status_or_invites","date"]].concat(out);
   const csv="\ufeff"+rows.map(r=>r.map(q).join(",")).join("\n");
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="farhetna-customers.csv";document.body.appendChild(a);a.click();a.remove();};
 async function enter(){
