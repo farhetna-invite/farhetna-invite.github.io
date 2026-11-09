@@ -63,6 +63,12 @@ window.farhetnaData=function(key){
       venueName:o.venue||"",venueAddress:o.addr||"",mapsUrl:o.map||"",rsvpWhatsApp:base.wa,
       schedule:prog.map(function(p,i){var hh=p[0]?+p[0].split(":")[0]:0;return{time:p[0]?((hh%12||12)+":"+p[0].split(":")[1]):"",period:hh<12?"صباحًا":"مساءً",label:p[1],icon:["cloche","rings","dinner","fireworks"][Math.min(i,3)]}}),
       music:mu||null};}
+  if(key==="tsn"){
+    var h2=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"",pics=(h2?[h2]:[]).concat(album);
+    return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,quote:o.poem||"",
+      venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",map:o.map||"",dressNote:o.dressNote||"",dressEn:o.dressEn||"",
+      gift:o.gift||"",ipay:o.ipay||"",ipayName:o.ipayName||"",ipayLink:/^https?:\/\//.test(o.ipayLink||"")?o.ipayLink:"",wa:base.wa,
+      hero:pics[0]||"",p1:pics[1]||"",p2:pics[2]||"",music:mu||null,slug:String(o._slug||"").toLowerCase()};}
   if(key==="ilt"){
     var hero=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:(album[0]||"");
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,
