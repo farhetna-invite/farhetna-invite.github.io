@@ -1318,7 +1318,7 @@ body.inviting .stbar{display:none}
 .acctbar{display:none!important}
 #sigView{position:fixed;inset:0;z-index:250;background:#000;display:none}#sigView.on{display:block}#sigView iframe{width:100%;height:100%;border:0;display:block}
 #sigView .sigBack{position:absolute;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:2;background:rgba(251,246,240,.92);color:#3c4733;border:1px solid rgba(85,104,74,.35);border-radius:22px;padding:8px 14px;font:inherit;font-size:.9rem;cursor:pointer}
-#gpBox{margin:-6px 0 16px;text-align:center}#gpBox .gpw{text-align:start}
+#gpBox{margin:-6px 0 16px;text-align:center;display:grid;gap:8px}#gpBox[hidden]{display:none}#gpBox .gpw{text-align:start}.rsl{list-style:none;margin:6px 0;padding:0;font-size:14px}.rsl li{padding:8px 4px;border-bottom:1px solid rgba(0,0,0,.07)}.rsl small{display:block;color:#888}.vcl audio{width:100%;height:36px;margin-top:4px}
 .lang-en #builder,.lang-en .mdl .box{text-align:left}
 .lang-en #builder .trk .nm{text-align:left}
 .lang-en #builder .step{margin-left:0;margin-right:6px}
@@ -1337,7 +1337,7 @@ body.inviting .stbar{display:none}
   </div>
   <div class="acctbar"><button class="acctbtn" id="acctBtn"><span class="av">👤</span><span id="acctTxt">تسجيل الدخول</span></button></div>
   <button class="editcode" id="editCodeBtn">عندك كود؟ عدّلي دعوتك ✏️</button>
-  <div id="gpBox" hidden><button class="btn ghost" id="gpBtn" type="button">صور الضيوف 📸</button><div class="gpw" id="gpWrap"></div></div>
+  <div id="gpBox" hidden><button class="btn ghost" id="rsBtn" type="button">ردود الحضور ✅</button><div class="gpw" id="rsWrap"></div><button class="btn ghost" id="gpBtn" type="button">صور الضيوف 📸</button><div class="gpw" id="gpWrap"></div><button class="btn ghost" id="vcBtn" type="button">رسايل الضيوف الصوتية 🎙️</button><div class="gpw" id="vcWrap"></div></div>
 
   <section class="card">
     <h2><span class="step">١</span>اختاري التصميم</h2>
@@ -3302,7 +3302,7 @@ async function loadCode(raw){
   try{const r=await SB.rpc("load_by_code",{p_code:code});if(r.error)throw r.error;
     if(!r.data){const c=await SB.rpc("check_code",{p_code:code,p_slug:null});
       err.textContent=(c.data==="bad_code")?MSG.bad_code:"الكود ده لسه ما اتفعّلش. اعملي دعوتك واضغطي «احصلي على لينك دعوتك» واكتبيه هناك";return;}
-    const d=r.data.data||{};fill(d);edit.code=code;edit.slug=r.data.slug;edit.songUrl=d.songUrl||null;$("gpBox").hidden=d.tpl!=="ivy";$("gpWrap").innerHTML="";delete $("gpWrap").dataset.open;
+    const d=r.data.data||{};fill(d);edit.code=code;edit.slug=r.data.slug;edit.songUrl=d.songUrl||null;$("gpBox").hidden=false;$("gpBtn").hidden=$("gpWrap").hidden=!["ivy","sgm"].includes(d.tpl);$("vcBtn").hidden=$("vcWrap").hidden=d.tpl!=="sgm";["gpWrap","rsWrap","vcWrap"].forEach(id=>{$(id).innerHTML="";delete $(id).dataset.open;});
     if(edit.songUrl){customUrl=edit.songUrl;$("upName").textContent="✔ أغنيتك محفوظة";}
     drawBuilder();closeM("editMdl");toast("اتفتحت دعوتك، عدّلي واضغطي «حفظ التعديلات» 💌");
     $("linkBtn").textContent="حفظ التعديلات 💾";
@@ -3362,6 +3362,18 @@ async function loadGuestPhotos(slug,gw,btn){if(gw.dataset.open){gw.innerHTML="";
       a.style.backgroundImage=`url("${u}")`;const n=document.createElement("span");n.textContent=p.name||"";a.appendChild(n);g.appendChild(a);});gw.appendChild(g);}
   catch(e){gw.innerHTML='<p class="err" style="text-align:center">في مشكلة في الاتصال، جربي تاني</p>';}}
 $("acctBtn").onclick=()=>USER?openAccount():openAuth(null,openAccount);
+/* guest replies and voice wishes with the edit code */
+const esc2=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+$("rsBtn").onclick=async()=>{const w=$("rsWrap"),btn=$("rsBtn");if(w.dataset.open){w.innerHTML="";delete w.dataset.open;return;}w.dataset.open=1;w.innerHTML='<p class="note" style="text-align:center">بنجيب الردود…</p>';
+  try{const r=await SB.rpc("rsvps_by_code",{p_code:edit.code});if(r.error)throw r.error;const rows=r.data||[];const yes=rows.filter(x=>x.attending),ppl=yes.reduce((a,x)=>a+(x.guests||1),0);
+    btn.textContent=`ردود الحضور (${rows.length}) ✅`;if(!rows.length){w.innerHTML='<p class="note" style="text-align:center;padding:8px">لسه محدش رد</p>';return;}
+    w.innerHTML=`<p class="note" style="text-align:center">✅ ${yes.length} هيحضروا (${ppl} فرد) · ❌ ${rows.length-yes.length} مش هيقدروا</p><ul class="rsl">${rows.map(x=>`<li>${x.attending?"✅":"❌"} <b>${esc2(x.name)}</b>${x.attending?` · ${x.guests||1} فرد`:""}${x.note?`<small>${esc2(x.note)}</small>`:""}</li>`).join("")}</ul>`;}
+  catch(e){w.innerHTML='<p class="err" style="text-align:center">في مشكلة في الاتصال، جربي تاني</p>';}};
+$("vcBtn").onclick=async()=>{const w=$("vcWrap"),btn=$("vcBtn");if(w.dataset.open){w.innerHTML="";delete w.dataset.open;return;}w.dataset.open=1;w.innerHTML='<p class="note" style="text-align:center">بنجيب الرسايل…</p>';
+  try{const r=await SB.rpc("voices_by_code",{p_code:edit.code});if(r.error)throw r.error;const rows=r.data||[];btn.textContent=`رسايل الضيوف الصوتية (${rows.length}) 🎙️`;
+    if(!rows.length){w.innerHTML='<p class="note" style="text-align:center;padding:8px">لسه محدش بعت رسالة</p>';return;}
+    w.innerHTML=`<ul class="rsl vcl">${rows.map(x=>`<li><b>${esc2(x.name)}</b><audio controls preload="none" src="${esc2(SB.storage.from("songs").getPublicUrl(x.path).data.publicUrl)}"></audio></li>`).join("")}</ul>`;}
+  catch(e){w.innerHTML='<p class="err" style="text-align:center">في مشكلة في الاتصال، جربي تاني</p>';}};
 /* guest album photos with the edit code (no account needed) */
 $("gpBtn").onclick=async()=>{const gw=$("gpWrap"),btn=$("gpBtn");if(gw.dataset.open){gw.innerHTML="";delete gw.dataset.open;return;}gw.dataset.open=1;
   gw.innerHTML='<p class="note" style="text-align:center">بنجيب الصور…</p>';
