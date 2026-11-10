@@ -63,6 +63,11 @@ window.farhetnaData=function(key){
       venueName:o.venue||"",venueAddress:o.addr||"",mapsUrl:o.map||"",rsvpWhatsApp:base.wa,
       schedule:prog.map(function(p,i){var hh=p[0]?+p[0].split(":")[0]:0;return{time:p[0]?((hh%12||12)+":"+p[0].split(":")[1]):"",period:hh<12?"صباحًا":"مساءً",label:p[1],icon:["cloche","rings","dinner","fireworks"][Math.min(i,3)]}}),
       music:mu||null};}
+  if(key==="gdc"){
+    var hp=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"",ps=(hp?[hp]:[]).concat(album);
+    return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,
+      venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",map:o.map||"",wa:base.wa,pGroom:o.pGroom||"",pBride:o.pBride||"",program:prog,
+      hero:ps[0]||"img/p1.webp",photos:ps.length?ps.slice(0,8):["img/p1.webp","img/p2.webp","img/p3.webp"],music:mu||null,slug:String(o._slug||"").toLowerCase()};}
   if(key==="azl"){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",map:o.map||"",wa:base.wa,intro:o.intro||"",program:prog,
