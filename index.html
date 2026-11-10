@@ -527,6 +527,126 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .pv-in video{width:100%;height:100%;object-fit:cover;display:block}
 .pv-cam{position:absolute;z-index:2;top:16px;left:50%;width:58px;height:16px;margin-left:-29px;border-radius:10px;background:rgba(42,48,36,.88)}
 .js .pv{animation:rise 1.1s cubic-bezier(.2,.7,.2,1) 1.35s both}
+
+/* ===================== 2026-11 visual refresh ===================== */
+:root{--sec-top:50px;--h2:clamp(30px,8.4vw,42px);--lead:clamp(16.5px,4.4vw,19px);--ease:cubic-bezier(.2,.7,.2,1)}
+html{scroll-behavior:smooth}
+/* one rhythm for every section head */
+.how,.pkg,.faq6{padding-top:var(--sec-top)}
+.how h2,.pkg h2,.faq6 h2,.dz h2{font-size:var(--h2);line-height:1.3}
+.how-head p,.pkg-head p,.faq-head p,.dz-head p{font-size:var(--lead);line-height:1.7;color:#5f5e4f;margin:6px auto 0;max-width:22em}
+
+/* ----- unified designs gallery ----- */
+.dz{position:relative;overflow:hidden;scroll-margin-top:56px;background:linear-gradient(180deg,#f6e8de 0,#f8efe7 18%,#f6ebe2 100%);padding:var(--sec-top) 0 0;text-align:center}
+.anc{position:absolute;top:0;scroll-margin-top:56px}
+.dz-head{position:relative;padding:0 24px}
+.dz .div{justify-content:center;margin:0 auto 4px}.dz .div i{width:72px}.dz .div svg{width:44px}
+.dz-kick{display:block;font-family:var(--latin);font-weight:600;font-size:13px;letter-spacing:.34em;color:var(--sage);text-transform:uppercase;margin-bottom:2px}
+.dz h2{font-weight:600;color:var(--olive)}
+.chips{position:relative;display:flex;justify-content:center;gap:8px;margin:20px auto 0;padding:0 14px;flex-wrap:wrap}
+.chips button{height:40px;padding:0 16px;border-radius:999px;border:1px solid rgba(85,104,74,.28);background:rgba(255,252,247,.7);color:var(--olive);font-size:15px;display:inline-flex;align-items:center;gap:6px;transition:background .35s var(--ease),color .35s,box-shadow .35s,border-color .35s}
+.chips button i{font-style:normal;font-size:12px;opacity:.65}
+.chips button[aria-selected="true"]{background:linear-gradient(180deg,#617556,#4a5d3e);color:#f6f1e6;border-color:transparent;box-shadow:0 8px 16px -10px rgba(55,68,45,.7)}
+.dz-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:1080px;margin:18px auto 0;padding:0 14px;transition:opacity .18s}
+.dz-grid.swap{opacity:0}
+.dc{display:flex;flex-direction:column;background:#fbf6f0;border-radius:22px;overflow:hidden;text-align:right;box-shadow:0 18px 32px -24px rgba(70,60,40,.55),inset 0 0 0 1px rgba(255,255,255,.85)}
+.dc[hidden]{display:none}
+.js .dc{opacity:0;transform:translateY(18px)}
+.js .dc.in{opacity:1;transform:none;transition:opacity .7s ease calc(var(--i) * 70ms),transform .9s var(--ease) calc(var(--i) * 70ms)}
+.dc-img{position:relative;display:block;aspect-ratio:640/680;margin:6px 6px 0;border-radius:17px;overflow:hidden;background:#ece0cf}
+.dc-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.dc-new{position:absolute;top:8px;right:8px;font-size:11px;line-height:1;padding:5px 9px;border-radius:20px;background:rgba(251,246,240,.94);color:var(--olive);border:1px solid rgba(97,117,86,.25)}
+.dc-b{display:flex;flex-direction:column;flex:1;padding:10px 11px 12px}
+.dc h3{font-family:var(--latin);font-weight:600;font-size:19px;line-height:1.15;color:var(--olive);text-align:right}
+.dc p{font-size:12.5px;line-height:1.55;color:#6a6858;margin-top:3px}
+.dc-p{font-size:12.5px;color:#6a6858;margin-top:6px}.dc-p b{font-size:16px;font-weight:600;color:var(--olive)}
+.dc-btns{display:flex;gap:6px;margin-top:auto;padding-top:10px}
+.dc-btns a{flex:1;height:36px;display:flex;align-items:center;justify-content:center;border-radius:999px;font-size:14px;font-weight:500;transition:transform .25s var(--ease)}
+.dc-try{background:linear-gradient(180deg,#617556,#4a5d3e);color:#f6f1e6;box-shadow:0 6px 12px -8px rgba(55,68,45,.7)}
+.dc-ord{border:1.2px solid var(--olive2);color:var(--olive)}
+.dc-btns a:active{transform:scale(.95)}
+.dc:active .dc-img img{transform:scale(1.035)}
+@media (hover:hover){.dc{transition:box-shadow .5s var(--ease)}.dc:hover{box-shadow:0 26px 40px -24px rgba(70,60,40,.6),inset 0 0 0 1px rgba(255,255,255,.85)}.dc:hover .dc-img img{transform:scale(1.04)}}
+.dz-more{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;margin:22px auto 0;height:50px;padding:0 28px;border-radius:999px;border:1.5px solid var(--olive2);color:var(--olive);background:rgba(255,252,247,.6);font-size:16px}
+.dz-more[hidden]{display:none}
+.dz-more i{font-style:normal;opacity:.7;font-size:14px}
+.dz-more svg,.q-more svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.dz .col-band{margin-top:-10px}
+@media (min-width:700px){.dz-grid{grid-template-columns:repeat(3,1fr);gap:18px;padding:0 24px}.dc h3{font-size:22px}.dc p,.dc-p{font-size:14px}}
+@media (min-width:1000px){.dz-grid{grid-template-columns:repeat(4,1fr)}}
+.lang-en .dc,.lang-en .dc h3{text-align:left}
+
+/* ----- hero: video moves to a pop-up, so the first screen reaches the designs sooner ----- */
+.vmod{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s ease}
+.vmod.on{opacity:1;pointer-events:auto}
+.vmod-bg{position:absolute;inset:0;background:rgba(36,40,30,.58);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.vmod-in{position:relative;display:flex;flex-direction:column;align-items:center;transform:translateY(20px) scale(.97);transition:transform .55s var(--ease)}
+.vmod.on .vmod-in{transform:none}
+.vmod .pv{width:min(70vw,300px,calc((100vh - 140px) * 390 / 844));margin:0;animation:none!important}
+.vmod p{color:#f6efe3;font-size:15px;margin-top:14px}
+.vmod-x{position:absolute;z-index:3;top:-14px;left:-14px;box-shadow:0 6px 16px -6px rgba(0,0,0,.4);width:44px;height:44px;border-radius:50%;background:rgba(251,246,240,.95);display:flex;align-items:center;justify-content:center;color:var(--olive)}
+.vmod-x svg{width:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.vm-open,.vm-open body{overflow:hidden}
+
+/* ----- how it works: tighter ----- */
+.steps{margin-top:24px}
+.step{padding:16px 18px 16px 16px}
+.conn{height:26px}
+.how-cta{margin-top:26px;min-height:56px}
+
+/* ----- packages: three clear rows ----- */
+.pmini{position:relative;display:flex;flex-direction:column;gap:10px;max-width:460px;margin:22px auto 0;padding:0 16px;text-align:right}
+.pmini a{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#fbf6f0;border:1px solid rgba(97,117,86,.18);border-radius:22px;padding:15px 16px;box-shadow:0 12px 24px -20px rgba(70,60,40,.55);transition:transform .25s var(--ease)}
+.pmini a:active{transform:scale(.98)}
+.pmini a.best{border:1.5px solid #c2a468;background:linear-gradient(170deg,#fffaf2,#f9f0e2)}
+.pm-t{flex:1;min-width:0}.pm-t b{font-size:19px;color:var(--olive);font-weight:600}
+.pm-t small{font-family:var(--latin);font-size:14px;color:var(--sage);margin-right:6px;letter-spacing:.04em}
+.pm-t em{font-style:normal;font-size:11px;background:var(--olive2);color:#f6ece1;border-radius:10px;padding:2px 8px;margin-right:6px;vertical-align:3px}
+.pm-t span{display:block;font-size:13.5px;line-height:1.6;color:#6a6858;margin-top:3px}
+.pm-p{text-align:center;color:#4a4a3c;font-size:13px;white-space:nowrap}
+.pm-p b{display:block;font-family:var(--latin);font-size:30px;line-height:1;color:var(--olive)}
+.pm-p i{display:block;font-style:normal;font-size:11.5px;color:var(--olive2);margin-top:6px;border-bottom:1px solid rgba(85,104,74,.35);padding-bottom:1px}
+.pnote{margin-top:12px;font-size:14.5px}
+.facts{margin-top:14px}
+.fx{padding:10px 8px}.fx svg{width:26px;height:26px;margin-bottom:2px}.fx b{font-size:15px}.fx span{font-size:13px}
+
+/* ----- FAQ: four first, the rest on demand ----- */
+.qx{display:none}
+.q-all .qx{display:block;animation:qin .6s var(--ease) both}
+@keyframes qin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.q-more{position:relative;display:flex;align-items:center;justify-content:center;gap:8px;margin:18px auto 0;height:48px;padding:0 26px;border-radius:999px;border:1.5px solid var(--olive2);color:var(--olive);background:rgba(255,252,247,.6);font-size:15.5px}
+.q-more[hidden]{display:none}
+
+/* ----- menu: bigger, calmer list ----- */
+.drawer nav a{min-height:64px;font-size:1.3rem}
+.drawer nav a::after{content:"←";font-size:1.15rem;color:var(--olive2);transition:transform .3s var(--ease)}
+.drawer nav a:active::after{transform:translateX(-4px)}
+.menu-open .drawer nav a{animation:qin .6s var(--ease) both}
+.menu-open .drawer nav a:nth-child(2){animation-delay:.05s}.menu-open .drawer nav a:nth-child(3){animation-delay:.1s}.menu-open .drawer nav a:nth-child(4){animation-delay:.15s}
+
+/* ----- consistent buttons ----- */
+.how-cta,.c7-btn{min-height:56px;width:min(84vw,340px)}
+.help-btn{min-height:54px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .dc,.js .dc.in{opacity:1;transform:none;transition:none}
+  .dz-grid,.vmod,.vmod-in,.dc-img img{transition:none}
+  .q-all .qx,.menu-open .drawer nav a{animation:none}
+}
+/* ----- lighter decorative bands so sections flow closer ----- */
+.dz .col-band{height:clamp(84px,24vw,170px)}
+.how-band{height:clamp(96px,28vw,200px)}
+.pkg-band{height:clamp(70px,18vw,130px)}
+.faq-band{height:clamp(90px,26vw,190px);margin-top:12px}
+.cta7{padding-top:44px}
+.c7-scene{aspect-ratio:880/640}
+.c7-scene img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
+.c7-quote{padding-bottom:40px}
+.help{padding-bottom:56px}
+.lang-en .pmini,.lang-en .dz-head{text-align:left}.lang-en .dz-head{text-align:center}
+.lang-en .pm-t small{display:none}
+.lang-en .pm-t em{margin:0 0 0 6px}
 </style>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
@@ -568,10 +688,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <p><span>صممي دعوة فرحك بنفسك في دقائق</span></p>
       <a class="cta" href="studio.html" data-track="InitiateCheckout">صممي دعوتك<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
       <a class="cta2" href="#howVideo" id="howBtn">شوفي إزاي</a>
-      <figure class="pv" id="howVideo" aria-label="فيديو قصير: إزاي تصممي دعوتك على فرحتنا">
-        <span class="pv-cam" aria-hidden="true"></span>
-        <div class="pv-in"><video id="howVid" muted playsinline loop preload="none" poster="hero-poster.jpg" data-src="hero.mp4" aria-hidden="true"></video></div>
-      </figure>
+      
       <div class="feats">
         <div class="feat"><svg viewBox="0 0 24 24"><path d="M7 3.5h10l3.5 5L12 20.5 3.5 8.5z"/><path d="M3.5 8.5h17M9.5 8.5L12 20.5l2.5-12M7 3.5l2.5 5 2.5-5 2.5 5 2.5-5"/></svg><span>جودة عالية<b>وتفاصيل فاخرة</b></span></div>
         <i class="sep"></i>
@@ -587,184 +704,230 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 </header>
 </div>
 
-<section class="sig" id="signature" aria-labelledby="sigTitle">
-  <div class="sig-head">
-    <span class="sig-kick" dir="ltr">Signature Collection</span>
-    <h2 id="sigTitle">تجارب فرحتنا المميزة</h2>
-    <p>دعوات تفاعلية جديدة، جرّبي كل واحدة بنفسك زي ما ضيوفك هيشوفوها</p>
-  </div>
-  <div class="sg-track" id="sgTrack" tabindex="0" aria-label="تجارب فرحتنا المميزة">
-      <article class="sg">
-        <a class="sg-img" href="golden-calla/index.html" data-track="ViewContent" data-design="Golden Calla" aria-label="جربي دعوة Golden Calla"><img src="home-t-calla.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Golden Calla</h3>
-          <p>بابين بورد كالا بيتفتحوا بختم دهبي، صورتكم في برواز دهبي، عدّاد، بمباركة العيلتين، برنامج يوم الفرح، ولحظاتكم بالصور</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="golden-calla/index.html" data-track="ViewContent" data-design="Golden Calla">جربي الدعوة</a><a class="sg-order" href="studio.html#t=gdc" data-track="InitiateCheckout" data-design="Golden Calla" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="azure-lake/index.html" data-track="ViewContent" data-design="Azure Lake" aria-label="جربي دعوة Azure Lake"><img src="home-t-azure.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Azure Lake</h3>
-          <p>ظرف بيتفتح بختم دهبي على منظر بحيرة، تاريخ بالخدش، جواب بيطلع من ظرف بيبي بلو، برنامج على السحاب، وأفكار للبس الضيوف</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="azure-lake/index.html" data-track="ViewContent" data-design="Azure Lake">جربي الدعوة</a><a class="sg-order" href="studio.html#t=azl" data-track="InitiateCheckout" data-design="Azure Lake" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="ivory-lantern/index.html" data-track="ViewContent" data-design="Ivory Lantern" aria-label="جربي دعوة Ivory Lantern"><img src="home-t-lantern.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Ivory Lantern</h3>
-          <p>باب بيتفتح على ممر فوانيس، حكايتكم وأهلكم والشهود، يافطة خشب للمناسبات بخرايطها، ومعرض صور وفورم رد كامل</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="ivory-lantern/index.html" data-track="ViewContent" data-design="Ivory Lantern">جربي الدعوة</a><a class="sg-order" href="studio.html#t=ilt" data-track="InitiateCheckout" data-design="Ivory Lantern" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="terracotta-sunset/index.html" data-track="ViewContent" data-design="Terracotta Sunset" aria-label="جربي دعوة Terracotta Sunset"><img src="home-t-terracotta.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Terracotta Sunset</h3>
-          <p>ألوان غروب تيراكوتا، باب زجاج بيتفتح على صوركم، دليل للضيوف، عدّاد، وهدايا بإنستاباي بـ QR</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="terracotta-sunset/index.html" data-track="ViewContent" data-design="Terracotta Sunset">جربي الدعوة</a><a class="sg-order" href="studio.html#t=tsn" data-track="InitiateCheckout" data-design="Terracotta Sunset" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="sage-meadow/index.html" data-track="ViewContent" data-design="Sage Meadow" aria-label="جربي دعوة Sage Meadow"><img src="home-t-meadow.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Sage Meadow</h3>
-          <p>ظرف أخضر بختم نحاسي، كولاج كامل بيتلمس على التلال، خريطة حقيقية، رسالة صوتية وصور من الضيوف</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="sage-meadow/index.html" data-track="ViewContent" data-design="Sage Meadow">جربي الدعوة</a><a class="sg-order" href="studio.html#t=sgm" data-track="InitiateCheckout" data-design="Sage Meadow" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="sage-peony/index.html" data-track="ViewContent" data-design="Sage & Peony" aria-label="جربي دعوة Sage & Peony"><img src="home-t-sage.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Sage &amp; Peony</h3>
-          <p>ظرف دانتيل بشريطة سيج والحروف على الختم، ورد بيوني، عدّاد وتقويم، برنامج بالأيقونات وألوان اللبس ساتان</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="sage-peony/index.html" data-track="ViewContent" data-design="Sage & Peony">جربي الدعوة</a><a class="sg-order" href="studio.html#t=sgp" data-track="InitiateCheckout" data-design="Sage & Peony" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="burgundy-bloom/index.html" data-track="ViewContent" data-design="Burgundy Bloom" aria-label="جربي دعوة Burgundy Bloom"><img src="home-t-bloom.webp" alt="" width="720" height="1440" loading="eager" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Burgundy Bloom</h3>
-          <p>تجربة تفاعلية في ٨ مشاهد بالعنابي والورد، من الختم لحد تأكيد الحضور</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="burgundy-bloom/index.html" data-track="ViewContent" data-design="Burgundy Bloom">جربي الدعوة</a><a class="sg-order" href="studio.html#t=bbl" data-track="InitiateCheckout" data-design="Burgundy Bloom" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="ivory-lace-royal/index.html" data-track="ViewContent" data-design="Ivory Lace Royal" aria-label="جربي دعوة Ivory Lace Royal"><img src="home-t-ivoryroyal.webp" alt="" width="720" height="1440" loading="eager" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Ivory Lace Royal</h3>
-          <p>باب دانتيل عاجي ملكي بختم، بيتفتح على دعوة كلاسيكية فخمة</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="ivory-lace-royal/index.html" data-track="ViewContent" data-design="Ivory Lace Royal">جربي الدعوة</a><a class="sg-order" href="studio.html#t=ilr" data-track="InitiateCheckout" data-design="Ivory Lace Royal" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="pearl-silk/index.html" data-track="ViewContent" data-design="Pearl & Silk" aria-label="جربي دعوة Pearl & Silk"><img src="home-t-pearl.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Pearl & Silk</h3>
-          <p>ظرف عاجي بقفل Infinity دهب، الجناحين بيتفتحوا بصباعك، حرير بيكشف الأسامي، وحلقة دهب بتلف وتظهر التاريخ</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="pearl-silk/index.html" data-track="ViewContent" data-design="Pearl & Silk">جربي الدعوة</a><a class="sg-order" href="studio.html#t=pls" data-track="InitiateCheckout" data-design="Pearl & Silk" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="blue-hydrangea/index.html" data-track="ViewContent" data-design="Blue Hydrangea" aria-label="جربي دعوة Blue Hydrangea"><img src="home-t-hydrangea.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Blue Hydrangea</h3>
-          <p>ظرف بيبي بلو بورد الهيدرانجيا وختم شمع، وبيتعمل بكذا لون وشكل ختم</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="blue-hydrangea/index.html" data-track="ViewContent" data-design="Blue Hydrangea">جربي الدعوة</a><a class="sg-order" href="studio.html#t=bhy" data-track="InitiateCheckout" data-design="Blue Hydrangea" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="unwritten-story/index.html" data-track="ViewContent" data-design="The Unwritten Story" aria-label="جربي دعوة The Unwritten Story"><img src="home-t-unwritten.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">The Unwritten Story</h3>
-          <p>حكاية سينمائية بالأسود والدهب: نور بيتجمع، والأسامي بتتكتب قدام الضيف</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="unwritten-story/index.html" data-track="ViewContent" data-design="The Unwritten Story">جربي الدعوة</a><a class="sg-order" href="studio.html#t=uws" data-track="InitiateCheckout" data-design="The Unwritten Story" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-      <article class="sg">
-        <a class="sg-img" href="blushing-garden/index.html" data-track="ViewContent" data-design="Blushing Garden" aria-label="جربي دعوة Blushing Garden"><img src="home-t-blush.webp" alt="" width="720" height="1440" loading="lazy" decoding="async"><span class="sg-new">جديد</span></a>
-        <div class="sg-body">
-          <h3 dir="ltr">Blushing Garden</h3>
-          <p>ظرف أخضر بختم وردي بيتفتح نصين، Save the Date وتقويم بقلب، ومواعيد اليوم، وصورة بتتلوّن في الآخر</p>
-          <div class="sg-price"><b>٣٥٠ جنيه</b><span>Signature</span></div>
-          <div class="sg-btns"><a class="sg-try" href="blushing-garden/index.html" data-track="ViewContent" data-design="Blushing Garden">جربي الدعوة</a><a class="sg-order" href="studio.html#t=bgd" data-track="InitiateCheckout" data-design="Blushing Garden" data-price="350">اطلبي دعوتك</a></div>
-        </div>
-      </article>
-  </div>
-  <div class="sg-hint" aria-hidden="true"><i></i><span>اسحبي لتشوفي باقي التصميمات</span><i></i></div>
-</section>
-
-<section class="col" id="designs" aria-labelledby="colTitle">
+<section class="dz" id="designs" aria-labelledby="dzTitle">
+  <span id="signature" class="anc" aria-hidden="true"></span>
   <img class="col-shadow" src="home-c-shadow.webp" alt="" aria-hidden="true">
-  <div class="col-head rv2">
+  <div class="dz-head rv2">
     <div class="div" aria-hidden="true"><i></i><svg viewBox="0 0 56 26"><path d="M6 22C18 16 32 10 50 4"/><path class="lf" d="M18 17c-2-5 0-9 5-10-1 4-2 8-5 10z"/><path class="lf" d="M21 15c4-3 9-2 11 1-4 2-8 2-11-1z"/><path class="lf" d="M30 11c-1-5 2-8 6-9-1 4-3 7-6 9z"/><path class="lf" d="M33 10c4-2 9-1 10 2-4 1-7 1-10-2z"/><path class="lf" d="M42 6c1-4 4-5 7-5-1 3-4 5-7 5z"/></svg><i></i></div>
-    <h2 id="colTitle">مجموعة فرحتنا</h2>
-    <p>تصاميمنا الأصلية اللي اختارتها عرايسنا</p>
+    <span class="dz-kick" dir="ltr">Farhetna Collection</span>
+    <h2 id="dzTitle">تصاميم فرحتنا</h2>
+    <p>افتحي أي دعوة وجرّبيها بنفسك، زي ما ضيوفك هيشوفوها بالظبط</p>
   </div>
-  <div class="car rv2" style="transition-delay:.15s">
-    <button class="car-nav pv" type="button" aria-label="التصميم السابق"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
-    <div class="track" id="track" tabindex="0" aria-roledescription="carousel" aria-label="تصميمات الدعوات">
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAib2x2IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnZhNmKIiwgImJyaWRlIjogItmK2KfYs9mF2YrZhiIsICJncm9vbUVuIjogIkFsaSIsICJicmlkZUVuIjogIllhc21pbmUiLCAiZGF0ZSI6ICIyMDI3LTA4LTE0IiwgInRpbWUiOiAiMTc6MDAiLCAidmVudWUiOiAi2YLYtdixINin2YTYrdiv2YrZgtipIiwgImFkZHIiOiAi2KfZhNi02YrYriDYstin2YrYryIsICJ2ZW51ZUVuIjogIlRoZSBHYXJkZW4gRXN0YXRlLCBTaGVpa2ggWmF5ZWQiLCAiZHJlc3NFbiI6ICJHYXJkZW4gZm9ybWFsIGluIHNvZnQgbmV1dHJhbCB0b25lcyIsICJ3YSI6ICIyMDEyODAwNjcxMTAiLCAiZHJlc3MiOiBbXX0" target="_blank" rel="noopener" aria-label="افتحي دعوة Olive Lace" data-i="0">
-        <span class="cd-img"><img src="home-t-olv.webp" alt="" loading="eager" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Olive Lace</b><small>Signature · ٣٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAiYnJkIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnZhdixIiwgImJyaWRlIjogItmE2YrZhNmJIiwgImdyb29tRW4iOiAiT21hciIsICJicmlkZUVuIjogIkxhaWxhIiwgImRhdGUiOiAiMjAyNy0wOC0yNCIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINiz2KfZhtiqINix2YrYrNmK2LMiLCAiYWRkciI6ICLZg9mI2LHZhtmK2LQg2KfZhNmG2YrZhNiMINin2YTZgtin2YfYsdipIiwgInZlbnVlRW4iOiAiVGhlIFN0LiBSZWdpcywgQ29ybmljaGUgRWwgTmlsLCBDYWlybyIsICJkcmVzc0VuIjogIkZvcm1hbCBhdHRpcmUiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgImdpZnQiOiAiSW5zdGFQYXk6IDAxMjgwMDY3MTEwIiwgImRyZXNzIjogW119" target="_blank" rel="noopener" aria-label="افتحي دعوة Bordeaux" data-i="1">
-        <span class="cd-img"><img src="home-t-brd.webp" alt="" loading="eager" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Bordeaux</b><small>Signature · ٣٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAiZ2xkIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2KLYr9mFIiwgImJyaWRlIjogItiy2YrZhtipIiwgImdyb29tRW4iOiAiQWRhbSIsICJicmlkZUVuIjogIlplaW5hIiwgIm1vbm8iOiAiWiZBIiwgImRhdGUiOiAiMjAyNy0wNS0wOCIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINin2YTZhdin2LPYqSIsICJhZGRyIjogItin2YTYudin2LXZhdipINin2YTYpdiv2KfYsdmK2KkiLCAidmVudWVFbiI6ICJBbCBNYXNhIEhvdGVsLCBOZXcgQ2FwaXRhbCIsICJkcmVzc0VuIjogIkJsYWNrIFRpZSIsICJ3YSI6ICIyMDEyODAwNjcxMTAiLCAiZHJlc3MiOiBbXX0" target="_blank" rel="noopener" aria-label="افتحي دعوة Golden Scroll" data-i="2">
-        <span class="cd-img"><img src="home-t-gld.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Golden Scroll</b><small>Signature · ٣٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAiaXZ5IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2YPYsdmK2YUiLCAiYnJpZGUiOiAi2YbZiNixIiwgImdyb29tRW4iOiAiS2FyaW0iLCAiYnJpZGVFbiI6ICJOb3VyIiwgIm1vbm8iOiAiTiZLIiwgImtpbmQiOiAi2K3ZgdmEINiy2YHYp9mBIiwgImRhdGUiOiAiMjAyNy0wMS0xNSIsICJ0aW1lIjogIjE4OjAwIiwgInZlbnVlIjogIlJvc2UgR2FyZGVuIEhhbGwiLCAiYWRkciI6ICJOZXcgQ2Fpcm8sIEVneXB0IiwgInZlbnVlRW4iOiAiUm9zZSBHYXJkZW4gSGFsbCwgTmV3IENhaXJvIiwgImRyZXNzRW4iOiAiU29tZXRoaW5nIHdoaXRlIG9yIGJlaWdlIiwgIndhIjogIjIwMTI4MDA2NzExMCJ9" target="_blank" rel="noopener" aria-label="افتحي دعوة Ivory Lily" data-i="3">
-        <span class="cd-img"><img src="home-t-ivy.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Ivory Lily</b><small>Signature · ٣٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAibGF2IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2YTYpNmKIiwgImJyaWRlIjogItmD2KfYsdmF2KciLCAiZ3Jvb21FbiI6ICJMb2F5IiwgImJyaWRlRW4iOiAiS2FybWEiLCAibW9ubyI6ICJLJkwiLCAiZGF0ZSI6ICIyMDI3LTA0LTI1IiwgInRpbWUiOiAiMTg6MDAiLCAidmVudWUiOiAi2YHZhtiv2YIg2KfZhNmB2YjYsdiz2YrYstmI2YbYsiIsICJhZGRyIjogItmG2KfZitmEINio2YTYp9iy2KfYjCDYp9mE2YLYp9mH2LHYqSIsICJ2ZW51ZUVuIjogIkZvdXIgU2Vhc29ucywgTmlsZSBQbGF6YSwgQ2Fpcm8iLCAiZHJlc3NFbiI6ICJGb3JtYWwgwrcgc29mdCBwYXN0ZWwgdG9uZXMiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgImdpZnQiOiAiSW5zdGFQYXk6IDAxMjgwMDY3MTEwIiwgIm5vdGVzIjogIiIsICJkcmVzcyI6IFtdfQ" target="_blank" rel="noopener" aria-label="افتحي دعوة Lavender" data-i="4">
-        <span class="cd-img"><img src="home-t-lav.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Lavender</b><small>Signature · ٣٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAic3duIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LPZhNmK2YUiLCAiYnJpZGUiOiAi2YHYsdmK2K_YqSIsICJncm9vbUVuIjogIlNlbGltIiwgImJyaWRlRW4iOiAiRmFyaWRhIiwgImRhdGUiOiAiMjAyNy0xMi0zMSIsICJ0aW1lIjogIjE3OjAwIiwgInZlbnVlIjogIk1haXNvbiBkZSBSb3NlIiwgImFkZHIiOiAiTmV3IENhaXJvIiwgInZlbnVlRW4iOiAiTWFpc29uIGRlIFJvc2UsIE5ldyBDYWlybyIsICJkcmVzc0VuIjogIkdhcmRlbiBGb3JtYWwiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgInByb2dyYW0iOiAiQ2VyZW1vbnkgwrcgNTowMCBQTVxuRGlubmVyIFJlY2VwdGlvbiDCtyA3OjAwIFBNIiwgIm1vbm8iOiAiIn0" target="_blank" rel="noopener" aria-label="افتحي دعوة Once Upon a Time" data-i="5">
-        <span class="cd-img"><img src="home-t-swn.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b style="font-size:clamp(19px,5.3vw,23px)">Once Upon a Time</b><small>Signature · ٣٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAiYmFiIiwgInBhbCI6IDAsICJtdXNpYyI6ICJ6YWZmYSIsICJncm9vbSI6ICLZhdin2LLZhiIsICJicmlkZSI6ICLZh9mG2KciLCAibW9ubyI6ICJIJk0iLCAia2luZCI6ICLYrdmB2YQg2LLZgdin2YEiLCAiZGF0ZSI6ICIyMDI3LTA0LTE1IiwgInRpbWUiOiAiMTk6MDAiLCAidmVudWUiOiAi2YHZhtiv2YIg2K_ZiNiz2YrYqiIsICJhZGRyIjogItin2YTYqtis2YXYuSDYp9mE2K7Yp9mF2LPYjCDYp9mE2YLYp9mH2LHYqSIsICJtYXAiOiAiIiwgIndhIjogIjIwMTI4MDA2NzExMCIsICJwcm9ncmFtIjogIjU6MDAg2YUgLSDZg9iq2Kgg2KfZhNmD2KrYp9ioXG43OjAwINmFIC0g2KfZhNin2LPYqtmC2KjYp9mEXG44OjAwINmFIC0g2KfZhNmB2LHYrSIsICJwQnJpZGUiOiAi2KfZhNij2LPYqtin2LAg2KPYrdmF2K8g2YjYp9mE2LPZitiv2Kkg2YXZhtmJIiwgInBHcm9vbSI6ICLYp9mE2KPYs9iq2KfYsCDZhdit2YXZiNivINmI2KfZhNiz2YrYr9ipINmH2KfZhNipIiwgImRyZXNzIjogWyIjZjNlNWMwIiwgIiM5ZGIzOWIiXSwgImRyZXNzTm90ZSI6ICLYo9mE2YjYp9mGINmH2KfYr9mK2Kkg2YjYqNin2LPYqtmK2YQiLCAiZ2lmdCI6ICLZiNis2YjYr9mD2YUg2YfZiCDYo9is2YXZhCDZh9iv2YrYqSIsICJub3RlcyI6ICIiLCAiaW50cm8iOiAiIiwgInN0b3J5IjogIiIsICJwb2VtIjogIiIsICJjbG9zaW5nIjogIiJ9" target="_blank" rel="noopener" aria-label="افتحي دعوة Rose Gate" data-i="6">
-        <span class="cd-img"><img src="home-t-bab.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Rose Gate</b><small>Classic · ٢٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJwYWwiOiAwLCAia2luZCI6ICLYrdmB2YQg2LLZgdin2YEiLCAiaW50cm8iOiAi2YrYqti02LHZgSDYo9mH2YQg2KfZhNi52LHZiNiz2YrZhiDYqNiv2LnZiNiq2YPZhSDZhNmF2LTYp9ix2YPYqtmH2YUg2YHYsdit2KrZh9mFXG7ZiNis2YjYr9mD2YUg2YrZg9mF2ZHZhCDZgdix2K3YqtmG2KciLCAiZGF0ZSI6ICIyMDI3LTA0LTE1IiwgInRpbWUiOiAiMjA6MDAiLCAibWFwIjogIiIsICJ3YSI6ICIiLCAiZHJlc3NOb3RlIjogIiIsICJub3RlcyI6ICIiLCAiZ2lmdCI6ICIiLCAibW9ubyI6ICJTJlkiLCAicG9lbSI6ICIiLCAiY2xvc2luZyI6ICIiLCAicHJvZ3JhbSI6ICI4OjAwINmFIC0g2K_YrtmI2YQg2KfZhNi52LHZiNiz2YrZhlxuOTowMCDZhSAtINiq2YLYr9mK2YUg2KfZhNi52LTYp9ihIiwgImRyZXNzIjogW10sICJtdXNpYyI6ICJwaWFubyIsICJncm9vbSI6ICLZitit2YrZiSIsICJicmlkZSI6ICLYs9in2LHYqSIsICJ2ZW51ZSI6ICLZgdmG2K_ZgiDYr9mI2LPZitiqIiwgImFkZHIiOiAi2KfZhNiq2KzZhdi5INin2YTYrtin2YXYs9iMINin2YTZgtin2YfYsdipIiwgInRwbCI6ICJyb3lhbCJ9" target="_blank" rel="noopener" aria-label="افتحي دعوة Rose Palace" data-i="7">
-        <span class="cd-img"><img src="home-t-royal.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Rose Palace</b><small>Classic · ٢٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJwYWwiOjAsImtpbmQiOiLYrdmB2YQg2LLZgdin2YEiLCJpbnRybyI6ItmK2KrYtNix2YEg2KPZh9mEINin2YTYudix2YjYs9mK2YYg2KjYr9i52YjYqtmD2YUg2YTZhdi02KfYsdmD2KrZh9mFINmB2LHYrdiq2YfZhVxu2YjYrNmI2K_Zg9mFINmK2YPZhdmR2YQg2YHYsdit2KrZhtinIiwiZGF0ZSI6IjIwMjctMDQtMTUiLCJ0aW1lIjoiMjA6MDAiLCJtYXAiOiIiLCJ3YSI6IiIsImRyZXNzTm90ZSI6Itij2YTZiNin2YYg2YfYp9iv2YrYqSDZiNio2KfYs9iq2YrZhCIsIm5vdGVzIjoiIiwiZ2lmdCI6ItmI2KzZiNiv2YPZhSDZh9mIINij2KzZhdmEINmH2K_ZitipIiwibW9ubyI6IiIsInBvZW0iOiIiLCJjbG9zaW5nIjoiIiwicHJvZ3JhbSI6Ijc6MDAg2YUgLSDYp9iz2KrZgtio2KfZhCDYp9mE2LbZitmI2YFcbjg6MDAg2YUgLSDZg9iq2Kgg2KfZhNmD2KrYp9ioXG45OjMwINmFIC0g2KfZhNi52LTYp9ihIiwiZHJlc3MiOlsiIzlkYjM5YiIsIiNlOGI0YjgiLCIjYTdjN2U3Il0sIm11c2ljIjoicGlhbm8iLCJncm9vbSI6ItmK2YjYs9mBIiwiYnJpZGUiOiLZhdix2YrZhSIsInZlbnVlIjoi2YLYp9i52Kkg2KfZhNmK2KfYs9mF2YrZhiIsImFkZHIiOiLYp9mE2LTZitiuINiy2KfZitiv2Iwg2KfZhNis2YrYstipIiwidHBsIjoiZ2FyZGVuIn0" target="_blank" rel="noopener" aria-label="افتحي دعوة Rose Garden" data-i="8">
-        <span class="cd-img"><img src="home-t-garden.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Rose Garden</b><small>Classic · ٢٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJwYWwiOjAsImtpbmQiOiLYrdmB2YQg2LLZgdin2YEiLCJpbnRybyI6ItmK2KrYtNix2YEg2KPZh9mEINin2YTYudix2YjYs9mK2YYg2KjYr9i52YjYqtmD2YUg2YTZhdi02KfYsdmD2KrZh9mFINmB2LHYrdiq2YfZhVxu2YjYrNmI2K_Zg9mFINmK2YPZhdmR2YQg2YHYsdit2KrZhtinIiwiZGF0ZSI6IjIwMjctMDQtMTUiLCJ0aW1lIjoiMjA6MDAiLCJtYXAiOiIiLCJ3YSI6IiIsImRyZXNzTm90ZSI6IiIsIm5vdGVzIjoiIiwiZ2lmdCI6IiIsIm1vbm8iOiIiLCJwb2VtIjoiIiwiY2xvc2luZyI6IiIsInByb2dyYW0iOiI4OjAwINmFIC0g2KfYs9iq2YLYqNin2YQg2KfZhNi22YrZiNmBXG45OjAwINmFIC0g2K_YrtmI2YQg2KfZhNi52LHZiNiz2YrZhiIsImRyZXNzIjpbXSwibXVzaWMiOiJvdWQiLCJncm9vbSI6Itiy2YrYp9ivIiwiYnJpZGUiOiLZhNmK2YTZiSIsInZlbnVlIjoi2YHZhtiv2YIg2KfZhNmF2KfYs9ipIiwiYWRkciI6ItmF2K_ZitmG2Kkg2YbYtdix2Iwg2KfZhNmC2KfZh9ix2KkiLCJ0cGwiOiJ2ZWx2ZXQifQ" target="_blank" rel="noopener" aria-label="افتحي دعوة Royal Velvet" data-i="9">
-        <span class="cd-img"><img src="home-t-velvet.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Royal Velvet</b><small>Classic · ٢٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-      <a class="cd" href="studio.html#i=eyJ0cGwiOiAiZnlrIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnYqNiv2KfZhNix2K3ZhdmGIiwgImJyaWRlIjogItix2YLZitipIiwgImtpbmQiOiAi2LnZgtivINmC2LHYp9mGIiwgImRhdGUiOiAiMjAyNy0wNC0xNSIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINiv2YjYs9mK2KoiLCAiYWRkciI6ICLYp9mE2KrYrNmF2Lkg2KfZhNiu2KfZhdiz2Iwg2KfZhNmC2KfZh9ix2KkiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgIm1hcCI6ICIiLCAicHJvZ3JhbSI6ICIiLCAiaW50cm8iOiAiIiwgImNsb3NpbmciOiAiIiwgIm1vbm8iOiAiIiwgImRyZXNzIjogW119" target="_blank" rel="noopener" aria-label="افتحي دعوة Satin Bow" data-i="10">
-        <span class="cd-img"><img src="home-t-fyk.webp" alt="" loading="lazy" decoding="async" width="720" height="1440"></span>
-        <span class="cd-bar"><span class="cd-t"><b>Satin Bow</b><small>Classic · ٢٥٠ جنيه</small></span><i class="cd-go" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></i></span>
-      </a>
-    </div>
-    <button class="car-nav nx" type="button" aria-label="التصميم التالي"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <div class="chips rv2" role="tablist" aria-label="فلترة التصاميم">
+    <button type="button" role="tab" aria-selected="true" data-f="all">الكل <i>٢٣</i></button>
+    <button type="button" role="tab" aria-selected="false" data-f="350">فاخر ٣٥٠ <i>١٨</i></button>
+    <button type="button" role="tab" aria-selected="false" data-f="250">أساسي ٢٥٠ <i>٥</i></button>
   </div>
-  <div class="dots rv2" style="transition-delay:.3s" id="dots" role="tablist" aria-label="اختاري تصميم"></div>
-  <a class="all rv2" style="transition-delay:.4s" href="designs.html"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></svg>عرض جميع التصاميم</a>
+  <div class="dz-grid" id="dzGrid">
+    <article class="dc" data-tier="350" style="--i:0">
+      <a class="dc-img" href="golden-calla/index.html" data-track="ViewContent" data-design="Golden Calla" aria-label="جربي دعوة Golden Calla"><img src="cards/golden-calla.webp" alt="" width="640" height="680" loading="lazy" decoding="async"><span class="dc-new">جديد</span></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Golden Calla</h3>
+        <p>أبواب كالا وختم دهبي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="golden-calla/index.html" data-track="ViewContent" data-design="Golden Calla">جربي</a><a class="dc-ord" href="studio.html#t=gdc" data-track="InitiateCheckout" data-design="Golden Calla" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc" data-tier="350" style="--i:1">
+      <a class="dc-img" href="azure-lake/index.html" data-track="ViewContent" data-design="Azure Lake" aria-label="جربي دعوة Azure Lake"><img src="cards/azure-lake.webp" alt="" width="640" height="680" loading="lazy" decoding="async"><span class="dc-new">جديد</span></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Azure Lake</h3>
+        <p>بحيرة وتاريخ بيتكشف بالخدش</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="azure-lake/index.html" data-track="ViewContent" data-design="Azure Lake">جربي</a><a class="dc-ord" href="studio.html#t=azl" data-track="InitiateCheckout" data-design="Azure Lake" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc" data-tier="350" style="--i:2">
+      <a class="dc-img" href="ivory-lantern/index.html" data-track="ViewContent" data-design="Ivory Lantern" aria-label="جربي دعوة Ivory Lantern"><img src="cards/ivory-lantern.webp" alt="" width="640" height="680" loading="lazy" decoding="async"><span class="dc-new">جديد</span></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Ivory Lantern</h3>
+        <p>ممر فوانيس وحكايتكم</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="ivory-lantern/index.html" data-track="ViewContent" data-design="Ivory Lantern">جربي</a><a class="dc-ord" href="studio.html#t=ilt" data-track="InitiateCheckout" data-design="Ivory Lantern" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc" data-tier="350" style="--i:3">
+      <a class="dc-img" href="terracotta-sunset/index.html" data-track="ViewContent" data-design="Terracotta Sunset" aria-label="جربي دعوة Terracotta Sunset"><img src="cards/terracotta-sunset.webp" alt="" width="640" height="680" loading="lazy" decoding="async"><span class="dc-new">جديد</span></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Terracotta Sunset</h3>
+        <p>غروب دافي بألوان التراكوتا</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="terracotta-sunset/index.html" data-track="ViewContent" data-design="Terracotta Sunset">جربي</a><a class="dc-ord" href="studio.html#t=tsn" data-track="InitiateCheckout" data-design="Terracotta Sunset" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc" data-tier="350" style="--i:4">
+      <a class="dc-img" href="sage-meadow/index.html" data-track="ViewContent" data-design="Sage Meadow" aria-label="جربي دعوة Sage Meadow"><img src="cards/sage-meadow.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Sage Meadow</h3>
+        <p>كولاج صوركم على التلال</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="sage-meadow/index.html" data-track="ViewContent" data-design="Sage Meadow">جربي</a><a class="dc-ord" href="studio.html#t=sgm" data-track="InitiateCheckout" data-design="Sage Meadow" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc" data-tier="350" style="--i:5">
+      <a class="dc-img" href="sage-peony/index.html" data-track="ViewContent" data-design="Sage &amp; Peony" aria-label="جربي دعوة Sage &amp; Peony"><img src="cards/sage-peony.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Sage &amp; Peony</h3>
+        <p>ظرف بيوني بختم وردي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="sage-peony/index.html" data-track="ViewContent" data-design="Sage &amp; Peony">جربي</a><a class="dc-ord" href="studio.html#t=sgp" data-track="InitiateCheckout" data-design="Sage &amp; Peony" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc" data-tier="350" style="--i:6">
+      <a class="dc-img" href="burgundy-bloom/index.html" data-track="ViewContent" data-design="Burgundy Bloom" aria-label="جربي دعوة Burgundy Bloom"><img src="cards/burgundy-bloom.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Burgundy Bloom</h3>
+        <p>ختم عاجي على عنابي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="burgundy-bloom/index.html" data-track="ViewContent" data-design="Burgundy Bloom">جربي</a><a class="dc-ord" href="studio.html#t=bbl" data-track="InitiateCheckout" data-design="Burgundy Bloom" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc" data-tier="350" style="--i:7">
+      <a class="dc-img" href="ivory-lace-royal/index.html" data-track="ViewContent" data-design="Ivory Lace Royal" aria-label="جربي دعوة Ivory Lace Royal"><img src="cards/ivory-lace-royal.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Ivory Lace Royal</h3>
+        <p>دانتيل عاجي ملكي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="ivory-lace-royal/index.html" data-track="ViewContent" data-design="Ivory Lace Royal">جربي</a><a class="dc-ord" href="studio.html#t=ilr" data-track="InitiateCheckout" data-design="Ivory Lace Royal" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:0">
+      <a class="dc-img" href="pearl-silk/index.html" data-track="ViewContent" data-design="Pearl &amp; Silk" aria-label="جربي دعوة Pearl &amp; Silk"><img src="cards/pearl-silk.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Pearl &amp; Silk</h3>
+        <p>لؤلؤ وحرير بقفل دهبي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="pearl-silk/index.html" data-track="ViewContent" data-design="Pearl &amp; Silk">جربي</a><a class="dc-ord" href="studio.html#t=pls" data-track="InitiateCheckout" data-design="Pearl &amp; Silk" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:1">
+      <a class="dc-img" href="blue-hydrangea/index.html" data-track="ViewContent" data-design="Blue Hydrangea" aria-label="جربي دعوة Blue Hydrangea"><img src="cards/blue-hydrangea.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Blue Hydrangea</h3>
+        <p>هيدرانجيا زرقا وختم عاجي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="blue-hydrangea/index.html" data-track="ViewContent" data-design="Blue Hydrangea">جربي</a><a class="dc-ord" href="studio.html#t=bhy" data-track="InitiateCheckout" data-design="Blue Hydrangea" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:2">
+      <a class="dc-img" href="unwritten-story/index.html" data-track="ViewContent" data-design="The Unwritten Story" aria-label="جربي دعوة The Unwritten Story"><img src="cards/unwritten-story.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">The Unwritten Story</h3>
+        <p>حكاية بتبدأ بلمسة نور</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="unwritten-story/index.html" data-track="ViewContent" data-design="The Unwritten Story">جربي</a><a class="dc-ord" href="studio.html#t=uws" data-track="InitiateCheckout" data-design="The Unwritten Story" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:3">
+      <a class="dc-img" href="blushing-garden/index.html" data-track="ViewContent" data-design="Blushing Garden" aria-label="جربي دعوة Blushing Garden"><img src="cards/blushing-garden.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Blushing Garden</h3>
+        <p>ظرف أخضر بختم وردي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="blushing-garden/index.html" data-track="ViewContent" data-design="Blushing Garden">جربي</a><a class="dc-ord" href="studio.html#t=bgd" data-track="InitiateCheckout" data-design="Blushing Garden" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:4">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAib2x2IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnZhNmKIiwgImJyaWRlIjogItmK2KfYs9mF2YrZhiIsICJncm9vbUVuIjogIkFsaSIsICJicmlkZUVuIjogIllhc21pbmUiLCAiZGF0ZSI6ICIyMDI3LTA4LTE0IiwgInRpbWUiOiAiMTc6MDAiLCAidmVudWUiOiAi2YLYtdixINin2YTYrdiv2YrZgtipIiwgImFkZHIiOiAi2KfZhNi02YrYriDYstin2YrYryIsICJ2ZW51ZUVuIjogIlRoZSBHYXJkZW4gRXN0YXRlLCBTaGVpa2ggWmF5ZWQiLCAiZHJlc3NFbiI6ICJHYXJkZW4gZm9ybWFsIGluIHNvZnQgbmV1dHJhbCB0b25lcyIsICJ3YSI6ICIyMDEyODAwNjcxMTAiLCAiZHJlc3MiOiBbXX0" data-track="ViewContent" data-design="Olive Lace" aria-label="جربي دعوة Olive Lace"><img src="cards/olv.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Olive Lace</h3>
+        <p>ظرف زيتوني بدانتيل</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAib2x2IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnZhNmKIiwgImJyaWRlIjogItmK2KfYs9mF2YrZhiIsICJncm9vbUVuIjogIkFsaSIsICJicmlkZUVuIjogIllhc21pbmUiLCAiZGF0ZSI6ICIyMDI3LTA4LTE0IiwgInRpbWUiOiAiMTc6MDAiLCAidmVudWUiOiAi2YLYtdixINin2YTYrdiv2YrZgtipIiwgImFkZHIiOiAi2KfZhNi02YrYriDYstin2YrYryIsICJ2ZW51ZUVuIjogIlRoZSBHYXJkZW4gRXN0YXRlLCBTaGVpa2ggWmF5ZWQiLCAiZHJlc3NFbiI6ICJHYXJkZW4gZm9ybWFsIGluIHNvZnQgbmV1dHJhbCB0b25lcyIsICJ3YSI6ICIyMDEyODAwNjcxMTAiLCAiZHJlc3MiOiBbXX0" data-track="ViewContent" data-design="Olive Lace">جربي</a><a class="dc-ord" href="studio.html#t=olv" data-track="InitiateCheckout" data-design="Olive Lace" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:5">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAiYnJkIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnZhdixIiwgImJyaWRlIjogItmE2YrZhNmJIiwgImdyb29tRW4iOiAiT21hciIsICJicmlkZUVuIjogIkxhaWxhIiwgImRhdGUiOiAiMjAyNy0wOC0yNCIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINiz2KfZhtiqINix2YrYrNmK2LMiLCAiYWRkciI6ICLZg9mI2LHZhtmK2LQg2KfZhNmG2YrZhNiMINin2YTZgtin2YfYsdipIiwgInZlbnVlRW4iOiAiVGhlIFN0LiBSZWdpcywgQ29ybmljaGUgRWwgTmlsLCBDYWlybyIsICJkcmVzc0VuIjogIkZvcm1hbCBhdHRpcmUiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgImdpZnQiOiAiSW5zdGFQYXk6IDAxMjgwMDY3MTEwIiwgImRyZXNzIjogW119" data-track="ViewContent" data-design="Bordeaux" aria-label="جربي دعوة Bordeaux"><img src="cards/brd.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Bordeaux</h3>
+        <p>ورق عتيق على عنابي</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAiYnJkIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnZhdixIiwgImJyaWRlIjogItmE2YrZhNmJIiwgImdyb29tRW4iOiAiT21hciIsICJicmlkZUVuIjogIkxhaWxhIiwgImRhdGUiOiAiMjAyNy0wOC0yNCIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINiz2KfZhtiqINix2YrYrNmK2LMiLCAiYWRkciI6ICLZg9mI2LHZhtmK2LQg2KfZhNmG2YrZhNiMINin2YTZgtin2YfYsdipIiwgInZlbnVlRW4iOiAiVGhlIFN0LiBSZWdpcywgQ29ybmljaGUgRWwgTmlsLCBDYWlybyIsICJkcmVzc0VuIjogIkZvcm1hbCBhdHRpcmUiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgImdpZnQiOiAiSW5zdGFQYXk6IDAxMjgwMDY3MTEwIiwgImRyZXNzIjogW119" data-track="ViewContent" data-design="Bordeaux">جربي</a><a class="dc-ord" href="studio.html#t=brd" data-track="InitiateCheckout" data-design="Bordeaux" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:6">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAiZ2xkIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2KLYr9mFIiwgImJyaWRlIjogItiy2YrZhtipIiwgImdyb29tRW4iOiAiQWRhbSIsICJicmlkZUVuIjogIlplaW5hIiwgIm1vbm8iOiAiWiZBIiwgImRhdGUiOiAiMjAyNy0wNS0wOCIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINin2YTZhdin2LPYqSIsICJhZGRyIjogItin2YTYudin2LXZhdipINin2YTYpdiv2KfYsdmK2KkiLCAidmVudWVFbiI6ICJBbCBNYXNhIEhvdGVsLCBOZXcgQ2FwaXRhbCIsICJkcmVzc0VuIjogIkJsYWNrIFRpZSIsICJ3YSI6ICIyMDEyODAwNjcxMTAiLCAiZHJlc3MiOiBbXX0" data-track="ViewContent" data-design="Golden Scroll" aria-label="جربي دعوة Golden Scroll"><img src="cards/gld.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Golden Scroll</h3>
+        <p>لفافة دهبي فخمة</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAiZ2xkIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2KLYr9mFIiwgImJyaWRlIjogItiy2YrZhtipIiwgImdyb29tRW4iOiAiQWRhbSIsICJicmlkZUVuIjogIlplaW5hIiwgIm1vbm8iOiAiWiZBIiwgImRhdGUiOiAiMjAyNy0wNS0wOCIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINin2YTZhdin2LPYqSIsICJhZGRyIjogItin2YTYudin2LXZhdipINin2YTYpdiv2KfYsdmK2KkiLCAidmVudWVFbiI6ICJBbCBNYXNhIEhvdGVsLCBOZXcgQ2FwaXRhbCIsICJkcmVzc0VuIjogIkJsYWNrIFRpZSIsICJ3YSI6ICIyMDEyODAwNjcxMTAiLCAiZHJlc3MiOiBbXX0" data-track="ViewContent" data-design="Golden Scroll">جربي</a><a class="dc-ord" href="studio.html#t=gld" data-track="InitiateCheckout" data-design="Golden Scroll" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:7">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAiaXZ5IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2YPYsdmK2YUiLCAiYnJpZGUiOiAi2YbZiNixIiwgImdyb29tRW4iOiAiS2FyaW0iLCAiYnJpZGVFbiI6ICJOb3VyIiwgIm1vbm8iOiAiTiZLIiwgImtpbmQiOiAi2K3ZgdmEINiy2YHYp9mBIiwgImRhdGUiOiAiMjAyNy0wMS0xNSIsICJ0aW1lIjogIjE4OjAwIiwgInZlbnVlIjogIlJvc2UgR2FyZGVuIEhhbGwiLCAiYWRkciI6ICJOZXcgQ2Fpcm8sIEVneXB0IiwgInZlbnVlRW4iOiAiUm9zZSBHYXJkZW4gSGFsbCwgTmV3IENhaXJvIiwgImRyZXNzRW4iOiAiU29tZXRoaW5nIHdoaXRlIG9yIGJlaWdlIiwgIndhIjogIjIwMTI4MDA2NzExMCJ9" data-track="ViewContent" data-design="Ivory Lily" aria-label="جربي دعوة Ivory Lily"><img src="cards/ivy.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Ivory Lily</h3>
+        <p>ظرف عاجي بورد الليليوم</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAiaXZ5IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2YPYsdmK2YUiLCAiYnJpZGUiOiAi2YbZiNixIiwgImdyb29tRW4iOiAiS2FyaW0iLCAiYnJpZGVFbiI6ICJOb3VyIiwgIm1vbm8iOiAiTiZLIiwgImtpbmQiOiAi2K3ZgdmEINiy2YHYp9mBIiwgImRhdGUiOiAiMjAyNy0wMS0xNSIsICJ0aW1lIjogIjE4OjAwIiwgInZlbnVlIjogIlJvc2UgR2FyZGVuIEhhbGwiLCAiYWRkciI6ICJOZXcgQ2Fpcm8sIEVneXB0IiwgInZlbnVlRW4iOiAiUm9zZSBHYXJkZW4gSGFsbCwgTmV3IENhaXJvIiwgImRyZXNzRW4iOiAiU29tZXRoaW5nIHdoaXRlIG9yIGJlaWdlIiwgIndhIjogIjIwMTI4MDA2NzExMCJ9" data-track="ViewContent" data-design="Ivory Lily">جربي</a><a class="dc-ord" href="studio.html#t=ivy" data-track="InitiateCheckout" data-design="Ivory Lily" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:0">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAibGF2IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2YTYpNmKIiwgImJyaWRlIjogItmD2KfYsdmF2KciLCAiZ3Jvb21FbiI6ICJMb2F5IiwgImJyaWRlRW4iOiAiS2FybWEiLCAibW9ubyI6ICJLJkwiLCAiZGF0ZSI6ICIyMDI3LTA0LTI1IiwgInRpbWUiOiAiMTg6MDAiLCAidmVudWUiOiAi2YHZhtiv2YIg2KfZhNmB2YjYsdiz2YrYstmI2YbYsiIsICJhZGRyIjogItmG2KfZitmEINio2YTYp9iy2KfYjCDYp9mE2YLYp9mH2LHYqSIsICJ2ZW51ZUVuIjogIkZvdXIgU2Vhc29ucywgTmlsZSBQbGF6YSwgQ2Fpcm8iLCAiZHJlc3NFbiI6ICJGb3JtYWwgwrcgc29mdCBwYXN0ZWwgdG9uZXMiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgImdpZnQiOiAiSW5zdGFQYXk6IDAxMjgwMDY3MTEwIiwgIm5vdGVzIjogIiIsICJkcmVzcyI6IFtdfQ" data-track="ViewContent" data-design="Lavender" aria-label="جربي دعوة Lavender"><img src="cards/lav.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Lavender</h3>
+        <p>ظرف لافندر رقيق</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAibGF2IiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2YTYpNmKIiwgImJyaWRlIjogItmD2KfYsdmF2KciLCAiZ3Jvb21FbiI6ICJMb2F5IiwgImJyaWRlRW4iOiAiS2FybWEiLCAibW9ubyI6ICJLJkwiLCAiZGF0ZSI6ICIyMDI3LTA0LTI1IiwgInRpbWUiOiAiMTg6MDAiLCAidmVudWUiOiAi2YHZhtiv2YIg2KfZhNmB2YjYsdiz2YrYstmI2YbYsiIsICJhZGRyIjogItmG2KfZitmEINio2YTYp9iy2KfYjCDYp9mE2YLYp9mH2LHYqSIsICJ2ZW51ZUVuIjogIkZvdXIgU2Vhc29ucywgTmlsZSBQbGF6YSwgQ2Fpcm8iLCAiZHJlc3NFbiI6ICJGb3JtYWwgwrcgc29mdCBwYXN0ZWwgdG9uZXMiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgImdpZnQiOiAiSW5zdGFQYXk6IDAxMjgwMDY3MTEwIiwgIm5vdGVzIjogIiIsICJkcmVzcyI6IFtdfQ" data-track="ViewContent" data-design="Lavender">جربي</a><a class="dc-ord" href="studio.html#t=lav" data-track="InitiateCheckout" data-design="Lavender" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="350" style="--i:1">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAic3duIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LPZhNmK2YUiLCAiYnJpZGUiOiAi2YHYsdmK2K_YqSIsICJncm9vbUVuIjogIlNlbGltIiwgImJyaWRlRW4iOiAiRmFyaWRhIiwgImRhdGUiOiAiMjAyNy0xMi0zMSIsICJ0aW1lIjogIjE3OjAwIiwgInZlbnVlIjogIk1haXNvbiBkZSBSb3NlIiwgImFkZHIiOiAiTmV3IENhaXJvIiwgInZlbnVlRW4iOiAiTWFpc29uIGRlIFJvc2UsIE5ldyBDYWlybyIsICJkcmVzc0VuIjogIkdhcmRlbiBGb3JtYWwiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgInByb2dyYW0iOiAiQ2VyZW1vbnkgwrcgNTowMCBQTVxuRGlubmVyIFJlY2VwdGlvbiDCtyA3OjAwIFBNIiwgIm1vbm8iOiAiIn0" data-track="ViewContent" data-design="Once Upon a Time" aria-label="جربي دعوة Once Upon a Time"><img src="cards/swn.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Once Upon a Time</h3>
+        <p>حكاية البجع على البحيرة</p>
+        <div class="dc-p"><b>٣٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAic3duIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LPZhNmK2YUiLCAiYnJpZGUiOiAi2YHYsdmK2K_YqSIsICJncm9vbUVuIjogIlNlbGltIiwgImJyaWRlRW4iOiAiRmFyaWRhIiwgImRhdGUiOiAiMjAyNy0xMi0zMSIsICJ0aW1lIjogIjE3OjAwIiwgInZlbnVlIjogIk1haXNvbiBkZSBSb3NlIiwgImFkZHIiOiAiTmV3IENhaXJvIiwgInZlbnVlRW4iOiAiTWFpc29uIGRlIFJvc2UsIE5ldyBDYWlybyIsICJkcmVzc0VuIjogIkdhcmRlbiBGb3JtYWwiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgInByb2dyYW0iOiAiQ2VyZW1vbnkgwrcgNTowMCBQTVxuRGlubmVyIFJlY2VwdGlvbiDCtyA3OjAwIFBNIiwgIm1vbm8iOiAiIn0" data-track="ViewContent" data-design="Once Upon a Time">جربي</a><a class="dc-ord" href="studio.html#t=swn" data-track="InitiateCheckout" data-design="Once Upon a Time" data-price="350">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="250" style="--i:2">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAiYmFiIiwgInBhbCI6IDAsICJtdXNpYyI6ICJ6YWZmYSIsICJncm9vbSI6ICLZhdin2LLZhiIsICJicmlkZSI6ICLZh9mG2KciLCAibW9ubyI6ICJIJk0iLCAia2luZCI6ICLYrdmB2YQg2LLZgdin2YEiLCAiZGF0ZSI6ICIyMDI3LTA0LTE1IiwgInRpbWUiOiAiMTk6MDAiLCAidmVudWUiOiAi2YHZhtiv2YIg2K_ZiNiz2YrYqiIsICJhZGRyIjogItin2YTYqtis2YXYuSDYp9mE2K7Yp9mF2LPYjCDYp9mE2YLYp9mH2LHYqSIsICJtYXAiOiAiIiwgIndhIjogIjIwMTI4MDA2NzExMCIsICJwcm9ncmFtIjogIjU6MDAg2YUgLSDZg9iq2Kgg2KfZhNmD2KrYp9ioXG43OjAwINmFIC0g2KfZhNin2LPYqtmC2KjYp9mEXG44OjAwINmFIC0g2KfZhNmB2LHYrSIsICJwQnJpZGUiOiAi2KfZhNij2LPYqtin2LAg2KPYrdmF2K8g2YjYp9mE2LPZitiv2Kkg2YXZhtmJIiwgInBHcm9vbSI6ICLYp9mE2KPYs9iq2KfYsCDZhdit2YXZiNivINmI2KfZhNiz2YrYr9ipINmH2KfZhNipIiwgImRyZXNzIjogWyIjZjNlNWMwIiwgIiM5ZGIzOWIiXSwgImRyZXNzTm90ZSI6ICLYo9mE2YjYp9mGINmH2KfYr9mK2Kkg2YjYqNin2LPYqtmK2YQiLCAiZ2lmdCI6ICLZiNis2YjYr9mD2YUg2YfZiCDYo9is2YXZhCDZh9iv2YrYqSIsICJub3RlcyI6ICIiLCAiaW50cm8iOiAiIiwgInN0b3J5IjogIiIsICJwb2VtIjogIiIsICJjbG9zaW5nIjogIiJ9" data-track="ViewContent" data-design="Rose Gate" aria-label="جربي دعوة Rose Gate"><img src="cards/bab.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Rose Gate</h3>
+        <p>باب ورد وفوانيس</p>
+        <div class="dc-p"><b>٢٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAiYmFiIiwgInBhbCI6IDAsICJtdXNpYyI6ICJ6YWZmYSIsICJncm9vbSI6ICLZhdin2LLZhiIsICJicmlkZSI6ICLZh9mG2KciLCAibW9ubyI6ICJIJk0iLCAia2luZCI6ICLYrdmB2YQg2LLZgdin2YEiLCAiZGF0ZSI6ICIyMDI3LTA0LTE1IiwgInRpbWUiOiAiMTk6MDAiLCAidmVudWUiOiAi2YHZhtiv2YIg2K_ZiNiz2YrYqiIsICJhZGRyIjogItin2YTYqtis2YXYuSDYp9mE2K7Yp9mF2LPYjCDYp9mE2YLYp9mH2LHYqSIsICJtYXAiOiAiIiwgIndhIjogIjIwMTI4MDA2NzExMCIsICJwcm9ncmFtIjogIjU6MDAg2YUgLSDZg9iq2Kgg2KfZhNmD2KrYp9ioXG43OjAwINmFIC0g2KfZhNin2LPYqtmC2KjYp9mEXG44OjAwINmFIC0g2KfZhNmB2LHYrSIsICJwQnJpZGUiOiAi2KfZhNij2LPYqtin2LAg2KPYrdmF2K8g2YjYp9mE2LPZitiv2Kkg2YXZhtmJIiwgInBHcm9vbSI6ICLYp9mE2KPYs9iq2KfYsCDZhdit2YXZiNivINmI2KfZhNiz2YrYr9ipINmH2KfZhNipIiwgImRyZXNzIjogWyIjZjNlNWMwIiwgIiM5ZGIzOWIiXSwgImRyZXNzTm90ZSI6ICLYo9mE2YjYp9mGINmH2KfYr9mK2Kkg2YjYqNin2LPYqtmK2YQiLCAiZ2lmdCI6ICLZiNis2YjYr9mD2YUg2YfZiCDYo9is2YXZhCDZh9iv2YrYqSIsICJub3RlcyI6ICIiLCAiaW50cm8iOiAiIiwgInN0b3J5IjogIiIsICJwb2VtIjogIiIsICJjbG9zaW5nIjogIiJ9" data-track="ViewContent" data-design="Rose Gate">جربي</a><a class="dc-ord" href="studio.html#t=bab" data-track="InitiateCheckout" data-design="Rose Gate" data-price="250">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="250" style="--i:3">
+      <a class="dc-img" href="studio.html#i=eyJwYWwiOiAwLCAia2luZCI6ICLYrdmB2YQg2LLZgdin2YEiLCAiaW50cm8iOiAi2YrYqti02LHZgSDYo9mH2YQg2KfZhNi52LHZiNiz2YrZhiDYqNiv2LnZiNiq2YPZhSDZhNmF2LTYp9ix2YPYqtmH2YUg2YHYsdit2KrZh9mFXG7ZiNis2YjYr9mD2YUg2YrZg9mF2ZHZhCDZgdix2K3YqtmG2KciLCAiZGF0ZSI6ICIyMDI3LTA0LTE1IiwgInRpbWUiOiAiMjA6MDAiLCAibWFwIjogIiIsICJ3YSI6ICIiLCAiZHJlc3NOb3RlIjogIiIsICJub3RlcyI6ICIiLCAiZ2lmdCI6ICIiLCAibW9ubyI6ICJTJlkiLCAicG9lbSI6ICIiLCAiY2xvc2luZyI6ICIiLCAicHJvZ3JhbSI6ICI4OjAwINmFIC0g2K_YrtmI2YQg2KfZhNi52LHZiNiz2YrZhlxuOTowMCDZhSAtINiq2YLYr9mK2YUg2KfZhNi52LTYp9ihIiwgImRyZXNzIjogW10sICJtdXNpYyI6ICJwaWFubyIsICJncm9vbSI6ICLZitit2YrZiSIsICJicmlkZSI6ICLYs9in2LHYqSIsICJ2ZW51ZSI6ICLZgdmG2K_ZgiDYr9mI2LPZitiqIiwgImFkZHIiOiAi2KfZhNiq2KzZhdi5INin2YTYrtin2YXYs9iMINin2YTZgtin2YfYsdipIiwgInRwbCI6ICJyb3lhbCJ9" data-track="ViewContent" data-design="Rose Palace" aria-label="جربي دعوة Rose Palace"><img src="cards/royal.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Rose Palace</h3>
+        <p>قصر الورد بختم أحمر</p>
+        <div class="dc-p"><b>٢٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJwYWwiOiAwLCAia2luZCI6ICLYrdmB2YQg2LLZgdin2YEiLCAiaW50cm8iOiAi2YrYqti02LHZgSDYo9mH2YQg2KfZhNi52LHZiNiz2YrZhiDYqNiv2LnZiNiq2YPZhSDZhNmF2LTYp9ix2YPYqtmH2YUg2YHYsdit2KrZh9mFXG7ZiNis2YjYr9mD2YUg2YrZg9mF2ZHZhCDZgdix2K3YqtmG2KciLCAiZGF0ZSI6ICIyMDI3LTA0LTE1IiwgInRpbWUiOiAiMjA6MDAiLCAibWFwIjogIiIsICJ3YSI6ICIiLCAiZHJlc3NOb3RlIjogIiIsICJub3RlcyI6ICIiLCAiZ2lmdCI6ICIiLCAibW9ubyI6ICJTJlkiLCAicG9lbSI6ICIiLCAiY2xvc2luZyI6ICIiLCAicHJvZ3JhbSI6ICI4OjAwINmFIC0g2K_YrtmI2YQg2KfZhNi52LHZiNiz2YrZhlxuOTowMCDZhSAtINiq2YLYr9mK2YUg2KfZhNi52LTYp9ihIiwgImRyZXNzIjogW10sICJtdXNpYyI6ICJwaWFubyIsICJncm9vbSI6ICLZitit2YrZiSIsICJicmlkZSI6ICLYs9in2LHYqSIsICJ2ZW51ZSI6ICLZgdmG2K_ZgiDYr9mI2LPZitiqIiwgImFkZHIiOiAi2KfZhNiq2KzZhdi5INin2YTYrtin2YXYs9iMINin2YTZgtin2YfYsdipIiwgInRwbCI6ICJyb3lhbCJ9" data-track="ViewContent" data-design="Rose Palace">جربي</a><a class="dc-ord" href="studio.html#t=royal" data-track="InitiateCheckout" data-design="Rose Palace" data-price="250">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="250" style="--i:4">
+      <a class="dc-img" href="studio.html#i=eyJwYWwiOjAsImtpbmQiOiLYrdmB2YQg2LLZgdin2YEiLCJpbnRybyI6ItmK2KrYtNix2YEg2KPZh9mEINin2YTYudix2YjYs9mK2YYg2KjYr9i52YjYqtmD2YUg2YTZhdi02KfYsdmD2KrZh9mFINmB2LHYrdiq2YfZhVxu2YjYrNmI2K_Zg9mFINmK2YPZhdmR2YQg2YHYsdit2KrZhtinIiwiZGF0ZSI6IjIwMjctMDQtMTUiLCJ0aW1lIjoiMjA6MDAiLCJtYXAiOiIiLCJ3YSI6IiIsImRyZXNzTm90ZSI6Itij2YTZiNin2YYg2YfYp9iv2YrYqSDZiNio2KfYs9iq2YrZhCIsIm5vdGVzIjoiIiwiZ2lmdCI6ItmI2KzZiNiv2YPZhSDZh9mIINij2KzZhdmEINmH2K_ZitipIiwibW9ubyI6IiIsInBvZW0iOiIiLCJjbG9zaW5nIjoiIiwicHJvZ3JhbSI6Ijc6MDAg2YUgLSDYp9iz2KrZgtio2KfZhCDYp9mE2LbZitmI2YFcbjg6MDAg2YUgLSDZg9iq2Kgg2KfZhNmD2KrYp9ioXG45OjMwINmFIC0g2KfZhNi52LTYp9ihIiwiZHJlc3MiOlsiIzlkYjM5YiIsIiNlOGI0YjgiLCIjYTdjN2U3Il0sIm11c2ljIjoicGlhbm8iLCJncm9vbSI6ItmK2YjYs9mBIiwiYnJpZGUiOiLZhdix2YrZhSIsInZlbnVlIjoi2YLYp9i52Kkg2KfZhNmK2KfYs9mF2YrZhiIsImFkZHIiOiLYp9mE2LTZitiuINiy2KfZitiv2Iwg2KfZhNis2YrYstipIiwidHBsIjoiZ2FyZGVuIn0" data-track="ViewContent" data-design="Rose Garden" aria-label="جربي دعوة Rose Garden"><img src="cards/garden.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Rose Garden</h3>
+        <p>حديقة ورد بختم أحمر</p>
+        <div class="dc-p"><b>٢٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJwYWwiOjAsImtpbmQiOiLYrdmB2YQg2LLZgdin2YEiLCJpbnRybyI6ItmK2KrYtNix2YEg2KPZh9mEINin2YTYudix2YjYs9mK2YYg2KjYr9i52YjYqtmD2YUg2YTZhdi02KfYsdmD2KrZh9mFINmB2LHYrdiq2YfZhVxu2YjYrNmI2K_Zg9mFINmK2YPZhdmR2YQg2YHYsdit2KrZhtinIiwiZGF0ZSI6IjIwMjctMDQtMTUiLCJ0aW1lIjoiMjA6MDAiLCJtYXAiOiIiLCJ3YSI6IiIsImRyZXNzTm90ZSI6Itij2YTZiNin2YYg2YfYp9iv2YrYqSDZiNio2KfYs9iq2YrZhCIsIm5vdGVzIjoiIiwiZ2lmdCI6ItmI2KzZiNiv2YPZhSDZh9mIINij2KzZhdmEINmH2K_ZitipIiwibW9ubyI6IiIsInBvZW0iOiIiLCJjbG9zaW5nIjoiIiwicHJvZ3JhbSI6Ijc6MDAg2YUgLSDYp9iz2KrZgtio2KfZhCDYp9mE2LbZitmI2YFcbjg6MDAg2YUgLSDZg9iq2Kgg2KfZhNmD2KrYp9ioXG45OjMwINmFIC0g2KfZhNi52LTYp9ihIiwiZHJlc3MiOlsiIzlkYjM5YiIsIiNlOGI0YjgiLCIjYTdjN2U3Il0sIm11c2ljIjoicGlhbm8iLCJncm9vbSI6ItmK2YjYs9mBIiwiYnJpZGUiOiLZhdix2YrZhSIsInZlbnVlIjoi2YLYp9i52Kkg2KfZhNmK2KfYs9mF2YrZhiIsImFkZHIiOiLYp9mE2LTZitiuINiy2KfZitiv2Iwg2KfZhNis2YrYstipIiwidHBsIjoiZ2FyZGVuIn0" data-track="ViewContent" data-design="Rose Garden">جربي</a><a class="dc-ord" href="studio.html#t=garden" data-track="InitiateCheckout" data-design="Rose Garden" data-price="250">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="250" style="--i:5">
+      <a class="dc-img" href="studio.html#i=eyJwYWwiOjAsImtpbmQiOiLYrdmB2YQg2LLZgdin2YEiLCJpbnRybyI6ItmK2KrYtNix2YEg2KPZh9mEINin2YTYudix2YjYs9mK2YYg2KjYr9i52YjYqtmD2YUg2YTZhdi02KfYsdmD2KrZh9mFINmB2LHYrdiq2YfZhVxu2YjYrNmI2K_Zg9mFINmK2YPZhdmR2YQg2YHYsdit2KrZhtinIiwiZGF0ZSI6IjIwMjctMDQtMTUiLCJ0aW1lIjoiMjA6MDAiLCJtYXAiOiIiLCJ3YSI6IiIsImRyZXNzTm90ZSI6IiIsIm5vdGVzIjoiIiwiZ2lmdCI6IiIsIm1vbm8iOiIiLCJwb2VtIjoiIiwiY2xvc2luZyI6IiIsInByb2dyYW0iOiI4OjAwINmFIC0g2KfYs9iq2YLYqNin2YQg2KfZhNi22YrZiNmBXG45OjAwINmFIC0g2K_YrtmI2YQg2KfZhNi52LHZiNiz2YrZhiIsImRyZXNzIjpbXSwibXVzaWMiOiJvdWQiLCJncm9vbSI6Itiy2YrYp9ivIiwiYnJpZGUiOiLZhNmK2YTZiSIsInZlbnVlIjoi2YHZhtiv2YIg2KfZhNmF2KfYs9ipIiwiYWRkciI6ItmF2K_ZitmG2Kkg2YbYtdix2Iwg2KfZhNmC2KfZh9ix2KkiLCJ0cGwiOiJ2ZWx2ZXQifQ" data-track="ViewContent" data-design="Royal Velvet" aria-label="جربي دعوة Royal Velvet"><img src="cards/velvet.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Royal Velvet</h3>
+        <p>قطيفة عنابي وختم دهبي</p>
+        <div class="dc-p"><b>٢٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJwYWwiOjAsImtpbmQiOiLYrdmB2YQg2LLZgdin2YEiLCJpbnRybyI6ItmK2KrYtNix2YEg2KPZh9mEINin2YTYudix2YjYs9mK2YYg2KjYr9i52YjYqtmD2YUg2YTZhdi02KfYsdmD2KrZh9mFINmB2LHYrdiq2YfZhVxu2YjYrNmI2K_Zg9mFINmK2YPZhdmR2YQg2YHYsdit2KrZhtinIiwiZGF0ZSI6IjIwMjctMDQtMTUiLCJ0aW1lIjoiMjA6MDAiLCJtYXAiOiIiLCJ3YSI6IiIsImRyZXNzTm90ZSI6IiIsIm5vdGVzIjoiIiwiZ2lmdCI6IiIsIm1vbm8iOiIiLCJwb2VtIjoiIiwiY2xvc2luZyI6IiIsInByb2dyYW0iOiI4OjAwINmFIC0g2KfYs9iq2YLYqNin2YQg2KfZhNi22YrZiNmBXG45OjAwINmFIC0g2K_YrtmI2YQg2KfZhNi52LHZiNiz2YrZhiIsImRyZXNzIjpbXSwibXVzaWMiOiJvdWQiLCJncm9vbSI6Itiy2YrYp9ivIiwiYnJpZGUiOiLZhNmK2YTZiSIsInZlbnVlIjoi2YHZhtiv2YIg2KfZhNmF2KfYs9ipIiwiYWRkciI6ItmF2K_ZitmG2Kkg2YbYtdix2Iwg2KfZhNmC2KfZh9ix2KkiLCJ0cGwiOiJ2ZWx2ZXQifQ" data-track="ViewContent" data-design="Royal Velvet">جربي</a><a class="dc-ord" href="studio.html#t=velvet" data-track="InitiateCheckout" data-design="Royal Velvet" data-price="250">اطلبي</a></div>
+      </div>
+    </article>
+    <article class="dc more" data-tier="250" style="--i:6">
+      <a class="dc-img" href="studio.html#i=eyJ0cGwiOiAiZnlrIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnYqNiv2KfZhNix2K3ZhdmGIiwgImJyaWRlIjogItix2YLZitipIiwgImtpbmQiOiAi2LnZgtivINmC2LHYp9mGIiwgImRhdGUiOiAiMjAyNy0wNC0xNSIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINiv2YjYs9mK2KoiLCAiYWRkciI6ICLYp9mE2KrYrNmF2Lkg2KfZhNiu2KfZhdiz2Iwg2KfZhNmC2KfZh9ix2KkiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgIm1hcCI6ICIiLCAicHJvZ3JhbSI6ICIiLCAiaW50cm8iOiAiIiwgImNsb3NpbmciOiAiIiwgIm1vbm8iOiAiIiwgImRyZXNzIjogW119" data-track="ViewContent" data-design="Satin Bow" aria-label="جربي دعوة Satin Bow"><img src="cards/fyk.webp" alt="" width="640" height="680" loading="lazy" decoding="async"></a>
+      <div class="dc-b">
+        <h3 dir="ltr">Satin Bow</h3>
+        <p>فيونكة ساتان وردي</p>
+        <div class="dc-p"><b>٢٥٠</b> جنيه</div>
+        <div class="dc-btns"><a class="dc-try" href="studio.html#i=eyJ0cGwiOiAiZnlrIiwgInBhbCI6IDAsICJtdXNpYyI6ICJicmlkYWwiLCAiZ3Jvb20iOiAi2LnYqNiv2KfZhNix2K3ZhdmGIiwgImJyaWRlIjogItix2YLZitipIiwgImtpbmQiOiAi2LnZgtivINmC2LHYp9mGIiwgImRhdGUiOiAiMjAyNy0wNC0xNSIsICJ0aW1lIjogIjE5OjAwIiwgInZlbnVlIjogItmB2YbYr9mCINiv2YjYs9mK2KoiLCAiYWRkciI6ICLYp9mE2KrYrNmF2Lkg2KfZhNiu2KfZhdiz2Iwg2KfZhNmC2KfZh9ix2KkiLCAid2EiOiAiMjAxMjgwMDY3MTEwIiwgIm1hcCI6ICIiLCAicHJvZ3JhbSI6ICIiLCAiaW50cm8iOiAiIiwgImNsb3NpbmciOiAiIiwgIm1vbm8iOiAiIiwgImRyZXNzIjogW119" data-track="ViewContent" data-design="Satin Bow">جربي</a><a class="dc-ord" href="studio.html#t=fyk" data-track="InitiateCheckout" data-design="Satin Bow" data-price="250">اطلبي</a></div>
+      </div>
+    </article>
+  </div>
+  <button type="button" class="dz-more" id="dzMore">شوفي كل التصاميم <i>(٢٣)</i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button>
   <img class="col-band" src="home-c-band.webp" alt="" aria-hidden="true" loading="lazy">
 </section>
 <section class="how" id="how" aria-labelledby="howTitle">
@@ -799,30 +962,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
     <h2 id="pkgTitle">باقات التصميم</h2>
     <p>اختاري الباقة المناسبة لاحتياجك</p>
   </div>
-  <div class="ptabs rv5" role="tablist" aria-label="الباقات"><button type="button" role="tab" data-i="0" aria-selected="false"><span>أساسي</span><b>٢٥٠</b></button><button type="button" role="tab" data-i="1" aria-selected="true"><span>فاخر</span><b>٣٥٠</b></button><button type="button" role="tab" data-i="2" aria-selected="false"><span>تصميم خاص</span><b>٤٥٠</b></button></div>
-  <div class="ptrack rv5" id="ptrack">
-      <article class="pc" data-i="0" aria-label="باقة أساسي">
-        
-        <header class="ph"><svg class="pic sp" viewBox="0 0 48 40" aria-hidden="true"><path d="M8 36C18 28 30 18 42 6"/><path class="lf" d="M16 30c-3-6 0-11 6-12-1 5-2 9-6 12z"/><path class="lf" d="M19 28c5-4 11-3 13 1-5 2-9 2-13-1z"/><path class="lf" d="M27 21c-2-6 1-10 7-11-1 5-3 8-7 11z"/><path class="lf" d="M30 19c5-3 10-2 12 2-5 1-9 1-12-2z"/><path class="lf" d="M37 12c1-5 4-7 8-7-1 4-4 6-8 7z"/></svg><h3>أساسي</h3><span class="en">Basic</span></header>
-        <div class="pp"><b>٢٥٠</b> جنيه</div>
-        <ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>أساميكم وحروفكم على الختم</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>مزيكا وعدّ تنازلي وخريطة</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>برنامج الحفل وتأكيد الحضور</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>تعدّلي بنفسك لحد يوم الفرح</span></li></ul><p class="ptpl"><b>التصميمات:&rlm;</b> <span dir="ltr">Rose Palace</span> <i>·</i> <span dir="ltr">Rose Garden</span> <i>·</i> <span dir="ltr">Royal Velvet</span> <i>·</i> <span dir="ltr">Rose Gate</span> <i>·</i> <span dir="ltr">Satin Bow</span></p>
-        <a class="pbtn" href="studio.html#t=bab">اختاري الباقة<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
-      </article>
-      <article class="pc best" data-i="1" aria-label="باقة فاخر">
-        <span class="ribbon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7z"/></svg>الأكثر طلبًا</span>
-        <header class="ph"><svg class="pic" viewBox="0 0 48 40" aria-hidden="true"><path d="M14 5h20l8 10-18 21L6 15z"/><path d="M6 15h36M19 15l5 21 5-21M14 5l5 10 5-10 5 10 5-10"/></svg><h3>فاخر</h3><span class="en">Premium</span></header>
-        <div class="pp"><b>٣٥٠</b> جنيه</div>
-        <ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>حركات سينمائية وظرف حقيقي بيتفتح</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>أغنيتكم الخاصة</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>كل مميزات الباقة الأساسية</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>تعدّلي بنفسك لحد يوم الفرح</span></li></ul><p class="ptpl"><b>التصميمات:&rlm;</b> <span dir="ltr">Golden Scroll</span> <i>·</i> <span dir="ltr">Lavender</span> <i>·</i> <span dir="ltr">Bordeaux</span> <i>·</i> <span dir="ltr">Ivory Lily</span> <i>·</i> <span dir="ltr">Once Upon a Time</span> <i>·</i> <span dir="ltr">Olive Lace</span> <i>·</i> <span dir="ltr">Burgundy Bloom</span> <i>·</i> <span dir="ltr">Ivory Lace Royal</span> <i>·</i> <span dir="ltr">Pearl & Silk</span> <i>·</i> <span dir="ltr">Blue Hydrangea</span> <i>·</i> <span dir="ltr">The Unwritten Story</span> <i>·</i> <span dir="ltr">Blushing Garden</span></p>
-        <a class="pbtn" href="studio.html#t=olv">اختاري الباقة<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
-      </article>
-      <article class="pc" data-i="2" aria-label="باقة تصميم خاص">
-        
-        <header class="ph"><svg class="pic" viewBox="0 0 48 40" aria-hidden="true"><path d="M7 31l-2-19 11 9 8-14 8 14 11-9-2 19z"/><path d="M8 36h32"/><circle cx="5" cy="11" r="2"/><circle cx="24" cy="6" r="2"/><circle cx="43" cy="11" r="2"/></svg><h3>تصميم خاص</h3><span class="en">Bespoke</span></header>
-        <div class="pp"><b>٤٥٠</b> جنيه</div>
-        <ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>تصميم معمول ليكم من الصفر</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>ألوان وورد وستايل على ذوقك</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>أغنيتكم الخاصة</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7"/></svg><span>إحنا اللي بنجهّزها ونعدّل معاكي</span></li></ul>
-        <a class="pbtn" href="https://wa.me/201280067110?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%81%D8%B1%D8%AD%D8%AA%D9%86%D8%A7%20%F0%9F%A4%8D%20%D8%B9%D8%A7%D9%8A%D8%B2%D8%A9%20%D8%A3%D8%B7%D9%84%D8%A8%20%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" rel="noopener">اطلبي على واتساب<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
-      </article>
-  </div>
+  <div class="pmini rv5"><a class="pm" href="#designs" data-pf="250"><div class="pm-t"><b>أساسي</b><small dir="ltr">Basic</small><span>تصميم أنيق بأساميكم، ومزيكا، وعدّ تنازلي، وخريطة</span></div><div class="pm-p"><b>٢٥٠</b> جنيه<i>شوفي التصاميم</i></div></a><a class="pm best" href="#designs" data-pf="350"><div class="pm-t"><b>فاخر</b><small dir="ltr">Premium</small><em>الأكثر طلبًا</em><span>دعوة تفاعلية بظرف بيتفتح وحركات سينمائية وأغنيتكم</span></div><div class="pm-p"><b>٣٥٠</b> جنيه<i>شوفي التصاميم</i></div></a><a class="pm" href="https://wa.me/201280067110?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%81%D8%B1%D8%AD%D8%AA%D9%86%D8%A7%20%F0%9F%A4%8D%20%D8%B9%D8%A7%D9%8A%D8%B2%D8%A9%20%D8%A3%D8%B7%D9%84%D8%A8%20%D8%A8%D8%A7%D9%82%D8%A9%20%D8%A7%D9%84%D8%AA%D8%B5%D9%85%D9%8A%D9%85%20%D8%A7%D9%84%D8%AE%D8%A7%D8%B5" target="_blank" rel="noopener"><div class="pm-t"><b>تصميم خاص</b><small dir="ltr">Bespoke</small><span>تصميم معمول ليكم من الصفر، بألوان وورد على ذوقك</span></div><div class="pm-p"><b>٤٥٠</b> جنيه<i>اطلبي على واتساب</i></div></a></div>
   <p class="pnote rv5">السعر مرة واحدة، ولعدد ضيوف مفتوح.</p>
   <div class="facts rv5"><div class="fx"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-2-2.6-3.6-4-5.6-4a4 4 0 0 0 0 8c2 0 3.6-1.4 5.6-4zm0 0c2 2.6 3.6 4 5.6 4a4 4 0 0 0 0-8c-2 0-3.6 1.4-5.6 4z"/></svg><b>ضيوف بلا حدود</b><span>لينك واحد لكل ضيوفك</span></div><div class="fx"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg><b>تعدّلي بنفسك</b><span>لحد يوم الفرح، واللينك ما بيتغيرش</span></div><div class="fx"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2.5L5 13.5h6l-1 8 8-11h-6z"/></svg><b>تتفعّل خلال ٢٤ ساعة</b><span>بعد مراجعة تحويل InstaPay</span></div><div class="fx"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.6-3.1 8.2-7.5 9.5-4.4-1.3-7.5-4.9-7.5-9.5V6z"/><path d="M8.5 12l2.4 2.4L15.5 10"/></svg><b>لينك خاص باسمكم</b><span>تبعتيه على واتساب أو انستجرام</span></div></div>
   <img class="pkg-band" src="home-s5-band.webp" alt="" aria-hidden="true" loading="lazy">
@@ -852,23 +992,24 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <h3><button type="button" class="qb" id="qb3" aria-expanded="false" aria-controls="qp3"><svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.6 2.4 3.8 5.2 3.8 8.5s-1.2 6.1-3.8 8.5c-2.6-2.4-3.8-5.2-3.8-8.5s1.2-6.1 3.8-8.5z"/></svg><span>ينفع الدعوة تبقى بأكتر من لغة؟</span><svg class="qc" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button></h3>
       <div class="qp" id="qp3" role="region" aria-labelledby="qb3"><div class="qin"><p>أيوه، تقدري تكتبي الأسامي والمكان بالعربي والإنجليزي. وكل تصميم بيعرض اللغتين بالشكل اللي يناسبه.</p></div></div>
     </div>
-    <div class="qa rv6">
+    <div class="qa rv6 qx">
       <h3><button type="button" class="qb" id="qb4" aria-expanded="false" aria-controls="qp4"><svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4.5" width="18" height="12" rx="1.6"/><path d="M8.5 20h7M12 16.5V20"/><path d="M10.5 8.3v4.4l3.7-2.2z"/></svg><span>أقدر أشوف الدعوة قبل ما أدفع؟</span><svg class="qc" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button></h3>
       <div class="qp" id="qp4" role="region" aria-labelledby="qb4"><div class="qin"><p>أكيد. في الاستوديو بتشوفي المعاينة بتتغير قدامك مع كل تفصيلة بتكتبيها، وكمان تقدري تفتحي الدعوات التجريبية لكل تصميم وتجرّبيها بنفسك قبل ما تختاري.</p></div></div>
     </div>
-    <div class="qa rv6">
+    <div class="qa rv6 qx">
       <h3><button type="button" class="qb" id="qb5" aria-expanded="false" aria-controls="qp5"><svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5"/><circle cx="17" cy="9.5" r="2.5"/><path d="M15.8 14.2c2.4-.3 4.2 1.2 4.7 3.8"/></svg><span>أقدر أبعتها لكام ضيف؟</span><svg class="qc" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button></h3>
       <div class="qp" id="qp5" role="region" aria-labelledby="qb5"><div class="qin"><p>لعدد مفتوح. هو لينك واحد تبعتيه لكل ضيوفك على واتساب أو انستجرام، من غير أي تكلفة زيادة.</p></div></div>
     </div>
-    <div class="qa rv6">
+    <div class="qa rv6 qx">
       <h3><button type="button" class="qb" id="qb6" aria-expanded="false" aria-controls="qp6"><svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg><span>ينفع أحط أغنية معينة؟</span><svg class="qc" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button></h3>
       <div class="qp" id="qp6" role="region" aria-labelledby="qb6"><div class="qin"><p>أيوه، تقدري ترفعي أغنيتكم من الاستوديو، أو تختاري من المقطوعات الجاهزة.</p></div></div>
     </div>
-    <div class="qa rv6">
+    <div class="qa rv6 qx">
       <h3><button type="button" class="qb" id="qb7" aria-expanded="false" aria-controls="qp7"><svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="14" r="5.5"/><circle cx="15" cy="14" r="5.5"/><path d="M10.5 5.5l1.5-2 1.5 2-1.5 1.5z"/></svg><span>تنفع للخطوبة وكتب الكتاب؟</span><svg class="qc" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button></h3>
       <div class="qp" id="qp7" role="region" aria-labelledby="qb7"><div class="qin"><p>أكيد، تنفع لأي مناسبة: فرح، أو خطوبة، أو كتب كتاب، أو حنة.</p></div></div>
     </div>
   </div>
+  <button type="button" class="q-more" id="qMore">شوفي باقي الأسئلة<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button>
   <img class="faq-band" src="home-s6-band.webp" alt="" aria-hidden="true" loading="lazy">
 </section>
 <section class="cta7" id="start" aria-labelledby="ctaTitle">
@@ -920,15 +1061,19 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   </div>
 </footer>
 
+<div class="vmod" id="vmod" aria-hidden="true"><div class="vmod-bg" data-vclose></div><div class="vmod-in"><button type="button" class="vmod-x" data-vclose aria-label="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button><figure class="pv" id="howVideo" aria-label="فيديو قصير: إزاي تصممي دعوتك على فرحتنا">
+        <span class="pv-cam" aria-hidden="true"></span>
+        <div class="pv-in"><video id="howVid" muted playsinline loop preload="none" poster="hero-poster.jpg" data-src="hero.mp4" aria-hidden="true"></video></div>
+      </figure><p>إزاي تصممي دعوتك على فرحتنا</p></div></div>
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="القائمة" aria-hidden="true">
   <button class="close" id="close" aria-label="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <div class="dl">فرحتنا</div><small>FARHETNA</small>
   <nav>
     <a href="#designs">التصاميم</a>
-    <a href="#designs">المميزات</a>
-    <a href="#designs">الأسعار</a>
-    <a href="#designs">الأسئلة الشائعة</a>
+    <a href="#how">إزاي تطلبي</a>
+    <a href="#packages">الأسعار</a>
+    <a href="#faq">الأسئلة الشائعة</a>
   </nav>
   <a class="order" href="studio.html">اطلبي دعوتك</a>
 </aside>
@@ -953,36 +1098,19 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 </script>
 
 <script>
-(()=>{
-  const sec=document.getElementById("designs"),track=document.getElementById("track"),cards=[...track.querySelectorAll(".cd")],dotsEl=document.getElementById("dots");
-  const prev=sec.querySelector(".car-nav.pv"),next=sec.querySelector(".car-nav.nx");
-  let cur=0,raf=0,auto=null,userTouched=false;
-  cards.forEach((c,i)=>{const b=document.createElement("button");b.type="button";b.setAttribute("role","tab");b.setAttribute("aria-label",(c.querySelector("b")||{}).textContent||("تصميم "+(i+1)));b.onclick=()=>{stop();go(i)};dotsEl.appendChild(b)});
-  const dots=[...dotsEl.children];
-  function centerOf(el){const r=el.getBoundingClientRect();return r.left+r.width/2}
-  function go(i,smooth=true){i=Math.max(0,Math.min(cards.length-1,i));const tr=track.getBoundingClientRect();
-    track.scrollBy({left:centerOf(cards[i])-(tr.left+tr.width/2),behavior:smooth?"smooth":"auto"})}
-  function paint(){raf=0;const tr=track.getBoundingClientRect(),mid=tr.left+tr.width/2;let best=0,bd=1e9;
-    cards.forEach((c,i)=>{const r=c.getBoundingClientRect(),d=(r.left+r.width/2-mid)/r.width,a=Math.min(Math.abs(d),1.4);
-      c.style.transform=`translateY(${a*16}px) scale(${1-Math.min(a,1)*.12})`;c.style.opacity=1-Math.min(a,1.4)*.14;
-      const im=c.querySelector("img");if(im)im.style.transform=`translateX(${d*-14}px)`;
-      if(Math.abs(d)<bd){bd=Math.abs(d);best=i}});
-    if(best!==cur||!dots[cur].classList.contains("on")){cur=best;cards.forEach((c,i)=>c.classList.toggle("is-c",i===cur));
-      dots.forEach((d,i)=>{d.classList.toggle("on",i===cur);d.setAttribute("aria-selected",i===cur)});
-      prev.disabled=cur===0;next.disabled=cur===cards.length-1}}
-  const req=()=>{if(!raf)raf=requestAnimationFrame(paint)};
-  track.addEventListener("scroll",req,{passive:true});addEventListener("resize",req);
-  prev.onclick=()=>{stop();go(cur-1)};next.onclick=()=>{stop();go(cur+1)};
-  track.addEventListener("keydown",e=>{if(e.key==="ArrowLeft"){stop();go(cur+1)}if(e.key==="ArrowRight"){stop();go(cur-1)}});
-  ["touchstart","pointerdown","wheel"].forEach(ev=>track.addEventListener(ev,stop,{passive:true}));
-  function stop(){userTouched=true;clearInterval(auto);auto=null}
-  // gentle autoplay while the section is on screen, until she touches it
-  const io=new IntersectionObserver(es=>es.forEach(e=>{
-    if(e.target===sec){if(e.isIntersecting&&!userTouched&&!auto&&!matchMedia("(prefers-reduced-motion:reduce)").matches)auto=setInterval(()=>go(cur+1>=cards.length?0:cur+1),4200);
-      else if(!e.isIntersecting){clearInterval(auto);auto=null}}
-    else if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.25});
-  io.observe(sec);sec.querySelectorAll(".rv2").forEach(el=>io.observe(el));
-  requestAnimationFrame(()=>{go(0,false);paint()});
+(()=>{const sec=document.getElementById("designs"),grid=document.getElementById("dzGrid"),more=document.getElementById("dzMore"),cards=[...grid.children],chips=[...sec.querySelectorAll(".chips button")];
+  let f="all",open=false;
+  function paint(anim){cards.forEach((c,n)=>{const ok=f==="all"||c.dataset.tier===f,show=ok&&(open||f!=="all"||!c.classList.contains("more"));
+      c.hidden=!show;if(show&&anim){c.classList.remove("in");void c.offsetWidth;c.classList.add("in")}});
+    more.hidden=open||f!=="all"}
+  chips.forEach(b=>b.addEventListener("click",()=>{if(f===b.dataset.f)return;f=b.dataset.f;chips.forEach(x=>x.setAttribute("aria-selected",String(x===b)));
+    grid.classList.add("swap");setTimeout(()=>{paint(true);grid.classList.remove("swap")},180)}));
+  more.addEventListener("click",()=>{open=true;paint(false);cards.filter(c=>c.classList.contains("more")).forEach(c=>{c.classList.remove("in");void c.offsetWidth;c.classList.add("in")})});
+  paint(false);
+  const els=[...sec.querySelectorAll(".rv2"),...cards];
+  if(!("IntersectionObserver"in window)){els.forEach(e=>e.classList.add("in"));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12,rootMargin:"0px 0px -6% 0px"});
+  els.forEach(e=>io.observe(e));
 })();
 </script>
 
@@ -1043,7 +1171,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 <script>
 (()=>{
-  const sec=document.getElementById("packages"),track=document.getElementById("ptrack"),cards=[...track.children],tabs=[...sec.querySelectorAll(".ptabs button")];
+  const sec=document.getElementById("packages"),track=document.getElementById("ptrack");if(!track){sec.querySelectorAll(".rv5").forEach(e=>e.classList.add("in"));return}const cards=[...track.children],tabs=[...sec.querySelectorAll(".ptabs button")];
   let cur=-1,raf=0;
   const cx=el=>{const r=el.getBoundingClientRect();return r.left+r.width/2};
   function go(i,sm=true){const t=track.getBoundingClientRect();track.scrollBy({left:cx(cards[i])-(t.left+t.width/2),behavior:sm?"smooth":"auto"})}
@@ -1076,13 +1204,17 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 </script>
 <a class="wa-help" href="https://wa.me/201280067110?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%81%D8%B1%D8%AD%D8%AA%D9%86%D8%A7%20%F0%9F%A4%8D%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%D8%A9%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9" target="_blank" rel="noopener" data-track="Contact" aria-label="مساعدة على واتساب"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.4 12.4 0 0 0 5.3 22.2L3.6 28.5l6.5-1.7A12.4 12.4 0 1 0 16 3.5zm0 22.6a10.2 10.2 0 0 1-5.2-1.4l-.4-.2-3.9 1 1-3.8-.2-.4A10.2 10.2 0 1 1 16 26.1zm5.6-7.6c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2-.8 1-1 1.2-.4.2-.7 0a8.4 8.4 0 0 1-4.1-3.6c-.3-.5.3-.5.9-1.6a.6.6 0 0 0 0-.5c0-.2-.7-1.7-1-2.3s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4 3.3 3.3 0 0 0-1 2.5 5.8 5.8 0 0 0 1.2 3.1 13.3 13.3 0 0 0 5.1 4.5c1.9.8 2.6.9 3.6.7a3 3 0 0 0 2-1.4 2.5 2.5 0 0 0 .2-1.4c-.1-.1-.3-.2-.6-.4z"/></svg><span>محتاجة مساعدة؟</span></a>
 <script>(function(){var w=document.querySelector(".wa-help");if(!w||!("IntersectionObserver" in window))return;var hide=new Set();var io=new IntersectionObserver(function(es){es.forEach(function(e){e.isIntersecting?hide.add(e.target):hide.delete(e.target)});w.classList.toggle("hide",hide.size>0)},{threshold:.15});document.querySelectorAll("#top,#signature,#designs,#packages,#start,footer,.help").forEach(function(x){io.observe(x)})})();</script>
-<script>(function(){var v=document.getElementById("howVid");if(!v)return;
-var rm=matchMedia("(prefers-reduced-motion: reduce)").matches,loaded=false,vis=false;
-function load(){if(loaded)return;loaded=true;v.src=v.getAttribute("data-src");v.load()}
+<script>(function(){var v=document.getElementById("howVid"),m=document.getElementById("vmod");if(!v||!m)return;
+var loaded=false;function load(){if(loaded)return;loaded=true;v.src=v.getAttribute("data-src");v.load()}
 function play(){load();var p=v.play();if(p&&p.catch)p.catch(function(){})}
-if(!rm&&"IntersectionObserver" in window){var io=new IntersectionObserver(function(es){vis=es[0].isIntersecting;if(vis){if(document.readyState==="complete")play();else addEventListener("load",function(){setTimeout(function(){if(vis)play()},300)},{once:true})}else if(!v.paused)v.pause()},{threshold:.15});io.observe(v)}
-document.getElementById("howBtn").addEventListener("click",function(e){e.preventDefault();document.getElementById("howVideo").scrollIntoView({behavior:rm?"auto":"smooth",block:"center"});v.currentTime=0;play()});
+function open(){m.classList.add("on");m.setAttribute("aria-hidden","false");document.documentElement.classList.add("vm-open");v.currentTime=0;play()}
+function close(){m.classList.remove("on");m.setAttribute("aria-hidden","true");document.documentElement.classList.remove("vm-open");v.pause()}
+document.getElementById("howBtn").addEventListener("click",function(e){e.preventDefault();open()});
+m.querySelectorAll("[data-vclose]").forEach(function(b){b.addEventListener("click",close)});
+addEventListener("keydown",function(e){if(e.key==="Escape"&&m.classList.contains("on"))close()});
 v.addEventListener("click",function(){v.paused?play():v.pause()});
 })();</script>
+<script>document.querySelectorAll("[data-pf]").forEach(a=>a.addEventListener("click",()=>{const b=document.querySelector('.chips button[data-f="'+a.dataset.pf+'"]');if(b)b.click()}));</script>
+<script>(function(){var b=document.getElementById("qMore");if(!b)return;b.addEventListener("click",function(){document.getElementById("faq").classList.add("q-all");b.hidden=true})})();</script>
 </body>
 </html>
