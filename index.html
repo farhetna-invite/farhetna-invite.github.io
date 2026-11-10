@@ -647,6 +647,60 @@ html{scroll-behavior:smooth}
 .lang-en .pmini,.lang-en .dz-head{text-align:left}.lang-en .dz-head{text-align:center}
 .lang-en .pm-t small{display:none}
 .lang-en .pm-t em{margin:0 0 0 6px}
+/* ===== round 2: hero ends at the buttons, then designs ===== */
+.copy{padding-bottom:calc(86 * var(--u))}
+.hero-in::after{content:"";position:absolute;left:0;right:0;bottom:0;height:calc(120 * var(--u));background:linear-gradient(transparent,#f6e8de);z-index:3;pointer-events:none}
+.rvx{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform 1s var(--ease)}
+.rvx.in{opacity:1;transform:none}
+html:not(.js) .rvx{opacity:1;transform:none}
+
+/* ----- video banner ----- */
+.vb{position:relative;background:linear-gradient(180deg,#f6ebe2,#f7ece2);padding:34px 16px 6px}
+.vb-card{position:relative;display:flex;align-items:center;gap:16px;max-width:620px;margin:0 auto;padding:18px 18px 18px 14px;border-radius:26px;overflow:hidden;
+  background:radial-gradient(120% 140% at 100% 0,#6b7f5d 0,#4f6244 45%,#3c4733 100%);color:#f6efe3;box-shadow:0 26px 40px -26px rgba(40,50,32,.75),inset 0 0 0 1px rgba(255,255,255,.08)}
+.vb-card::before{content:"";position:absolute;inset:7px;border-radius:20px;border:1px solid rgba(214,190,140,.35);pointer-events:none}
+.vb-media{position:relative;flex:0 0 31%;max-width:150px;align-self:stretch;display:flex;align-items:center;justify-content:center}
+.vb-ph{display:block;width:100%;aspect-ratio:540/1000;border-radius:16px;overflow:hidden;border:3px solid #1d1d1d;transform:rotate(-4deg);box-shadow:0 14px 22px -10px rgba(0,0,0,.55)}
+.vb-ph img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.vb-play{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:rgba(251,246,240,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px -6px rgba(0,0,0,.45);animation:vbp 2.8s ease-in-out infinite}
+.vb-play svg{width:20px;fill:var(--olive);margin-left:3px}
+@keyframes vbp{0%,100%{box-shadow:0 8px 18px -6px rgba(0,0,0,.45),0 0 0 0 rgba(251,246,240,.45)}50%{box-shadow:0 8px 18px -6px rgba(0,0,0,.45),0 0 0 10px rgba(251,246,240,0)}}
+.vb-t{position:relative;flex:1;text-align:right}
+.vb-kick{display:inline-block;font-size:12px;letter-spacing:.04em;color:#e5d3a8;border:1px solid rgba(229,211,168,.45);border-radius:20px;padding:1px 10px}
+.vb h2{font-size:clamp(21px,5.8vw,28px);font-weight:600;line-height:1.35;margin-top:6px;color:#fbf5ea}
+.vb p{font-size:14px;line-height:1.6;color:rgba(246,239,227,.82);margin-top:4px}
+.vb-btn{display:inline-flex;align-items:center;gap:8px;margin-top:12px;height:42px;padding:0 18px;border-radius:999px;background:#fbf6ee;color:var(--olive);font-size:15px;font-weight:500;box-shadow:0 8px 16px -10px rgba(0,0,0,.5);transition:transform .25s var(--ease)}
+.vb-btn svg{width:15px;fill:currentColor}
+.vb-btn:active,.vb-media:active .vb-ph{transform:scale(.96)}
+.lang-en .vb-t{text-align:left}
+.how{padding-top:40px}
+
+/* ----- why farhetna ----- */
+.why{position:relative;background:linear-gradient(180deg,#f8ebe0,#f8ece2);padding:30px 16px 8px}
+.why-card{position:relative;max-width:620px;margin:0 auto;padding:26px 14px 24px;border-radius:26px;overflow:hidden;text-align:center;
+  background:linear-gradient(170deg,rgba(255,252,248,.95),rgba(246,236,224,.92));box-shadow:0 20px 36px -26px rgba(70,60,40,.5),inset 0 0 0 1px rgba(255,255,255,.9)}
+.why-lily{position:absolute;top:-6px;left:-14px;width:min(36%,170px);height:auto;opacity:.9;pointer-events:none;transform:scaleX(-1)}
+.why-head{position:relative}
+.why .div{justify-content:center;margin:0 auto 4px}.why .div i{width:56px}.why .div svg{width:40px}
+.why h2{font-size:clamp(26px,7.2vw,36px);font-weight:600;color:var(--olive);line-height:1.3}
+.why .feats{position:relative;width:auto;margin:18px 0 0}
+.why .feat{gap:8px}
+.why .feat svg{width:30px}
+.why .feat span{font-size:15px}
+.why .feats .sep{height:56px;min-height:0;margin-top:10px}
+.js .why .feat,.js .why .feats .sep{animation:none}
+.why .feat{opacity:0;transform:translateY(12px);transition:opacity .8s ease,transform .9s var(--ease)}
+.why-card.in .feat{opacity:1;transform:none}
+.why-card.in .feat:nth-child(3){transition-delay:.12s}.why-card.in .feat:nth-child(5){transition-delay:.24s}
+html:not(.js) .why .feat{opacity:1;transform:none}
+.pkg{padding-top:44px}
+
+@media (prefers-reduced-motion:reduce){.rvx,.why .feat{opacity:1;transform:none;transition:none}.vb-play{animation:none}}
+.vb-media{order:2}.vb-ph{transform:rotate(4deg)}
+.why-lily{top:0;left:0;width:min(30%,150px);transform:none;mix-blend-mode:multiply;opacity:.85;-webkit-mask:linear-gradient(#000 45%,transparent 92%);mask:linear-gradient(#000 45%,transparent 92%)}
+/* round 3: calmer gap between hero and designs */
+.copy{padding-bottom:calc(44 * var(--u))}
+.dz{padding-top:30px}
 </style>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
@@ -687,19 +741,12 @@ html{scroll-behavior:smooth}
       <div class="div" aria-hidden="true"><i></i><svg viewBox="0 0 56 26"><path d="M6 22C18 16 32 10 50 4"/><path class="lf" d="M18 17c-2-5 0-9 5-10-1 4-2 8-5 10z"/><path class="lf" d="M21 15c4-3 9-2 11 1-4 2-8 2-11-1z"/><path class="lf" d="M30 11c-1-5 2-8 6-9-1 4-3 7-6 9z"/><path class="lf" d="M33 10c4-2 9-1 10 2-4 1-7 1-10-2z"/><path class="lf" d="M42 6c1-4 4-5 7-5-1 3-4 5-7 5z"/></svg><i></i></div>
       <p><span>صممي دعوة فرحك بنفسك في دقائق</span></p>
       <a class="cta" href="studio.html" data-track="InitiateCheckout">صممي دعوتك<svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a>
-      <a class="cta2" href="#howVideo" id="howBtn">شوفي إزاي</a>
+      <a class="cta2" href="#howVideo" id="howBtn">شوفي طريقة التصميم</a>
       
-      <div class="feats">
-        <div class="feat"><svg viewBox="0 0 24 24"><path d="M7 3.5h10l3.5 5L12 20.5 3.5 8.5z"/><path d="M3.5 8.5h17M9.5 8.5L12 20.5l2.5-12M7 3.5l2.5 5 2.5-5 2.5 5 2.5-5"/></svg><span>جودة عالية<b>وتفاصيل فاخرة</b></span></div>
-        <i class="sep"></i>
-        <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 3.5l9 4.5-9 4.5L3 8z"/><path d="M3 12l9 4.5 9-4.5M3 16l9 4.5 9-4.5"/></svg><span>تصاميم متنوعة<b>وفريدة</b></span></div>
-        <i class="sep"></i>
-        <div class="feat"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.2"/><path d="M12 14.6s-3-1.8-3-3.9a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2.1-3 3.9-3 3.9z"/></svg><span>تفاعلية<b>وسهلة المشاركة</b></span></div>
-      </div>
+      
     </div>
 
-    <div class="cardsw"><img class="lay l-cards" src="home-cards.webp" alt="" width="941" height="382" decoding="async">
-    <a class="down" href="#signature" aria-label="انزلي للتصاميم"><svg viewBox="0 0 24 24"><path d="M6 9.5l6 6 6-6"/></svg></a></div>
+    
   </div>
 </header>
 </div>
@@ -930,6 +977,17 @@ html{scroll-behavior:smooth}
   <button type="button" class="dz-more" id="dzMore">شوفي كل التصاميم <i>(٢٣)</i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9.5l6 6 6-6"/></svg></button>
   <img class="col-band" src="home-c-band.webp" alt="" aria-hidden="true" loading="lazy">
 </section>
+<section class="vb" id="video" aria-labelledby="vbTitle">
+  <div class="vb-card rvx">
+    <button type="button" class="vb-media" data-vopen aria-label="شغّلي الفيديو"><span class="vb-ph"><img src="hero-poster.jpg" alt="" width="540" height="1170" loading="lazy" decoding="async"></span><span class="vb-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></svg></span></button>
+    <div class="vb-t">
+      <span class="vb-kick">فيديو قصير</span>
+      <h2 id="vbTitle">شوفي إزاي تصممي دعوتك</h2>
+      <p>خطوات التصميم من الأول للآخر في أقل من نص دقيقة</p>
+      <button type="button" class="vb-btn" data-vopen><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>شاهدي الفيديو</button>
+    </div>
+  </div>
+</section>
 <section class="how" id="how" aria-labelledby="howTitle">
   <img class="how-leaves" src="home-s3-leaves.webp" alt="" aria-hidden="true" loading="lazy">
   <img class="how-gyp" src="home-s3-gyp.webp" alt="" aria-hidden="true" loading="lazy">
@@ -955,6 +1013,19 @@ html{scroll-behavior:smooth}
   <img class="how-band" src="home-s3-band.webp" alt="" aria-hidden="true" loading="lazy">
 </section>
 
+<section class="why" id="why" aria-labelledby="whyTitle">
+  <div class="why-card rvx">
+    <img class="why-lily" src="home-s6-lily.webp" alt="" aria-hidden="true" loading="lazy">
+    <div class="why-head"><div class="div" aria-hidden="true"><i></i><svg viewBox="0 0 56 26"><path d="M6 22C18 16 32 10 50 4"/><path class="lf" d="M18 17c-2-5 0-9 5-10-1 4-2 8-5 10z"/><path class="lf" d="M21 15c4-3 9-2 11 1-4 2-8 2-11-1z"/><path class="lf" d="M30 11c-1-5 2-8 6-9-1 4-3 7-6 9z"/><path class="lf" d="M33 10c4-2 9-1 10 2-4 1-7 1-10-2z"/><path class="lf" d="M42 6c1-4 4-5 7-5-1 3-4 5-7 5z"/></svg><i></i></div><h2 id="whyTitle">ليه فرحتنا؟</h2></div>
+    <div class="feats">
+        <div class="feat"><svg viewBox="0 0 24 24"><path d="M7 3.5h10l3.5 5L12 20.5 3.5 8.5z"/><path d="M3.5 8.5h17M9.5 8.5L12 20.5l2.5-12M7 3.5l2.5 5 2.5-5 2.5 5 2.5-5"/></svg><span>جودة عالية<b>وتفاصيل فاخرة</b></span></div>
+        <i class="sep"></i>
+        <div class="feat"><svg viewBox="0 0 24 24"><path d="M12 3.5l9 4.5-9 4.5L3 8z"/><path d="M3 12l9 4.5 9-4.5M3 16l9 4.5 9-4.5"/></svg><span>تصاميم متنوعة<b>وفريدة</b></span></div>
+        <i class="sep"></i>
+        <div class="feat"><svg viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.2"/><path d="M12 14.6s-3-1.8-3-3.9a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2.1-3 3.9-3 3.9z"/></svg><span>تفاعلية<b>وسهلة المشاركة</b></span></div>
+      </div>
+  </div>
+</section>
 <section class="pkg" id="packages" aria-labelledby="pkgTitle">
   <img class="pkg-lily" src="home-s5-lily-tl.webp" alt="" aria-hidden="true" loading="lazy">
   <div class="pkg-head rv5">
@@ -1207,6 +1278,7 @@ html{scroll-behavior:smooth}
 <script>(function(){var v=document.getElementById("howVid"),m=document.getElementById("vmod");if(!v||!m)return;
 var loaded=false;function load(){if(loaded)return;loaded=true;v.src=v.getAttribute("data-src");v.load()}
 function play(){load();var p=v.play();if(p&&p.catch)p.catch(function(){})}
+document.querySelectorAll("[data-vopen]").forEach(function(b){b.addEventListener("click",function(){open()})});
 function open(){m.classList.add("on");m.setAttribute("aria-hidden","false");document.documentElement.classList.add("vm-open");v.currentTime=0;play()}
 function close(){m.classList.remove("on");m.setAttribute("aria-hidden","true");document.documentElement.classList.remove("vm-open");v.pause()}
 document.getElementById("howBtn").addEventListener("click",function(e){e.preventDefault();open()});
@@ -1216,5 +1288,7 @@ v.addEventListener("click",function(){v.paused?play():v.pause()});
 })();</script>
 <script>document.querySelectorAll("[data-pf]").forEach(a=>a.addEventListener("click",()=>{const b=document.querySelector('.chips button[data-f="'+a.dataset.pf+'"]');if(b)b.click()}));</script>
 <script>(function(){var b=document.getElementById("qMore");if(!b)return;b.addEventListener("click",function(){document.getElementById("faq").classList.add("q-all");b.hidden=true})})();</script>
+<script>(function(){var els=document.querySelectorAll(".rvx");if(!("IntersectionObserver"in window)){els.forEach(function(e){e.classList.add("in")});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.18});els.forEach(function(e){io.observe(e)})})();</script>
 </body>
 </html>
