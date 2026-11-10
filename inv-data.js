@@ -111,4 +111,30 @@ window.farhetnaRsvp=function(r){
 /* the "demo" ribbon is only for the public demo */
 if(mode){document.addEventListener("DOMContentLoaded",function(){
   document.querySelectorAll("#demoFlag,.demo,.demo-flag").forEach(function(e){if(mode==="preview")e.textContent="معاينة";else e.remove()})});}
+/* back-to-designs button: only on the public demo (not on a guest's real invitation, not inside the studio preview) */
+(function(){
+  if(mode!==null)return;
+  try{if(window.top!==window)return}catch(e){return}
+  function add(){
+    if(document.getElementById("fhBack"))return;
+    var a=document.createElement("a");a.id="fhBack";a.href="../index.html#designs";a.setAttribute("aria-label","رجوع للتصاميم");
+    a.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>التصاميم</span>';
+    var s=document.createElement("style");
+    s.textContent='#fhBack{position:fixed;z-index:2147483000;left:14px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:4px;height:38px;padding:0 14px 0 10px;border-radius:999px;background:rgba(251,246,240,.92);color:#3c4733;font:500 14px "Noto Naskh Arabic",system-ui,sans-serif;text-decoration:none;direction:rtl;box-shadow:0 6px 16px -6px rgba(0,0,0,.35),inset 0 0 0 1px rgba(85,104,74,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fhIn .6s ease 1s both}'+
+      '#fhBack svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}'+
+      '#fhBack:active{transform:scale(.95)}@keyframes fhIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}'+
+      '@media (prefers-reduced-motion:reduce){#fhBack{animation:none}}';
+    var f=(location.pathname.match(/\/([a-z-]+)\/(?:index\.html)?$/)||[])[1]||"";
+    var T="top:max(14px,env(safe-area-inset-top));bottom:auto;";
+    var P={"azure-lake":"left:66px;","unwritten-story":"left:auto;right:14px;","burgundy-bloom":T,"ivory-lace-royal":T,"blue-hydrangea":T,"blushing-garden":T,
+      "pearl-silk":"top:calc(max(14px,env(safe-area-inset-top)) + 46px);bottom:auto;"};
+    if(P[f])s.textContent+="#fhBack{"+P[f]+"}";
+    document.head.appendChild(s);document.body.appendChild(a);
+    a.addEventListener("click",function(e){
+      try{var r=document.referrer?new URL(document.referrer):null;
+        if(r&&r.origin===location.origin&&/\/(index\.html)?$/.test(r.pathname)&&history.length>1){e.preventDefault();history.back()}}catch(x){}
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",add);else add();
+})();
 })();
