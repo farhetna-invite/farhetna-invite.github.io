@@ -67,7 +67,7 @@ window.farhetnaData=function(key){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",map:o.map||"",wa:base.wa,intro:o.intro||"",program:prog,
       dress:(o.dress||[]).filter(function(c){return/^#[0-9a-f]{3,8}$/i.test(c)}),dressNote:o.dressNote||"",dressEn:o.dressEn||"",
-      couple:album[0]||"img/couple.webp",music:mu||null,slug:String(o._slug||"").toLowerCase()};}
+      couple:album[0]||"img/couple.webp",dressLadies:o.dressLadies||"",dressGents:o.dressGents||"",music:mu||null,slug:String(o._slug||"").toLowerCase()};}
   if(key==="tsn"){
     var h2=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"",pics=(h2?[h2]:[]).concat(album);
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,quote:o.poem||"",

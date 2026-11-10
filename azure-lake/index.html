@@ -239,7 +239,7 @@ footer a{color:var(--blue3)}
     <div class="hint rv d1">scroll<svg viewBox="0 0 46 10" fill="none" stroke="currentColor" stroke-width="1"><path d="M1 5h43M39 1l5 4-5 4"/></svg></div>
     <div class="rail" id="rail" dir="ltr"></div>
     <div class="pal rv"><small data-h="palT"></small><div class="dots" id="dots" dir="ltr"></div></div>
-    <div class="dnotes rv" id="dNotes"><p><b data-t="ladies"></b> <span data-t="ladiesT"></span></p><p><b data-t="gents"></b> <span data-t="gentsT"></span></p></div>
+    <div class="dnotes rv" id="dNotes"><p id="dL"><b data-t="ladies"></b> <span id="dLt"></span></p><p id="dG"><b data-t="gents"></b> <span id="dGt"></span></p></div>
   </section>
 
   <section id="rsvp">
@@ -339,7 +339,8 @@ function render(){
   var mh=D.map||("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([D.venue,D.addr].filter(Boolean).join(" ")));$("mapA").href=mh;$("mapP").href=mh;
   $("dTxt").textContent=pick(D.dressNote,D.dressEn)||t("dressTxt");
   var cols=(D.dress||[]).filter(function(c){return/^#[0-9a-f]{6}$/i.test(c)});var dots=$("dots");dots.innerHTML="";cols.forEach(function(c){var i=document.createElement("i");i.style.background=c;dots.appendChild(i)});
-  dots.parentNode.classList.toggle("hide",!cols.length);$("dNotes").classList.toggle("hide",!D.demo);
+  dots.parentNode.classList.toggle("hide",!cols.length);var la=D.demo?t("ladiesT"):(lang==="en"&&isAr(D.dressLadies)?"":D.dressLadies||""),ge=D.demo?t("gentsT"):(lang==="en"&&isAr(D.dressGents)?"":D.dressGents||"");
+  $("dLt").textContent=la;$("dGt").textContent=ge;$("dL").classList.toggle("hide",!la);$("dG").classList.toggle("hide",!ge);$("dNotes").classList.toggle("hide",!la&&!ge);
   var rail=$("rail");if(!rail.children.length)["img/dress1.webp","img/dress2.webp","img/dress3.webp","img/dress4.webp"].forEach(function(u){var im=document.createElement("img");im.src=u;im.alt="";im.loading="lazy";rail.appendChild(im)});
   if(D.couple)$("cImg").src=D.couple;
   document.title=G+(en?" & ":" و ")+B+" · "+(en?"Wedding Invitation":"دعوة فرح");$("gate").setAttribute("aria-label",t("tap"));

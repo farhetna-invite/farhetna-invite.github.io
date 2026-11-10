@@ -1417,6 +1417,12 @@ body.inviting .stbar{display:none}
       <div><label for="pBride">أهل العروسة</label><input id="pBride" placeholder="الأستاذ أحمد والسيدة منى"></div>
       <div><label for="pGroom">أهل العريس</label><input id="pGroom" placeholder="الأستاذ محمود والسيدة هالة"></div>
     </div>
+    <div id="azlExtra" hidden>
+      <label for="dressLadies">ملاحظة لبس السيدات <small style="color:#8a6b6f;font-weight:400">(اختياري)</small></label>
+      <input id="dressLadies" placeholder="يُفضّل فستان سهرة طويل بألوان هادية">
+      <label for="dressGents">ملاحظة لبس السادة <small style="color:#8a6b6f;font-weight:400">(اختياري)</small></label>
+      <input id="dressGents" placeholder="يُفضّل بدلة رسمية أو كلاسيك مع حذاء أنيق">
+    </div>
     <div id="tsnExtra" hidden>
       <label for="ipay">رقم أو اسم إنستاباي للهدايا <small style="color:#8a6b6f;font-weight:400">(اختياري — لو فاضي قسم الهدايا مش هيظهر)</small></label>
       <input id="ipay" placeholder="01xxxxxxxxx أو name@instapay" inputmode="email">
@@ -2373,14 +2379,14 @@ function drawBuilder(){
     s.setAttribute("aria-label","لون "+(i+1));s.onclick=()=>{state.pal=i;drawBuilder();save();};pals.appendChild(s);});
   document.querySelectorAll(".trk").forEach(d=>{d.setAttribute("aria-pressed",d.dataset.k===state.music);
     const pb=d.querySelector(".play");if(pb)pb.textContent=Music.playing===d.dataset.k?"■":"▶";});
-  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("iltExtra").hidden=state.tpl!=="ilt";$("tsnExtra").hidden=state.tpl!=="tsn";$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
+  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("iltExtra").hidden=state.tpl!=="ilt";$("tsnExtra").hidden=state.tpl!=="tsn";$("azlExtra").hidden=state.tpl!=="azl";$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
   const dp=$("dressPick");dp.innerHTML="";state.dress=state.dress||[];
   DRESS.forEach(c=>{const b=document.createElement("button");b.className="sw";b.style.background=c;b.setAttribute("aria-pressed",state.dress.includes(c));b.setAttribute("aria-label","لون");
     b.onclick=()=>{const i=state.dress.indexOf(c);if(i>=0)state.dress.splice(i,1);else state.dress.push(c);drawBuilder();save();};dp.appendChild(b);});
 }
 
 /* ---------------- data ---------------- */
-const FIELDS=["groom","bride","kind","intro","date","time","venue","addr","map","wa","program","dressNote","notes","gift","mono","poem","closing","story","pBride","pGroom","brideEn","groomEn","venueEn","dressEn","witnesses","band","ipay","ipayName","ipayLink"];
+const FIELDS=["groom","bride","kind","intro","date","time","venue","addr","map","wa","program","dressNote","notes","gift","mono","poem","closing","story","pBride","pGroom","brideEn","groomEn","venueEn","dressEn","witnesses","band","ipay","ipayName","ipayLink","dressLadies","dressGents"];
 /* ---- garden art helpers ---- */
 function gFlower(x,y,r,c){let s="";for(let k=0;k<6;k++){const a=k*60*Math.PI/180;s+=`<ellipse cx="${(x+Math.cos(a)*r*.55).toFixed(1)}" cy="${(y+Math.sin(a)*r*.55).toFixed(1)}" rx="${r*.55}" ry="${r*.42}" transform="rotate(${k*60} ${(x+Math.cos(a)*r*.55).toFixed(1)} ${(y+Math.sin(a)*r*.55).toFixed(1)})" fill="${c}" opacity=".92"/>`;}
   return s+`<circle cx="${x}" cy="${y}" r="${r*.42}" fill="${c}" stroke="rgba(150,80,70,.25)"/><circle cx="${x}" cy="${y}" r="${r*.18}" fill="rgba(170,110,80,.5)"/>`;}
