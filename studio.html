@@ -2224,7 +2224,7 @@ const CFG={
   whatsapp:"201280067110",
   price:"٢٥٠ جنيه",
   pricePremium:"٣٥٠ جنيه",
-  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd","sgp","sgm","ilt","tsn","azl","gdc","sga"],
+  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd","sgp","sgm","ilt","tsn","azl","gdc","sga","bsw"],
   instapay:"01280067110",
   site:"https://farhetnainvite.com/",
   pixel:"" // رقم Meta Pixel (فيسبوك/إنستجرام) لما يبقى عندك
@@ -2334,7 +2334,8 @@ const SIG={bbl:{dir:"burgundy-bloom",name:"Burgundy Bloom",th:"home-t-bloom.webp
   tsn:{dir:"terracotta-sunset",name:"Terracotta Sunset",th:"home-t-terracotta.webp"},
   azl:{dir:"azure-lake",name:"Azure Lake",th:"home-t-azure.webp"},
   gdc:{dir:"golden-calla",name:"Golden Calla",th:"home-t-calla.webp"},
-  sga:{dir:"sage-arch",name:"Sage Arch",th:"home-t-arch.webp"}};
+  sga:{dir:"sage-arch",name:"Sage Arch",th:"home-t-arch.webp"},
+  bsw:{dir:"blush-swan",name:"Blush Swan",th:"home-t-swan.webp"}};
 const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a20","#c9a463","#8a6b6f")],
   ilr:[P("#f3ead9","#efe4d0","#d9c9ad","#f7f0e2","#fffaf2","#5a4a35","#c9a463","#8a7a62"),P("#e9eee3","#a9b996","#7f9172","#cfd9c4","#fafcf7","#3d4a34","#c9a463","#7d8a72"),P("#e7eef5","#a9c2da","#7f9bb8","#cfdcea","#f8fbfe","#2f4258","#c9a463","#7a8798"),P("#f6e7e6","#e3b9b6","#c99592","#f0d4d2","#fffafa","#5a3a38","#c9a463","#9a7a78")],
   pls:[P("#f3e3d2","#efe0cc","#d8c2a2","#f7ecdf","#fffaf2","#6f5232","#c49a58","#8f714c")],
@@ -2347,9 +2348,10 @@ const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a2
   tsn:[P("#fbf7f2","#c97a52","#b8653d","#f2b48e","#fffdfa","#5c524c","#b8653d","#8d827a")],
   azl:[P("#faf8f4","#a9c6dc","#56799a","#d7e6f1","#fffdf9","#3f4852","#c9a463","#8b9097")],
   gdc:[P("#f3eadc","#b08a4a","#8c6a32","#d6bd8a","#fffaf2","#5c4a36","#b08a4a","#8f7d66")],
-  sga:[P("#f4eee3","#8a9a74","#55684a","#c9d3b8","#fbf7ef","#3f4a36","#c9a463","#7d8577")]};
+  sga:[P("#f4eee3","#8a9a74","#55684a","#c9d3b8","#fbf7ef","#3f4a36","#c9a463","#7d8577")],
+  bsw:[P("#f8ece9","#e2aab0","#9b5a65","#f0d2d5","#fffaf8","#5c3f44","#c9a463","#9a8285")]};
 Object.keys(SIG).forEach(k=>TPL[k]={name:SIG[k].name,opener:"ext",pals:SIG_PALS[k]});
-const SIG_ALBUM=["bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc","sga"];
+const SIG_ALBUM=["bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc","sga","bsw"];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
 let customUrl=null;
 
@@ -2405,7 +2407,7 @@ function thumb(k){
   }[k];
   return `<svg class="thumb" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice">${art}</svg>`;
 }
-["sga","gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
+["bsw","sga","gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
   const b=document.createElement("button");b.className="tpl";b.dataset.k=k;
   b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`+(CFG.premium.includes(k)?`<span class="prem">فاخر ✦</span>`:"");
   b.onclick=()=>{const was=!!SIG[state.tpl];state.tpl=k;state.pal=0;if(SIG[k]&&!was)state.music="design";if(!SIG[k]&&state.music==="design")state.music="box";drawBuilder();save();};
