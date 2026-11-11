@@ -30,7 +30,7 @@ table{width:100%;border-collapse:collapse;font-size:.85rem}
 td,th{padding:8px 4px;border-bottom:1px solid #f0e6e1;text-align:right}
 td.c{direction:ltr;font-weight:700;letter-spacing:.08em}
 .tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.75rem}
-.tag.src-ad{background:#c9a463;color:#3a2a10;font-weight:700}.tag.src-no{background:#e7e2da;color:#6b6457}
+.tag.src-ad{background:#c9a463;color:#3a2a10;font-weight:700}.tag.src-inv{background:#e9d6dc;color:#6d1f2f;font-weight:700}.tag.src-no{background:#e7e2da;color:#6b6457}
 .used{background:#e6f4ea;color:#1e6b34}.free{background:#fff4e0;color:#8a5a00}
 a.l{color:#6d1f2f;direction:ltr;display:inline-block}
 [hidden]{display:none!important}
@@ -104,6 +104,7 @@ async function srcTag(code,el){
   try{if(!(code in SRC)){const r=await SB.rpc("load_by_code",{p_code:code});SRC[code]=(r.data&&r.data.data&&r.data.data._src)||null;}
     const s=SRC[code];if(!s){el.remove();return;}
     if(s.ad){el.className+=" src-ad";el.textContent="📣 من إعلان"+(s.camp?" · "+s.camp:"");}
+    else if(s.src==="invite"){el.className+=" src-inv";el.textContent="💌 من دعوة ضيف";}
     else{el.className+=" src-no";el.textContent="مش من إعلان";}
   }catch(e){el.remove();}
 }

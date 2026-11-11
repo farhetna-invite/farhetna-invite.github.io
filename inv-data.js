@@ -111,6 +111,27 @@ window.farhetnaRsvp=function(r){
 /* the "demo" ribbon is only for the public demo */
 if(mode){document.addEventListener("DOMContentLoaded",function(){
   document.querySelectorAll("#demoFlag,.demo,.demo-flag").forEach(function(e){if(mode==="preview")e.textContent="معاينة";else e.remove()})});}
+/* credit for guests: every real invitation ends with a small link back to Farhetna (tracked as "from an invitation") */
+(function(){
+  if(mode!=="live"&&mode!=="preview")return;   /* the bride sees it in her preview too, exactly as guests will */
+  var U="https://farhetna-invite.github.io/?utm_source=invite&utm_medium=guest";
+  function put(){
+    var ex=document.querySelectorAll('a[href^="https://farhetna-invite.github.io/"]'),n=0;
+    for(var i=0;i<ex.length;i++){var h=ex[i].getAttribute("href");if(h==="https://farhetna-invite.github.io/"||h==="https://farhetna-invite.github.io"){ex[i].href=U;ex[i].target="_blank";ex[i].rel="noopener";n++;}}
+    if(n||document.getElementById("fhCredit"))return;
+    var d=document.createElement("div");d.id="fhCredit";
+    d.innerHTML='<a href="'+U+'" target="_blank" rel="noopener">💌 صمّمي دعوتك مع فرحتنا</a>';
+    /* designs that move screen by screen: the credit sits at the bottom of their last screen */
+    var LAST={"blushing-garden":'section.page[data-k="thanks"]',"burgundy-bloom":"#s-thanks","pearl-silk":"#s-thanks","unwritten-story":"#s8"};
+    var dir=(location.pathname.match(/\/([a-z-]+)\/(?:index\.html)?$/)||[])[1],sel=LAST[dir],host=sel&&document.querySelector(sel);
+    var st=document.createElement("style");st.textContent="#fhCredit{position:relative;z-index:5;text-align:center;padding:18px 12px calc(26px + env(safe-area-inset-bottom));font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;opacity:.8}#fhCredit a{color:inherit;text-decoration:underline;text-underline-offset:3px}#fhCredit.fh-abs{position:absolute;left:0;right:0;bottom:calc(6px + env(safe-area-inset-bottom));padding:8px 12px}";
+    document.head.appendChild(st);
+    if(host){d.className="fh-abs";if(getComputedStyle(host).position==="static")host.style.position="relative";host.appendChild(d);}
+    else if(LAST[dir])return;
+    else (document.querySelector("main")||document.body).appendChild(d);
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",put);else put();
+})();
 /* back-to-designs button: only on the public demo (not on a guest's real invitation, not inside the studio preview) */
 (function(){
   if(mode!==null)return;
