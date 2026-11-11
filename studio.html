@@ -1217,6 +1217,47 @@ body.inviting #builder{display:none}
 .bd-end .bd-btn.ln{color:#fff3e2;border-color:rgba(243,230,211,.8);background:rgba(255,255,255,.08)}
 [data-tpl="brd"] .mute{background:#5b1626}
 [data-tpl="brd"]{background:#3d0d18}
+
+/* guest replies dashboard */
+.rsd{--o:#3c4733;--o2:#55684a;--sg:#7f8f70;--gd:#c2a468;--iv:#fbf6ef;--no:#9a4b48;font-family:inherit;color:var(--o);text-align:right;direction:rtl;margin:8px 0 4px}
+.rsd *{box-sizing:border-box}
+.rsd-sum{display:flex;align-items:center;gap:16px;background:linear-gradient(170deg,#fffdf9,#f6eee3);border-radius:22px;padding:16px;box-shadow:0 14px 28px -22px rgba(70,60,40,.55),inset 0 0 0 1px rgba(194,164,104,.35)}
+.rsd-ring{position:relative;flex:0 0 112px;height:112px}
+.rsd-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.rsd-ring circle{fill:none;stroke-width:10}
+.rsd-ring .bg{stroke:rgba(85,104,74,.12)}
+.rsd-ring .fg{stroke:url(#rsdG);stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1)}
+.rsd-ring div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.rsd-ring b{font-size:26px;font-weight:700;direction:ltr}
+.rsd-ring span{font-size:12px;color:var(--sg);margin-top:2px}
+.rsd-st{flex:1;display:grid;gap:8px;min-width:0}
+.rsd-st div{display:flex;align-items:center;justify-content:space-between;gap:8px;border-radius:14px;padding:9px 12px;font-size:14px}
+.rsd-st b{font-size:18px;font-weight:700;direction:ltr}
+.rsd-st .y{background:rgba(85,104,74,.1)}.rsd-st .n{background:rgba(154,75,72,.08);color:var(--no)}
+.rsd-st .p{background:rgba(194,164,104,.14);color:#6d5a2e}
+.rsd-tools{display:flex;flex-direction:column;gap:10px;margin:14px 0 10px}
+.rsd-tabs{display:flex;gap:6px;background:rgba(85,104,74,.08);border-radius:999px;padding:4px}
+.rsd-tabs button{flex:1;height:38px;border:0;border-radius:999px;background:transparent;color:var(--o);font:inherit;font-size:14px;cursor:pointer;transition:background .3s,color .3s}
+.rsd-tabs button i{font-style:normal;opacity:.7;font-size:12px;margin-inline-start:4px}
+.rsd-tabs button[aria-pressed="true"]{background:linear-gradient(180deg,#617556,#4a5d3e);color:#f6f1e6;box-shadow:0 6px 12px -8px rgba(55,68,45,.7)}
+.rsd-q{position:relative}
+.rsd-q input{width:100%;height:44px;border-radius:999px;border:1px solid rgba(85,104,74,.25);background:#fffdf9;padding:0 42px 0 16px;font:inherit;font-size:15px;color:var(--o);outline:none}
+.rsd-q input:focus{border-color:var(--o2);box-shadow:0 0 0 3px rgba(85,104,74,.12)}
+.rsd-q svg{position:absolute;right:15px;top:50%;width:18px;height:18px;margin-top:-9px;fill:none;stroke:var(--sg);stroke-width:2;stroke-linecap:round}
+.rsd-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.rsd-it{background:#fffdf9;border-radius:18px;padding:12px 14px;box-shadow:0 10px 20px -18px rgba(70,60,40,.6),inset 0 0 0 1px rgba(85,104,74,.1);animation:rsdIn .45s ease both}
+@keyframes rsdIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.rsd-h{display:flex;align-items:center;gap:10px}
+.rsd-av{flex:0 0 40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:17px;color:#fbf5ea;background:linear-gradient(160deg,#a68b55,#7d6a3f)}
+.rsd-it.no .rsd-av{background:linear-gradient(160deg,#b98a86,#8f5c58)}
+.rsd-nm{flex:1;min-width:0;font-weight:700;font-size:15.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rsd-bd{flex:none;font-size:12px;border-radius:999px;padding:3px 10px;background:rgba(85,104,74,.12);color:var(--o2)}
+.rsd-it.no .rsd-bd{background:rgba(154,75,72,.1);color:var(--no)}
+.rsd-g{font-size:12.5px;color:var(--sg);margin-top:6px}
+.rsd-msg{margin-top:8px;background:rgba(194,164,104,.1);border-radius:12px;padding:8px 12px;font-size:14px;line-height:1.7;color:#4b4a3d;white-space:pre-wrap;word-break:break-word}
+.rsd-dt{font-size:11.5px;color:#9a9784;margin-top:6px}
+.rsd-empty{text-align:center;color:var(--sg);font-size:14px;padding:16px}
+@media (prefers-reduced-motion:reduce){.rsd-it{animation:none}.rsd-ring .fg{transition:none}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -3390,10 +3431,29 @@ $("acctBtn").onclick=()=>USER?openAccount():openAuth(null,openAccount);
 /* guest replies and voice wishes with the edit code */
 const esc2=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 $("rsBtn").onclick=async()=>{const w=$("rsWrap"),btn=$("rsBtn");if(w.dataset.open){w.innerHTML="";delete w.dataset.open;return;}w.dataset.open=1;w.innerHTML='<p class="note" style="text-align:center">بنجيب الردود…</p>';
-  try{const r=await SB.rpc("rsvps_by_code",{p_code:edit.code});if(r.error)throw r.error;const rows=r.data||[];const yes=rows.filter(x=>x.attending),ppl=yes.reduce((a,x)=>a+(x.guests||1),0);
+  try{const r=await SB.rpc("rsvps_by_code",{p_code:edit.code});if(r.error)throw r.error;const rows=r.data||[];
     btn.textContent=`ردود الحضور (${rows.length}) ✅`;if(!rows.length){w.innerHTML='<p class="note" style="text-align:center;padding:8px">لسه محدش رد</p>';return;}
-    w.innerHTML=`<p class="note" style="text-align:center">✅ ${yes.length} هيحضروا (${ppl} فرد) · ❌ ${rows.length-yes.length} مش هيقدروا</p><ul class="rsl">${rows.map(x=>`<li>${x.attending?"✅":"❌"} <b>${esc2(x.name)}</b>${x.attending?` · ${x.guests||1} فرد`:""}${x.note?`<small>${esc2(x.note)}</small>`:""}</li>`).join("")}</ul>`;}
+    rsdRender(w,rows,esc2);}
   catch(e){w.innerHTML='<p class="err" style="text-align:center">في مشكلة في الاتصال، جربي تاني</p>';}};
+function rsdRender(w,rows,esc){
+  var yes=rows.filter(function(x){return x.attending}),no=rows.length-yes.length,ppl=yes.reduce(function(a,x){return a+(x.guests||1)},0);
+  var pct=rows.length?Math.round(yes.length*100/rows.length):0,C=2*Math.PI*46;
+  var AD="٠١٢٣٤٥٦٧٨٩";function ar(n){return String(n).replace(/\d/g,function(d){return AD[d]})}
+  function dt(s){try{var d=new Date(s);return d.toLocaleDateString("ar-EG",{day:"numeric",month:"long"})+"، "+d.toLocaleTimeString("ar-EG",{hour:"numeric",minute:"2-digit"})}catch(e){return""}}
+  w.innerHTML='<div class="rsd"><div class="rsd-sum"><div class="rsd-ring"><svg viewBox="0 0 112 112"><defs><linearGradient id="rsdG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#617556"/><stop offset="1" stop-color="#c2a468"/></linearGradient></defs><circle class="bg" cx="56" cy="56" r="46"/><circle class="fg" cx="56" cy="56" r="46" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'"/></svg><div><b>'+ar(pct)+'٪</b><span>هيحضروا</span></div></div>'+
+    '<div class="rsd-st"><div class="y"><span>هيحضروا</span><b>'+ar(yes.length)+'</b></div><div class="p"><span>عدد الأفراد</span><b>'+ar(ppl)+'</b></div><div class="n"><span>معتذرين</span><b>'+ar(no)+'</b></div></div></div>'+
+    '<div class="rsd-tools"><div class="rsd-tabs" role="group" aria-label="فلترة الردود"><button type="button" data-f="all" aria-pressed="true">الكل<i>'+ar(rows.length)+'</i></button><button type="button" data-f="y" aria-pressed="false">هيحضروا<i>'+ar(yes.length)+'</i></button><button type="button" data-f="n" aria-pressed="false">معتذرين<i>'+ar(no)+'</i></button></div>'+
+    '<label class="rsd-q"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4 4"/></svg><input type="search" placeholder="دوّري باسم الضيف" aria-label="دوّري باسم الضيف"></label></div><ul class="rsd-list"></ul></div>';
+  var list=w.querySelector(".rsd-list"),f="all",q="";
+  function paint(){var r=rows.filter(function(x){return(f==="all"||(f==="y")===!!x.attending)&&(!q||String(x.name||"").toLowerCase().indexOf(q)>-1)});
+    if(!r.length){list.innerHTML='<li class="rsd-empty">مفيش ردود هنا</li>';return}
+    list.innerHTML=r.map(function(x,i){var n=String(x.name||"ضيف").trim();return '<li class="rsd-it'+(x.attending?"":" no")+'" style="animation-delay:'+Math.min(i*40,400)+'ms"><div class="rsd-h"><span class="rsd-av">'+esc(n.charAt(0))+'</span><span class="rsd-nm">'+esc(n)+'</span><span class="rsd-bd">'+(x.attending?"هيحضر":"معتذر")+'</span></div>'+
+      (x.attending?'<div class="rsd-g">'+(x.guests==2?"فردين":x.guests>2?ar(x.guests)+" أفراد":"فرد واحد")+'</div>':'')+(x.note?'<div class="rsd-msg">'+esc(x.note)+'</div>':'')+(x.created_at?'<div class="rsd-dt">'+dt(x.created_at)+'</div>':'')+'</li>'}).join("")}
+  w.querySelectorAll(".rsd-tabs button").forEach(function(b){b.onclick=function(){f=b.dataset.f;w.querySelectorAll(".rsd-tabs button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});paint()}});
+  w.querySelector(".rsd-q input").oninput=function(e){q=e.target.value.trim().toLowerCase();paint()};
+  paint();requestAnimationFrame(function(){requestAnimationFrame(function(){var fg=w.querySelector(".rsd-ring .fg");if(fg)fg.style.strokeDashoffset=C*(1-pct/100)})});
+}
+
 $("vcBtn").onclick=async()=>{const w=$("vcWrap"),btn=$("vcBtn");if(w.dataset.open){w.innerHTML="";delete w.dataset.open;return;}w.dataset.open=1;w.innerHTML='<p class="note" style="text-align:center">بنجيب الرسايل…</p>';
   try{const r=await SB.rpc("voices_by_code",{p_code:edit.code});if(r.error)throw r.error;const rows=r.data||[];btn.textContent=`رسايل الضيوف الصوتية (${rows.length}) 🎙️`;
     if(!rows.length){w.innerHTML='<p class="note" style="text-align:center;padding:8px">لسه محدش بعت رسالة</p>';return;}
