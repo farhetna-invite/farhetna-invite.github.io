@@ -5,11 +5,11 @@
      so a Purchase must only be recorded after an admin verifies the payment. */
 (function(){
 "use strict";
-var FARHETNA_PIXEL_ID="";            // ← e.g. "123456789012345" (from Meta Events Manager). Empty = disabled.
+var FARHETNA_PIXEL_ID="1645602507052286";          // ← e.g. "123456789012345" (from Meta Events Manager). Empty = disabled.
 var KEY="farhetna_consent",consent=null;try{consent=localStorage.getItem(KEY)}catch(e){}
 var queue=[],loaded=false;
 function load(){
-  if(loaded||!FARHETNA_PIXEL_ID||consent!=="yes")return;loaded=true;
+  if(loaded||!FARHETNA_PIXEL_ID)return;loaded=true;
   !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version="2.0";n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,"script","https://connect.facebook.net/en_US/fbevents.js");
   fbq("init",FARHETNA_PIXEL_ID);fbq("track","PageView");
   queue.forEach(function(a){fbq("track",a[0],a[1])});queue=[];
@@ -35,6 +35,6 @@ document.addEventListener("click",function(e){
   var a=e.target.closest&&e.target.closest("[data-track]");if(!a)return;
   window.farhetnaTrack(a.getAttribute("data-track"),{content_name:a.getAttribute("data-design")||undefined,currency:"EGP",value:+(a.getAttribute("data-price")||0)||undefined});
 },true);
-function start(){load();banner()}
+function start(){load()}   /* no consent banner: pixel loads for every visitor */
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start);else start();
 })();
