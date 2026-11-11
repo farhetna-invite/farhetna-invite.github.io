@@ -114,10 +114,10 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
 /* credit for guests: every real invitation ends with a small link back to Farhetna (tracked as "from an invitation") */
 (function(){
   if(mode!=="live"&&mode!=="preview")return;   /* the bride sees it in her preview too, exactly as guests will */
-  var U="https://farhetna-invite.github.io/?utm_source=invite&utm_medium=guest";
+  var U="https://farhetnainvite.com/?utm_source=invite&utm_medium=guest";
   function put(){
-    var ex=document.querySelectorAll('a[href^="https://farhetna-invite.github.io/"]'),n=0;
-    for(var i=0;i<ex.length;i++){var h=ex[i].getAttribute("href");if(h==="https://farhetna-invite.github.io/"||h==="https://farhetna-invite.github.io"){ex[i].href=U;ex[i].target="_blank";ex[i].rel="noopener";n++;}}
+    var ex=document.querySelectorAll('a[href^="https://farhetna-invite.github.io"],a[href^="https://farhetnainvite.com"]'),n=0;
+    for(var i=0;i<ex.length;i++){var h=ex[i].getAttribute("href");if(/^https:\/\/(farhetna-invite\.github\.io|farhetnainvite\.com)\/?$/.test(h)){ex[i].href=U;ex[i].target="_blank";ex[i].rel="noopener";n++;}}
     if(n||document.getElementById("fhCredit"))return;
     var d=document.createElement("div");d.id="fhCredit";
     d.innerHTML='<a href="'+U+'" target="_blank" rel="noopener">💌 صمّمي دعوتك مع فرحتنا</a>';
