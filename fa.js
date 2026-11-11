@@ -7,6 +7,21 @@
 "use strict";
 var FARHETNA_PIXEL_ID="1645602507052286";          // ← e.g. "123456789012345" (from Meta Events Manager). Empty = disabled.
 var KEY="farhetna_consent",consent=null;try{consent=localStorage.getItem(KEY)}catch(e){}
+/* where did this visitor come from? remembered 30 days, an ad visit wins over a plain one */
+var SKEY="farhetna_src",DAY=864e5;
+function readSrc(){try{var o=JSON.parse(localStorage.getItem(SKEY)||"null");if(o&&Date.now()-o.at<30*DAY)return o}catch(e){}return null}
+(function capture(){try{
+  var q=new URLSearchParams(location.search),g=function(k){return (q.get(k)||"").slice(0,80)};
+  var us=g("utm_source"),um=g("utm_medium"),fb=g("fbclid"),gc=g("gclid");
+  if(us||fb||gc){
+    var ad=!!(fb||gc||/paid|cpc|cpm|ad/i.test(um)||/^(fb|facebook|ig|instagram|meta|tiktok|google|snap)/i.test(us));
+    localStorage.setItem(SKEY,JSON.stringify({ad:ad,src:us||(fb?"facebook":"google"),camp:g("utm_campaign"),adn:g("utm_content")||g("utm_term"),at:Date.now()}));return;}
+  if(readSrc())return;
+  var r="";try{r=document.referrer?new URL(document.referrer).hostname:""}catch(e){}
+  if(r===location.hostname)return;
+  localStorage.setItem(SKEY,JSON.stringify({ad:false,src:r||"direct",at:Date.now()}));
+}catch(e){}})();
+window.farhetnaSource=readSrc;
 var queue=[],loaded=false;
 function load(){
   if(loaded||!FARHETNA_PIXEL_ID)return;loaded=true;

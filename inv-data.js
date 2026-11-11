@@ -115,6 +115,8 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
 (function(){
   if(mode!==null)return;
   try{if(window.top!==window)return}catch(e){return}
+  /* public demo only: load the site's pixel + ad-source script (never on a guest's real invitation) */
+  if(!document.querySelector('script[src$="fa.js"]')){var fs=document.createElement("script");fs.src="../fa.js";fs.defer=true;document.head.appendChild(fs);}
   function add(){
     if(document.getElementById("fhBack"))return;
     var a=document.createElement("a");a.id="fhBack";a.href="../index.html#designs";a.setAttribute("aria-label","رجوع للتصاميم");
