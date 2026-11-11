@@ -1461,6 +1461,10 @@ body.inviting .stbar{display:none}
       <div><label for="pBride">أهل العروسة</label><input id="pBride" placeholder="الأستاذ أحمد والسيدة منى"></div>
       <div><label for="pGroom">أهل العريس</label><input id="pGroom" placeholder="الأستاذ محمود والسيدة هالة"></div>
     </div>
+    <div id="sgaExtra" hidden>
+      <label for="bism">البسملة والدعاء في الدعوة</label>
+      <select id="bism"><option value="on">إظهار البسملة والدعاء</option><option value="off">من غير بسملة ودعاء</option></select>
+    </div>
     <div id="azlExtra" hidden>
       <label for="dressLadies">ملاحظة لبس السيدات <small style="color:#8a6b6f;font-weight:400">(اختياري)</small></label>
       <input id="dressLadies" placeholder="يُفضّل فستان سهرة طويل بألوان هادية">
@@ -2220,7 +2224,7 @@ const CFG={
   whatsapp:"201280067110",
   price:"٢٥٠ جنيه",
   pricePremium:"٣٥٠ جنيه",
-  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd","sgp","sgm","ilt","tsn","azl","gdc"],
+  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd","sgp","sgm","ilt","tsn","azl","gdc","sga"],
   instapay:"01280067110",
   site:"https://farhetnainvite.com/",
   pixel:"" // رقم Meta Pixel (فيسبوك/إنستجرام) لما يبقى عندك
@@ -2329,7 +2333,8 @@ const SIG={bbl:{dir:"burgundy-bloom",name:"Burgundy Bloom",th:"home-t-bloom.webp
   ilt:{dir:"ivory-lantern",name:"Ivory Lantern",th:"home-t-lantern.webp"},
   tsn:{dir:"terracotta-sunset",name:"Terracotta Sunset",th:"home-t-terracotta.webp"},
   azl:{dir:"azure-lake",name:"Azure Lake",th:"home-t-azure.webp"},
-  gdc:{dir:"golden-calla",name:"Golden Calla",th:"home-t-calla.webp"}};
+  gdc:{dir:"golden-calla",name:"Golden Calla",th:"home-t-calla.webp"},
+  sga:{dir:"sage-arch",name:"Sage Arch",th:"home-t-arch.webp"}};
 const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a20","#c9a463","#8a6b6f")],
   ilr:[P("#f3ead9","#efe4d0","#d9c9ad","#f7f0e2","#fffaf2","#5a4a35","#c9a463","#8a7a62"),P("#e9eee3","#a9b996","#7f9172","#cfd9c4","#fafcf7","#3d4a34","#c9a463","#7d8a72"),P("#e7eef5","#a9c2da","#7f9bb8","#cfdcea","#f8fbfe","#2f4258","#c9a463","#7a8798"),P("#f6e7e6","#e3b9b6","#c99592","#f0d4d2","#fffafa","#5a3a38","#c9a463","#9a7a78")],
   pls:[P("#f3e3d2","#efe0cc","#d8c2a2","#f7ecdf","#fffaf2","#6f5232","#c49a58","#8f714c")],
@@ -2341,9 +2346,10 @@ const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a2
   ilt:[P("#f4eadb","#9b7350","#7a5634","#e2d1b6","#fffdf9","#6e5844","#5d6843","#a8927a")],
   tsn:[P("#fbf7f2","#c97a52","#b8653d","#f2b48e","#fffdfa","#5c524c","#b8653d","#8d827a")],
   azl:[P("#faf8f4","#a9c6dc","#56799a","#d7e6f1","#fffdf9","#3f4852","#c9a463","#8b9097")],
-  gdc:[P("#f3eadc","#b08a4a","#8c6a32","#d6bd8a","#fffaf2","#5c4a36","#b08a4a","#8f7d66")]};
+  gdc:[P("#f3eadc","#b08a4a","#8c6a32","#d6bd8a","#fffaf2","#5c4a36","#b08a4a","#8f7d66")],
+  sga:[P("#f4eee3","#8a9a74","#55684a","#c9d3b8","#fbf7ef","#3f4a36","#c9a463","#7d8577")]};
 Object.keys(SIG).forEach(k=>TPL[k]={name:SIG[k].name,opener:"ext",pals:SIG_PALS[k]});
-const SIG_ALBUM=["bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc"];
+const SIG_ALBUM=["bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc","sga"];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
 let customUrl=null;
 
@@ -2399,7 +2405,7 @@ function thumb(k){
   }[k];
   return `<svg class="thumb" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice">${art}</svg>`;
 }
-["gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
+["sga","gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
   const b=document.createElement("button");b.className="tpl";b.dataset.k=k;
   b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`+(CFG.premium.includes(k)?`<span class="prem">فاخر ✦</span>`:"");
   b.onclick=()=>{const was=!!SIG[state.tpl];state.tpl=k;state.pal=0;if(SIG[k]&&!was)state.music="design";if(!SIG[k]&&state.music==="design")state.music="box";drawBuilder();save();};
@@ -2426,14 +2432,14 @@ function drawBuilder(){
     s.setAttribute("aria-label","لون "+(i+1));s.onclick=()=>{state.pal=i;drawBuilder();save();};pals.appendChild(s);});
   document.querySelectorAll(".trk").forEach(d=>{d.setAttribute("aria-pressed",d.dataset.k===state.music);
     const pb=d.querySelector(".play");if(pb)pb.textContent=Music.playing===d.dataset.k?"■":"▶";});
-  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("iltExtra").hidden=state.tpl!=="ilt";$("tsnExtra").hidden=state.tpl!=="tsn";$("azlExtra").hidden=state.tpl!=="azl";$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
+  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("iltExtra").hidden=state.tpl!=="ilt";$("tsnExtra").hidden=state.tpl!=="tsn";$("azlExtra").hidden=state.tpl!=="azl";$("sgaExtra").hidden=state.tpl!=="sga";$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
   const dp=$("dressPick");dp.innerHTML="";state.dress=state.dress||[];
   DRESS.forEach(c=>{const b=document.createElement("button");b.className="sw";b.style.background=c;b.setAttribute("aria-pressed",state.dress.includes(c));b.setAttribute("aria-label","لون");
     b.onclick=()=>{const i=state.dress.indexOf(c);if(i>=0)state.dress.splice(i,1);else state.dress.push(c);drawBuilder();save();};dp.appendChild(b);});
 }
 
 /* ---------------- data ---------------- */
-const FIELDS=["groom","bride","kind","intro","date","time","venue","addr","map","wa","program","dressNote","notes","gift","mono","poem","closing","story","pBride","pGroom","brideEn","groomEn","venueEn","dressEn","witnesses","band","ipay","ipayName","ipayLink","dressLadies","dressGents"];
+const FIELDS=["bism","groom","bride","kind","intro","date","time","venue","addr","map","wa","program","dressNote","notes","gift","mono","poem","closing","story","pBride","pGroom","brideEn","groomEn","venueEn","dressEn","witnesses","band","ipay","ipayName","ipayLink","dressLadies","dressGents"];
 /* ---- garden art helpers ---- */
 function gFlower(x,y,r,c){let s="";for(let k=0;k<6;k++){const a=k*60*Math.PI/180;s+=`<ellipse cx="${(x+Math.cos(a)*r*.55).toFixed(1)}" cy="${(y+Math.sin(a)*r*.55).toFixed(1)}" rx="${r*.55}" ry="${r*.42}" transform="rotate(${k*60} ${(x+Math.cos(a)*r*.55).toFixed(1)} ${(y+Math.sin(a)*r*.55).toFixed(1)})" fill="${c}" opacity=".92"/>`;}
   return s+`<circle cx="${x}" cy="${y}" r="${r*.42}" fill="${c}" stroke="rgba(150,80,70,.25)"/><circle cx="${x}" cy="${y}" r="${r*.18}" fill="rgba(170,110,80,.5)"/>`;}
@@ -2470,7 +2476,7 @@ const DRESS=["#9db39b","#e8b4b8","#c3b1e1","#a7c7e7","#f5c9a8","#f3e5c0","#7a1c2
 function collect(){const o={tpl:state.tpl,pal:state.pal,music:state.music,dress:state.dress||[],photos:{hero:PH.hero||null,album:PH.album.slice()}};FIELDS.forEach(f=>o[f]=$(f).value.trim());return o;}
 function fill(o){FIELDS.forEach(f=>{if(o[f]!=null)$(f).value=o[f];});if(TPL[o.tpl]){state.tpl=o.tpl;state.pal=o.pal||0;}if(o.music)state.music=o.music;state.dress=o.dress||[];if(o.photos){PH.hero=o.photos.hero||null;PH.album=(o.photos.album||[]).slice(0,4);drawPhotos();}}
 function save(){try{const o=collect();o.photos={hero:/^http/.test(PH.hero||"")?PH.hero:null,album:PH.album.filter(u=>/^http/.test(u))};localStorage.setItem("da3wati2",JSON.stringify(o))}catch(e){}}
-FIELDS.forEach(f=>$(f).addEventListener("input",save));
+FIELDS.forEach(f=>$(f).addEventListener("input",save));$("bism").addEventListener("change",save);
 const enc=o=>btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
 const dec=s=>JSON.parse(decodeURIComponent(escape(atob(s.replace(/-/g,"+").replace(/_/g,"/")))));
 function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),2800);}
