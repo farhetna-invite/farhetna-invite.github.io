@@ -62,8 +62,9 @@ function compose(d){
   const fp=photos.find(p=>p.end)||take(1)[0]||cover;
   pages.push({type:"fin",img:fp?fp.url:"",msg:nl(d.finalMsg||(lang==="ar"?"كل سنة وإنت أحلى حكاية.":"Here's to many more chapters.")),end:O.end,toc:U.fin});
   const ML=window.MAG_MUSIC||[],EM=(window.MAG_EDITION_MUSIC||{})[d.edition||"emerald"];
-  const mu=d.music==="none"?null:(ML.find(t=>t.id===d.music)||(EM&&ML.find(t=>t.id===EM.id))||null);
-  return {lang,ui:U,intro:{for:U.forW,t:name},mag,pages:pages.slice(0,11),music:mu?{src:mu.src,name:lang==="en"?(EM&&EM.id===mu.id?EM.en:mu.en):(EM&&EM.id===mu.id?EM.name:mu.name)}:null};
+  const own=d.music==="custom"&&d.song&&d.song.url?{src:d.song.url,name:d.song.name||(lang==="en"?"Our song":"أغنيتنا"),own:1}:null;
+  const mu=own||(d.music==="none"?null:(ML.find(t=>t.id===d.music)||(EM&&ML.find(t=>t.id===EM.id))||null));
+  return {lang,ui:U,intro:{for:U.forW,t:name},mag,pages:pages.slice(0,11),music:mu&&mu.own?{src:mu.src,name:mu.name}:mu?{src:mu.src,name:lang==="en"?(EM&&EM.id===mu.id?EM.en:mu.en):(EM&&EM.id===mu.id?EM.name:mu.name)}:null};
 }
 function letters(d){return (d.letters||[]).filter(t=>t&&t.msg&&t.name)}
 window.MAG_COMPOSE=compose;window.MAG_ESC=esc;

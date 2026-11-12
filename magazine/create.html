@@ -259,8 +259,11 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
     <audio id="vAud" preload="none"></audio>
     <div class="card" id="musCard">
       <b>🎵 مزيكا المجلة</b>
-      <p class="note">كل تصميم ليه مزيكا مختارة مخصوص. مش بتشتغل لوحدها: اللي بيفتح المجلة يشغّلها بزرار، وبتقف لما يسمع رسالة صوتية. ولو حابة، اختاري «من غير مزيكا».</p>
+      <p class="note">كل تصميم ليه مزيكا مختارة مخصوص. مش بتشتغل لوحدها: اللي بيفتح المجلة يشغّلها بزرار، وبتقف لما يسمع رسالة صوتية. وتقدري ترفعي أغنية من اختيارك، أو تختاري «من غير مزيكا».</p>
       <div class="mlist" id="mList"></div>
+      <input type="file" id="songFile" accept="audio/*,.m4a,.mp3,.aac,.wav,.ogg" hidden>
+      <div class="err" id="mErr"></div>
+      <p class="note" style="font-size:12.5px">لو رفعتي أغنية، اتأكدي إن مسموحلك تستخدميها. الأغنية بتظهر في مجلتك بس.</p>
       <audio id="mAud" preload="none"></audio>
     </div>
     </fieldset>
@@ -364,18 +367,34 @@ $("next").onclick=async()=>{if(step===R){openPreview();return}if(step<PRE){show(
 /* ---- background music picker (optional) ---- */
 const mAud=$("mAud");let mPrev=null;
 function drawMusic(){const box=$("mList");box.innerHTML="";const ML=window.MAG_MUSIC||[],EM=(window.MAG_EDITION_MUSIC||{})[D.edition||"emerald"]||{id:"piano",name:"بيانو"},tr=ML.find(t=>t.id===EM.id);
-  const cur=D.music==="none"?"none":"";
-  const list=[{id:"",name:"مزيكا التصميم",sub:EM.name+" · Emerald",src:tr&&tr.src},{id:"none",name:"من غير مزيكا",sub:"المجلة هادية"}];
+  const cur=D.music==="none"?"none":D.music==="custom"&&D.song&&D.song.url?"custom":"";
+  const list=[{id:"",name:"مزيكا التصميم",sub:EM.name+" · Emerald",src:tr&&tr.src},
+    {id:"custom",name:D.song&&D.song.url?"🎶 أغنيتك":"🎶 ارفعي أغنية من اختيارك",sub:D.song&&D.song.url?D.song.name:(D.song&&D.song.up?"بتترفع…":"ملف mp3 أو m4a لحد ١٢ ميجا"),src:D.song&&D.song.url,upload:1},
+    {id:"none",name:"من غير مزيكا",sub:"المجلة هادية"}];
   list.forEach(t=>{const r=document.createElement("div");r.className="mtr"+(cur===t.id?" on":"");r.dataset.id=t.id;r.setAttribute("role","radio");r.setAttribute("aria-checked",cur===t.id);
-    r.innerHTML=(t.src?'<button class="pl" type="button" aria-label="اسمعي">▶</button>':'<span class="pl" style="background:#efe8da;color:var(--mute)">✕</span>')+'<span class="tx"><b></b><small></small></span><span class="ck">✓</span>';
+    r.innerHTML=(t.src?'<button class="pl" type="button" aria-label="اسمعي">▶</button>':t.upload?'<span class="pl" style="background:#f3e9d6;color:var(--em)">＋</span>':'<span class="pl" style="background:#efe8da;color:var(--mute)">✕</span>')+'<span class="tx"><b></b><small></small></span>'+(t.upload&&t.src?'<button class="lnk ch" type="button" style="margin:0;font-size:12.5px">تغيير</button>':'')+'<span class="ck">✓</span>';
     r.querySelector("b").textContent=t.name;r.querySelector("small").textContent=t.sub||"";
     r.onclick=e=>{if(e.target.closest(".pl")&&t.src){if(mPrev===t.id&&!mAud.paused){mAud.pause();return}stopVoicePreview();mAud.src=t.src;mAud.currentTime=0;mAud.play().catch(()=>{});mPrev=t.id;drawPlay();return}
-      if(!EDITABLE)return;if(t.id)D.music=t.id;else delete D.music;dirty();[...box.children].forEach(x=>{x.classList.toggle("on",x===r);x.setAttribute("aria-checked",x===r)})};
+      if(!EDITABLE)return;
+      if(t.upload&&(!t.src||e.target.closest(".ch"))){$("songFile").click();return}
+      if(t.id)D.music=t.id;else delete D.music;dirty();[...box.children].forEach(x=>{x.classList.toggle("on",x===r);x.setAttribute("aria-checked",x===r)})};
     box.appendChild(r)});drawPlay()}
 function drawPlay(){[...$("mList").children].forEach(r=>{const b=r.querySelector("button.pl");if(!b)return;b.textContent=(mPrev===r.dataset.id&&!mAud.paused)?"❚❚":"▶"})}
+/* the customer's own song: uploaded like a voice note, used only in her magazine */
+async function addSong(f){$("mErr").textContent="";if(!f)return;
+  if(f.size>12*1048576){$("mErr").textContent="الملف أكبر من ١٢ ميجا";return}
+  const ok=await new Promise(r=>{const a=new Audio();a.preload="metadata";a.onloadedmetadata=()=>r(true);a.onerror=()=>r(false);a.src=URL.createObjectURL(f)});
+  if(!ok){$("mErr").textContent="الملف ده مش بيشتغل على المتصفح — جربي mp3 أو m4a";return}
+  const old=D.song;D.song={up:1,name:(f.name||"أغنيتي").replace(/\.[a-z0-9]+$/i,"").slice(0,40)};drawMusic();pendingUploads++;
+  const ext=/mp4|m4a|aac/.test(f.type)?"m4a":/ogg|opus/.test(f.type)?"ogg":/wav/.test(f.type)?"wav":"mp3";
+  try{const path=P.id+"/s-"+rid()+"."+ext;const url=await SB.upload(path,f,f.type||"audio/mpeg");D.song={url,path,name:D.song.name};D.music="custom";
+    if(old&&old.path)try{await SB.remove(old.path)}catch(e){}toast("الأغنية اتضافت ✓")}
+  catch(e){D.song=old&&old.url?old:undefined;if(!D.song)delete D.song;$("mErr").textContent="ما اترفعتش، جربي تاني"}
+  pendingUploads--;drawMusic();dirty()}
 function stopVoicePreview(){try{const v=$("vAud");if(v&&!v.paused)v.pause()}catch(e){}}
 mAud.addEventListener("pause",drawPlay);mAud.addEventListener("play",drawPlay);mAud.addEventListener("ended",drawPlay);
 try{$("vAud").addEventListener("play",()=>{if(!mAud.paused)mAud.pause()})}catch(e){}
+$("songFile").onchange=e=>{const f=e.target.files[0];e.target.value="";addSong(f)};
 /* ---- create / resume ---- */
 $("startBtn").onclick=async()=>{const n=$("rec0").value.trim();if(n.length<2){$("startErr").textContent="اكتبي اسم صاحب المجلة";return}
   const b=$("startBtn");b.disabled=true;b.textContent="بنجهز مجلتك…";
