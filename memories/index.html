@@ -166,6 +166,15 @@ section.s{padding:64px 0}
 .dev .scr:before{content:"9:41";position:absolute;top:14px;right:28px;font:600 13px/1 -apple-system,system-ui,sans-serif;color:#f6efdd;direction:ltr}
 .dev iframe{width:100%;height:100%;border:0;background:var(--ivory);display:block}
 .devcap{text-align:center;font-size:14px;color:var(--mute);margin-top:12px}
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:330px;max-width:88vw;margin:0 auto 16px}
+.pick .op{display:flex;align-items:center;gap:10px;padding:8px;border-radius:16px;background:var(--paper);border:1.5px solid rgba(195,160,102,.25);font:inherit;text-align:right;cursor:pointer;transition:border-color .2s,box-shadow .2s}
+.pick .op img{width:44px;height:60px;object-fit:cover;border-radius:10px;flex:0 0 auto}
+.pick .op b{display:block;font-family:var(--latin);font-size:17px;color:var(--olive);line-height:1.2}
+.pick .op small{font-size:12.5px;color:var(--mute)}
+.pick .op.on{border-color:var(--gold2);box-shadow:0 10px 22px -16px rgba(80,62,30,.7),inset 0 0 0 1px var(--gold2)}
+.pick .op[data-t=blush].on b{color:#7a3f4b}
+.dev.blush .scr{background:#7a3f4b}
+#tryIt{scroll-margin-top:84px}
 
 /* couple album preview */
 .alb{background:linear-gradient(180deg,#f3ece0,var(--ivory))}
@@ -257,7 +266,7 @@ footer a{color:var(--gold2);font-weight:600}
       <div class="kick">Farhetna Memories</div>
       <h1>كل صور فرحكم<br>في <em>ألبوم واحد</em></h1>
       <p class="lead">كارت QR أنيق على الترابيزات، الضيوف يمسحوه ويرفعوا صورهم وفيديوهاتهم وتهانيهم من موبايلهم في ثواني — من غير تطبيق ولا تسجيل. وكلها توصلكم في ألبوم خاص بيكم.</p>
-      <div class="ctas"><a class="try" href="../m/index.html#demo=blush"><span class="ti">📱</span><span><b>جرّبي بنفسك</b><small>إزاي ضيوفك هيشاركوا صورهم</small></span><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a><a class="b2" href="#price">اطلبي ألبومك · <span class="pr">399</span> جنيه</a></div>
+      <div class="ctas"><a class="try" href="#tryIt"><span class="ti">📱</span><span><b>جرّبي بنفسك</b><small>إزاي ضيوفك هيشاركوا صورهم</small></span><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a><a class="b2" href="#price">اطلبي ألبومك · <span class="pr">399</span> جنيه</a></div>
       <div class="trust"><span>من غير تطبيق</span><span>صور وفيديوهات</span><span>ألبوم خاص ومقفول</span></div>
     </div>
     <div class="vis" aria-hidden="true">
@@ -308,7 +317,14 @@ footer a{color:var(--gold2);font-weight:600}
         <li class="rv"><i>⚡</i><div><b>سريعة حتى على نت ضعيف</b><span>الصور بتتصغّر على الموبايل قبل الرفع من غير ما جودتها تبان أقل.</span></div></li>
       </ul>
     </div>
-    <div class="rv"><div class="dev"><div class="scr"><iframe src="../m/index.html#demo=blush" title="تجربة صفحة الضيف" loading="lazy"></iframe></div></div><p class="devcap">مرّري جوه الموبايل ودوسي على الزرار الأخضر · <a href="../m/index.html#demo=blush" style="color:var(--gold2);font-weight:700">افتحيها بملء الشاشة</a></p></div>
+    <div class="rv" id="tryIt">
+      <div class="pick" role="tablist" aria-label="اختاري التصميم">
+        <button class="op on" type="button" data-t="sage" role="tab" aria-selected="true"><img src="themes/sage/guest.webp" alt="" loading="lazy"><span><b>Sage</b><small>زيتون ورخام</small></span></button>
+        <button class="op" type="button" data-t="blush" role="tab" aria-selected="false"><img src="themes/blush/guest.webp" alt="" loading="lazy"><span><b>Blush</b><small>بحيرة وورد</small></span></button>
+      </div>
+      <div class="dev" id="dev"><div class="scr"><iframe id="devF" src="../m/index.html#demo=sage" title="تجربة صفحة الضيف" loading="lazy"></iframe></div></div>
+      <p class="devcap">مرّري جوه الموبايل وجرّبي الرفع · <a id="devFull" href="../m/index.html#demo=sage" style="color:var(--gold2);font-weight:700">افتحيها بملء الشاشة</a></p>
+    </div>
   </div>
 </section>
 
@@ -393,6 +409,11 @@ const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
 document.querySelectorAll(".pr").forEach(e=>e.textContent=ar(C.price));
 document.querySelectorAll(".pa").forEach(e=>e.textContent=ar(C.addon));
 
+/* demo design picker: Sage and Blush side by side, the phone shows the chosen one */
+document.querySelectorAll(".pick .op").forEach(b=>b.onclick=()=>{const t=b.dataset.t,u="../m/index.html#demo="+t;
+  document.querySelectorAll(".pick .op").forEach(x=>{x.classList.toggle("on",x===b);x.setAttribute("aria-selected",x===b)});
+  document.getElementById("devF").src="../m/index.html?d="+t+"#demo="+t;
+  document.getElementById("devFull").href=u;document.getElementById("dev").classList.toggle("blush",t==="blush")});
 /* qr cards: the code opens the demo guest page */
 const leaf=c=>`<svg class="fl ${c}" viewBox="0 0 120 120" aria-hidden="true"><g fill="none" stroke="#a9b59c" stroke-width="1.2" stroke-linecap="round"><path d="M120 10C88 18 64 40 52 72"/><path d="M96 20c-4-12 3-20 12-21-1 10-5 17-12 21z" fill="#d3dac8"/><path d="M76 36c-9-8-8-18-1-24 5 9 5 17 1 24z" fill="#dde2d3"/><path d="M62 56c-12-3-15-12-13-21 9 4 13 12 13 21z" fill="#d3dac8"/></g><circle cx="104" cy="38" r="9" fill="#efd2c8"/><circle cx="104" cy="38" r="4" fill="#e1b4a6"/><circle cx="84" cy="56" r="5" fill="#ecdcbd"/></svg>`;
 function qrPath(url){try{const Q=window.FarhetnaQR,q=new Q(-1,1);q.addData(url);q.make();const n=q.getModuleCount();let p="";

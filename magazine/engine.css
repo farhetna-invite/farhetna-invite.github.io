@@ -18,7 +18,7 @@ img{display:block}
 .mag3d .vol{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateY(-16deg) rotateX(4deg);animation:sway 7s ease-in-out infinite 1.8s}
 @keyframes sway{50%{transform:rotateY(-9deg) rotateX(2deg) translateY(-6px)}}
 .mag3d .front{position:absolute;inset:0;border-radius:2px 4px 4px 2px;overflow:hidden;transform:translateZ(5px);container-type:size;box-shadow:inset 3px 0 6px -2px rgba(0,0,0,.45)}
-.mag3d .edge{position:absolute;top:1%;bottom:1%;right:-1px;width:10px;transform:rotateY(90deg) translateZ(-5px);transform-origin:right;background:repeating-linear-gradient(90deg,#f4efe4 0 1px,#d9d2c3 1px 2px)}
+.mag3d .edge{position:absolute;top:1%;bottom:1%;right:-1px;width:10px;transform:rotateY(90deg) translateZ(-5px);transform-origin:right;background:repeating-linear-gradient(90deg,#cfc6b2 0 1px,#a89e88 1px 2px);opacity:.8}
 .mag3d .back{position:absolute;inset:0;transform:translateZ(-5px);background:#0b1a15;border-radius:2px 4px 4px 2px}
 .mag3d:after{content:"";position:absolute;left:6%;right:-4%;bottom:-6%;height:12%;background:radial-gradient(50% 50% at 50% 50%,rgba(0,0,0,.55),transparent 70%);filter:blur(6px);z-index:-1}
 .mag3d .gloss{position:absolute;inset:0;transform:translateZ(6px);background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.22) 45%,transparent 58%);background-size:250% 100%;animation:gloss 5s ease-in-out infinite 2s;pointer-events:none;border-radius:2px 4px 4px 2px}
