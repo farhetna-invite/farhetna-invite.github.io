@@ -741,6 +741,19 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 @media(min-width:1000px){.svc-grid{grid-template-columns:repeat(3,1fr);max-width:1180px}}
 .lang-en .sv{text-align:left}.lang-en .sv-tag{right:auto;left:14px}.lang-en .sv-go svg{transform:scaleX(-1)}
 .only-inv #services{display:none}
+
+/* menu: the three services first, then small links */
+.drawer .dsec{margin-top:24px;font-size:.85rem;letter-spacing:.08em;color:var(--sage)}
+.drawer nav.svcnav{margin-top:8px}
+.drawer nav.svcnav a{justify-content:flex-start;gap:14px;min-height:70px}
+.drawer nav.svcnav a i{font-style:normal;flex:0 0 44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.25rem;background:rgba(85,104,74,.08)}
+.drawer nav.svcnav a span{flex:1;line-height:1.35}
+.drawer nav.svcnav a b{display:block;font-weight:600;font-size:1.15rem}
+.drawer nav.svcnav a small{display:block;letter-spacing:0;text-align:right;direction:inherit;font-size:.8rem;color:var(--sage);font-family:inherit}
+.drawer nav.svcnav a:nth-child(3) i{background:rgba(114,90,128,.14)}
+.drawer nav.subnav{margin-top:18px;border-top:0;display:flex;flex-wrap:wrap;gap:6px 16px}
+.drawer nav.subnav a{min-height:36px;border-bottom:0;font-size:.98rem;color:var(--sage);text-decoration:underline;text-underline-offset:4px;animation:none}
+.drawer nav.subnav a::after{content:none}
 </style>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
@@ -1211,7 +1224,7 @@ html:not(.js) .why .feat{opacity:1;transform:none}
       <em><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10C19.5 15.4 12 20 12 20z"/></svg>دعوات رقمية بلمسة استثنائية</em>
     </a>
     <nav class="ft7-links" aria-label="روابط الموقع">
-      <a href="#designs">التصاميم</a><a href="#how">إزاي تطلبي</a><a href="#packages">الباقات</a><a href="#faq">الأسئلة الشائعة</a><a href="/memories/">ألبوم الذكريات</a><a href="studio.html">صمّمي دعوتك</a>
+      <a href="#designs">التصاميم</a><a href="#how">إزاي تطلبي</a><a href="#packages">الباقات</a><a href="#faq">الأسئلة الشائعة</a><a href="/memories/">ألبوم الذكريات</a><a href="/magazine/">The Surprise · مجلة هدية</a><a href="studio.html">صمّمي دعوتك</a>
     </nav>
     <ul class="ft7-feats">
       <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5h10l3.5 5L12 20.5 3.5 8.5z"/><path d="M3.5 8.5h17M9.5 8.5L12 20.5l2.5-12"/></svg>تصاميم أنيقة</li>
@@ -1234,12 +1247,14 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 <aside class="drawer" id="drawer" aria-label="القائمة" aria-hidden="true">
   <button class="close" id="close" aria-label="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
   <div class="dl">فرحتنا</div><small>FARHETNA</small>
-  <nav>
-    <a href="#designs">التصاميم</a>
-    <a href="#how">إزاي تطلبي</a>
-    <a href="#packages">الأسعار</a>
-    <a href="/memories/">ألبوم الذكريات ✨</a>
-    <a href="#faq">الأسئلة الشائعة</a>
+  <div class="dsec">خدماتنا</div>
+  <nav class="svcnav">
+    <a href="#designs"><i>💌</i><span><b>دعوات الفرح</b><small>Wedding Invitations</small></span></a>
+    <a href="/memories/"><i>📸</i><span><b>ألبوم الذكريات</b><small>Guest Memories</small></span></a>
+    <a href="/magazine/"><i>🎁</i><span><b>The Surprise</b><small>مجلة هدية رقمية</small></span></a>
+  </nav>
+  <nav class="subnav">
+    <a href="#how">إزاي تطلبي</a><a href="#packages">الأسعار</a><a href="#faq">الأسئلة الشائعة</a>
   </nav>
   <a class="order" href="studio.html">اطلبي دعوتك</a>
 </aside>
