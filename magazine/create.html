@@ -258,8 +258,8 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
     <div id="vList"></div>
     <audio id="vAud" preload="none"></audio>
     <div class="card" id="musCard">
-      <b>🎵 مزيكا خلفية <small style="color:var(--mute);font-weight:400">(اختياري)</small></b>
-      <p class="note">مش بتشتغل لوحدها: اللي بيفتح المجلة يشغّلها بزرار، وبتقف لوحدها لما يسمع رسالة صوتية.</p>
+      <b>🎵 مزيكا المجلة</b>
+      <p class="note">كل تصميم ليه مزيكا مختارة مخصوص. مش بتشتغل لوحدها: اللي بيفتح المجلة يشغّلها بزرار، وبتقف لما يسمع رسالة صوتية. ولو حابة، اختاري «من غير مزيكا».</p>
       <div class="mlist" id="mList"></div>
       <audio id="mAud" preload="none"></audio>
     </div>
@@ -363,14 +363,16 @@ $("next").onclick=async()=>{if(step===R){openPreview();return}if(step<PRE){show(
 
 /* ---- background music picker (optional) ---- */
 const mAud=$("mAud");let mPrev=null;
-function drawMusic(){const box=$("mList");box.innerHTML="";const list=[{id:"",name:"من غير مزيكا",sub:"المجلة هادية"}].concat(window.MAG_MUSIC||[]);
-  list.forEach(t=>{const r=document.createElement("div");r.className="mtr"+(((D.music||"")===t.id)?" on":"");r.setAttribute("role","radio");r.setAttribute("aria-checked",(D.music||"")===t.id);
+function drawMusic(){const box=$("mList");box.innerHTML="";const ML=window.MAG_MUSIC||[],EM=(window.MAG_EDITION_MUSIC||{})[D.edition||"emerald"]||{id:"piano",name:"بيانو"},tr=ML.find(t=>t.id===EM.id);
+  const cur=D.music==="none"?"none":"";
+  const list=[{id:"",name:"مزيكا التصميم",sub:EM.name+" · Emerald",src:tr&&tr.src},{id:"none",name:"من غير مزيكا",sub:"المجلة هادية"}];
+  list.forEach(t=>{const r=document.createElement("div");r.className="mtr"+(cur===t.id?" on":"");r.dataset.id=t.id;r.setAttribute("role","radio");r.setAttribute("aria-checked",cur===t.id);
     r.innerHTML=(t.src?'<button class="pl" type="button" aria-label="اسمعي">▶</button>':'<span class="pl" style="background:#efe8da;color:var(--mute)">✕</span>')+'<span class="tx"><b></b><small></small></span><span class="ck">✓</span>';
     r.querySelector("b").textContent=t.name;r.querySelector("small").textContent=t.sub||"";
     r.onclick=e=>{if(e.target.closest(".pl")&&t.src){if(mPrev===t.id&&!mAud.paused){mAud.pause();return}stopVoicePreview();mAud.src=t.src;mAud.currentTime=0;mAud.play().catch(()=>{});mPrev=t.id;drawPlay();return}
-      if(!EDITABLE)return;D.music=t.id||undefined;if(!t.id)delete D.music;dirty();[...box.children].forEach(x=>{x.classList.toggle("on",x===r);x.setAttribute("aria-checked",x===r)})};
+      if(!EDITABLE)return;if(t.id)D.music=t.id;else delete D.music;dirty();[...box.children].forEach(x=>{x.classList.toggle("on",x===r);x.setAttribute("aria-checked",x===r)})};
     box.appendChild(r)});drawPlay()}
-function drawPlay(){[...$("mList").children].forEach((r,i)=>{const b=r.querySelector("button.pl");if(!b)return;const id=(window.MAG_MUSIC||[])[i-1].id;b.textContent=(mPrev===id&&!mAud.paused)?"❚❚":"▶"})}
+function drawPlay(){[...$("mList").children].forEach(r=>{const b=r.querySelector("button.pl");if(!b)return;b.textContent=(mPrev===r.dataset.id&&!mAud.paused)?"❚❚":"▶"})}
 function stopVoicePreview(){try{const v=$("vAud");if(v&&!v.paused)v.pause()}catch(e){}}
 mAud.addEventListener("pause",drawPlay);mAud.addEventListener("play",drawPlay);mAud.addEventListener("ended",drawPlay);
 try{$("vAud").addEventListener("play",()=>{if(!mAud.paused)mAud.pause()})}catch(e){}

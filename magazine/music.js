@@ -8,3 +8,6 @@ window.MAG_MUSIC=[
   {id:"canon",name:"كانون",en:"Canon",sub:"كلاسيك",src:"../music-canon.mp3"},
   {id:"oudsolo",name:"تقاسيم عود",en:"Oud",sub:"نهاوند هادي",src:"../music-oudsolo.mp3"},
   {id:"ney",name:"ناي وعود",en:"Ney & oud",sub:"روحاني وهادي",src:"../music-ney.mp3"}];
+
+/* each edition has its own track; the customer can only switch it off ("none") */
+window.MAG_EDITION_MUSIC={emerald:{id:"piano",name:"بيانو دافي وحالم",en:"Warm dreamy piano"}};
