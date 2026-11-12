@@ -3,6 +3,7 @@
    (memories_albums) and the storage bucket, and the admin page can raise them. */
 window.FM = {
   price: 399,          // standalone album, EGP
+  magPrice: 299,       // My Magazine (The Surprise), EGP
   addon: 249,          // with an invitation order, EGP
   sbUrl: "https://fjoyqftndulavcjcxaya.supabase.co",
   sbKey: "sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui",
