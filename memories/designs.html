@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e8">
+<title>اختاري تصميم ألبومك · فرحتنا Memories</title>
+<meta name="description" content="تصميمات ألبوم ذكريات فرحتنا: صفحة الضيوف وكارت الـQR ولوحة ألبومكم بنفس الستايل.">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--olive:#3c4733;--sage2:#5f7356;--gold2:#a8854a;--mute:#8a8574;--ink:#4a4638;--naskh:"Noto Naskh Arabic",serif;--ruq:"Aref Ruqaa",serif;--latin:"Cormorant Garamond",serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:radial-gradient(90% 40% at 50% 0,#fffaf2,transparent 70%),#f7f1e8;font-family:var(--naskh);color:var(--ink);-webkit-tap-highlight-color:transparent}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:980px;margin:0 auto;padding:16px 16px calc(36px + env(safe-area-inset-bottom,0px))}
+.back{display:inline-block;color:var(--sage2);font-size:14.5px;padding:4px 0}
+.hd{text-align:center;margin:8px 0 14px}
+.hd .k{font-family:var(--latin);font-style:italic;letter-spacing:.25em;color:var(--gold2);font-size:14px}
+.hd h1{font-family:var(--ruq);color:var(--olive);font-size:clamp(32px,9vw,46px);line-height:1.35}
+.hd p{color:var(--mute);font-size:15px}
+.steps{display:flex;justify-content:center;gap:6px;margin-bottom:18px;font-size:13px;color:var(--mute);flex-wrap:wrap}
+.steps span{background:#fff;border-radius:20px;padding:3px 12px;box-shadow:inset 0 0 0 1px #e8dcc6}
+.steps span.on{background:var(--olive);color:#fbf3e3;box-shadow:none}
+.grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:760px){.grid{grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:24px}}
+.dz{background:#fffdf9;border-radius:26px;overflow:hidden;box-shadow:0 22px 44px -32px rgba(80,62,30,.7),inset 0 0 0 1px rgba(195,160,102,.3)}
+.pv{position:relative;height:330px;display:flex;justify-content:center;align-items:flex-end;gap:16px;padding-top:18px;overflow:hidden;background:var(--tint)}
+.pv:before{content:"";position:absolute;inset:0;background:var(--gbg) center/cover;opacity:.35;filter:blur(2px)}
+.ph{position:relative;width:148px;height:300px;border-radius:26px 26px 0 0;background:#1f211c;padding:7px 7px 0;box-shadow:0 18px 30px -16px rgba(0,0,0,.5)}
+.ph .s{width:100%;height:100%;border-radius:20px 20px 0 0;overflow:hidden;position:relative;background:var(--gbg) center top/cover}
+.ph .t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:var(--py,92px)}
+.ph .nm{font-family:var(--ruq);font-size:22px;line-height:1.15;color:var(--n);text-shadow:0 0 10px rgba(255,255,255,.95)}
+.ph .nm i{font-style:normal;font-family:var(--latin);color:#b08c52;margin:0 4px}
+.ph .dt{font-size:8.5px;margin-top:3px;color:#5c574a;text-shadow:0 0 6px #fff}
+.ph .bt{position:absolute;left:10%;right:10%;bottom:46px;border-radius:12px;padding:8px 4px;font-size:9px;font-weight:700;color:var(--bt);background:linear-gradient(160deg,var(--b1),var(--b2));box-shadow:0 8px 14px -8px rgba(0,0,0,.4)}
+.ph .mono{position:absolute;left:50%;top:var(--my,46px);transform:translate(-50%,-50%);font-family:var(--latin);font-weight:600;font-size:15px;color:#b08c52}
+.qc{position:relative;width:126px;align-self:center;margin-bottom:44px;transform:rotate(-5deg);filter:drop-shadow(0 16px 20px rgba(60,40,20,.35))}
+.qc canvas{width:100%;display:block;border-radius:6px}
+.tag{position:absolute;top:12px;right:12px;z-index:2;background:rgba(255,250,242,.92);border-radius:20px;padding:2px 12px;font-size:12.5px;font-weight:700;color:var(--gold2)}
+.bd{padding:14px 18px 18px}
+.bd h3{font-family:var(--latin);font-size:30px;color:var(--olive);line-height:1.1}
+.bd .ar{color:var(--gold2);font-size:14px;font-weight:600}
+.bd p{font-size:14.5px;line-height:1.75;margin-top:4px}
+.chips{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+.chips span{font-size:12px;background:#f4eee3;border-radius:20px;padding:2px 10px;color:var(--sage2)}
+.row{display:grid;grid-template-columns:1fr 1.35fr;gap:10px;margin-top:14px}
+.row a{display:flex;justify-content:center;align-items:center;border-radius:14px;padding:13px;font-weight:700;font-size:15.5px}
+.try{box-shadow:inset 0 0 0 1.5px var(--acc);color:var(--acc)}
+.pick{color:#fffaf0;background:linear-gradient(160deg,var(--p1),var(--p2));box-shadow:0 10px 20px -12px rgba(0,0,0,.45)}
+.note{text-align:center;color:var(--mute);font-size:14px;margin-top:18px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">→ ألبوم الذكريات</a>
+  <div class="hd"><div class="k">Farhetna Memories</div><h1>اختاري تصميم ألبومك</h1><p>التصميم بيتطبق على صفحة الضيوف، وكارت الـQR، ولوحة ألبومكم</p></div>
+  <div class="steps"><span class="on">١ التصميم</span><span>٢ بيانات الفرح</span><span>٣ الدفع</span></div>
+  <div class="grid" id="grid"></div>
+  <p class="note">«جربي» بيفتحلك صفحة الضيوف بالتصميم ده، وتقدري ترفعي صور تجريبية (مش بتترفع فعلًا).<br>وتقدري تغيّري التصميم في خطوة الطلب قبل ما تدفعي.</p>
+</div>
+<script src="config.js"></script>
+<script src="qr.js"></script>
+<script src="themes.js"></script>
+<script src="card.js"></script>
+<script src="../fa.js"></script>
+<script>
+(()=>{
+const TH=window.FMThemes,grid=document.getElementById("grid");
+const POS={sage:{py:"120px",my:"46px"},blush:{py:"98px"}};
+const TAG={sage:"الأكثر فخامة",blush:"جديد"};
+TH.list.forEach(id=>{const t=TH.all[id],c=t.c,p=POS[id]||{};
+  const d=document.createElement("article");d.className="dz";
+  d.style.cssText=`--gbg:url("${t.guest}");--tint:${c.tint};--n:${c.name};--b1:${c.btn1};--b2:${c.btn2};--bt:${c.btnText};--acc:${c.accent};--p1:${id==="blush"?"#d29aa0":c.btn1};--p2:${id==="blush"?"#b27178":c.btn2};--py:${p.py||"96px"};--my:${p.my||"46px"}`;
+  d.innerHTML=`<div class="pv">${TAG[id]?`<span class="tag">${TAG[id]}</span>`:""}
+      <div class="qc"><canvas></canvas></div>
+      <div class="ph"><div class="s">${id==="sage"?'<span class="mono">A &amp; M</span>':""}<div class="t"><div class="nm">أحمد<i>&amp;</i>مريم</div><div class="dt">الجمعة ١٨ ديسمبر</div></div><div class="bt">📸 شارك صورك وفيديوهاتك</div></div></div></div>
+    <div class="bd"><h3 dir="ltr" style="text-align:right">${t.name}</h3><div class="ar">${t.ar}</div><p>${t.desc}</p>
+      <div class="chips"><span>صفحة الضيوف</span><span>كارت QR</span><span>لوحة الألبوم</span></div>
+      <div class="row"><a class="try" href="../m/index.html#demo=${id}">جربي 📱</a><a class="pick" href="order.html?t=${id}">اختاري التصميم</a></div></div>`;
+  grid.appendChild(d);
+  FMCard.draw(d.querySelector("canvas"),{groom:"أحمد",bride:"مريم",date:"2026-12-18",url:"https://farhetnainvite.com/m/#demo",theme:id});
+  d.querySelector(".pick").addEventListener("click",()=>{try{window.fbq&&fbq("track","InitiateCheckout",{content_name:"memories-"+id})}catch(e){}});
+});
+})();
+</script>
+</body>
+</html>

@@ -137,6 +137,97 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 .demo{position:sticky;top:0;z-index:5;text-align:center;font-size:12.5px;background:#3c4733;color:#f7efdc;padding:7px 10px}
 .toast{position:fixed;left:50%;bottom:calc(20px + var(--safe));transform:translate(-50%,40px);opacity:0;z-index:9;background:#3c4733;color:#fff8ea;border-radius:30px;padding:11px 20px;font-size:14px;box-shadow:0 10px 24px -10px rgba(0,0,0,.5);transition:.35s;max-width:90vw;text-align:center}
 .toast.on{transform:translate(-50%,0);opacity:1}
+/* ===== album designs (memories/themes.js) ===== */
+body.th{--n:#3c4733;--btn1:#6f8464;--btn2:#4f6346;--btnT:#fffaf0;--paper:rgba(255,253,249,.86);--acc:#5f7356}
+body.th .bg{background:var(--tint) var(--gbg) center top/cover no-repeat}
+body.th .bg svg{display:none}
+body.th .hero{padding-top:min(30vh,250px)}
+body.th .ring{display:none}
+body.th h1{color:var(--n);text-shadow:0 0 18px rgba(255,255,255,.95),0 0 4px rgba(255,255,255,.9)}
+body.th .kick,body.th .date,body.th .welcome{text-shadow:0 0 12px rgba(255,255,255,.95)}
+body.th .welcome{color:var(--ink2,#4a4638);font-weight:500}
+body.th .cta{background:linear-gradient(160deg,var(--btn1),var(--btn2));color:var(--btnT)}
+body.th .cta .ic{background:rgba(255,255,255,.22)}
+body.th .cta .ic svg{stroke:var(--btnT)}
+body.th .card,body.th .nm .in{background:var(--paper);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+body.th .hint,body.th .priv,body.th .foot{text-shadow:0 0 10px rgba(255,255,255,.95);color:#6b6657}
+body.t-blush .cta{box-shadow:0 16px 30px -14px rgba(150,95,80,.6),inset 0 0 0 1.5px rgba(190,150,100,.6),inset 0 2px 0 rgba(255,255,255,.9)}
+body.t-blush .cta small{opacity:.8}
+body.t-blush .hero{padding-top:min(26vh,210px)}
+/* falling petals / drifting leaves */
+.fx{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fx i{position:absolute;top:-30px;width:14px;height:10px;border-radius:70% 0 70% 0;opacity:.85;animation:fall linear infinite}
+.t-blush .fx i{background:linear-gradient(135deg,#ffd9e0,#f4aebd)}
+.t-sage .fx i{width:18px;height:7px;border-radius:100% 0;background:linear-gradient(90deg,#9fae8a,#c8d2b6)}
+@keyframes fall{0%{transform:translate(0,-20px) rotate(0)}100%{transform:translate(-60px,110vh) rotate(540deg)}}
+/* envelope intro (Sage) */
+.intro{position:fixed;inset:0;z-index:20;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:var(--tint) var(--gbg) center/cover;cursor:pointer;transition:opacity .9s ease}
+.intro .env{width:min(84vw,420px);aspect-ratio:3/2;position:relative;filter:drop-shadow(0 26px 30px rgba(60,55,30,.35));transition:transform 1.2s cubic-bezier(.6,-0.2,.3,1)}
+.intro .env img{width:100%;height:100%;object-fit:contain}
+.intro p{font-size:16px;color:#4a4638;background:rgba(255,253,249,.8);border-radius:30px;padding:8px 18px;animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.04)}}
+.intro.go .env{transform:translateY(70vh) rotate(-6deg) scale(.9)}
+.intro.go p{opacity:0}
+.intro.gone{opacity:0;pointer-events:none}
+/* Sage: monogram in the gold heart, gold dust, foil button */
+.mono{position:fixed;z-index:0;transform:translate(-50%,-50%);font-family:var(--latin);font-weight:600;font-size:var(--ms,40px);letter-spacing:.04em;white-space:nowrap;pointer-events:none;
+  background:linear-gradient(110deg,#a8803f 20%,#f3dfa6 40%,#b48a48 55%,#e9cf8e 70%,#9c7638 90%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 4.5s ease-in-out infinite;opacity:0;transition:opacity 1.2s ease 1s}
+.mono.on{opacity:1}
+@keyframes foil{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+.t-sage h1{background:linear-gradient(110deg,#3c4733 30%,#7d8f5f 45%,#3c4733 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;animation:foil 6s ease-in-out infinite}
+.t-sage h1 .amp{-webkit-text-fill-color:#b08c52}
+.dust{position:fixed;inset:0;pointer-events:none;z-index:0}
+.dust b{position:absolute;width:4px;height:4px;border-radius:50%;background:radial-gradient(circle,#fff6d8,#d6b26a 60%,transparent 70%);box-shadow:0 0 6px 1px rgba(230,200,120,.7);animation:twinkle ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:0;transform:translateY(0) scale(.6)}50%{opacity:1;transform:translateY(-26px) scale(1)}}
+.t-sage .cta{box-shadow:0 18px 32px -16px rgba(60,71,51,.8),inset 0 0 0 2px rgba(222,196,140,.85);position:relative}
+.t-sage .cta:before{content:"";position:absolute;inset:5px;border-radius:17px;border:1px solid rgba(240,220,170,.55);pointer-events:none}
+/* Sage envelope: seal breaks, flap opens, card rises */
+.intro .env{perspective:1200px}
+.intro .env .lay{position:absolute;inset:0;background:var(--envimg) center/100% 100% no-repeat}
+.intro .env .ghost{position:absolute;inset:0;background:var(--envfull) center/100% 100% no-repeat;z-index:6;transition:opacity .25s ease}
+.intro.go .env .ghost{opacity:0}
+.intro .env .body{clip-path:polygon(0 0,50.5% 58%,100% 0,100% 100%,0 100%);z-index:2}
+.intro .env .flap{clip-path:polygon(0 0,100% 0,50.5% 58%);transform-origin:50% 0;z-index:3}
+.intro .env .seal{position:absolute;left:39.6%;top:41.5%;width:23.7%;height:35.55%;background:var(--sealimg) center/contain no-repeat;z-index:5;transition:transform .8s cubic-bezier(.5,0,.3,1),opacity .8s ease}
+.intro .env .seal.l{clip-path:polygon(0 0,52% 0,44% 30%,55% 55%,46% 100%,0 100%)}
+.intro .env .seal.r{clip-path:polygon(52% 0,100% 0,100% 100%,46% 100%,55% 55%,44% 30%)}
+.intro .env .wax{position:absolute;left:46.5%;top:53%;width:10%;height:11%;z-index:4;border-radius:46% 54% 42% 58%/55% 45% 55% 45%;background:radial-gradient(circle at 40% 35%,#e2c27e,#b48a48 55%,#8d6a34);box-shadow:inset 0 0 6px rgba(80,55,20,.5);opacity:0;transition:opacity .3s ease .35s}
+.intro .env .card{position:absolute;left:9%;right:9%;top:8%;height:84%;z-index:1;border-radius:8px;background:#fffdf7;box-shadow:0 10px 30px -10px rgba(60,55,30,.5),inset 0 0 0 1px rgba(184,148,90,.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:transform 1.1s cubic-bezier(.3,.9,.3,1) 1.25s}
+.intro .env .card small{font-family:var(--latin);font-style:italic;letter-spacing:.25em;color:#a8854a;font-size:12px}
+.intro .env .card b{font-family:var(--ruq);font-size:clamp(22px,7vw,32px);color:#3c4733}
+.intro .env .card b i{font-style:normal;font-family:var(--latin);color:#b08c52;margin:0 6px}
+.intro .env .card svg{width:34px;height:30px}
+.intro.go .env{transform:none}
+.intro.go .env .flap{animation:flapOpen 1s cubic-bezier(.5,0,.3,1) .6s forwards}
+@keyframes flapOpen{0%{transform:rotateX(0);z-index:3}49%{z-index:3}50%{z-index:0}100%{transform:rotateX(178deg);z-index:0}}
+.intro.go .env .wax{opacity:.75}
+.intro.go .env .seal.l{transform:translate(-40%,30%) rotate(-32deg);opacity:0}
+.intro.go .env .seal.r{transform:translate(40%,30%) rotate(32deg);opacity:0}
+.intro.go .env .card{transform:translateY(-62%)}
+.intro.go .env{animation:lift 1s ease 2.6s forwards}
+@keyframes lift{to{transform:translateY(-8%) scale(1.08);opacity:0}}
+.intro .spark{position:absolute;left:50%;top:50%;width:6px;height:6px;border-radius:50%;background:#f3dfa6;box-shadow:0 0 8px 2px rgba(240,210,140,.9);opacity:0;z-index:5}
+.intro.go .spark{animation:burst .9s ease-out .15s forwards}
+@keyframes burst{0%{opacity:1;transform:translate(-50%,-50%)}100%{opacity:0;transform:translate(calc(-50% + var(--x)),calc(-50% + var(--y)))}}
+/* Sage: the opened envelope stays on the page */
+.henv{position:relative;width:min(86vw,400px);aspect-ratio:3/2;margin:calc(var(--cardRise,46%)*.62) auto 4px;filter:drop-shadow(0 22px 26px rgba(60,55,30,.3));perspective:1200px}
+.henv .lay{position:absolute;inset:0;background:var(--envimg) center/100% 100% no-repeat}
+.henv .body{clip-path:polygon(0 0,50.5% 58%,100% 0,100% 100%,0 100%);z-index:3}
+.henv .flap{clip-path:polygon(0 0,100% 0,50.5% 58%);transform-origin:50% 0;transform:rotateX(178deg);z-index:0}
+.henv .card{position:absolute;left:8%;right:8%;top:6%;height:88%;z-index:1;border-radius:8px;background:#fffdf7;box-shadow:0 8px 24px -10px rgba(60,55,30,.45),inset 0 0 0 1px rgba(184,148,90,.5);
+  display:flex;flex-direction:column;align-items:center;padding-top:7%;gap:2px;transform:translateY(-46%);animation:rise 1.4s cubic-bezier(.3,.9,.3,1) both}
+@keyframes rise{from{transform:translateY(0)}}
+.henv .card small{font-family:var(--latin);font-style:italic;letter-spacing:.25em;color:#a8854a;font-size:12px}
+.henv .card b{font-family:var(--ruq);font-size:clamp(26px,8.4vw,38px);line-height:1.25;background:linear-gradient(110deg,#3c4733 30%,#7d8f5f 45%,#3c4733 60%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:foil 6s ease-in-out infinite}
+.henv .card b i{font-style:normal;font-family:var(--latin);-webkit-text-fill-color:#b08c52;margin:0 6px}
+.henv .card em{font-style:normal;font-size:12.5px;color:#6b6657}
+.henv .hseal{position:absolute;left:39.6%;top:41.5%;width:23.7%;height:35.55%;background:var(--sealimg) center/contain no-repeat;z-index:4;filter:drop-shadow(0 3px 4px rgba(60,40,20,.35))}
+.henv.gulp .body,.henv.gulp .hseal{animation:gulp .5s ease}
+@keyframes gulp{40%{transform:scale(1.04)}}
+.t-sage.hasenv h1,.t-sage.hasenv .date,.t-sage.hasenv .kick{display:none}
+.tenv{width:70px;height:47px;flex:none;background:center/contain no-repeat;filter:drop-shadow(0 6px 8px rgba(60,55,30,.3))}
+.tenv.gulp{animation:gulp .5s ease}
+.flyer{position:fixed;z-index:30;border-radius:6px;border:3px solid #fff;box-shadow:0 8px 16px -6px rgba(0,0,0,.4);background:#eee center/cover;pointer-events:none;transition:transform .9s cubic-bezier(.5,0,.6,1),opacity .9s ease}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -199,11 +290,12 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 <div class="toast" id="toast"></div>
 
 <script src="../memories/config.js"></script>
+<script src="../memories/themes.js"></script>
 <script>
 (()=>{
 const C=window.FM||{},$=id=>document.getElementById(id);
 const raw=decodeURIComponent((location.hash||"").slice(1)).trim();
-const DEMO=!raw||raw==="demo"||/(^|[?&])demo=1/.test(location.search);
+const DEMO=!raw||/^demo/.test(raw)||/(^|[?&])demo=1/.test(location.search);const DEMO_T=(raw.match(/^demo[=:-]?([a-z]+)/)||[])[1]||"";
 const slug=raw.replace(/[^a-z0-9-]/gi,"").toLowerCase();
 let A=null; // album info
 
@@ -227,12 +319,13 @@ function paint(a){
   $("date").textContent=fmtDate(a.date);$("date").hidden=!a.date;
   $("welcome").textContent=a.welcome||"أهلًا بيكم في فرحنا 🤍 كل صورة بتصوّروها النهارده هي ذكرى هنفضل نحبها طول العمر. شاركونا بيها هنا.";
   if(a.maxVideoMB)C.maxVideoMB=a.maxVideoMB;
+  theme(a.theme||a.style);
   try{const s=localStorage.getItem("fm_name");if(s)$("gname").value=s}catch(e){}
   show("app");
 }
 
 async function boot(){
-  if(DEMO){$("demoBar").hidden=false;if(window.top!==window.self)$("demoBack").hidden=true;paint({groom:"أحمد",bride:"مريم",groomEn:"Ahmed",brideEn:"Mariam",date:"2026-12-18",welcome:""});return}
+  if(DEMO){$("demoBar").hidden=false;if(window.top!==window.self)$("demoBack").hidden=true;paint({groom:"أحمد",bride:"مريم",groomEn:"Ahmed",brideEn:"Mariam",date:"2026-12-18",welcome:"",theme:DEMO_T||"plain"});return}
   if(!slug){show("stNone");return}
   try{const a=await rpc("memories_public",{p_slug:slug});
     if(!a){show("stNone");return}
@@ -241,6 +334,43 @@ async function boot(){
     paint(a)}
   catch(e){show("stErr")}
 }
+
+/* ---------- album design ---------- */
+function theme(id){const TH=window.FMThemes;if(!TH||id==="plain"||(!id&&DEMO))return;const t=TH.get(id);const b=document.body,base="../memories/";
+  b.classList.add("th","t-"+t.id);const st=b.style;st.setProperty("--gbg",`url("${base+t.guest}")`);st.setProperty("--tint",t.c.tint);
+  st.setProperty("--n",t.c.name);st.setProperty("--btn1",t.c.btn1);st.setProperty("--btn2",t.c.btn2);st.setProperty("--btnT",t.c.btnText);st.setProperty("--paper",t.c.paper);st.setProperty("--ink2",t.c.ink);
+  document.querySelector('meta[name=theme-color]').content=t.c.tint;
+  if(t.fx&&!matchMedia("(prefers-reduced-motion:reduce)").matches){const fx=document.createElement("div");fx.className="fx";
+    for(let i=0;i<9;i++){const e=document.createElement("i");e.style.left=(8+Math.random()*90)+"%";e.style.animationDuration=(9+Math.random()*8)+"s";e.style.animationDelay=(-Math.random()*14)+"s";e.style.transform="scale("+(.7+Math.random()*.6)+")";fx.appendChild(e)}
+    b.appendChild(fx)}
+  if(t.intro==="envelope"&&t.envelope){let seen=false;try{seen=sessionStorage.getItem("fm_env_"+slug)==="1"}catch(e){}
+    if(!seen){const it=document.createElement("div");it.className="intro";it.style.setProperty("--envimg",`url("${base}themes/${t.id}/env-base.webp")`);it.style.setProperty("--envfull",`url("${base+t.envelope}")`);it.style.setProperty("--sealimg",`url("${base}themes/${t.id}/seal.webp")`);
+      const nm=`${esc(A.groom)}<i>&amp;</i>${esc(A.bride)}`;
+      const sp=Array.from({length:14},(_,i)=>{const a=i/14*Math.PI*2,r=60+Math.random()*70;return `<span class="spark" style="--x:${Math.cos(a)*r}px;--y:${Math.sin(a)*r}px"></span>`}).join("");
+      it.innerHTML=`<div class="env"><div class="card"><small>Our Memories</small><svg viewBox="0 0 34 30"><path d="M17 28L3 13 7 4h7l3 4 3-4h7l4 9z M3 13h28 M7 4l4 9 6 15 6-15 4-9 M11 13l6-5 6 5" fill="none" stroke="#b8945a" stroke-width="1"/></svg><b>${nm}</b></div><div class="lay body"></div><div class="lay flap"></div><div class="wax"></div><div class="seal l"></div><div class="seal r"></div><div class="ghost"></div>${sp}</div><p>دوسي لفتح الألبوم 💌</p>`;
+      const open=()=>{if(it.classList.contains("go"))return;it.classList.add("go");try{sessionStorage.setItem("fm_env_"+slug,"1")}catch(e){}setTimeout(()=>it.classList.add("gone"),3300);setTimeout(()=>{it.remove();mono&&mono.classList.add("on")},4300)};
+      it.onclick=open;setTimeout(open,6000);b.appendChild(it)}}
+  // gold dust + monogram inside the heart (Sage)
+  if(t.id==="sage"&&!matchMedia("(prefers-reduced-motion:reduce)").matches){const d=document.createElement("div");d.className="dust";
+    for(let i=0;i<16;i++){const e=document.createElement("b");e.style.left=Math.random()*100+"%";e.style.top=(10+Math.random()*85)+"%";e.style.animationDuration=(3+Math.random()*4)+"s";e.style.animationDelay=(-Math.random()*6)+"s";d.appendChild(e)}b.appendChild(d)}
+  var mono=null;if(t.id==="sage"){const ini=(A.groomEn&&A.brideEn)?(A.groomEn.trim()[0]+" & "+A.brideEn.trim()[0]).toUpperCase():"♡";
+    mono=document.createElement("div");mono.className="mono";mono.textContent=ini;b.appendChild(mono);
+    const place=()=>{const W=innerWidth,H=innerHeight,s=Math.max(W/941,H/1672),ox=(W-941*s)/2;mono.style.left=(470*s+ox)+"px";mono.style.top=(345*s)+"px";mono.style.setProperty("--ms",Math.round(58*s)+"px");
+      document.querySelector(".hero").style.paddingTop=Math.round(520*s)+"px"};
+    place();addEventListener("resize",place);if(!document.querySelector(".intro"))mono.classList.add("on");
+    if(t.envelope){const he=document.createElement("div");he.className="henv";he.id="henv";he.style.setProperty("--envimg",`url("${base}themes/${t.id}/env-base.webp")`);he.style.setProperty("--sealimg",`url("${base}themes/${t.id}/seal.webp")`);
+      he.innerHTML=`<div class="lay flap"></div><div class="card"><small>Our Memories</small><b>${esc(A.groom)}<i>&amp;</i>${esc(A.bride)}</b><em>${esc($("date").textContent)}</em></div><div class="lay body"></div><div class="hseal"></div>`;
+      const h=document.querySelector(".hero");h.insertBefore(he,$("welcome"));b.classList.add("hasenv");
+      const te=document.createElement("div");te.className="tenv";te.id="tenv";te.style.backgroundImage=`url("${base+t.envelope}")`;document.querySelector(".sum").appendChild(te);
+      const p0=()=>{const W=innerWidth,H=innerHeight,s=Math.max(W/941,H/1672);h.style.paddingTop=Math.round(470*s)+"px"};p0();addEventListener("resize",p0)}}}
+function flyIn(tile){const vis=el=>{if(!el)return false;const r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight};
+  const env=[document.getElementById("tenv"),document.getElementById("henv")].find(vis);if(!env||!tile)return;const a=tile.getBoundingClientRect(),e=env.getBoundingClientRect();
+  const f=document.createElement("div");f.className="flyer";
+  const bg=tile.style.backgroundImage;if(bg)f.style.backgroundImage=bg;else f.style.background="#dfe5d6";
+  f.style.cssText+=`left:${a.left}px;top:${a.top}px;width:${a.width}px;height:${a.height}px`;document.body.appendChild(f);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{const dx=e.left+e.width/2-(a.left+a.width/2),dy=e.top+e.height*.55-(a.top+a.height/2);f.style.transform=`translate(${dx}px,${dy}px) scale(.25) rotate(-12deg)`;f.style.opacity=".2"}));
+  setTimeout(()=>{f.remove();env.classList.remove("gulp");void env.offsetWidth;env.classList.add("gulp")},900)}
+const esc=t=>String(t==null?"":t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* ---------- picking + uploading ---------- */
 const Q=[];let running=0,totalBytes=0,doneBytes=0,okCount=0,failCount=0,busy=false;
@@ -291,7 +421,7 @@ function sum(){
 
 async function run(){busy=true;
   const next=()=>Q.find(x=>!x.st);
-  const worker=async()=>{let it;while((it=next())){it.st="up";try{await send(it);it.st="ok";okCount++;it.el.classList.add("done")}
+  const worker=async()=>{let it;while((it=next())){it.st="up";try{await send(it);it.st="ok";okCount++;it.el.classList.add("done");flyIn(it.el)}
     catch(e){it.st="err";failCount++;it.sent=0;it.el.classList.add("err");it.el.querySelector(".ov").textContent="ما اترفعش";errNote(e)}sum()}};
   await Promise.all(Array.from({length:CONC},worker));
   busy=false;sum();

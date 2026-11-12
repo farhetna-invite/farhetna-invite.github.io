@@ -12,6 +12,9 @@
 <title>فرحتنا | لوحة الأكواد</title>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="memories/qr.js"></script>
+<script src="memories/themes.js"></script>
+<script src="memories/card.js"></script>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
@@ -198,6 +201,7 @@ function drawMems(list){const box=$("mems");box.innerHTML="";const pend=list.fil
   list.forEach(x=>{const d=document.createElement("div");d.className="ord";
     const top=document.createElement("div");top.className="top";const no=document.createElement("b");no.style.color="#3c4733";no.textContent=x.groom+" & "+x.bride;
     const st=document.createElement("span");st.className="tag st-"+x.status;st.textContent=MST[x.status]||x.status;top.append(no,st);
+    if(window.FMThemes){const th=document.createElement("span");th.className="tag";th.style.cssText="background:#eef1e8;color:#3c4733;font-weight:700";th.textContent="🎨 "+FMThemes.get(x.card_style).name;top.append(th)}
     if(x.src){const sr=document.createElement("span");sr.className="tag "+(x.src.ad?"src-ad":"src-no");sr.textContent=x.src.ad?"📣 من إعلان"+(x.src.camp?" · "+x.src.camp:""):"مش من إعلان";top.append(sr)}
     const meta=document.createElement("div");meta.className="meta";const url=SITE+"m/#"+x.slug;
     const a=document.createElement("a");a.className="l";a.href=url;a.target="_blank";a.textContent="m/#"+x.slug;
@@ -221,6 +225,9 @@ function drawMems(list){const box=$("mems");box.innerHTML="";const pend=list.fil
       btn("📅 غيّري تاريخ الانتهاء","g",()=>{const v=prompt("تاريخ الانتهاء (سنة-شهر-يوم):",(x.expires_at||"").slice(0,10));if(v&&/^\d{4}-\d{2}-\d{2}$/.test(v))memSet(x.id,{p_expires:v})});
       btn("🔑 كود جديد للعروسة","g",async()=>{if(!confirm("الكود القديم هيتلغي، والأجهزة اللي دخلت بيه هتخرج. تكمّلي؟"))return;const r=await SB.rpc("memories_admin_new_code",{p_pass:MPASS,p_id:x.id});if(r.error){alert("حصلت مشكلة");return}
         prompt("الكود الجديد (انسخيه وابعتيه للعروسة):",r.data)});
+      btn("⬇️ كارت الـQR","g",async()=>{if(!window.FMCard){alert("الكارت مش متاح");return}const cv=document.createElement("canvas");
+        await FMCard.draw(cv,{groom:x.groom,bride:x.bride,date:x.event_date,url:SITE+"m/#"+x.slug,theme:FMThemes.get(x.card_style).id,base:"memories/"});
+        cv.toBlob(b=>{const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="farhetna-qr-"+x.slug+".png";document.body.appendChild(a);a.click();a.remove()},"image/png")});
       const wa=document.createElement("a");wa.className="btn w";wa.target="_blank";wa.rel="noopener";wa.textContent="💬 بلّغيها إن الألبوم اتفعّل";
       wa.href="https://wa.me/2"+(x.buyer_phone||"").replace(/\D/g,"").replace(/^2/,"")+"?text="+encodeURIComponent(`أهلاً${x.buyer_name?" "+x.buyer_name:""} 🤍 ألبوم الذكريات بتاعكم اتفعّل!\n\nادخلي لوحة الألبوم بالكود السري اللي ظهرلك وقت الطلب:\n${SITE}memories/album.html\n\nهتلاقي لينك الضيوف وكارت الـQR جاهزين للطباعة.`);
       acts.appendChild(wa)}

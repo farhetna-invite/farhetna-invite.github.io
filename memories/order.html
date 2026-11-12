@@ -35,7 +35,8 @@ label.f small{color:var(--mute);font-weight:400}
 .in[dir=ltr]{text-align:left}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 textarea.in{min-height:80px;resize:vertical;line-height:1.8}
-.sty{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sty{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sty b{display:block;font-family:var(--latin);font-size:17px;color:var(--olive)}
 .sty button{border-radius:14px;padding:6px;box-shadow:inset 0 0 0 1.5px #e4d9c6;background:#fffcf7;text-align:center;font-size:13.5px;color:var(--ink)}
 .sty button.on{box-shadow:inset 0 0 0 2.5px var(--gold);background:#fbf3e4}
 .sty canvas{width:100%;border-radius:8px;display:block;margin-bottom:4px;background:#eee}
@@ -92,13 +93,9 @@ textarea.in{min-height:80px;resize:vertical;line-height:1.8}
     </section>
 
     <section class="card">
-      <h2><i>٢</i> شكل كارت الـQR</h2>
-      <div class="sty" id="sty">
-        <button type="button" data-s="ivory" class="on"><canvas></canvas>عاجي</button>
-        <button type="button" data-s="dark"><canvas></canvas>زيتوني</button>
-        <button type="button" data-s="blush"><canvas></canvas>بلاش</button>
-      </div>
-      <p class="note">تقدري تغيّري الشكل بعدين من لوحة الألبوم.</p>
+      <h2><i>٢</i> تصميم الألبوم</h2>
+      <div class="sty" id="sty"></div>
+      <p class="note">التصميم بيتطبق على صفحة الضيوف وكارت الـQR ولوحة ألبومكم. <a href="designs.html" style="color:var(--gold2);font-weight:700">شوفي التصميمات وجربيها</a></p>
     </section>
 
     <section class="card">
@@ -134,6 +131,7 @@ textarea.in{min-height:80px;resize:vertical;line-height:1.8}
 
 <script src="config.js"></script>
 <script src="qr.js"></script>
+<script src="themes.js"></script>
 <script src="card.js"></script>
 <script src="../fa.js"></script>
 <script>
@@ -142,11 +140,13 @@ const C=window.FM,$=id=>document.getElementById(id);
 const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
 $("price").textContent=ar(C.price);
 const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2400)};
-let style="ivory",receipt=null;
+const TH=window.FMThemes;let style=TH.get((new URLSearchParams(location.search).get("t")||"sage")).id,receipt=null;
+TH.list.forEach(id=>{const t=TH.all[id];const b=document.createElement("button");b.type="button";b.dataset.s=id;b.innerHTML=`<canvas></canvas><b>${t.name}</b>${t.ar}`;$("sty").appendChild(b)});
+document.querySelectorAll("#sty button").forEach(x=>x.classList.toggle("on",x.dataset.s===style));
 
 /* style thumbnails, drawn with the real card renderer */
 function thumbs(){const g=$("groom").value.trim()||"أحمد",b=$("bride").value.trim()||"مريم";
-  document.querySelectorAll("#sty button").forEach(bt=>FMCard.draw(bt.querySelector("canvas"),{groom:g,bride:b,date:$("date").value,url:C.site+"/m/#demo",style:bt.dataset.s}))}
+  document.querySelectorAll("#sty button").forEach(bt=>FMCard.draw(bt.querySelector("canvas"),{groom:g,bride:b,date:$("date").value,url:C.site+"/m/#demo",theme:bt.dataset.s}))}
 let tt;["groom","bride","date"].forEach(id=>$(id).addEventListener("input",()=>{clearTimeout(tt);tt=setTimeout(thumbs,400)}));
 thumbs();
 $("sty").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;style=b.dataset.s;document.querySelectorAll("#sty button").forEach(x=>x.classList.toggle("on",x===b))});
