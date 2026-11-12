@@ -7,6 +7,7 @@
 <link rel="manifest" href="/manifest.webmanifest">
 
 <meta charset="utf-8">
+<script>/* /invitations/ ad link: invitations only, other services hidden */if(/[?&]s=inv(&|$)/.test(location.search))document.documentElement.classList.add("only-inv")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f6ece1">
 <title>فرحتنا | دعوات زفاف رقمية</title>
@@ -739,6 +740,7 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 .sv.sur .sv-tag b{background:rgba(255,250,242,.9)}
 @media(min-width:1000px){.svc-grid{grid-template-columns:repeat(3,1fr);max-width:1180px}}
 .lang-en .sv{text-align:left}.lang-en .sv-tag{right:auto;left:14px}.lang-en .sv-go svg{transform:scaleX(-1)}
+.only-inv #services{display:none}
 </style>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>

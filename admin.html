@@ -248,7 +248,7 @@ async function loadMags(){const r=await SB.rpc("mag_admin_list",{p_pass:MPASS||P
   list.forEach(x=>{const d=document.createElement("div");d.className="ord";
     const top=document.createElement("div");top.className="top";const no=document.createElement("b");no.style.color="#0f2a22";no.textContent="📖 "+(x.recipient||"—");
     const st=document.createElement("span");st.className="tag st-"+(x.status==="active"?"active":x.status);st.textContent=GST[x.status]||x.status;
-    const ed=document.createElement("span");ed.className="tag";ed.style.cssText="background:#e7efe9;color:#0f2a22;font-weight:700";ed.textContent="🎨 "+(x.edition||"emerald");top.append(no,st,ed);
+    const ed=document.createElement("span");ed.className="tag";ed.style.cssText="background:#e7efe9;color:#0f2a22;font-weight:700";ed.textContent="🎨 "+(x.edition||"emerald");top.append(no,st,ed);if(x.src){const sr=document.createElement("span");sr.className="tag "+(x.src.ad?"src-ad":"src-no");sr.textContent=x.src.ad?"📣 من إعلان"+(x.src.camp?" · "+x.src.camp:""):"مش من إعلان";top.append(sr)}
     const meta=document.createElement("div");meta.className="meta";const view=SITE+"magazine/view.html#"+x.slug;
     const editOpen=x.edit_until&&new Date(x.edit_until)>new Date();
     meta.append("المناسبة: "+(OCCN[x.occasion]||x.occasion||"—")+" · اللغة: "+(x.lang==="en"?"English":"عربي")+" · 📷 "+x.photos+" صورة",document.createElement("br"),
