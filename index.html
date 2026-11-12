@@ -754,6 +754,10 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 .drawer nav.subnav{margin-top:18px;border-top:0;display:flex;flex-wrap:wrap;gap:6px 16px}
 .drawer nav.subnav a{min-height:36px;border-bottom:0;font-size:.98rem;color:var(--sage);text-decoration:underline;text-underline-offset:4px;animation:none}
 .drawer nav.subnav a::after{content:none}
+.drawer .dwrap{margin-block:auto;padding-bottom:6vh}
+@media(min-height:760px){.drawer .dwrap{padding-bottom:16vh}}
+.drawer small{margin-right:-.4em}
+@media(max-height:620px){.drawer .dwrap{padding-bottom:0}.drawer nav.svcnav a{min-height:60px}.drawer .dl{font-size:2rem}}
 </style>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
@@ -1246,6 +1250,7 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 <div class="scrim" id="scrim"></div>
 <aside class="drawer" id="drawer" aria-label="القائمة" aria-hidden="true">
   <button class="close" id="close" aria-label="إغلاق"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="dwrap">
   <div class="dl">فرحتنا</div><small>FARHETNA</small>
   <div class="dsec">خدماتنا</div>
   <nav class="svcnav">
@@ -1256,7 +1261,7 @@ html:not(.js) .why .feat{opacity:1;transform:none}
   <nav class="subnav">
     <a href="#how">إزاي تطلبي</a><a href="#packages">الأسعار</a><a href="#faq">الأسئلة الشائعة</a>
   </nav>
-  <a class="order" href="studio.html">اطلبي دعوتك</a>
+  </div>
 </aside>
 
 <script>
