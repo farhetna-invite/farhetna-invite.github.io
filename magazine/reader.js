@@ -31,14 +31,28 @@ list.forEach((p,i)=>{const li=document.createElement("li");const img=IMGOF(p.img
 const closeT=()=>{$("sheet").classList.remove("on");$("scrim").classList.remove("on")};
 $("toc").onclick=()=>{$("sheet").classList.add("on");$("scrim").classList.add("on")};$("scrim").onclick=closeT;
 /* voice notes */
+/* background music: optional, off until the reader taps it, never comes back by itself */
+const MU=C.music&&C.music.src?C.music:null;let mus=null,musBtn=null;
+const musicOff=()=>{if(mus&&!mus.paused)mus.pause();if(musBtn){musBtn.classList.remove("on");musBtn.setAttribute("aria-pressed","false")}};
+if(MU){musBtn=document.getElementById("musBtn")||document.createElement("button");musBtn.id="musBtn";musBtn.type="button";musBtn.className="musb";
+  musBtn.setAttribute("aria-pressed","false");musBtn.setAttribute("aria-label",(C.lang==="en"?"Background music: ":"مزيكا الخلفية: ")+MU.name);
+  musBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg><span>'+(C.lang==="en"?"Music":"مزيكا")+'</span>';
+  (document.querySelector(".nav")||document.body).appendChild(musBtn);
+  musBtn.onclick=()=>{if(!mus){mus=new Audio(MU.src);mus.loop=true;mus.preload="auto";mus.volume=.55;mus.addEventListener("pause",()=>{musBtn.classList.remove("on");musBtn.setAttribute("aria-pressed","false")})}
+    if(mus.paused){if(typeof stopAudio==="function")stopAudio();mus.play().then(()=>{musBtn.classList.remove("hint");musBtn.classList.add("on");musBtn.setAttribute("aria-pressed","true")}).catch(()=>{musBtn.classList.add("hint")})}else musicOff()}}
 const aud=$("aud");let playing=null,raf=0;
 function stopAudio(){if(!aud.paused)aud.pause();cancelAnimationFrame(raf);if(playing){playing.querySelectorAll(".wave i").forEach(i=>i.classList.remove("on"));playing.querySelector("svg").innerHTML='<path d="M7 4l13 8-13 8z"/>';playing=null}}
-book.addEventListener("click",e=>{const v=e.target.closest(".vn");if(!v)return;if(playing===v){stopAudio();return}stopAudio();playing=v;aud.src=v.dataset.src||"";if(!aud.src){playing=null;return}aud.currentTime=0;aud.play().catch(()=>{});
+book.addEventListener("click",e=>{const v=e.target.closest(".vn");if(!v)return;if(playing===v){stopAudio();return}stopAudio();musicOff();playing=v;aud.src=v.dataset.src||"";if(!aud.src){playing=null;return}aud.currentTime=0;aud.play().catch(()=>{});
   v.querySelector("svg").innerHTML='<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';const bars=[...v.querySelectorAll(".wave i")];
   const tm=v.querySelector('.tm'),f=x=>Math.floor(x/60)+':'+String(Math.floor(x%60)).padStart(2,'0');
   const tick=()=>{const p=aud.duration?aud.currentTime/aud.duration:0;bars.forEach((b,j)=>b.classList.toggle("on",j/bars.length<=p));if(tm&&aud.duration)tm.textContent=f(aud.currentTime)+' / '+f(aud.duration);if(!aud.paused)raf=requestAnimationFrame(tick)};tick()});
 aud.addEventListener("ended",stopAudio);
-$("open").onclick=()=>$("intro").classList.add("gone");
+$("open").onclick=()=>{$("intro").classList.add("gone");
+  /* sample issue: the tap on "open" starts the music (a user gesture, so phones allow it); if blocked, the button stays ready */
+  if(opts.autoMusic&&musBtn&&(!mus||mus.paused))musBtn.click()};
+/* leaving the page or switching apps stops the music; it only comes back when the reader taps it */
+addEventListener("pagehide",()=>{musicOff();stopAudio()});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){musicOff();stopAudio()}});
 if(opts.open)$("intro").classList.add("gone");
 cnt();
 };

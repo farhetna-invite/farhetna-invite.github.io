@@ -52,6 +52,7 @@ body.smp .book{height:calc(100dvh - 120px);width:min(100vw,calc((100dvh - 120px)
 
 <script src="../memories/config.js"></script>
 <script src="editions.js"></script>
+<script src="music.js"></script>
 <script src="compose.js"></script>
 <script src="reader.js"></script>
 <script>if(/^#sample/.test(location.hash))document.write('<script src="sample.js"><\/script>')</script>
@@ -63,7 +64,7 @@ const show=(p,opts)=>{if(!p||!p.data){msg("المجلة دي مش متاحة د�
   MAG_MOUNT(MAG_COMPOSE(d),p.edition||d.edition,d.recipient,opts)};
 /* the sample issue (Malak): a static file shown to everyone, separate from customer projects, nobody can edit it */
 if(/^#sample/.test(location.hash)){const en=location.hash==="#sample-en",S=window.MAG_SAMPLE;if(!S){msg("المجلة التجريبية مش متاحة دلوقتي.");return}
-  const c=S[en?"en":"ar"];MAG_MOUNT(c,"emerald",c.intro.t,{tag:en?"Sample issue":"مجلة تجريبية للعرض"});
+  const c=S[en?"en":"ar"];c.music={src:"../music-waltz.mp3",name:en?"Piano & strings":"بيانو وكمنجات"};MAG_MOUNT(c,"emerald",c.intro.t,{tag:en?"Sample issue":"مجلة تجريبية للعرض",autoMusic:true});
   const b=document.getElementById("smpbar"),lg=document.getElementById("smpLg"),mk=document.getElementById("smpMk");
   lg.textContent=en?"ع":"EN";lg.href=en?"#sample":"#sample-en";if(en){mk.textContent="✨ Design yours for free";b.querySelector(".bk").textContent="←"}
   lg.onclick=e=>{e.preventDefault();location.replace(lg.href);location.reload()};

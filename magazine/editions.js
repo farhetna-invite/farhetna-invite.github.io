@@ -46,3 +46,4 @@ const EDITIONS={
 
 
 window.MAG_EDITIONS=EDITIONS;window.MAG_FIT=fit;
+
