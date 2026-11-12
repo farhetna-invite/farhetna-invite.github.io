@@ -247,6 +247,21 @@ footer a{color:var(--gold2);font-weight:600}
 .rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
 .rv.on{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* polish before ads */
+.who{display:inline-block;margin:6px 0 2px;font-size:12.5px;font-weight:700;color:var(--olive);background:rgba(127,143,112,.12);border-radius:99px;padding:3px 12px}
+.flow{list-style:none;display:flex;justify-content:flex-start;gap:6px;margin:4px 0 18px;padding:0;font-size:14px;color:var(--olive);font-weight:600;flex-wrap:wrap}
+.flow li{display:flex;align-items:center;gap:5px;background:var(--paper);border-radius:99px;padding:5px 11px;box-shadow:inset 0 0 0 1px rgba(195,160,102,.3)}
+.flow li+li:before{content:"←";color:var(--gold2);margin-inline-end:4px;font-weight:400}
+.flow i{font-style:normal}
+.seeal{display:block;margin-top:12px;font-size:14.5px;color:var(--gold2);font-weight:700;text-decoration:underline;text-underline-offset:5px}
+.fe.sm{opacity:.92}.fe.sm b{font-size:15px}
+.fe.top{box-shadow:inset 0 0 0 1.5px rgba(195,160,102,.45)}
+.pl2{display:block;text-align:center;margin-top:10px;font-size:13.5px;color:var(--sage2);text-decoration:underline;text-underline-offset:4px}
+@media(max-width:860px){.flow{justify-content:center}.seeal{text-align:center}}
+@media(max-width:700px){.hero .tag{display:none}.hero .lead{font-size:16px}.flow{font-size:12.5px;gap:3px;flex-wrap:nowrap}.flow li{padding:4px 8px;white-space:nowrap}.flow li+li:before{margin-inline-end:2px}
+  .vis{height:420px;transform:scale(.82);transform-origin:50% 0;margin-bottom:-76px}}
+@media(max-width:359px){.flow{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -265,9 +280,10 @@ footer a{color:var(--gold2);font-weight:600}
       <span class="tag">✨ جديد من فرحتنا</span>
       <div class="kick">Farhetna Memories</div>
       <h1>كل صور فرحكم<br>في <em>ألبوم واحد</em></h1>
-      <p class="lead">كارت QR أنيق على الترابيزات، الضيوف يمسحوه ويرفعوا صورهم وفيديوهاتهم وتهانيهم من موبايلهم في ثواني — من غير تطبيق ولا تسجيل. وكلها توصلكم في ألبوم خاص بيكم.</p>
-      <div class="ctas"><a class="try" href="#tryIt"><span class="ti">📱</span><span><b>جرّبي بنفسك</b><small>إزاي ضيوفك هيشاركوا صورهم</small></span><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a><a class="b2" href="#price">اطلبي ألبومك · <span class="pr">399</span> جنيه</a></div>
-      <div class="trust"><span>من غير تطبيق</span><span>صور وفيديوهات</span><span>ألبوم خاص ومقفول</span></div>
+      <p class="lead">ضيوفك بيصوّروا فرحك من كل زاوية… خلّي كل الصور دي توصلك. كارت QR على الترابيزات، والضيوف يرفعوا صورهم وفيديوهاتهم من موبايلهم من غير تطبيق.</p>
+      <ol class="flow"><li><i>📱</i>يمسحوا الكود</li><li><i>📸</i>يرفعوا صورهم</li><li><i>💌</i>توصلك كلها</li></ol>
+      <div class="ctas"><a class="try" href="#tryIt"><span class="ti">📱</span><span><b>جرّبي ألبوم الضيوف مجانًا</b><small>زي ما ضيوفك هيشوفوه بالظبط</small></span><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a><a class="b2" href="#price">اطلبي ألبومك · <span class="pr">399</span> جنيه</a></div>
+      <a class="seeal" href="#album">👰 وشوفي ألبوم العروسين، ده اللي هيوصلك ←</a>
     </div>
     <div class="vis" aria-hidden="true">
       <div class="phone"><div class="sc"><div class="mini">
@@ -287,9 +303,9 @@ footer a{color:var(--gold2);font-weight:600}
   <div class="in">
     <div class="h rv"><div class="k">How it works</div><h2>بسيطة لأقصى درجة</h2><div class="orn">✦</div></div>
     <div class="steps">
-      <div class="st rv"><span class="num">1</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-3.5L6 21z"/><path d="M9.5 9.5l1.8 1.8 3.3-3.6"/></svg></div><h3>اطلبي ألبومك</h3><p>اكتبي أسامي العروسين وتاريخ الفرح وادفعي بإنستاباي، وألبومكم يتفعّل خلال ٢٤ ساعة.</p></div>
-      <div class="st rv"><span class="num">2</span><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg></div><h3>اطبعي كارت الـQR</h3><p>كارت فخم بأساميكم جاهز للطباعة. حطّيه على الترابيزات أو عند الاستقبال، أو ابعتي اللينك على جروب العيلة.</p></div>
-      <div class="st rv"><span class="num">3</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><h3>استلمي ذكرياتكم</h3><p>كل صورة وفيديو وتهنئة بتوصلك في ألبوم خاص بكود، تشوفيه وتنزّليه كله في أي وقت.</p></div>
+      <div class="st rv"><span class="num">1</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-3.5L6 21z"/><path d="M9.5 9.5l1.8 1.8 3.3-3.6"/></svg></div><h3>اطلبي ألبومك</h3><p>اختاري التصميم وادفعي بإنستاباي، ويتفعّل خلال ٢٤ ساعة.</p></div>
+      <div class="st rv"><span class="num">2</span><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 18h2M18 14h2"/></svg></div><h3>حطّي كارت الـQR</h3><p>على الترابيزات، والضيوف يمسحوه ويرفعوا من موبايلهم.</p></div>
+      <div class="st rv"><span class="num">3</span><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></div><h3>استلمي ذكرياتكم</h3><p>كل الصور والفيديوهات والتهاني في ألبوم خاص، تنزّليها في أي وقت.</p></div>
     </div>
   </div>
 </section>
@@ -309,7 +325,7 @@ footer a{color:var(--gold2);font-weight:600}
 <section class="s" id="demo">
   <div class="in demo">
     <div>
-      <div class="h rv" style="text-align:right;margin:0 0 22px"><div class="k">Live demo</div><h2>جرّبي زي الضيف بالظبط</h2><p>دي نفس الصفحة اللي ضيوفك هيشوفوها. اختاري صور من جهازك وشوفي الرفع — في التجربة دي مفيش حاجة بتترفع فعلًا.</p></div>
+      <div class="h rv" style="text-align:right;margin:0 0 22px"><div class="k">Live demo</div><span class="who">📱 تجربة الضيف</span><h2>جرّبي زي الضيف بالظبط</h2><p>دي نفس الصفحة اللي ضيوفك هيشوفوها. اختاري صور من جهازك وشوفي الرفع — في التجربة دي مفيش حاجة بتترفع فعلًا.</p></div>
       <ul class="dl">
         <li class="rv"><i>📸</i><div><b>زرار واحد كبير</b><span>الضيف يختار كذا صورة وفيديو مرة واحدة من موبايله.</span></div></li>
         <li class="rv"><i>⏳</i><div><b>يشوف الرفع لحظة بلحظة</b><span>نسبة واضحة وعلامة ✓ على كل صورة توصل.</span></div></li>
@@ -323,14 +339,14 @@ footer a{color:var(--gold2);font-weight:600}
         <button class="op" type="button" data-t="blush" role="tab" aria-selected="false"><img src="themes/blush/guest.webp" alt="" loading="lazy"><span><b>Blush</b><small>بحيرة وورد</small></span></button>
       </div>
       <div class="dev" id="dev"><div class="scr"><iframe id="devF" src="../m/index.html#demo=sage" title="تجربة صفحة الضيف" loading="lazy"></iframe></div></div>
-      <p class="devcap">مرّري جوه الموبايل وجرّبي الرفع · <a id="devFull" href="../m/index.html#demo=sage" style="color:var(--gold2);font-weight:700">افتحيها بملء الشاشة</a></p>
+      <p class="devcap">🔒 تجربة توضيحية: الصور اللي هتختاريها مش بتترفع على أي سيرفر.<br>مرّري جوه الموبايل وجرّبي · <a id="devFull" href="../m/index.html#demo=sage" style="color:var(--gold2);font-weight:700">افتحيها بملء الشاشة</a></p>
     </div>
   </div>
 </section>
 
 <section class="s alb" id="album">
   <div class="in">
-    <div class="h rv"><div class="k">Your private album</div><h2>ألبومكم الخاص</h2><p>بكود سري يوصلكم لوحدكم. ده شكل توضيحي لألبومكم.</p><div class="orn">✦</div></div>
+    <div class="h rv"><div class="k">Your private album</div><span class="who">👰 للعروسين بس</span><h2>ألبومكم الخاص</h2><p>ده اللي بتشوفوه إنتوا، بكود سري. الضيوف ما بيشوفوهوش. (بيانات توضيحية)</p><div class="orn">✦</div></div>
     <div class="abox rv">
       <div class="ahead"><div class="t">أحمد &amp; مريم<small>١٢٨ صورة · ١٤ فيديو · ٣٧ تهنئة</small></div><button class="dlall" type="button" id="dlDemo">⬇️ نزّلي الكل</button></div>
       <div class="tabs" id="tabs"><button class="on" data-f="all">الكل</button><button data-f="p">الصور</button><button data-f="v">الفيديوهات</button><button data-f="m">التهاني</button></div>
@@ -355,12 +371,12 @@ footer a{color:var(--gold2);font-weight:600}
   <div class="in">
     <div class="h rv"><div class="k">Everything included</div><h2>كل اللي محتاجاه</h2><div class="orn">✦</div></div>
     <div class="feat">
-      <div class="fe rv"><i>📱</i><b>من غير تطبيق ولا تسجيل</b><span>الضيف يمسح الكود ويرفع على طول، من آيفون أو أندرويد.</span></div>
-      <div class="fe rv"><i>🎬</i><b>صور وفيديوهات</b><span>مساحة ٣ جيجا للألبوم (حوالي ١٠٠٠ صورة و٣٠ فيديو)، والفيديو لحد ٥٠ ميجا.</span></div>
-      <div class="fe rv"><i>🔒</i><b>خصوصية كاملة</b><span>الصور في تخزين خاص ومقفول، مش على لينك عام.</span></div>
-      <div class="fe rv"><i>⬇️</i><b>نزّلي كل حاجة</b><span>صورة صورة، أو الألبوم كله مرة واحدة.</span></div>
-      <div class="fe rv"><i>🗑️</i><b>إنتي المتحكمة</b><span>امسحي أي صورة مش عاجباكي، واقفلي الرفع وقت ما تحبي.</span></div>
-      <div class="fe rv"><i>🖨️</i><b>كارت QR جاهز للطباعة</b><span>بأساميكم وبتصميم فرحتنا، وبجودة عالية.</span></div>
+      <div class="fe top rv"><i>📱</i><b>رفع في ثواني</b><span>من غير تطبيق ولا تسجيل، من أي موبايل.</span></div>
+      <div class="fe top rv"><i>🔒</i><b>خصوصية كاملة</b><span>ألبوم مقفول، محدش يشوفه غيركم.</span></div>
+      <div class="fe top rv"><i>⬇️</i><b>نزّلي كل حاجة</b><span>صورة صورة، أو الألبوم كله مرة واحدة.</span></div>
+      <div class="fe top rv"><i>🖨️</i><b>كارت QR جاهز للطباعة</b><span>بأساميكم وبجودة عالية.</span></div>
+      <div class="fe sm rv"><i>🎬</i><b>صور وفيديوهات</b><span>٣ جيجا للألبوم، والفيديو لحد ٥٠ ميجا.</span></div>
+      <div class="fe sm rv"><i>🗑️</i><b>إنتي المتحكمة</b><span>امسحي أي صورة، واقفلي الرفع وقت ما تحبي.</span></div>
     </div>
   </div>
 </section>
@@ -374,9 +390,10 @@ footer a{color:var(--gold2);font-weight:600}
         <ul><li>صفحة رفع باسم العروسين</li><li>كارت QR جاهز للطباعة</li><li>صور وفيديوهات وتهاني</li><li>ألبوم خاص بكود + تنزيل الكل</li></ul>
         <a class="b1" id="orderBtn" href="designs.html">اطلبي ألبومك</a></div>
       <div class="pc rv"><span class="bd">مع دعوة من فرحتنا</span>
-        <h3>إضافة الألبوم على دعوتك</h3><div class="amt"><span class="plus">+</span><span class="pa">249</span><small>جنيه</small></div><div class="sub">بتتضاف على سعر الدعوة — مش سعر الاتنين مع بعض</div><div class="ex">مثال: دعوة فاخرة <b>٣٥٠</b> + الألبوم <b>٢٤٩</b> = <b>٥٩٩ جنيه</b></div>
+        <h3>مع دعوة من فرحتنا</h3><div class="amt"><span class="plus">+</span><span class="pa">249</span><small>جنيه</small></div><div class="sub"><b>سعر إضافة</b> على دعوة من فرحتنا، مش سعر ألبوم لوحده</div><div class="ex">مثال: دعوة فاخرة <b>٣٥٠</b> + الألبوم <b>٢٤٩</b> = <b>٥٩٩ جنيه</b></div>
         <ul><li>كل مميزات الألبوم</li><li>الكارت بنفس ألوان دعوتك</li><li>كل حاجة من نفس الحساب</li></ul>
-        <a class="b2" href="../studio.html">اختاري دعوتك الأول</a></div>
+        <a class="b2" href="https://wa.me/201280067110?text=%D8%B9%D8%A7%D9%8A%D8%B2%D8%A9%20%D8%A3%D8%B6%D9%8A%D9%81%20%D8%A3%D9%84%D8%A8%D9%88%D9%85%20%D8%A7%D9%84%D8%B0%D9%83%D8%B1%D9%8A%D8%A7%D8%AA%20(%D9%A2%D9%A4%D9%A9%20%D8%AC%D9%86%D9%8A%D9%87)%20%D8%B9%D9%84%D9%89%20%D8%AF%D8%B9%D9%88%D8%AA%D9%8A" target="_blank" rel="noopener">ضيفيه على دعوتك · واتساب</a>
+        <a class="pl2" href="../#designs">لسه ما اخترتيش دعوة؟ شوفي التصميمات</a></div>
     </div>
     <p class="pnote">الدفع بإنستاباي، والألبوم بيتفعّل بعد تأكيد التحويل خلال ٢٤ ساعة. وعندك سؤال؟ <a href="https://wa.me/201280067110" style="color:var(--gold2);font-weight:700">كلّمينا على واتساب</a></p>
   </div>
