@@ -316,7 +316,7 @@ async function shrink(f){
     const M=2048,s=Math.min(1,M/Math.max(bmp.width,bmp.height));
     if(s===1&&f.size<1.6*1048576&&/jpe?g/i.test(f.type))return {blob:f,type:"image/jpeg",ext:"jpg"};
     const c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
-    c.getContext("2d").drawImage(bmp,0,0,c.width,c.height);bmp.close&&bmp.close();
+    const cx=c.getContext("2d");cx.fillStyle="#fff";cx.fillRect(0,0,c.width,c.height);cx.drawImage(bmp,0,0,c.width,c.height);bmp.close&&bmp.close();
     const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.86));if(!b)throw 0;return {blob:b,type:"image/jpeg",ext:"jpg"}
   }catch(e){const ext=(f.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";return {blob:f,type:f.type||"image/jpeg",ext}}
 }
