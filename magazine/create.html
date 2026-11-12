@@ -106,6 +106,10 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,30px);opacity:0;background:var(--em);color:var(--gold2);border-radius:30px;padding:10px 18px;font-size:14px;transition:.3s;z-index:60;max-width:90vw;text-align:center}
 .toast.on{transform:translate(-50%,0);opacity:1}
 fieldset{border:0}fieldset[disabled]{opacity:.6}
+.lnk{display:block;margin:14px auto 0;background:none;border:0;color:var(--em2,#1c4537);font:inherit;font-size:14.5px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.resume .card{margin-top:10px}
+.smpl{display:block;margin:-4px 0 14px;padding:10px 14px;border-radius:14px;background:rgba(114,90,128,.09);border:1px solid rgba(114,90,128,.22);color:#3e2f47;font-size:14.5px;text-decoration:none}
+.smpl b{color:#725A80}
 </style>
 </head>
 <body>
@@ -118,6 +122,7 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
   <!-- 0 start -->
   <section data-s="start">
     <h1>صممي مجلة لحد بتحبيه</h1>
+    <a class="smpl" href="view.html#sample">📖 لسه ما شفتيش المجلة؟ <b>افتحي مجلة تجريبية</b></a>
     <p class="lead">اختاري المناسبة والتصميم، وارفعي الصور والكلام، والمجلة بتترتب لوحدها في ١٢ صفحة. وكل حاجة بتتحفظ أول بأول.</p>
     <div class="card">
       <label class="f">المناسبة</label>
@@ -128,15 +133,17 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
       <div class="chips" id="lng"><button data-v="ar" class="on" type="button">عربي</button><button data-v="en" type="button">English</button></div>
       <label class="f" for="rec0">اسم الشخص اللي المجلة عشانه</label>
       <input class="in" id="rec0" maxlength="30" placeholder="مثلًا: ملك">
-      <button class="btn b1" id="startBtn" type="button">ابدأي المجلة</button>
+      <button class="btn b1" id="startBtn" type="button">ابدأي تصميم مجلتك مجانًا</button>
       <div class="err" id="startErr"></div>
     </div>
-    <div class="card">
-      <b>بدأتي قبل كده؟</b>
-      <p class="note">اكتبي الكود السري بتاع مجلتك وكمّلي من مكان ما وقفتي.</p>
-      <input class="in" id="codeIn" dir="ltr" maxlength="16" autocapitalize="characters" placeholder="G••••••••••" style="margin-top:8px;text-align:center;letter-spacing:.12em">
-      <button class="btn b3" id="resumeBtn" type="button">كمّلي مجلتي</button>
-      <div class="err" id="resumeErr"></div>
+    <div class="resume">
+      <button class="lnk" id="haveCode" type="button">بدأتي مجلة قبل كده من موبايل تاني؟</button>
+      <div class="card" id="resumeBox" hidden>
+        <p class="note">افتحي «لينك الاستكمال» اللي بعتيه لنفسك على واتساب، أو اكتبي الكود اللي فيه هنا.</p>
+        <input class="in" id="codeIn" dir="ltr" maxlength="16" autocapitalize="characters" placeholder="G••••••••••" style="margin-top:8px;text-align:center;letter-spacing:.12em">
+        <button class="btn b3" id="resumeBtn" type="button">كمّلي مجلتي</button>
+        <div class="err" id="resumeErr"></div>
+      </div>
     </div>
   </section>
 
@@ -144,10 +151,11 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
   <section data-s="basics" hidden>
     <div id="statusBox"></div>
     <div class="card" id="codeCard" hidden>
-      <b>🔒 الكود السري لمجلتك</b>
-      <div class="code" id="codeShow"></div>
-      <p class="note">بالكود ده ترجعي تكمّلي من أي موبايل. احتفظي بيه وما تبعتيهوش لحد.</p>
-      <a class="btn b3" id="codeWa" target="_blank" rel="noopener">ابعتيه لنفسك على واتساب</a>
+      <b>🔗 لينك استكمال مجلتك</b>
+      <p class="note">مجلتك بتتحفظ لوحدها، ولو رجعتي من نفس الموبايل هتلاقيها على طول. عشان تكمّلي من أي موبايل تاني، ابعتي اللينك ده لنفسك. ده مفتاح مجلتك، فما تبعتيهوش لحد.</p>
+      <a class="btn b3" id="codeWa" target="_blank" rel="noopener">ابعتي اللينك لنفسك على واتساب</a>
+      <button class="lnk" id="codeCopy" type="button">نسخ اللينك</button>
+      <p class="note" style="margin-top:6px">الكود: <span class="code" id="codeShow" style="display:inline;font-size:inherit;padding:0"></span></p>
     </div>
     <fieldset class="lock">
     <h1>البيانات الأساسية</h1>
@@ -327,17 +335,20 @@ $("startBtn").onclick=async()=>{const n=$("rec0").value.trim();if(n.length<2){$(
     D=Object.assign(D,{recipient:n,occasion:occ,lang,edition});if(!DEMO)try{localStorage.setItem("mag_code",CODE)}catch(e){}
     load(r.project,true);await saveNow();show(1)}
   catch(e){$("startErr").textContent=/rate/.test(e.message)?"اتعملت مجلات كتير من الجهاز ده، جربي بعد شوية":"في مشكلة في الاتصال، جربي تاني"}
-  b.disabled=false;b.textContent="ابدأي المجلة"};
+  b.disabled=false;b.textContent="ابدأي تصميم مجلتك مجانًا"};
 async function resume(code){CODE=(code||"").trim().toUpperCase();if(CODE.length<8)return;
   try{const p=await SB.rpc("mag_claim",{p_code:CODE});try{localStorage.setItem("mag_code",CODE)}catch(e){}load(p,false);
     let s=1;try{s=+sessionStorage.getItem("mag_step")||1}catch(e){}show(p.status==="active"||p.status==="pending"?6:Math.max(1,s))}
   catch(e){$("resumeErr").textContent=/bad_code/.test(e.message)?"الكود ده مش صحيح":"في مشكلة في الاتصال، جربي تاني";show(0)}}
 $("resumeBtn").onclick=()=>resume($("codeIn").value);
+$("haveCode").onclick=()=>{$("resumeBox").hidden=false;$("haveCode").hidden=true;$("codeIn").focus()};
 
 function load(p,isNew){P=p;D=Object.assign({photos:[],letters:[],voices:[],loves:[]},p.data||{});D.recipient=D.recipient||p.recipient;D.occasion=D.occasion||p.occasion;D.lang=D.lang||p.lang;D.edition=D.edition||p.edition;
   EDITABLE=p.editable!==false;$("who").textContent=D.recipient?"· مجلة "+D.recipient:"";
   $("codeCard").hidden=!isNew;$("codeShow").textContent=CODE;
-  $("codeWa").href="https://wa.me/?text="+encodeURIComponent(`🔒 كود مجلتي على فرحتنا (ما تبعتيهوش لحد):\n${CODE}\n\nأكمّل منين: ${C.site}/magazine/create.html`);
+  const rl=`${C.site}/magazine/create.html#c=${CODE}`;
+  $("codeWa").href="https://wa.me/?text="+encodeURIComponent(`🔒 لينك استكمال مجلتي على فرحتنا (ما تبعتيهوش لحد):\n${rl}`);
+  $("codeCopy").onclick=()=>{try{navigator.clipboard.writeText(rl).then(()=>toast("اتنسخ ✓"),()=>prompt("انسخي اللينك:",rl))}catch(e){prompt("انسخي اللينك:",rl)}};
   document.querySelectorAll("[data-k]").forEach(el=>el.value=D[el.dataset.k]||"");$("loves").value=(D.loves||[]).join("\n");
   [...$("gen").children].forEach(b=>b.classList.toggle("on",(b.dataset.v==="m")===!!D.male));
   document.querySelectorAll("fieldset.lock").forEach(f=>f.disabled=!EDITABLE);
@@ -456,6 +467,7 @@ $("orderBtn").onclick=async()=>{const err=$("orderErr");err.textContent="";
 /* ---- start ---- */
 let saved="";try{saved=localStorage.getItem("mag_code")||""}catch(e){}
 const hc=(location.hash.match(/c=([A-Z0-9]+)/i)||[])[1];
+if(hc)try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
 if(DEMO){document.querySelector(".top b").textContent="My Magazine · تجربة";show(0)}else if(hc||saved)resume(hc||saved);else show(0);
 })();
 </script>

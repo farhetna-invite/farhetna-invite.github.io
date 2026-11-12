@@ -13,10 +13,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,800;0,900;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="engine.css">
-<style>.msg{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;background:#0f2a22;color:#efe3c4;font-family:"Noto Naskh Arabic",serif;font-size:17px;line-height:1.9}.msg.on{display:flex}</style>
+<style>.msg{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;text-align:center;padding:30px;background:#0f2a22;color:#efe3c4;font-family:"Noto Naskh Arabic",serif;font-size:17px;line-height:1.9}.msg.on{display:flex}
+.smpbar{position:fixed;z-index:40;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 10px);display:none;gap:8px;align-items:center;font-family:"Noto Naskh Arabic",serif}
+.smpbar.on{display:flex}
+body.smp .stage{padding-bottom:calc(env(safe-area-inset-bottom) + 56px);box-sizing:border-box}
+body.smp .book{height:calc(100dvh - 120px);width:min(100vw,calc((100dvh - 120px)*.72))}
+.smpbar a{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:999px;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap}
+.smpbar .mk{background:linear-gradient(180deg,#f1dfb4,#cdb07a);color:#2c2233;box-shadow:0 10px 24px -10px rgba(0,0,0,.7)}
+.smpbar .lg{background:rgba(10,25,20,.55);color:#efe3c4;border:1px solid rgba(232,207,148,.4);backdrop-filter:blur(6px);font-family:"Cormorant Garamond",serif;padding:9px 14px}
+.smpbar .bk{background:rgba(10,25,20,.55);color:#efe3c4;border:1px solid rgba(232,207,148,.4);backdrop-filter:blur(6px);padding:9px 13px}</style>
 </head>
 <body class="ed-emerald">
 <div class="msg" id="msg"></div>
+<div class="smpbar" id="smpbar"><a class="bk" href="./" aria-label="رجوع">→</a><a class="mk" id="smpMk" href="create.html">✨ صممي مجلتك مجانًا</a><a class="lg" id="smpLg" href="#sample-en">EN</a></div>
 <div class="intro" id="intro">
   <span class="demo" id="demoTag" hidden></span>
   <div class="k">FARHETNA · EMERALD EDITION</div>
@@ -45,12 +54,20 @@
 <script src="editions.js"></script>
 <script src="compose.js"></script>
 <script src="reader.js"></script>
+<script>if(/^#sample/.test(location.hash))document.write('<script src="sample.js"><\/script>')</script>
 <script>
 (()=>{
 const C=window.FM,msg=t=>{const m=document.getElementById("msg");m.textContent=t;m.classList.add("on")};
 const show=(p,opts)=>{if(!p||!p.data){msg("المجلة دي مش متاحة دلوقتي.");return}
   const d=Object.assign({},p.data,{lang:p.lang||p.data.lang,recipient:p.data.recipient||p.recipient});
   MAG_MOUNT(MAG_COMPOSE(d),p.edition||d.edition,d.recipient,opts)};
+/* the sample issue (Malak): a static file shown to everyone, separate from customer projects, nobody can edit it */
+if(/^#sample/.test(location.hash)){const en=location.hash==="#sample-en",S=window.MAG_SAMPLE;if(!S){msg("المجلة التجريبية مش متاحة دلوقتي.");return}
+  const c=S[en?"en":"ar"];MAG_MOUNT(c,"emerald",c.intro.t,{tag:en?"Sample issue":"مجلة تجريبية للعرض"});
+  const b=document.getElementById("smpbar"),lg=document.getElementById("smpLg"),mk=document.getElementById("smpMk");
+  lg.textContent=en?"ع":"EN";lg.href=en?"#sample":"#sample-en";if(en){mk.textContent="✨ Design yours for free";b.querySelector(".bk").textContent="←"}
+  lg.onclick=e=>{e.preventDefault();location.replace(lg.href);location.reload()};
+  document.getElementById("open").addEventListener("click",()=>{document.body.classList.add("smp");b.classList.add("on")});return}
 /* preview from the builder (same device, nothing published) */
 if(location.hash==="#preview"){addEventListener("message",e=>{if(e.origin!==location.origin||!e.data||e.data.t!=="mag-preview")return;show(e.data.p,{tag:"معاينة — مش منشورة"})});
   (window.opener||window.parent).postMessage({t:"mag-ready"},location.origin);return}
