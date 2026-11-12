@@ -39,18 +39,28 @@ a{color:inherit;text-decoration:none}img{display:block;max-width:100%}
 .hero:before{content:"";position:absolute;inset:0;background:radial-gradient(40% 30% at 80% 10%,rgba(241,223,180,.18),transparent 70%),radial-gradient(40% 30% at 10% 90%,rgba(241,223,180,.12),transparent 70%);pointer-events:none}
 .hero .in{position:relative;display:grid;gap:34px;align-items:center}
 .kick{font-family:var(--lat);letter-spacing:.32em;font-size:13px;color:var(--goldT);text-transform:uppercase}
-.hero h1{font-family:var(--ruq);font-size:clamp(34px,8.5vw,58px);line-height:1.35;margin:10px 0 12px;color:#fbf4e6}
+.hero h1{font-family:var(--ruq);font-size:clamp(31px,8vw,52px);line-height:1.45;margin:12px 0 16px;color:#fbf4e6;text-wrap:balance}
+.hero h1 em{display:block;margin-top:2px}
 .hero h1 em{font-style:normal;background:linear-gradient(180deg,#f6e6bf,#c9a564);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p.lead{font-size:17px;color:#ece3d6;max-width:520px}
+.hero p.lead{font-size:17px;line-height:1.95;color:#ece3d6;max-width:500px}
+.hero .lead2{display:inline-block;margin-top:8px;color:#f6e6bf;font-weight:600}
 .ctas{display:flex;flex-direction:column;gap:12px;margin-top:24px;max-width:420px}
 .btn{display:flex;align-items:center;justify-content:center;gap:10px;height:56px;border-radius:16px;font-size:17px;font-weight:700;transition:transform .2s}
 .btn:active{transform:scale(.98)}
 .b-gold{background:linear-gradient(180deg,var(--gold1),var(--gold));color:var(--plum3);box-shadow:0 14px 28px -14px rgba(30,15,40,.8)}
 .b-line{border:1.5px solid rgba(241,223,180,.7);color:#fbf4e6;background:rgba(255,255,255,.06)}
 .b-plum{background:linear-gradient(180deg,#7f6690,var(--plum2));color:#fbf4e6;box-shadow:0 14px 28px -14px rgba(60,40,70,.8)}
+.b-two{flex-direction:column;gap:2px;height:auto;min-height:64px;padding:10px 18px}
+.b-two .bl{display:flex;align-items:center;gap:10px}
+.b-two small{font-size:12.5px;font-weight:500;opacity:.78;white-space:nowrap}
 .btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.trust{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:18px;font-size:13.5px;color:#e4d9e6}
-.trust span:before{content:"✓ ";color:var(--goldT)}
+.hero .in>div{min-width:0}
+.trust{list-style:none;display:flex;flex-wrap:wrap;row-gap:8px;margin-top:20px;max-width:420px;font-size:13px;color:#e9dfea}
+.trust li{display:flex;align-items:center;gap:5px;padding:0 10px;white-space:nowrap}
+.trust li:first-child{padding-right:0}
+.trust li+li{border-right:1px solid rgba(233,214,172,.35)}
+.trust i{font-style:normal;font-size:14px}
+@media(max-width:420px){.trust{font-size:12.5px}.trust li{padding:0 8px}}
 
 /* 3D magazine */
 .mag{perspective:1600px;display:flex;justify-content:center;padding:10px 0 20px}
@@ -128,7 +138,7 @@ footer a{color:var(--plum)}
 @media(min-width:900px){
   .hero{padding:120px 0 90px}
   .hero .in{grid-template-columns:1.05fr .95fr}
-  .ctas{flex-direction:row}.ctas .btn{flex:1;padding:0 18px}
+  .ctas{flex-direction:row;max-width:600px}.ctas .btn{flex:1;padding:0 18px}.ctas .b-two{flex:1.35;padding:10px 18px}
   .steps{grid-template-columns:repeat(2,1fr)}
   .eds{grid-template-columns:repeat(4,1fr)}
   .fts{grid-template-columns:repeat(2,1fr)}
@@ -146,13 +156,13 @@ footer a{color:var(--plum)}
   <div class="in">
     <div>
       <div class="kick">The Surprise · My Magazine</div>
-      <h1>هدية <em>محدش هيتوقعها</em>…<br>مجلة كاملة عنه هو</h1>
-      <p class="lead">صوره، وذكرياتكم سوا، ورسائل صحابه وأصواتهم… في عدد خاص باسمه، بغلاف مجلة حقيقية، يفتحه من موبايله ويقلّب صفحاته واحدة واحدة.</p>
+      <h1>تخيّلي حد يفتح هديته… <em>يلاقي مجلة كاملة بتحكي حكايته!</em></h1>
+      <p class="lead">صوره، ذكرياته، وضحكاته مع اللي بيحبهم… كلها في مجلة شخصية معمولة مخصوص عشانه.<br><span class="lead2">هدية مش بس هيفتحها، دي هيفضل فاكرها.</span></p>
       <div class="ctas">
-        <a class="btn b-gold" href="view.html#sample" data-ev="sample"><svg viewBox="0 0 24 24"><path d="M4 6c3-1.5 5.5-1.5 8 0v13c-2.5-1.5-5-1.5-8 0zM20 6c-3-1.5-5.5-1.5-8 0v13c2.5-1.5 5-1.5 8 0z"/></svg>افتحي مجلة تجريبية</a>
+        <a class="btn b-gold b-two" href="view.html#sample" data-ev="sample"><span class="bl"><svg viewBox="0 0 24 24"><path d="M4 6c3-1.5 5.5-1.5 8 0v13c-2.5-1.5-5-1.5-8 0zM20 6c-3-1.5-5.5-1.5-8 0v13c2.5-1.5 5-1.5 8 0z"/></svg>افتحي مجلة تجريبية</span><small>وشوفي الهدية من جوّه قبل ما تصمميها</small></a>
         <a class="btn b-line" href="create.html" data-ev="create">✨ صممي مجلتك مجانًا</a>
       </div>
-      <div class="trust"><span>بتصمميها وتشوفيها قبل ما تدفعي</span><span>من غير أبليكيشن</span><span>عربي أو English</span></div>
+      <ul class="trust"><li><i>👀</i>معاينة قبل الدفع</li><li><i>📱</i>من غير أبليكيشن</li><li><i>🌍</i>عربي أو English</li></ul>
     </div>
     <a class="mag" href="view.html#sample" aria-label="افتحي المجلة التجريبية">
       <div class="vol"><div class="sp"></div><div class="fr"><img src="sample/cover.webp" alt="غلاف مجلة MALAK — The Birthday Issue" width="700" height="971"></div><div class="gl"></div><div class="pg"></div><span class="tagN">افتحيها ←</span></div>
