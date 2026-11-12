@@ -1265,6 +1265,26 @@ body.inviting #builder{display:none}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 .editcode{display:block;margin:-8px auto 18px;background:none;border:0;color:#6d1f2f;font-weight:700;font-size:.95rem;text-decoration:underline;cursor:pointer}
+
+/* ===== help button ===== */
+#hlpBtn{position:fixed;z-index:190;left:12px;bottom:calc(var(--actH,200px) + 12px + env(safe-area-inset-bottom));height:42px;padding:0 14px 0 12px;font-size:.88rem;border-radius:999px;border:0;
+  background:#6d1f2f;color:#fff;font:700 .95rem inherit;font-family:inherit;display:flex;align-items:center;gap:6px;box-shadow:0 8px 22px rgba(109,31,47,.35);cursor:pointer}
+#hlpBtn span{font-size:1.15rem}
+#hlpBtn:active{transform:scale(.96)}
+#hlp{position:fixed;inset:0;z-index:210;background:rgba(40,15,20,.5);display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px)}
+#hlp.open{display:flex}
+#hlp .hb{background:#fffaf6;width:100%;max-width:520px;border-radius:24px 24px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom));max-height:86vh;overflow:auto;animation:hup .35s ease}
+@keyframes hup{from{transform:translateY(40px);opacity:0}}
+#hlp h3{font-family:"Aref Ruqaa",serif;font-size:1.6rem;color:#6d1f2f;text-align:center}
+#hlp .hs{text-align:center;color:#8a6b6f;font-size:.9rem;margin:0 0 12px}
+#hlp details{border:1px solid #eadcd6;border-radius:14px;background:#fff;margin:8px 0;overflow:hidden}
+#hlp summary{list-style:none;cursor:pointer;padding:13px 14px;font-weight:700;color:#4a2a30;display:flex;justify-content:space-between;align-items:center;gap:10px}
+#hlp summary::-webkit-details-marker{display:none}
+#hlp summary::after{content:"+";font-size:1.3rem;color:#b08a6a;line-height:1}
+#hlp details[open] summary::after{content:"−"}
+#hlp details p{padding:0 14px 14px;color:#6b5458;font-size:.92rem;line-height:1.85}
+#hlp .hwa{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:14px;padding:14px;border-radius:14px;background:#25d366;color:#fff;font-weight:700;text-decoration:none}
+#hlp .hx{display:block;margin:10px auto 0;background:none;border:0;color:#8a6b6f;font:inherit;cursor:pointer;padding:8px}
 .mdl{position:fixed;inset:0;z-index:200;background:rgba(40,15,20,.55);display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(3px)}
 .mdl.open{display:flex}
 .mdl .box{background:#fffaf6;width:100%;max-width:520px;border-radius:24px 24px 0 0;padding:22px 20px calc(24px + env(safe-area-inset-bottom));max-height:92vh;overflow:auto;animation:up .35s ease}
@@ -2133,6 +2153,20 @@ body.inviting .stbar{display:none}
 
 <div class="demo-tag" id="demoTag" hidden>معاينة · نسخة تجريبية</div>
 
+
+<button id="hlpBtn" type="button" aria-label="مساعدة"><span>💬</span>محتاجة مساعدة؟</button>
+<div id="hlp" role="dialog" aria-modal="true" aria-label="مساعدة"><div class="hb">
+  <h3>إزاي نساعدك؟ 🤍</h3>
+  <p class="hs">دوسي على السؤال وهتلاقي الإجابة</p>
+  <details><summary>أدفع إزاي؟</summary><p>لما تخلصي بيانات دعوتك، دوسي «احصلي على لينك دعوتك 💌». اختاري اسم اللينك، وحوّلي السعر على <b>إنستاباي</b> للرقم <b dir="ltr">01280067110</b>، وارفعي صورة التحويل، واكتبي رقم موبايلك.</p></details>
+  <details><summary>دعوتي هتشتغل إمتى؟</summary><p>بعد ما تبعتي صورة التحويل بنراجعه، ودعوتك بتتفعّل عند الضيوف خلال ٢٤ ساعة بالكتير. تقدري تبعتي اللينك لضيوفك من أول لحظة، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».</p></details>
+  <details><summary>أشوف دعوتي قبل ما أدفع؟</summary><p>أكيد. دوسي «معاينة الكارت ✉️» تحت، وهتشوفيها بالظبط زي ما ضيوفك هيشوفوها، وتقدري تغيّري أي حاجة قبل ما تطلبي.</p></details>
+  <details><summary>أعدّل دعوتي بعد ما أبعتها؟</summary><p>أيوه، وببلاش. من فوق دوسي «عندك كود؟ عدّلي دعوتك ✏️»، واكتبي كود التعديل اللي ظهرلك بعد الطلب. التعديل بيتحفظ على نفس اللينك، فضيوفك مش محتاجين لينك جديد.</p></details>
+  <details><summary>أعرف مين جاي إزاي؟</summary><p>ادخلي بكود التعديل من «عندك كود؟ عدّلي دعوتك ✏️»، وهتلاقي زرار «ردود الحضور ✅» فيه كل اللي أكدوا واللي اعتذروا وعددهم.</p></details>
+  <details><summary>أحط صوري أو أغنيتي إزاي؟</summary><p>الصور من جزء «صوركم وقصتكم»، وبيظهر في التصاميم اللي فيها ألبوم. والأغنية من جزء «المزيكا» ← «ارفعي أغنيتك»، وتختاري الملف من موبايلك.</p></details>
+  <a class="hwa" id="hlpWa" target="_blank" rel="noopener" data-track="Contact">💬 كلّمينا على واتساب</a>
+  <button class="hx" type="button" id="hlpX">قفل</button>
+</div></div>
 <div class="mdl" id="getMdl" role="dialog" aria-modal="true"><div class="box">
   <button class="x" data-close>×</button>
   <div id="getForm">
@@ -3287,6 +3321,27 @@ $("waLead").addEventListener("click",function(){
   const ref=src&&src.ad?`\n\n— ref: إعلان${src.camp?" · "+src.camp:""}`:(src&&src.src==="invite"?"\n\n— ref: من دعوة":"");
   this.href=`https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(`أهلاً فرحتنا 🤍\nعجبني تصميم «${nm}» وعايزة أعرف تفاصيل أكتر.\nالمعاينة: ${CFG.site}studio.html#t=${state.tpl}${ref}`)}`;
 });
+
+/* ===== help: common answers + WhatsApp with where she is ===== */
+(function(){
+  const ov=$("hlp");
+  function where(){
+    if($("getMdl").classList.contains("open"))return "خطوة الطلب والدفع";
+    const hs=[...document.querySelectorAll("section.card h2")].filter(h=>h.offsetParent);let cur="";
+    hs.forEach(h=>{if(h.getBoundingClientRect().top<innerHeight*.55)cur=h.textContent.replace(/^[\d١-٩✦]+/,"").replace(/\(.*\)/,"").trim()});
+    return cur||"أول الصفحة";}
+  function waHref(){
+    const sg=SIG[state.tpl],nm=sg?sg.name:((TPL[state.tpl]||{}).name||"");
+    const m=`أهلاً فرحتنا 🤍\nمحتاجة مساعدة وأنا بصمّم دعوتي.\nالتصميم: ${nm}\nواقفة عند: ${where()}${edit.code?"\nكود التعديل: "+edit.code:""}\n\nسؤالي: `;
+    return `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(m)}`;}
+  const act=document.querySelector(".actions");
+  function fit(){if(act)document.documentElement.style.setProperty("--actH",(innerHeight-act.getBoundingClientRect().top)+"px")}
+  addEventListener("resize",fit);addEventListener("scroll",fit,{passive:true});setTimeout(fit,300);
+  $("hlpBtn").onclick=()=>{$("hlpWa").href=waHref();ov.classList.add("open");};
+  $("hlpWa").addEventListener("click",()=>{$("hlpWa").href=waHref();});
+  $("hlpX").onclick=()=>ov.classList.remove("open");
+  ov.addEventListener("click",e=>{if(e.target===ov)ov.classList.remove("open");});
+})();
 $("previewBtn").onclick=()=>{const o=collect();
   if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
   if(o.music==="custom"&&!customUrl)toast("لسه ما اخترتيش ملف الأغنية");
