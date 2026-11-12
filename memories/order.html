@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e8">
+<meta name="robots" content="noindex">
+<title>اطلبي ألبوم الذكريات · فرحتنا</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#f7f1e8;--paper:#fffdf9;--sage:#7d8f72;--sage2:#5f7356;--olive:#3c4733;--ink:#4a4638;--mute:#8a8574;--gold:#c3a066;--gold2:#a8854a;
+  --naskh:"Noto Naskh Arabic","Amiri",serif;--ruq:"Aref Ruqaa",serif;--latin:"Cormorant Garamond",serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100dvh;background:radial-gradient(90% 40% at 50% 0,#fffaf2,transparent 70%),var(--ivory);color:var(--ink);font-family:var(--naskh);-webkit-tap-highlight-color:transparent}
+button,input,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+a{color:inherit}
+.wrap{max-width:520px;margin:0 auto;padding:18px 18px calc(30px + env(safe-area-inset-bottom,0px))}
+.back{display:inline-flex;gap:6px;align-items:center;color:var(--sage2);font-size:14.5px;text-decoration:none;padding:6px 0}
+.hd{text-align:center;margin:8px 0 18px}
+.hd .k{font-family:var(--latin);font-style:italic;letter-spacing:.25em;color:var(--gold2);font-size:14px}
+.hd h1{font-family:var(--ruq);color:var(--olive);font-size:34px;line-height:1.35}
+.hd p{color:var(--mute);font-size:15px}
+.card{background:var(--paper);border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 10px 28px -20px rgba(90,70,40,.5),inset 0 0 0 1px rgba(195,160,102,.28)}
+.card h2{font-size:17px;color:var(--olive);display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.card h2 i{font-style:normal;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#f2eadb;color:var(--gold2);font-size:14px;font-weight:700}
+label.f{display:block;font-size:14px;color:var(--sage2);margin:10px 0 5px}
+label.f small{color:var(--mute);font-weight:400}
+.in{width:100%;border:1px solid #e4d9c6;background:#fffcf7;border-radius:13px;padding:12px 14px;font-size:16px;outline:none}
+.in:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,160,102,.18)}
+.in[dir=ltr]{text-align:left}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+textarea.in{min-height:80px;resize:vertical;line-height:1.8}
+.sty{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.sty button{border-radius:14px;padding:6px;box-shadow:inset 0 0 0 1.5px #e4d9c6;background:#fffcf7;text-align:center;font-size:13.5px;color:var(--ink)}
+.sty button.on{box-shadow:inset 0 0 0 2.5px var(--gold);background:#fbf3e4}
+.sty canvas{width:100%;border-radius:8px;display:block;margin-bottom:4px;background:#eee}
+.pay{background:#f7f2e8;border-radius:14px;padding:12px;font-size:15px;line-height:1.9}
+.pay b{color:var(--olive)}
+.num{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:8px 12px;margin:6px 0;box-shadow:inset 0 0 0 1px #e8dcc6}
+.num span{font-family:var(--latin);font-size:24px;font-weight:600;letter-spacing:.06em;direction:ltr;color:var(--olive)}
+.num button{border-radius:10px;padding:6px 14px;background:var(--olive);color:#fbf3e3;font-size:14px;font-weight:700}
+.rcpt{display:block;border:1.5px dashed #d6c6a6;border-radius:14px;padding:14px;text-align:center;color:var(--sage2);cursor:pointer;margin-top:8px}
+.rcpt input{display:none}
+.rcpt img{max-width:100%;max-height:220px;border-radius:10px;display:block;margin:0 auto 6px}
+.sum{display:flex;justify-content:space-between;align-items:center;font-size:16px;margin-top:4px}
+.sum b{font-family:var(--latin);font-size:30px;color:var(--olive)}
+.go{margin-top:16px;width:100%;border-radius:16px;padding:16px;font-weight:700;font-size:17px;color:#fffaf0;background:linear-gradient(160deg,#6f8464,#4f6346);box-shadow:0 14px 26px -14px rgba(60,71,51,.85)}
+.go[disabled]{opacity:.6}
+.err{color:#a8432f;text-align:center;margin-top:10px;min-height:1.4em;font-size:15px}
+.note{font-size:13.5px;color:var(--mute);text-align:center;margin-top:10px;line-height:1.8}
+/* done */
+#done{display:none}
+#done.on{display:block;animation:pop .5s ease}
+@keyframes pop{from{opacity:0;transform:translateY(10px)}}
+.code{font-family:var(--latin);font-size:34px;font-weight:600;letter-spacing:.18em;text-align:center;direction:ltr;color:var(--olive);background:#f6efe2;border-radius:16px;padding:14px;margin:10px 0}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:14px;padding:13px;font-weight:700;font-size:16px;margin-top:10px;text-decoration:none}
+.b-olive{background:linear-gradient(160deg,#6f8464,#4f6346);color:#fffaf0}
+.b-gold{background:linear-gradient(180deg,#d4b47a,#ad874b);color:#fffaf0}
+.b-wa{background:#25d366;color:#fff}
+.b-line{box-shadow:inset 0 0 0 1.5px var(--sage);color:var(--sage2)}
+.warn{background:#fbf1ea;color:#8a4d3c;border-radius:12px;padding:10px 12px;font-size:14px;line-height:1.8;margin-top:10px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;background:#3c4733;color:#fff8ea;border-radius:30px;padding:10px 18px;font-size:14px;transition:.3s;z-index:9}
+.toast.on{transform:translate(-50%,0);opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="index.html">→ ألبوم الذكريات</a>
+
+  <div id="form">
+    <div class="hd"><div class="k">Farhetna Memories</div><h1>اطلبي ألبوم الذكريات</h1><p>دقيقتين وتخلصي 🤍</p></div>
+
+    <section class="card">
+      <h2><i>١</i> بيانات الفرح</h2>
+      <div class="row">
+        <div><label class="f" for="groom">اسم العريس</label><input class="in" id="groom" maxlength="40" placeholder="أحمد"></div>
+        <div><label class="f" for="bride">اسم العروسة</label><input class="in" id="bride" maxlength="40" placeholder="مريم"></div>
+      </div>
+      <div class="row">
+        <div><label class="f" for="groomEn">بالإنجليزي <small>(اختياري)</small></label><input class="in" id="groomEn" dir="ltr" maxlength="30" autocapitalize="words" placeholder="Ahmed"></div>
+        <div><label class="f" for="brideEn">بالإنجليزي <small>(اختياري)</small></label><input class="in" id="brideEn" dir="ltr" maxlength="30" autocapitalize="words" placeholder="Mariam"></div>
+      </div>
+      <label class="f" for="date">تاريخ الفرح</label>
+      <input class="in" id="date" type="date">
+      <label class="f" for="welcome">كلمة ترحيب للضيوف <small>(اختياري)</small></label>
+      <textarea class="in" id="welcome" maxlength="400" placeholder="أهلًا بيكم في فرحنا 🤍 شاركونا صوركم…"></textarea>
+    </section>
+
+    <section class="card">
+      <h2><i>٢</i> شكل كارت الـQR</h2>
+      <div class="sty" id="sty">
+        <button type="button" data-s="ivory" class="on"><canvas></canvas>عاجي</button>
+        <button type="button" data-s="dark"><canvas></canvas>زيتوني</button>
+        <button type="button" data-s="blush"><canvas></canvas>بلاش</button>
+      </div>
+      <p class="note">تقدري تغيّري الشكل بعدين من لوحة الألبوم.</p>
+    </section>
+
+    <section class="card">
+      <h2><i>٣</i> الدفع</h2>
+      <div class="sum"><span>ألبوم الذكريات</span><b><span id="price">399</span> <small style="font-size:16px;font-family:var(--naskh)">جنيه</small></b></div>
+      <div class="pay">حوّلي المبلغ على <b>InstaPay</b> للرقم:
+        <div class="num"><span id="ipNum">01280067110</span><button type="button" id="cp">نسخ</button></div>
+        وبعدين ارفعي سكرين شوت التحويل:</div>
+      <label class="rcpt" id="rcptL"><input type="file" id="rcpt" accept="image/*"><img id="rcptPrev" alt="" hidden><span id="rcptTxt">📎 اضغطي هنا واختاري صورة التحويل</span></label>
+      <label class="f" for="name">اسمك</label><input class="in" id="name" autocomplete="name" maxlength="60">
+      <label class="f" for="phone">رقم موبايلك (واتساب)</label><input class="in" id="phone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="01xxxxxxxxx">
+    </section>
+
+    <button class="go" id="go" type="button">ابعتي الطلب</button>
+    <div class="err" id="err"></div>
+    <p class="note">بعد ما نراجع التحويل، الألبوم بيتفعّل خلال ٢٤ ساعة، وتلاقي كل حاجة جاهزة في لوحة الألبوم.</p>
+  </div>
+
+  <div id="done">
+    <div class="hd"><div class="k">Thank you</div><h1>طلبك وصل 🤍</h1><p>بنراجع التحويل، والألبوم هيتفعّل خلال ٢٤ ساعة.</p></div>
+    <section class="card">
+      <h2>🔒 الكود السري لألبومكم</h2>
+      <div class="code" id="code"></div>
+      <p style="font-size:14.5px;line-height:1.8">بالكود ده تدخلي لوحة الألبوم في أي وقت: تشوفي لينك الضيوف، وتنزّلي كارت الـQR، وتشوفي كل الصور. <b>احتفظي بيه وما تبعتيهوش لحد</b> — الضيوف مش محتاجينه.</p>
+      <button class="btn b-olive" id="copyCode" type="button">انسخي الكود</button>
+      <a class="btn b-wa" id="waSelf" target="_blank" rel="noopener">ابعتيه لنفسك على واتساب</a>
+      <a class="btn b-gold" id="openDash">افتحي لوحة الألبوم</a>
+      <div class="warn">لو قفلتي الصفحة دي من غير ما تحفظي الكود، كلّمينا على واتساب وهنساعدك.</div>
+    </section>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="qr.js"></script>
+<script src="card.js"></script>
+<script src="../fa.js"></script>
+<script>
+(()=>{
+const C=window.FM,$=id=>document.getElementById(id);
+const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+$("price").textContent=ar(C.price);
+const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2400)};
+let style="ivory",receipt=null;
+
+/* style thumbnails, drawn with the real card renderer */
+function thumbs(){const g=$("groom").value.trim()||"أحمد",b=$("bride").value.trim()||"مريم";
+  document.querySelectorAll("#sty button").forEach(bt=>FMCard.draw(bt.querySelector("canvas"),{groom:g,bride:b,date:$("date").value,url:C.site+"/m/#demo",style:bt.dataset.s}))}
+let tt;["groom","bride","date"].forEach(id=>$(id).addEventListener("input",()=>{clearTimeout(tt);tt=setTimeout(thumbs,400)}));
+thumbs();
+$("sty").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;style=b.dataset.s;document.querySelectorAll("#sty button").forEach(x=>x.classList.toggle("on",x===b))});
+
+$("cp").onclick=async()=>{try{await navigator.clipboard.writeText($("ipNum").textContent);$("cp").textContent="اتنسخ ✅";setTimeout(()=>$("cp").textContent="نسخ",1500)}catch(e){toast("اضغطي مطوّل على الرقم وانسخيه")}};
+
+function shrink(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{
+  const m=1100,sc=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*sc);c.height=Math.round(im.height*sc);
+  c.getContext("2d").drawImage(im,0,0,c.width,c.height);let q=.75,d=c.toDataURL("image/jpeg",q);while(d.length>600000&&q>.35){q-=.1;d=c.toDataURL("image/jpeg",q)}res(d)};im.src=r.result};r.readAsDataURL(file)})}
+$("rcpt").onchange=async e=>{const f=e.target.files[0];if(!f)return;$("rcptTxt").textContent="بيتجهز…";
+  try{receipt=await shrink(f);$("rcptPrev").src=receipt;$("rcptPrev").hidden=false;$("rcptTxt").textContent="✓ اتضافت — دوسي لو عايزة تغيّريها"}
+  catch(err){receipt=null;$("rcptTxt").textContent="الصورة دي مش شغالة، جربي سكرين شوت تاني"}};
+
+const H={"Content-Type":"application/json",apikey:C.sbKey,Authorization:"Bearer "+C.sbKey};
+async function rpc(fn,body){const r=await fetch(C.sbUrl+"/rest/v1/rpc/"+fn,{method:"POST",headers:H,body:JSON.stringify(body)});const t=await r.text();let j=null;try{j=t?JSON.parse(t):null}catch(e){}
+  if(!r.ok){throw new Error((j&&j.message)||("HTTP "+r.status))}return j}
+
+$("go").onclick=async()=>{const err=$("err");err.textContent="";
+  const v=id=>$(id).value.trim();
+  if(v("groom").length<2){err.textContent="اكتبي اسم العريس";$("groom").focus();return}
+  if(v("bride").length<2){err.textContent="اكتبي اسم العروسة";$("bride").focus();return}
+  if(!v("date")){err.textContent="اختاري تاريخ الفرح";$("date").focus();return}
+  if(!receipt){err.textContent="ارفعي صورة التحويل الأول";return}
+  if(v("name").length<2){err.textContent="اكتبي اسمك";$("name").focus();return}
+  if(v("phone").replace(/\D/g,"").length<10){err.textContent="اكتبي رقم موبايلك";$("phone").focus();return}
+  const b=$("go");b.disabled=true;b.textContent="بيتبعت…";
+  try{const src=(window.farhetnaSource&&window.farhetnaSource())||null;
+    const r=await rpc("memories_create_order",{p_groom:v("groom"),p_bride:v("bride"),p_groom_en:v("groomEn"),p_bride_en:v("brideEn"),p_date:v("date"),
+      p_welcome:v("welcome"),p_style:style,p_name:v("name"),p_phone:v("phone"),p_receipt:receipt,p_src:src});
+    try{localStorage.setItem("fm_code",r.code)}catch(e){}
+    $("code").textContent=r.code;
+    $("waSelf").href="https://wa.me/?text="+encodeURIComponent(`🔒 كود ألبوم الذكريات بتاعنا (ما تبعتيهوش لحد):\n${r.code}\n\nلوحة الألبوم: ${C.site}/memories/album.html`);
+    $("openDash").href="album.html";
+    $("form").style.display="none";$("done").classList.add("on");scrollTo(0,0);
+    try{window.fbq&&fbq("track","Lead",{content_name:"memories",value:C.price,currency:"EGP"})}catch(e){}
+  }catch(e){const m=e.message||"";err.textContent=m.includes("bad_receipt")?"صورة التحويل مش واضحة، جربي سكرين شوت تاني":m.includes("rate")?"اتبعت طلبات كتير من الجهاز ده، جربي بعد شوية":m.includes("phone")?"اكتبي رقم موبايل صحيح":"في مشكلة في الاتصال، جربي تاني"}
+  finally{b.disabled=false;b.textContent="ابعتي الطلب"}};
+$("copyCode").onclick=async()=>{try{await navigator.clipboard.writeText($("code").textContent);toast("اتنسخ الكود ✅")}catch(e){toast("اضغطي مطوّل على الكود وانسخيه")}};
+})();
+</script>
+</body>
+</html>

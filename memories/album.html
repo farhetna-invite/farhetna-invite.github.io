@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f1e8">
+<meta name="robots" content="noindex">
+<title>لوحة ألبوم الذكريات · فرحتنا</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#f7f1e8;--paper:#fffdf9;--sage:#7d8f72;--sage2:#5f7356;--olive:#3c4733;--ink:#4a4638;--mute:#8a8574;--gold:#c3a066;--gold2:#a8854a;
+  --naskh:"Noto Naskh Arabic","Amiri",serif;--ruq:"Aref Ruqaa",serif;--latin:"Cormorant Garamond",serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{min-height:100dvh;background:radial-gradient(90% 40% at 50% 0,#fffaf2,transparent 70%),var(--ivory);color:var(--ink);font-family:var(--naskh);-webkit-tap-highlight-color:transparent}
+button,input{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+a{color:inherit;text-decoration:none}
+[hidden]{display:none!important}
+.wrap{max-width:720px;margin:0 auto;padding:16px 16px calc(40px + env(safe-area-inset-bottom,0px))}
+.top{display:flex;justify-content:space-between;align-items:center;padding:4px 2px 10px}
+.logo{font-family:var(--ruq);font-size:24px;color:var(--olive);line-height:1}
+.logo small{display:block;font-family:var(--latin);font-size:11px;letter-spacing:.2em;color:var(--gold2)}
+.out{font-size:13.5px;color:var(--mute);text-decoration:underline}
+.hd{text-align:center;margin:6px 0 14px}
+.hd .k{font-family:var(--latin);font-style:italic;letter-spacing:.25em;color:var(--gold2);font-size:14px}
+.hd h1{font-family:var(--ruq);color:var(--olive);font-size:clamp(32px,9vw,44px);line-height:1.35}
+.hd h1 b{font-family:var(--latin);font-weight:500;color:var(--gold);margin:0 6px}
+.hd p{color:var(--mute);font-size:14.5px}
+.card{background:var(--paper);border-radius:20px;padding:18px;margin-top:14px;box-shadow:0 10px 28px -20px rgba(90,70,40,.5),inset 0 0 0 1px rgba(195,160,102,.28)}
+.card h2{font-size:17px;color:var(--olive);display:flex;gap:8px;align-items:center;margin-bottom:10px}
+.card h2 .r{margin-inline-start:auto;font-size:13px;font-weight:500;color:var(--mute)}
+.in{width:100%;border:1px solid #e4d9c6;background:#fffcf7;border-radius:13px;padding:13px 14px;font-size:18px;outline:none;text-align:center;letter-spacing:.12em;direction:ltr;text-transform:uppercase}
+.in:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(195,160,102,.18)}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:14px;padding:13px;font-weight:700;font-size:15.5px;margin-top:10px}
+.btn[disabled]{opacity:.6}
+.b-olive{background:linear-gradient(160deg,#6f8464,#4f6346);color:#fffaf0;box-shadow:0 10px 20px -12px rgba(60,71,51,.85)}
+.b-gold{background:linear-gradient(180deg,#d4b47a,#ad874b);color:#fffaf0}
+.b-wa{background:#25d366;color:#fff}
+.b-line{box-shadow:inset 0 0 0 1.5px var(--sage);color:var(--sage2)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row2 .btn{margin-top:10px}
+.err{color:#a8432f;text-align:center;margin-top:10px;min-height:1.3em;font-size:15px}
+.mute{color:var(--mute);font-size:14px;line-height:1.8}
+.link{direction:ltr;text-align:center;background:#f6efe2;border-radius:12px;padding:12px;font-family:var(--latin);font-size:18px;font-weight:600;color:var(--olive);word-break:break-all}
+.st{display:inline-block;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:700}
+.st.pending{background:#fff4e0;color:#8a5a00}.st.active{background:#e8f1e3;color:#3f6236}.st.closed{background:#efe9e0;color:#6b6457}
+.wait{text-align:center;padding:10px 0}
+.wait .em{font-size:40px}
+.wait h3{font-family:var(--ruq);color:var(--olive);font-size:26px;margin:6px 0}
+/* qr card */
+.qwrap{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:640px){.qwrap{grid-template-columns:240px 1fr;align-items:center}}
+#qr{width:100%;max-width:300px;margin:0 auto;display:block;border-radius:10px;box-shadow:0 18px 30px -18px rgba(80,62,30,.6)}
+.sty{display:flex;gap:8px;justify-content:center;margin-top:4px}
+.sty button{border-radius:30px;padding:7px 14px;font-size:14px;box-shadow:inset 0 0 0 1.5px #e4d9c6;background:#fffcf7}
+.sty button.on{box-shadow:inset 0 0 0 2px var(--gold);background:#fbf3e4;color:var(--olive);font-weight:700}
+/* switch */
+.sw{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.sw b{display:block;color:var(--olive)}
+.tg{width:56px;height:32px;border-radius:20px;background:#d9d2c4;position:relative;flex:none;transition:.2s}
+.tg:after{content:"";position:absolute;top:3px;right:3px;width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:.2s}
+.tg.on{background:var(--sage2)}
+.tg.on:after{right:27px}
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.stats div{background:#f7f2e8;border-radius:14px;padding:10px 4px}
+.stats b{display:block;font-family:var(--latin);font-size:28px;color:var(--olive);line-height:1.1}
+.stats span{font-size:13px;color:var(--mute)}
+.bar{height:8px;border-radius:8px;background:#efe6d6;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,#c3a066,#e1c999);width:0}
+/* gallery */
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-bottom:12px}
+.tabs button{border-radius:30px;padding:7px 15px;font-size:14px;white-space:nowrap;background:#f4eee3;color:var(--sage2)}
+.tabs button.on{background:var(--olive);color:#fbf3e3}
+.g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+@media(min-width:640px){.g{grid-template-columns:repeat(4,1fr)}}
+.x{aspect-ratio:1;border-radius:12px;overflow:hidden;position:relative;background:#eee4d4;cursor:pointer}
+.x img,.x video{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.x .by{position:absolute;inset:auto 0 0;padding:14px 6px 5px;font-size:11.5px;color:#fff;background:linear-gradient(transparent,rgba(30,28,20,.6))}
+.x .pl{position:absolute;top:6px;right:6px;font-size:11px;color:#fff;background:rgba(0,0,0,.45);border-radius:10px;padding:1px 7px}
+.m{grid-column:1/-1;background:linear-gradient(160deg,#fdf6ef,#f6e9e1);border-radius:14px;padding:12px 14px;box-shadow:inset 0 0 0 1px #f0dccf;font-size:15px;line-height:1.8;display:flex;justify-content:space-between;gap:10px}
+.m b{display:block;font-size:13px;color:var(--gold2)}
+.m button{flex:none;color:#a8432f;font-size:13px;align-self:flex-start}
+.empty{grid-column:1/-1;text-align:center;color:var(--mute);padding:20px 0}
+.more{margin-top:12px}
+/* viewer */
+.vw{position:fixed;inset:0;background:rgba(20,18,14,.94);z-index:20;display:flex;flex-direction:column}
+.vw .media{flex:1;display:flex;align-items:center;justify-content:center;padding:10px;min-height:0}
+.vw img,.vw video{max-width:100%;max-height:100%;border-radius:8px}
+.vw .bar2{display:flex;gap:8px;padding:10px 14px calc(14px + env(safe-area-inset-bottom,0px));align-items:center}
+.vw .bar2 .btn{margin:0}
+.vw .who{color:#f3ead6;font-size:14px;text-align:center;padding:12px 10px 0}
+.vw .x2{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));left:12px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.15);color:#fff;font-size:22px}
+.b-del{background:#fff;color:#a8432f}
+.prog{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#3c4733;color:#fff8ea;border-radius:16px;padding:12px 18px;font-size:14px;z-index:30;box-shadow:0 10px 24px -10px rgba(0,0,0,.5);text-align:center;min-width:240px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,30px);opacity:0;background:#3c4733;color:#fff8ea;border-radius:30px;padding:10px 18px;font-size:14px;transition:.3s;z-index:40}
+.toast.on{transform:translate(-50%,0);opacity:1}
+.load{display:flex;justify-content:center;padding:80px 0}
+.load i{width:34px;height:34px;border-radius:50%;border:3px solid #eadfcb;border-top-color:var(--gold);animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><a class="logo" href="index.html">فرحتنا<small>MEMORIES</small></a><button class="out" id="logout" hidden>خروج</button></div>
+
+  <div class="load" id="load"><i></i></div>
+
+  <!-- enter code -->
+  <div id="login" hidden>
+    <div class="hd"><div class="k">Your private album</div><h1>لوحة ألبومكم</h1><p>اكتبي الكود السري اللي ظهرلك بعد الطلب</p></div>
+    <section class="card">
+      <input class="in" id="codeIn" maxlength="20" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="M••••••••••">
+      <button class="btn b-olive" id="enter" type="button">ادخلي</button>
+      <div class="err" id="lerr"></div>
+      <p class="mute" style="text-align:center">الكود ده للعروسين بس. الضيوف بيرفعوا من لينك الضيوف، ومش محتاجين كود.</p>
+    </section>
+  </div>
+
+  <!-- dashboard -->
+  <div id="dash" hidden>
+    <div class="hd"><div class="k">Our Memories</div><h1 id="names"></h1><p id="dateTxt"></p><span class="st" id="stTag"></span></div>
+
+    <section class="card wait" id="pendBox" hidden>
+      <div class="em">⏳</div><h3>بنراجع التحويل</h3>
+      <p class="mute">ألبومكم هيتفعّل خلال ٢٤ ساعة من الطلب. ارجعي للصفحة دي بعدين، وهتلاقي لينك الضيوف وكارت الـQR جاهزين هنا.</p>
+      <button class="btn b-line" id="refresh" type="button">حدّثي الصفحة</button>
+    </section>
+
+    <div id="live" hidden>
+      <section class="card">
+        <h2>🔗 لينك الضيوف</h2>
+        <div class="link" id="gLink"></div>
+        <div class="row2"><button class="btn b-olive" id="copyLink" type="button">انسخي اللينك</button><a class="btn b-wa" id="shareLink" target="_blank" rel="noopener">ابعتيه واتساب</a></div>
+        <p class="mute" style="margin-top:8px">ده اللينك اللي تبعتيه للضيوف أو تحطيه على الكارت. بيرفعوا منه بس، ومحدش منهم يقدر يشوف الألبوم.</p>
+      </section>
+
+      <section class="card">
+        <h2>🖨️ كارت الـQR</h2>
+        <div class="qwrap">
+          <canvas id="qr" aria-label="كارت QR"></canvas>
+          <div>
+            <div class="sty" id="sty"><button data-s="ivory">عاجي</button><button data-s="dark">زيتوني</button><button data-s="blush">بلاش</button></div>
+            <button class="btn b-gold" id="dlCard" type="button">⬇️ نزّلي الكارت للطباعة</button>
+            <p class="mute" style="margin-top:8px;text-align:center">مقاس ١٣×١٨ سم بجودة طباعة عالية. اطبعيه واحطيه على الترابيزات أو عند الاستقبال.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="sw"><div><b>استقبال الصور من الضيوف</b><span class="mute" id="openTxt"></span></div><button class="tg" id="openTg" type="button" aria-label="استقبال الصور"></button></div>
+      </section>
+
+      <section class="card">
+        <h2>📊 الألبوم <span class="r" id="expTxt"></span></h2>
+        <div class="stats"><div><b id="nP">0</b><span>صورة</span></div><div><b id="nV">0</b><span>فيديو</span></div><div><b id="nM">0</b><span>تهنئة</span></div></div>
+        <div class="bar"><i id="useBar"></i></div>
+        <p class="mute" id="useTxt" style="margin-top:6px;text-align:center"></p>
+      </section>
+
+      <section class="card">
+        <h2>📸 ذكرياتكم <button class="r" id="reload" type="button" style="text-decoration:underline">تحديث</button></h2>
+        <div class="tabs" id="tabs"><button class="on" data-f="all">الكل</button><button data-f="photo">الصور</button><button data-f="video">الفيديوهات</button><button data-f="message">التهاني</button></div>
+        <div class="g" id="grid"></div>
+        <button class="btn b-line more" id="moreBtn" type="button" hidden>اعرضي أكتر</button>
+        <button class="btn b-olive" id="dlAll" type="button">⬇️ نزّلي الكل</button>
+        <p class="mute" style="text-align:center;margin-top:6px">بيتنزل ملف مضغوط (ZIP) فيه كل الصور والفيديوهات والتهاني.</p>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="vw" id="vw" hidden>
+  <button class="x2" id="vwX" type="button" aria-label="إغلاق">×</button>
+  <div class="who" id="vwWho"></div>
+  <div class="media" id="vwMedia"></div>
+  <div class="bar2"><a class="btn b-gold" id="vwDl">⬇️ نزّلي</a><button class="btn b-del" id="vwDel" type="button">🗑️ امسحي</button></div>
+</div>
+<div class="prog" id="prog" hidden></div>
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="qr.js"></script>
+<script src="card.js"></script>
+<script>
+(()=>{
+const C=window.FM,$=id=>document.getElementById(id);
+/* small Supabase client: anonymous session + rpc + private storage (no external library) */
+const SB=(()=>{const K="farhetna-mem";let S=null;try{S=JSON.parse(localStorage.getItem(K)||"null")}catch(e){}
+  const keep=s=>{S=s?{access_token:s.access_token,refresh_token:s.refresh_token,expires_at:s.expires_at||Math.floor(Date.now()/1000)+(s.expires_in||3600)}:null;try{S?localStorage.setItem(K,JSON.stringify(S)):localStorage.removeItem(K)}catch(e){}};
+  const H=t=>({"Content-Type":"application/json",apikey:C.sbKey,Authorization:"Bearer "+(t||C.sbKey)});
+  async function j(r){const t=await r.text();let d=null;try{d=t?JSON.parse(t):null}catch(e){}return{ok:r.ok,status:r.status,data:d}}
+  async function signIn(){const r=await j(await fetch(C.sbUrl+"/auth/v1/signup",{method:"POST",headers:H(),body:JSON.stringify({data:{}})}));
+    if(!r.ok||!r.data||!r.data.access_token)throw Object.assign(new Error("anon"),{anon:1});keep(r.data)}
+  async function refresh(){if(!S||!S.refresh_token)return signIn();
+    const r=await j(await fetch(C.sbUrl+"/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:H(),body:JSON.stringify({refresh_token:S.refresh_token})}));
+    if(r.ok&&r.data&&r.data.access_token)keep(r.data);else{keep(null);await signIn()}}
+  async function token(){if(!S)await signIn();else if(S.expires_at-60<Date.now()/1000)await refresh();return S.access_token}
+  async function call(fn){let r=await fn(await token());if(r.status===401){await refresh();r=await fn(S.access_token)}return r}
+  const out=r=>r.ok?{data:r.data,error:null}:{data:null,error:{message:(r.data&&(r.data.message||r.data.error||r.data.msg))||("HTTP "+r.status)}};
+  return{
+    session:token,
+    rpc:async(fn,body)=>out(await call(async t=>j(await fetch(C.sbUrl+"/rest/v1/rpc/"+fn,{method:"POST",headers:H(t),body:JSON.stringify(body||{})})))),
+    sign:async(paths,exp)=>{const r=await call(async t=>j(await fetch(C.sbUrl+"/storage/v1/object/sign/"+C.bucket,{method:"POST",headers:H(t),body:JSON.stringify({expiresIn:exp,paths})})));
+      return r.ok?(r.data||[]).map(o=>({path:o.path,url:o.signedURL?C.sbUrl+"/storage/v1"+o.signedURL:null})):[]},
+    signOne:async(path,exp,dl)=>{const r=await call(async t=>j(await fetch(C.sbUrl+"/storage/v1/object/sign/"+C.bucket+"/"+path,{method:"POST",headers:H(t),body:JSON.stringify({expiresIn:exp})})));
+      if(!r.ok||!r.data||!r.data.signedURL)return null;const u=C.sbUrl+"/storage/v1"+r.data.signedURL;return dl?u+(u.includes("?")?"&":"?")+"download="+encodeURIComponent(dl):u},
+    remove:async paths=>{const r=await call(async t=>j(await fetch(C.sbUrl+"/storage/v1/object/"+C.bucket,{method:"DELETE",headers:H(t),body:JSON.stringify({prefixes:paths})})));return r.ok}
+  }})();
+const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2600)};
+const show=id=>{["load","login","dash"].forEach(x=>$(x).hidden=x!==id)};
+const fmtDate=d=>{if(!d)return"";try{const x=new Date(String(d).length<=10?d+"T12:00:00":d);return x.toLocaleDateString("ar-EG",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}catch(e){return d}};
+const mb=b=>b>=1073741824?ar((b/1073741824).toFixed(1))+" جيجا":ar(Math.max(0,Math.round(b/1048576)))+" ميجا";
+let CODE="",A=null,ITEMS=[],URLS={},FILTER="all",SHOWN=60;
+
+async function session(){await SB.session()}
+
+async function enter(code){CODE=(code||"").trim().toUpperCase();if(CODE.length<8){show("login");if(code)$("lerr").textContent="الكود ناقص";return}
+  show("load");$("lerr").textContent="";
+  try{await session();const r=await SB.rpc("memories_claim",{p_code:CODE});if(r.error)throw r.error;A=r.data;
+    try{localStorage.setItem("fm_code",CODE)}catch(e){}
+    paint()}
+  catch(e){show("login");$("codeIn").value=CODE;const m=(e&&e.message)||"";
+    $("lerr").textContent=/bad_code/.test(m)?"الكود ده مش صحيح، اتأكدي منه":e.anon?"الدخول بالكود مش متفعّل لسه، كلّمينا على واتساب":"في مشكلة في الاتصال، جربي تاني"}}
+
+function paint(){show("dash");$("logout").hidden=false;
+  const h=$("names");h.textContent="";h.append(A.groom,Object.assign(document.createElement("b"),{textContent:"&"}),A.bride);
+  $("dateTxt").textContent=fmtDate(A.date);
+  const st=A.status==="active"?"active":A.status==="pending"?"pending":"closed";
+  $("stTag").className="st "+st;$("stTag").textContent={active:"شغال ✅",pending:"⏳ قيد المراجعة",closed:"مقفول"}[st];
+  $("pendBox").hidden=st!=="pending";$("live").hidden=st==="pending";
+  if(st==="pending")return;
+  const url=C.site+"/m/#"+A.slug;$("gLink").textContent=url.replace("https://","");
+  $("shareLink").href="https://wa.me/?text="+encodeURIComponent(`شاركونا صوركم وفيديوهاتكم من فرحنا 📸🤍\nمن غير تطبيق ولا تسجيل:\n${url}`);
+  setStyle(A.style||"ivory",false);
+  $("openTg").classList.toggle("on",!!A.uploadsOpen);$("openTxt").textContent=A.uploadsOpen?"مفتوح — الضيوف يقدروا يرفعوا":"مقفول — محدش يقدر يرفع دلوقتي";
+  $("expTxt").textContent=A.expires?"متاح لحد "+fmtDate(A.expires):"";
+  $("nP").textContent=ar(A.photos||0);$("nV").textContent=ar(A.videos||0);$("nM").textContent=ar(A.messages||0);
+  const p=A.quotaBytes?Math.min(100,(A.usedBytes||0)/A.quotaBytes*100):0;$("useBar").style.width=p+"%";
+  $("useTxt").textContent=`استخدمتي ${mb(A.usedBytes||0)} من ${mb(A.quotaBytes||0)}`;
+  loadItems()}
+
+/* ---------- qr card ---------- */
+function setStyle(s,save){document.querySelectorAll("#sty button").forEach(b=>b.classList.toggle("on",b.dataset.s===s));A.style=s;
+  FMCard.draw($("qr"),{groom:A.groom,bride:A.bride,date:A.date,url:C.site+"/m/#"+A.slug,style:s});
+  if(save)SB.rpc("memories_set_style",{p_code:CODE,p_style:s})}
+$("sty").addEventListener("click",e=>{const b=e.target.closest("button");if(b)setStyle(b.dataset.s,true)});
+$("dlCard").onclick=()=>{$("qr").toBlob(async b=>{const name=`farhetna-qr-${A.slug}.png`;
+  try{const f=new File([b],name,{type:"image/png"});if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"كارت QR"});return}}catch(e){if(e&&e.name==="AbortError")return}
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)},"image/png")};
+
+/* ---------- link + open/close ---------- */
+$("copyLink").onclick=async()=>{try{await navigator.clipboard.writeText(C.site+"/m/#"+A.slug);toast("اتنسخ اللينك ✅")}catch(e){toast("اضغطي مطوّل على اللينك وانسخيه")}};
+$("openTg").onclick=async()=>{const to=!A.uploadsOpen;const r=await SB.rpc("memories_set_open",{p_code:CODE,p_open:to});if(r.error){toast("ماتغيرش، جربي تاني");return}
+  A.uploadsOpen=to;$("openTg").classList.toggle("on",to);$("openTxt").textContent=to?"مفتوح — الضيوف يقدروا يرفعوا":"مقفول — محدش يقدر يرفع دلوقتي";toast(to?"الرفع اتفتح ✅":"الرفع اتقفل 🔒")};
+
+/* ---------- gallery ---------- */
+async function loadItems(){$("grid").innerHTML='<p class="empty">بنجيب الصور…</p>';
+  const r=await SB.rpc("memories_list",{p_code:CODE});if(r.error){$("grid").innerHTML='<p class="empty">في مشكلة في الاتصال، دوسي «تحديث»</p>';return}
+  ITEMS=r.data||[];const paths=ITEMS.filter(x=>x.path&&!URLS[x.path]).map(x=>x.path);
+  for(let i=0;i<paths.length;i+=100){(await SB.sign(paths.slice(i,i+100),3600*6)).forEach(o=>{if(o.url)URLS[o.path]=o.url})}
+  draw()}
+function draw(){const g=$("grid");g.innerHTML="";const list=ITEMS.filter(x=>FILTER==="all"||x.kind===FILTER);
+  if(!list.length){g.innerHTML='<p class="empty">'+(ITEMS.length?"مفيش حاجة هنا":"لسه محدش رفع حاجة. ابعتي لينك الضيوف أو اطبعي الكارت 🤍")+'</p>';$("moreBtn").hidden=true;return}
+  list.slice(0,SHOWN).forEach(x=>{
+    if(x.kind==="message"){const d=document.createElement("div");d.className="m";const t=document.createElement("div");t.textContent="«"+(x.body||"")+"»";
+      const b=document.createElement("b");b.textContent="— "+(x.guest_name||"ضيف");t.appendChild(b);const del=document.createElement("button");del.textContent="امسحي";del.onclick=()=>remove(x);d.append(t,del);g.appendChild(d);return}
+    const d=document.createElement("div");d.className="x";const u=URLS[x.path];
+    if(x.kind==="video"){const v=document.createElement("video");v.muted=true;v.playsInline=true;v.preload="metadata";if(u)v.src=u+"#t=0.1";d.appendChild(v);d.appendChild(Object.assign(document.createElement("span"),{className:"pl",textContent:"▶ فيديو"}))}
+    else{const im=document.createElement("img");im.loading="lazy";im.alt="";if(u)im.src=u;d.appendChild(im)}
+    if(x.guest_name)d.appendChild(Object.assign(document.createElement("span"),{className:"by",textContent:"من "+x.guest_name}));
+    d.onclick=()=>view(x);g.appendChild(d)});
+  $("moreBtn").hidden=list.length<=SHOWN}
+$("moreBtn").onclick=()=>{SHOWN+=60;draw()};
+$("tabs").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;FILTER=b.dataset.f;SHOWN=60;document.querySelectorAll("#tabs button").forEach(x=>x.classList.toggle("on",x===b));draw()});
+$("reload").onclick=async()=>{const r=await SB.rpc("memories_claim",{p_code:CODE});if(!r.error){A=r.data;paint()}};
+
+let CUR=null;
+async function view(x){CUR=x;const m=$("vwMedia");m.innerHTML="";const u=URLS[x.path];
+  if(x.kind==="video"){const v=document.createElement("video");v.controls=true;v.playsInline=true;v.src=u;m.appendChild(v)}else{const im=document.createElement("img");im.src=u;m.appendChild(im)}
+  $("vwWho").textContent=x.guest_name?"من "+x.guest_name:"";
+  const name=fileName(x);$("vwDl").href=(await SB.signOne(x.path,3600,name))||u;
+  $("vw").hidden=false}
+$("vwX").onclick=()=>{$("vw").hidden=true;$("vwMedia").innerHTML=""};
+$("vwDel").onclick=()=>{if(CUR)remove(CUR)};
+async function remove(x){if(!confirm(x.kind==="message"?"تمسحي التهنئة دي؟":"تمسحي الملف ده نهائي؟"))return;
+  const r=await SB.rpc("memories_forget",{p_code:CODE,p_id:x.id});if(r.error){toast("ما اتمسحش، جربي تاني");return}
+  if(r.data)await SB.remove([r.data]);
+  ITEMS=ITEMS.filter(i=>i.id!==x.id);$("vw").hidden=true;$("vwMedia").innerHTML="";
+  A[x.kind==="photo"?"photos":x.kind==="video"?"videos":"messages"]--;A.usedBytes=Math.max(0,(A.usedBytes||0)-(x.size||0));
+  $("nP").textContent=ar(A.photos||0);$("nV").textContent=ar(A.videos||0);$("nM").textContent=ar(A.messages||0);draw();toast("اتمسح")}
+function fileName(x){const d=new Date(x.created_at);const p=n=>String(n).padStart(2,"0");
+  const ext=(x.path.split(".").pop()||"jpg");const who=(x.guest_name||"").replace(/[\\/:*?"<>|]/g,"").trim();
+  return `${d.getFullYear()}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}${who?"-"+who:""}-${x.id.slice(0,4)}.${ext}`}
+
+/* ---------- download all as zip (stored, split in parts of ~350MB) ---------- */
+const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
+function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC[(c^u8[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
+function zip(files){const enc=new TextEncoder(),parts=[],cen=[];let off=0;
+  files.forEach(f=>{const nm=enc.encode(f.name),crc=crc32(f.data),sz=f.data.length;
+    const h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint32(14,crc,true);h.setUint32(18,sz,true);h.setUint32(22,sz,true);h.setUint16(26,nm.length,true);
+    parts.push(h.buffer,nm,f.data);
+    const c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint32(16,crc,true);c.setUint32(20,sz,true);c.setUint32(24,sz,true);c.setUint16(28,nm.length,true);c.setUint32(42,off,true);
+    cen.push(c.buffer,nm);off+=30+nm.length+sz});
+  const cs=cen.reduce((a,b)=>a+(b.byteLength||b.length),0);const e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
+  return new Blob([...parts,...cen,e.buffer],{type:"application/zip"})}
+function save(blob,name){const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),60000)}
+$("dlAll").onclick=async()=>{const media=ITEMS.filter(x=>x.path);const msgs=ITEMS.filter(x=>x.kind==="message");
+  if(!media.length&&!msgs.length){toast("لسه مفيش حاجة تتنزل");return}
+  const btn=$("dlAll"),pg=$("prog");btn.disabled=true;pg.hidden=false;const LIMIT=200*1048576;let batch=[],size=0,part=1;
+  const base=`farhetna-${A.slug}`;const total=media.length;let done=0;
+  const flush=last=>{if(!batch.length)return;save(zip(batch),`${base}${(part>1||!last)?"-part"+part:""}.zip`);part++;batch=[];size=0};
+  try{if(msgs.length){const txt=msgs.map(m=>`${m.guest_name||"ضيف"} — ${new Date(m.created_at).toLocaleString("ar-EG")}\n${m.body}\n`).join("\n");batch.push({name:"التهاني.txt",data:new TextEncoder().encode("﻿"+txt)})}
+    for(const x of media){pg.textContent=`بنجهز الملفات… ${ar(done)} من ${ar(total)}`;
+      const r=await fetch(URLS[x.path]);if(!r.ok)throw 0;const u8=new Uint8Array(await r.arrayBuffer());
+      if(size+u8.length>LIMIT&&batch.length)flush(false);batch.push({name:(x.kind==="video"?"فيديوهات/":"صور/")+fileName(x),data:u8});size+=u8.length;done++}
+    flush(true);pg.textContent="✅ اتنزل — لو الموبايل سألك، اختاري «تنزيل»";setTimeout(()=>pg.hidden=true,4000)}
+  catch(e){pg.textContent="في ملفات ما اتنزلتش، جربي تاني";setTimeout(()=>pg.hidden=true,4000)}
+  btn.disabled=false};
+
+/* ---------- start ---------- */
+$("enter").onclick=()=>enter($("codeIn").value);
+$("codeIn").addEventListener("keydown",e=>{if(e.key==="Enter")enter($("codeIn").value)});
+$("refresh").onclick=()=>enter(CODE);
+$("logout").onclick=()=>{try{localStorage.removeItem("fm_code")}catch(e){}CODE="";A=null;$("codeIn").value="";$("logout").hidden=true;show("login")};
+let saved="";try{saved=localStorage.getItem("fm_code")||""}catch(e){}
+if(saved)enter(saved);else show("login");
+})();
+</script>
+</body>
+</html>

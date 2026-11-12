@@ -43,6 +43,9 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
 .ord .acts button{flex:1;margin-top:0;padding:10px}
 .ok{background:#1e6b34;color:#fff}.no-btn{background:#fff;color:#b3261e;border:1.5px solid #b3261e}
 .st-approved{background:#e6f4ea;color:#1e6b34}.st-pending{background:#fff4e0;color:#8a5a00}.st-rejected{background:#fde8e6;color:#b3261e}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}.mrow button,.mrow a{margin-top:0;padding:9px;font-size:.85rem}
+.st-active{background:#e6f4ea;color:#1e6b34}.st-closed{background:#efe9e0;color:#6b6457}
+.mbar{height:6px;border-radius:6px;background:#efe6d6;overflow:hidden;margin-top:6px}.mbar i{display:block;height:100%;background:#c3a066}
 .zoom{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
 .zoom img{max-width:100%;max-height:100%}
 </style>
@@ -58,6 +61,12 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
 </div>
 
 <div id="panel" hidden>
+  <div class="card" id="memCard">
+    <h3 style="color:#3c4733;margin-bottom:4px">📸 ألبومات الذكريات <span id="mpend" class="tag free"></span></h3>
+    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">الألبوم مش هيستقبل صور غير لما تضغطي ✅. لينك الضيوف بيرفع بس، والصور نفسها مش بتظهر هنا (خصوصية العروسين).</p>
+    <div id="mpass" hidden><label for="mpw">باسورد الألبومات</label><input id="mpw" type="password" autocomplete="off"><button class="btn p" id="mgo" style="background:#3c4733">دخول الألبومات</button></div>
+    <div id="mems"></div><div class="err" id="merr"></div>
+  </div>
   <div class="card">
     <h3 style="color:#6d1f2f;margin-bottom:4px">الطلبات الجديدة <span id="pend" class="tag free"></span></h3>
     <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">الدعوة مش هتظهر للضيوف غير لما تضغطي ✅. افتحي InstaPay واتأكدي إن التحويل وصل: لو تمام اضغطي ✅ والدعوة تتفعّل، ولو مش موجود اضغطي ❌.</p>
@@ -175,9 +184,52 @@ $("csvBtn").onclick=()=>{if(!USERS.length&&!ORDERS.length){alert("لسه مفي�
   const rows=[["fn","phone","email","country","offers","status_or_invites","date"]].concat(out);
   const csv="\ufeff"+rows.map(r=>r.map(q).join(",")).join("\n");
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="farhetna-customers.csv";document.body.appendChild(a);a.click();a.remove();};
+/* ---------- Memories albums ---------- */
+let MPASS="";try{MPASS=sessionStorage.getItem("fmp")||"";}catch(e){}
+const MST={pending:"⏳ مستني موافقتك",active:"شغال ✅",closed:"مقفول",rejected:"مرفوض ❌"};
+const gb=b=>(b/1073741824).toFixed(b<1073741824?2:1)+" جيجا";
+async function loadMems(){const pw=MPASS||PASS;const r=await SB.rpc("memories_admin_list",{p_pass:pw});
+  if(r.error){if((r.error.message||"").includes("denied")){$("mpass").hidden=false;$("mems").innerHTML="";return}
+    if((r.error.message||"").includes("function")||r.error.code==="PGRST202"){$("memCard").hidden=true;return}
+    $("merr").textContent="في مشكلة في الاتصال";return}
+  MPASS=pw;try{sessionStorage.setItem("fmp",pw)}catch(e){}$("mpass").hidden=true;drawMems(r.data||[])}
+function drawMems(list){const box=$("mems");box.innerHTML="";const pend=list.filter(x=>x.status==="pending").length;$("mpend").textContent=pend?pend+" مستني":"";
+  if(!list.length){box.innerHTML='<p style="color:#8a6b6f;text-align:center;padding:10px">لسه مفيش طلبات ألبومات</p>';return}
+  list.forEach(x=>{const d=document.createElement("div");d.className="ord";
+    const top=document.createElement("div");top.className="top";const no=document.createElement("b");no.style.color="#3c4733";no.textContent=x.groom+" & "+x.bride;
+    const st=document.createElement("span");st.className="tag st-"+x.status;st.textContent=MST[x.status]||x.status;top.append(no,st);
+    if(x.src){const sr=document.createElement("span");sr.className="tag "+(x.src.ad?"src-ad":"src-no");sr.textContent=x.src.ad?"📣 من إعلان"+(x.src.camp?" · "+x.src.camp:""):"مش من إعلان";top.append(sr)}
+    const meta=document.createElement("div");meta.className="meta";const url=SITE+"m/#"+x.slug;
+    const a=document.createElement("a");a.className="l";a.href=url;a.target="_blank";a.textContent="m/#"+x.slug;
+    const ph=document.createElement("a");ph.className="l";ph.target="_blank";ph.href="https://wa.me/2"+(x.buyer_phone||"").replace(/\D/g,"").replace(/^2/,"");ph.textContent=x.buyer_phone||"—";
+    meta.append("👰 "+(x.buyer_name||"—")+" · ",ph,document.createElement("br"),"الفرح: "+(x.event_date||"—")+" · المبلغ: "+x.price,document.createElement("br"),"لينك الضيوف: ",a,document.createElement("br"),
+      `📸 ${x.photo_count} · 🎬 ${x.video_count} · 💌 ${x.message_count} · ${gb(x.used_bytes)} من ${gb(x.quota_bytes)}`,document.createElement("br"),
+      "الرفع: "+(x.uploads_open?"مفتوح":"مقفول")+(x.expires_at?" · ينتهي: "+x.expires_at.slice(0,10):""),document.createElement("br"),
+      new Date(x.created_at).toLocaleString("ar-EG",{dateStyle:"medium",timeStyle:"short"}));
+    const bar=document.createElement("div");bar.className="mbar";const bi=document.createElement("i");bi.style.width=Math.min(100,x.used_bytes/x.quota_bytes*100)+"%";bar.appendChild(bi);
+    const img=document.createElement("img");img.alt="صورة التحويل";img.hidden=true;
+    const rc=document.createElement("button");rc.className="btn g";rc.style.marginTop="8px";rc.textContent="🧾 اعرضي صورة التحويل";
+    rc.onclick=async()=>{if(!img.hidden){img.hidden=true;rc.textContent="🧾 اعرضي صورة التحويل";return}const r=await SB.rpc("memories_admin_receipt",{p_pass:MPASS,p_id:x.id});if(r.error){alert("حصلت مشكلة");return}img.src=r.data||"";img.hidden=false;rc.textContent="اخفي الصورة";};
+    img.onclick=()=>{const z=document.createElement("div");z.className="zoom";const i=document.createElement("img");i.src=img.src;z.appendChild(i);z.onclick=()=>z.remove();document.body.appendChild(z);};
+    const acts=document.createElement("div");acts.className="mrow";
+    const btn=(t,cls,fn)=>{const b=document.createElement("button");b.className="btn "+cls;b.textContent=t;b.onclick=fn;acts.appendChild(b);return b};
+    if(x.status==="pending"){btn("✅ التحويل وصل — فعّلي","ok",()=>memSet(x.id,{p_status:"active"}));btn("❌ مفيش تحويل","no-btn",()=>{if(confirm("ترفضي الطلب ده؟"))memSet(x.id,{p_status:"rejected"})})}
+    else{
+      btn(x.uploads_open?"🔒 اقفلي الرفع":"🔓 افتحي الرفع","g",()=>memSet(x.id,{p_open:!x.uploads_open}));
+      btn(x.status==="active"?"⏸ اقفلي الألبوم":"▶️ رجّعيه شغال","g",()=>memSet(x.id,{p_status:x.status==="active"?"closed":"active"}));
+      btn("💾 غيّري المساحة","g",()=>{const v=prompt("المساحة بالجيجا:",(x.quota_bytes/1073741824).toFixed(0));if(v&&+v>0)memSet(x.id,{p_quota_gb:+v})});
+      btn("📅 غيّري تاريخ الانتهاء","g",()=>{const v=prompt("تاريخ الانتهاء (سنة-شهر-يوم):",(x.expires_at||"").slice(0,10));if(v&&/^\d{4}-\d{2}-\d{2}$/.test(v))memSet(x.id,{p_expires:v})});
+      btn("🔑 كود جديد للعروسة","g",async()=>{if(!confirm("الكود القديم هيتلغي، والأجهزة اللي دخلت بيه هتخرج. تكمّلي؟"))return;const r=await SB.rpc("memories_admin_new_code",{p_pass:MPASS,p_id:x.id});if(r.error){alert("حصلت مشكلة");return}
+        prompt("الكود الجديد (انسخيه وابعتيه للعروسة):",r.data)});
+      const wa=document.createElement("a");wa.className="btn w";wa.target="_blank";wa.rel="noopener";wa.textContent="💬 بلّغيها إن الألبوم اتفعّل";
+      wa.href="https://wa.me/2"+(x.buyer_phone||"").replace(/\D/g,"").replace(/^2/,"")+"?text="+encodeURIComponent(`أهلاً${x.buyer_name?" "+x.buyer_name:""} 🤍 ألبوم الذكريات بتاعكم اتفعّل!\n\nادخلي لوحة الألبوم بالكود السري اللي ظهرلك وقت الطلب:\n${SITE}memories/album.html\n\nهتلاقي لينك الضيوف وكارت الـQR جاهزين للطباعة.`);
+      acts.appendChild(wa)}
+    d.append(top,meta,bar,rc,img,acts);box.appendChild(d)})}
+async function memSet(id,args){const r=await SB.rpc("memories_admin_set",Object.assign({p_pass:MPASS,p_id:id},args));if(r.error){alert("حصلت مشكلة، جربي تاني");return}loadMems()}
+$("mgo").onclick=()=>{MPASS=$("mpw").value;loadMems()};
 async function enter(){
   $("lerr").textContent="";
-  try{await load();await loadOrders();loadUsers();$("login").hidden=true;$("panel").hidden=false;try{sessionStorage.setItem("fp",PASS);}catch(e){}}
+  try{await load();await loadOrders();loadUsers();loadMems();$("login").hidden=true;$("panel").hidden=false;try{sessionStorage.setItem("fp",PASS);}catch(e){}}
   catch(e){$("lerr").textContent=(e.message||"").includes("denied")?"الباسورد غلط":"في مشكلة في الاتصال، جربي تاني";}
 }
 $("go").onclick=()=>{PASS=$("pw").value;enter();};
