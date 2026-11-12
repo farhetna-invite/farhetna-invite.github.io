@@ -167,8 +167,10 @@ a{color:inherit;text-decoration:none}
         <div class="tabs" id="tabs"><button class="on" data-f="all">الكل</button><button data-f="photo">الصور</button><button data-f="video">الفيديوهات</button><button data-f="message">التهاني</button></div>
         <div class="g" id="grid"></div>
         <button class="btn b-line more" id="moreBtn" type="button" hidden>اعرضي أكتر</button>
-        <button class="btn b-olive" id="dlAll" type="button">⬇️ نزّلي الكل</button>
-        <p class="mute" style="text-align:center;margin-top:6px">بيتنزل ملف مضغوط (ZIP) فيه كل الصور والفيديوهات والتهاني.</p>
+        <button class="btn b-gold" id="saveAll" type="button" hidden>📲 احفظي الكل في صور الموبايل</button>
+        <p class="mute" id="saveAllTxt" style="text-align:center;margin-top:6px" hidden>بيفتحلك قايمة المشاركة — اختاري «حفظ الصور» أو «Save Images».</p>
+        <button class="btn b-olive" id="dlAll" type="button">⬇️ نزّلي الكل (ملف ZIP)</button>
+        <p class="mute" style="text-align:center;margin-top:6px">ملف مضغوط فيه كل الصور والفيديوهات والتهاني — مناسب للكمبيوتر.</p>
       </section>
     </div>
   </div>
@@ -178,7 +180,7 @@ a{color:inherit;text-decoration:none}
   <button class="x2" id="vwX" type="button" aria-label="إغلاق">×</button>
   <div class="who" id="vwWho"></div>
   <div class="media" id="vwMedia"></div>
-  <div class="bar2"><a class="btn b-gold" id="vwDl">⬇️ نزّلي</a><button class="btn b-del" id="vwDel" type="button">🗑️ امسحي</button></div>
+  <div class="bar2"><button class="btn b-gold" id="vwSave" type="button" hidden>📲 احفظي في الصور</button><a class="btn b-gold" id="vwDl">⬇️ نزّلي</a><button class="btn b-del" id="vwDel" type="button">🗑️ امسحي</button></div>
 </div>
 <div class="prog" id="prog" hidden></div>
 <div class="toast" id="toast"></div>
@@ -243,7 +245,7 @@ function paint(){show("dash");$("logout").hidden=false;
   $("nP").textContent=ar(A.photos||0);$("nV").textContent=ar(A.videos||0);$("nM").textContent=ar(A.messages||0);
   const p=A.quotaBytes?Math.min(100,(A.usedBytes||0)/A.quotaBytes*100):0;$("useBar").style.width=p+"%";
   $("useTxt").textContent=`استخدمتي ${mb(A.usedBytes||0)} من ${mb(A.quotaBytes||0)}`;
-  loadItems()}
+  $("saveAll").hidden=$("saveAllTxt").hidden=!CANSHARE;loadItems()}
 
 /* ---------- qr card ---------- */
 function setStyle(s,save){document.querySelectorAll("#sty button").forEach(b=>b.classList.toggle("on",b.dataset.s===s));A.style=s;
@@ -283,9 +285,33 @@ $("reload").onclick=async()=>{const r=await SB.rpc("memories_claim",{p_code:CODE
 let CUR=null;
 async function view(x){CUR=x;const m=$("vwMedia");m.innerHTML="";const u=URLS[x.path];
   if(x.kind==="video"){const v=document.createElement("video");v.controls=true;v.playsInline=true;v.src=u;m.appendChild(v)}else{const im=document.createElement("img");im.src=u;m.appendChild(im)}
-  $("vwWho").textContent=x.guest_name?"من "+x.guest_name:"";
+  $("vwWho").textContent=x.guest_name?"من "+x.guest_name:"";PREP=null;$("vwSave").hidden=!CANSHARE;$("vwDl").hidden=CANSHARE;$("vwSave").textContent="📲 احفظي في الصور";
   const name=fileName(x);$("vwDl").href=(await SB.signOne(x.path,3600,name))||u;
   $("vw").hidden=false}
+/* save to the phone's photos through the share sheet */
+const CANSHARE=(()=>{try{return !!(navigator.canShare&&navigator.canShare({files:[new File(["x"],"a.jpg",{type:"image/jpeg"})]}))}catch(e){return false}})();
+const MIME={jpg:"image/jpeg",jpeg:"image/jpeg",png:"image/png",webp:"image/webp",gif:"image/gif",heic:"image/heic",heif:"image/heif",mp4:"video/mp4",m4v:"video/mp4",mov:"video/quicktime","3gp":"video/3gpp",webm:"video/webm"};
+async function asFile(x){const r=await fetch(URLS[x.path]);if(!r.ok)throw 0;const b=await r.blob();const ext=(x.path.split(".").pop()||"").toLowerCase();
+  return new File([b],fileName(x),{type:MIME[ext]||b.type||"application/octet-stream"})}
+async function shareFiles(files){try{await navigator.share({files});return "ok"}catch(e){return e&&e.name==="AbortError"?"cancel":e&&e.name==="NotAllowedError"?"again":"fail"}}
+let PREP=null;
+$("vwSave").onclick=async()=>{const b=$("vwSave");if(!CUR)return;
+  try{if(!PREP){b.textContent="بنجهز…";PREP=await asFile(CUR)}
+    const r=await shareFiles([PREP]);b.textContent=r==="again"?"✓ جاهز — دوسي تاني للحفظ":r==="ok"?"✓ اتحفظ":"📲 احفظي في الصور";if(r==="fail")toast("ماقدرناش نفتح الحفظ، جربي «نزّلي»")}
+  catch(e){b.textContent="📲 احفظي في الصور";toast("في مشكلة في التحميل، جربي تاني")}};
+let QUEUE=null,READY=null;
+$("saveAll").onclick=async()=>{const b=$("saveAll");
+  if(READY){const files=READY;READY=null;const r=await shareFiles(files);
+    if(r==="again"){READY=files;b.textContent="دوسي تاني للحفظ";return}
+    if(r==="cancel"||r==="fail"){QUEUE=null;b.textContent="📲 احفظي الكل في صور الموبايل";return}
+    if(QUEUE&&QUEUE.length){b.textContent="بنجهز الدفعة الجاية…";await prepNext()}else{QUEUE=null;b.textContent="✓ اتحفظ كله";setTimeout(()=>b.textContent="📲 احفظي الكل في صور الموبايل",3000)}return}
+  QUEUE=ITEMS.filter(x=>x.path);if(!QUEUE.length){toast("لسه مفيش صور");QUEUE=null;return}
+  QUEUE.total=QUEUE.length;await prepNext()};
+async function prepNext(){const b=$("saveAll");b.disabled=true;const files=[];let size=0;
+  try{while(QUEUE.length&&files.length<20&&size<150*1048576){const x=QUEUE.shift();b.textContent=`بنجهز… ${ar(QUEUE.total-QUEUE.length)} من ${ar(QUEUE.total)}`;const f=await asFile(x);files.push(f);size+=f.size}
+    READY=files;b.textContent=`📲 احفظي ${ar(files.length)} ${files.length>2&&files.length<11?"ملفات":"ملف"} دلوقتي`+(QUEUE.length?` (فاضل ${ar(QUEUE.length)})`:"")}
+  catch(e){QUEUE=null;READY=null;b.textContent="📲 احفظي الكل في صور الموبايل";toast("في مشكلة في التحميل، جربي تاني")}
+  b.disabled=false}
 $("vwX").onclick=()=>{$("vw").hidden=true;$("vwMedia").innerHTML=""};
 $("vwDel").onclick=()=>{if(CUR)remove(CUR)};
 async function remove(x){if(!confirm(x.kind==="message"?"تمسحي التهنئة دي؟":"تمسحي الملف ده نهائي؟"))return;
@@ -302,10 +328,10 @@ function fileName(x){const d=new Date(x.created_at);const p=n=>String(n).padStar
 const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
 function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC[(c^u8[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
 function zip(files){const enc=new TextEncoder(),parts=[],cen=[];let off=0;
-  files.forEach(f=>{const nm=enc.encode(f.name),crc=crc32(f.data),sz=f.data.length;
-    const h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint32(14,crc,true);h.setUint32(18,sz,true);h.setUint32(22,sz,true);h.setUint16(26,nm.length,true);
+  files.forEach(f=>{const nm=enc.encode(f.name),crc=crc32(f.data),sz=f.data.length;const t=f.date||new Date(),dt=((t.getHours()<<11)|(t.getMinutes()<<5)|(t.getSeconds()>>1))&0xFFFF,dd=(((t.getFullYear()-1980)<<9)|((t.getMonth()+1)<<5)|t.getDate())&0xFFFF;
+    const h=new DataView(new ArrayBuffer(30));h.setUint32(0,0x04034b50,true);h.setUint16(4,20,true);h.setUint16(6,0x0800,true);h.setUint16(10,dt,true);h.setUint16(12,dd,true);h.setUint32(14,crc,true);h.setUint32(18,sz,true);h.setUint32(22,sz,true);h.setUint16(26,nm.length,true);
     parts.push(h.buffer,nm,f.data);
-    const c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint32(16,crc,true);c.setUint32(20,sz,true);c.setUint32(24,sz,true);c.setUint16(28,nm.length,true);c.setUint32(42,off,true);
+    const c=new DataView(new ArrayBuffer(46));c.setUint32(0,0x02014b50,true);c.setUint16(4,20,true);c.setUint16(6,20,true);c.setUint16(8,0x0800,true);c.setUint16(12,dt,true);c.setUint16(14,dd,true);c.setUint32(16,crc,true);c.setUint32(20,sz,true);c.setUint32(24,sz,true);c.setUint16(28,nm.length,true);c.setUint32(42,off,true);
     cen.push(c.buffer,nm);off+=30+nm.length+sz});
   const cs=cen.reduce((a,b)=>a+(b.byteLength||b.length),0);const e=new DataView(new ArrayBuffer(22));e.setUint32(0,0x06054b50,true);e.setUint16(8,files.length,true);e.setUint16(10,files.length,true);e.setUint32(12,cs,true);e.setUint32(16,off,true);
   return new Blob([...parts,...cen,e.buffer],{type:"application/zip"})}
@@ -318,7 +344,7 @@ $("dlAll").onclick=async()=>{const media=ITEMS.filter(x=>x.path);const msgs=ITEM
   try{if(msgs.length){const txt=msgs.map(m=>`${m.guest_name||"ضيف"} — ${new Date(m.created_at).toLocaleString("ar-EG")}\n${m.body}\n`).join("\n");batch.push({name:"التهاني.txt",data:new TextEncoder().encode("﻿"+txt)})}
     for(const x of media){pg.textContent=`بنجهز الملفات… ${ar(done)} من ${ar(total)}`;
       const r=await fetch(URLS[x.path]);if(!r.ok)throw 0;const u8=new Uint8Array(await r.arrayBuffer());
-      if(size+u8.length>LIMIT&&batch.length)flush(false);batch.push({name:(x.kind==="video"?"فيديوهات/":"صور/")+fileName(x),data:u8});size+=u8.length;done++}
+      if(size+u8.length>LIMIT&&batch.length)flush(false);batch.push({name:(x.kind==="video"?"فيديوهات/":"صور/")+fileName(x),data:u8,date:new Date(x.created_at)});size+=u8.length;done++}
     flush(true);pg.textContent="✅ اتنزل — لو الموبايل سألك، اختاري «تنزيل»";setTimeout(()=>pg.hidden=true,4000)}
   catch(e){pg.textContent="في ملفات ما اتنزلتش، جربي تاني";setTimeout(()=>pg.hidden=true,4000)}
   btn.disabled=false};
