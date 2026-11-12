@@ -64,6 +64,11 @@ a.l{color:#6d1f2f;direction:ltr;display:inline-block}
 </div>
 
 <div id="panel" hidden>
+  <div class="card" id="magCard">
+    <h3 style="color:#0f2a22;margin-bottom:4px">📖 My Magazine <span id="gpend" class="tag free"></span></h3>
+    <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">المجلة مش بتتنشر غير لما تضغطي ✅. بعد النشر العميلة تقدر تعدّل ٧ أيام، وبعدها المجلة تفضل للمشاهدة بس.</p>
+    <div id="mags"></div><div class="err" id="gerr"></div>
+  </div>
   <div class="card" id="memCard">
     <h3 style="color:#3c4733;margin-bottom:4px">📸 ألبومات الذكريات <span id="mpend" class="tag free"></span></h3>
     <p style="color:#8a6b6f;font-size:.85rem;margin-bottom:8px">الألبوم مش هيستقبل صور غير لما تضغطي ✅. لينك الضيوف بيرفع بس، والصور نفسها مش بتظهر هنا (خصوصية العروسين).</p>
@@ -195,7 +200,7 @@ async function loadMems(){const pw=MPASS||PASS;const r=await SB.rpc("memories_ad
   if(r.error){if((r.error.message||"").includes("denied")){$("mpass").hidden=false;$("mems").innerHTML="";return}
     if((r.error.message||"").includes("function")||r.error.code==="PGRST202"){$("memCard").hidden=true;return}
     $("merr").textContent="في مشكلة في الاتصال";return}
-  MPASS=pw;try{sessionStorage.setItem("fmp",pw)}catch(e){}$("mpass").hidden=true;drawMems(r.data||[])}
+  MPASS=pw;try{sessionStorage.setItem("fmp",pw)}catch(e){}$("mpass").hidden=true;drawMems(r.data||[]);loadMags()}
 function drawMems(list){const box=$("mems");box.innerHTML="";const pend=list.filter(x=>x.status==="pending").length;$("mpend").textContent=pend?pend+" مستني":"";
   if(!list.length){box.innerHTML='<p style="color:#8a6b6f;text-align:center;padding:10px">لسه مفيش طلبات ألبومات</p>';return}
   list.forEach(x=>{const d=document.createElement("div");d.className="ord";
@@ -232,6 +237,37 @@ function drawMems(list){const box=$("mems");box.innerHTML="";const pend=list.fil
       wa.href="https://wa.me/2"+(x.buyer_phone||"").replace(/\D/g,"").replace(/^2/,"")+"?text="+encodeURIComponent(`أهلاً${x.buyer_name?" "+x.buyer_name:""} 🤍 ألبوم الذكريات بتاعكم اتفعّل!\n\nادخلي لوحة الألبوم بالكود السري اللي ظهرلك وقت الطلب:\n${SITE}memories/album.html\n\nهتلاقي لينك الضيوف وكارت الـQR جاهزين للطباعة.`);
       acts.appendChild(wa)}
     d.append(top,meta,bar,rc,img,acts);box.appendChild(d)})}
+/* ---------- My Magazine ---------- */
+const GST={draft:"✏️ لسه بتتصمم",pending:"⏳ مستني موافقتك",active:"منشورة ✅",rejected:"مرفوض ❌"};
+const OCCN={birthday:"عيد ميلاد",friendship:"صداقة",love:"حب",anniversary:"ذكرى ارتباط",mother:"للأم",father:"للأب",graduation:"تخرج",other:"مناسبة تانية"};
+async function loadMags(){const r=await SB.rpc("mag_admin_list",{p_pass:MPASS||PASS});
+  if(r.error){if((r.error.message||"").includes("function")||r.error.code==="PGRST202"){$("magCard").hidden=true;return}if((r.error.message||"").includes("denied")){$("mags").innerHTML='<p style="color:#8a6b6f">ادخلي باسورد الألبومات تحت الأول</p>';return}$("gerr").textContent="في مشكلة في الاتصال";return}
+  const list=r.data||[],box=$("mags");box.innerHTML="";const pend=list.filter(x=>x.status==="pending").length;$("gpend").textContent=pend?pend+" مستني":"";
+  if(!list.length){box.innerHTML='<p style="color:#8a6b6f;text-align:center;padding:10px">لسه مفيش مجلات</p>';return}
+  const dd=x=>x?new Date(x).toLocaleDateString("ar-EG",{day:"numeric",month:"short",year:"numeric"}):"—";
+  list.forEach(x=>{const d=document.createElement("div");d.className="ord";
+    const top=document.createElement("div");top.className="top";const no=document.createElement("b");no.style.color="#0f2a22";no.textContent="📖 "+(x.recipient||"—");
+    const st=document.createElement("span");st.className="tag st-"+(x.status==="active"?"active":x.status);st.textContent=GST[x.status]||x.status;
+    const ed=document.createElement("span");ed.className="tag";ed.style.cssText="background:#e7efe9;color:#0f2a22;font-weight:700";ed.textContent="🎨 "+(x.edition||"emerald");top.append(no,st,ed);
+    const meta=document.createElement("div");meta.className="meta";const view=SITE+"magazine/view.html#"+x.slug;
+    const editOpen=x.edit_until&&new Date(x.edit_until)>new Date();
+    meta.append("المناسبة: "+(OCCN[x.occasion]||x.occasion||"—")+" · اللغة: "+(x.lang==="en"?"English":"عربي")+" · 📷 "+x.photos+" صورة",document.createElement("br"),
+      "العميلة: "+(x.buyer_name||"—")+" · ",Object.assign(document.createElement("a"),{className:"l",target:"_blank",href:"https://wa.me/2"+(x.buyer_phone||"").replace(/\D/g,"").replace(/^2/,""),textContent:x.buyer_phone||"—"}),
+      document.createElement("br"),"المبلغ: "+(x.price||"—")+" · الطلب: "+dd(x.submitted_at),document.createElement("br"),
+      "النشر: "+dd(x.activated_at)+" · التعديل: "+(x.status==="active"?(editOpen?"مفتوح لحد "+dd(x.edit_until):"اتقفل "+dd(x.edit_until)):"—"));
+    if(x.status==="active"){meta.append(document.createElement("br"),"اللينك: ",Object.assign(document.createElement("a"),{className:"l",target:"_blank",href:view,textContent:"magazine/#"+x.slug}))}
+    const img=document.createElement("img");img.alt="صورة التحويل";img.hidden=true;
+    const acts=document.createElement("div");acts.className="mrow";
+    const btn=(t,cls,fn)=>{const b=document.createElement("button");b.className="btn "+cls;b.textContent=t;b.onclick=fn;acts.appendChild(b);return b};
+    if(x.status!=="draft")btn("🧾 صورة التحويل","g",async()=>{if(!img.hidden){img.hidden=true;return}const r=await SB.rpc("mag_admin_receipt",{p_pass:MPASS||PASS,p_id:x.id});if(r.error){alert("حصلت مشكلة");return}img.src=r.data||"";img.hidden=false});
+    img.onclick=()=>{const z=document.createElement("div");z.className="zoom";const i=document.createElement("img");i.src=img.src;z.appendChild(i);z.onclick=()=>z.remove();document.body.appendChild(z)};
+    if(x.status==="pending"){btn("✅ التحويل وصل — انشري","ok",()=>magSet(x.id,{p_status:"active"}));btn("❌ مفيش تحويل","no-btn",()=>{if(confirm("ترفضي الطلب ده؟"))magSet(x.id,{p_status:"rejected"})})}
+    if(x.status==="active"){btn("✏️ افتحي التعديل ٣ أيام كمان","g",()=>magSet(x.id,{p_edit_days:3}));
+      btn("🔑 كود جديد للعميلة","g",async()=>{if(!confirm("الكود القديم هيتلغي. تكمّلي؟"))return;const r=await SB.rpc("mag_admin_new_code",{p_pass:MPASS||PASS,p_id:x.id});if(r.error){alert("حصلت مشكلة");return}prompt("الكود الجديد:",r.data)});
+      const wa=document.createElement("a");wa.className="btn w";wa.target="_blank";wa.rel="noopener";wa.textContent="💬 بلّغيها إن المجلة اتنشرت";
+      wa.href="https://wa.me/2"+(x.buyer_phone||"").replace(/\D/g,"").replace(/^2/,"")+"?text="+encodeURIComponent(`أهلاً${x.buyer_name?" "+x.buyer_name:""} 🤍 مجلة ${x.recipient||""} اتنشرت!\n\n${view}\n\nتقدري تعدّلي فيها لمدة ٧ أيام من صفحة التصميم بنفس الكود.`);acts.appendChild(wa)}
+    d.append(top,meta,img,acts);box.appendChild(d)})}
+async function magSet(id,args){const r=await SB.rpc("mag_admin_set",Object.assign({p_pass:MPASS||PASS,p_id:id},args));if(r.error){alert("حصلت مشكلة، جربي تاني");return}loadMags()}
 async function memSet(id,args){const r=await SB.rpc("memories_admin_set",Object.assign({p_pass:MPASS,p_id:id},args));if(r.error){alert("حصلت مشكلة، جربي تاني");return}loadMems()}
 $("mgo").onclick=()=>{MPASS=$("mpw").value;loadMems()};
 async function enter(){

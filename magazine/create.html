@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0f2a22">
+<meta name="robots" content="noindex">
+<title>صممي مجلتك · My Magazine · فرحتنا</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--em:#0f2a22;--em2:#173a2f;--gold:#c9a45c;--gold2:#e8cf94;--ivory:#f6f0e3;--paper:#fffdf8;--ink:#2a2620;--mute:#7b7468;--line:#e3d9c4;
+  --ar:"Noto Naskh Arabic","Amiri",serif;--ruq:"Aref Ruqaa",serif;--disp:"Playfair Display",Georgia,serif;--cor:"Cormorant Garamond",Georgia,serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ivory);color:var(--ink);font-family:var(--ar);-webkit-tap-highlight-color:transparent;min-height:100dvh}
+button,input,textarea,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+[hidden]{display:none!important}
+.top{position:sticky;top:0;z-index:20;background:var(--em);color:var(--ivory);padding:max(10px,env(safe-area-inset-top)) 16px 10px}
+.top .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.top b{font-family:var(--disp);font-style:italic;font-weight:500;font-size:19px;color:var(--gold2)}
+.top small{font-size:12.5px;opacity:.8}
+.save{font-size:12.5px;color:var(--gold2);white-space:nowrap}
+.steps{display:flex;gap:4px;margin-top:10px}
+.steps i{flex:1;height:4px;border-radius:4px;background:rgba(255,255,255,.18)}
+.steps i.on{background:var(--gold)}
+.wrap{max-width:560px;margin:0 auto;padding:18px 16px calc(110px + env(safe-area-inset-bottom))}
+h1{font-family:var(--ruq);font-size:clamp(28px,8vw,36px);color:var(--em);line-height:1.3}
+.lead{color:var(--mute);font-size:15px;line-height:1.8;margin:4px 0 14px}
+.card{background:var(--paper);border-radius:18px;padding:16px;margin-top:12px;box-shadow:0 10px 26px -20px rgba(40,30,10,.5),inset 0 0 0 1px var(--line)}
+label.f{display:block;font-size:14px;font-weight:600;color:#4a4336;margin:12px 0 6px}
+label.f small{font-weight:400;color:var(--mute)}
+.in{width:100%;border:1px solid var(--line);background:#fffcf6;border-radius:12px;padding:12px 13px;font-size:16px;outline:none}
+.in:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,164,92,.18)}
+textarea.in{min-height:96px;resize:vertical;line-height:1.8}
+.in[dir=ltr]{text-align:left}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{border-radius:30px;padding:9px 15px;font-size:14.5px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line)}
+.chips button.on{background:var(--em);color:var(--gold2);box-shadow:none}
+.eds{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.ed{border-radius:14px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);text-align:center;padding-bottom:8px;position:relative}
+.ed.on{box-shadow:inset 0 0 0 2.5px var(--gold)}
+.ed .sw{height:120px;display:grid;place-items:center;font-family:var(--disp);font-weight:900;font-size:26px;letter-spacing:.04em}
+.ed b{display:block;margin-top:6px;font-family:var(--disp);font-size:15px}
+.ed small{font-size:12px;color:var(--mute)}
+.ed .soon{position:absolute;top:8px;left:8px;font-size:11.5px;background:rgba(0,0,0,.55);color:#fff;border-radius:10px;padding:1px 8px}
+.ed[disabled]{opacity:.55}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:14px;padding:14px;font-weight:700;font-size:16px;margin-top:12px}
+.b1{background:linear-gradient(180deg,#f3dda4,#c49b56);color:#14271f;box-shadow:0 12px 24px -14px rgba(160,120,50,.8)}
+.b2{background:var(--em);color:var(--gold2)}
+.b3{box-shadow:inset 0 0 0 1.5px var(--em);color:var(--em)}
+.btn[disabled]{opacity:.55}
+.err{color:#a5402e;text-align:center;margin-top:10px;min-height:1.3em;font-size:14.5px}
+.note{font-size:13.5px;color:var(--mute);line-height:1.8}
+.code{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.16em;text-align:center;direction:ltr;color:var(--em);background:#f3ead6;border-radius:14px;padding:12px;margin:8px 0}
+/* photos */
+.drop{display:block;border:1.5px dashed #cdbb93;border-radius:16px;padding:18px;text-align:center;color:#6c5f45;cursor:pointer;background:#fffcf4}
+.drop b{display:block;font-size:16px;color:var(--em)}
+.drop input{display:none}
+.pgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
+.pi{display:grid;grid-template-columns:86px 1fr;gap:10px;background:#fff;border-radius:14px;padding:8px;box-shadow:inset 0 0 0 1px var(--line);position:relative}
+.pi .th{width:86px;height:86px;border-radius:10px;background:#eee center/cover;position:relative}
+.pi .th .bar{position:absolute;left:6px;right:6px;bottom:6px;height:5px;border-radius:5px;background:rgba(255,255,255,.6);overflow:hidden}
+.pi .th .bar i{display:block;height:100%;width:0;background:var(--gold)}
+.pi .th .cv{position:absolute;top:4px;right:4px;font-size:11px;background:var(--em);color:var(--gold2);border-radius:8px;padding:1px 6px}
+.pi .fl{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pi .fl .in{padding:8px 10px;font-size:15px}
+.pi .row{display:flex;gap:6px}
+.pi .row .in{flex:1}
+.pi .acts{display:flex;gap:6px}
+.pi .acts button{font-size:12.5px;border-radius:20px;padding:4px 10px;box-shadow:inset 0 0 0 1px var(--line)}
+.pi .acts .del{color:#a5402e}
+.pi.err{box-shadow:inset 0 0 0 1.5px #d38b7a}
+.count{display:flex;justify-content:space-between;font-size:13.5px;color:var(--mute);margin-top:10px}
+/* lists */
+.item{background:#fff;border-radius:14px;padding:12px;box-shadow:inset 0 0 0 1px var(--line);margin-top:10px;position:relative}
+.item b{color:var(--em)}.item small{color:var(--mute)}
+.item p{font-size:15px;line-height:1.7;margin-top:4px;white-space:pre-wrap}
+.item .x{position:absolute;top:8px;left:10px;color:#a5402e;font-size:13px}
+.vrow{display:flex;align-items:center;gap:10px}
+.vrow .pl{width:40px;height:40px;border-radius:50%;background:var(--em);color:var(--gold2);display:grid;place-items:center;flex:none}
+.rec{display:flex;align-items:center;gap:10px;margin-top:10px}
+.rec .dot{width:12px;height:12px;border-radius:50%;background:#c0392b;animation:bl 1s infinite}
+@keyframes bl{50%{opacity:.2}}
+/* bottom bar */
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(246,240,227,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
+.bar .in2{max-width:560px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:10px}
+.bar .btn{margin:0}
+.status{border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:14.5px;line-height:1.8}
+.status.pending{background:#fff4dd;color:#7a5600}
+.status.active{background:#e6f1e8;color:#21553a}
+.status.locked{background:#efe9df;color:#5f574a}
+.link{direction:ltr;text-align:center;background:#f3ead6;border-radius:12px;padding:10px;font-family:var(--cor);font-size:17px;word-break:break-all;color:var(--em)}
+.pv{position:fixed;inset:0;z-index:50;background:#000}
+.pv iframe{width:100%;height:100%;border:0}
+.pv .x{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:51;border-radius:20px;padding:7px 14px;background:rgba(255,255,255,.9);color:#14271f;font-weight:700;font-size:14px}
+.pay{background:#f6f1e5;border-radius:14px;padding:12px;font-size:15px;line-height:1.9}
+.num{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:8px 12px;margin:6px 0;box-shadow:inset 0 0 0 1px var(--line)}
+.num span{font-family:var(--disp);font-size:22px;letter-spacing:.06em;direction:ltr}
+.num button{border-radius:10px;padding:6px 14px;background:var(--em);color:var(--gold2);font-size:14px;font-weight:700}
+.rcpt{display:block;border:1.5px dashed #cdbb93;border-radius:14px;padding:14px;text-align:center;color:#6c5f45;cursor:pointer;margin-top:8px}
+.rcpt input{display:none}.rcpt img{max-width:100%;max-height:200px;margin:0 auto 6px;display:block;border-radius:8px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,30px);opacity:0;background:var(--em);color:var(--gold2);border-radius:30px;padding:10px 18px;font-size:14px;transition:.3s;z-index:60;max-width:90vw;text-align:center}
+.toast.on{transform:translate(-50%,0);opacity:1}
+fieldset{border:0}fieldset[disabled]{opacity:.6}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="row"><div><b>My Magazine</b> <small id="who"></small></div><span class="save" id="saveTag"></span></div>
+  <div class="steps" id="steps"></div>
+</header>
+
+<main class="wrap">
+  <!-- 0 start -->
+  <section data-s="start">
+    <h1>صممي مجلة لحد بتحبيه</h1>
+    <p class="lead">اختاري المناسبة والتصميم، وارفعي الصور والكلام، والمجلة بتترتب لوحدها في ١٢ صفحة. وكل حاجة بتتحفظ أول بأول.</p>
+    <div class="card">
+      <label class="f">المناسبة</label>
+      <div class="chips" id="occ"></div>
+      <label class="f">تصميم المجلة (Edition)</label>
+      <div class="eds" id="eds"></div>
+      <label class="f">لغة المجلة</label>
+      <div class="chips" id="lng"><button data-v="ar" class="on" type="button">عربي</button><button data-v="en" type="button">English</button></div>
+      <label class="f" for="rec0">اسم الشخص اللي المجلة عشانه</label>
+      <input class="in" id="rec0" maxlength="30" placeholder="مثلًا: ملك">
+      <button class="btn b1" id="startBtn" type="button">ابدأي المجلة</button>
+      <div class="err" id="startErr"></div>
+    </div>
+    <div class="card">
+      <b>بدأتي قبل كده؟</b>
+      <p class="note">اكتبي الكود السري بتاع مجلتك وكمّلي من مكان ما وقفتي.</p>
+      <input class="in" id="codeIn" dir="ltr" maxlength="16" autocapitalize="characters" placeholder="G••••••••••" style="margin-top:8px;text-align:center;letter-spacing:.12em">
+      <button class="btn b3" id="resumeBtn" type="button">كمّلي مجلتي</button>
+      <div class="err" id="resumeErr"></div>
+    </div>
+  </section>
+
+  <!-- 1 basics -->
+  <section data-s="basics" hidden>
+    <div id="statusBox"></div>
+    <div class="card" id="codeCard" hidden>
+      <b>🔒 الكود السري لمجلتك</b>
+      <div class="code" id="codeShow"></div>
+      <p class="note">بالكود ده ترجعي تكمّلي من أي موبايل. احتفظي بيه وما تبعتيهوش لحد.</p>
+      <a class="btn b3" id="codeWa" target="_blank" rel="noopener">ابعتيه لنفسك على واتساب</a>
+    </div>
+    <fieldset class="lock">
+    <h1>البيانات الأساسية</h1>
+    <div class="card">
+      <label class="f" for="recipient">اسم صاحب المجلة <small>(بيظهر في الصفحات)</small></label>
+      <input class="in" id="recipient" data-k="recipient" maxlength="30">
+      <label class="f" for="mast">الاسم بالإنجليزي للغلاف <small>(زي MALAK)</small></label>
+      <input class="in" id="mast" data-k="mast" dir="ltr" maxlength="14" autocapitalize="characters">
+      <label class="f">هو ولا هي؟ <small>(عشان صيغة الكلام)</small></label>
+      <div class="chips" id="gen"><button data-v="f" type="button" class="on">هي</button><button data-v="m" type="button">هو</button></div>
+      <label class="f" for="from">من مين؟</label>
+      <input class="in" id="from" data-k="from" maxlength="40" placeholder="مثلًا: البنات / نور / ولادك">
+      <label class="f" for="date">شهر المناسبة</label>
+      <input class="in" id="date" data-k="date" type="month">
+      <label class="f" for="headline">عنوان الغلاف <small>(اختياري، ولو سبتيه هنكتبه إحنا)</small></label>
+      <input class="in" id="headline" data-k="headline" maxlength="40">
+      <label class="f" for="sub">سطر صغير تحت العنوان <small>(اختياري)</small></label>
+      <input class="in" id="sub" data-k="sub" maxlength="90">
+    </div>
+    </fieldset>
+  </section>
+
+  <!-- 2 photos -->
+  <section data-s="photos" hidden>
+    <fieldset class="lock">
+    <h1>الصور</h1>
+    <p class="lead">ارفعي صور من الحياة: خروجات، وسفر، وطفولة، وضحك. الصور بتتوزع على الصفحات لوحدها. اكتبي تعليق وسنة لأي صورة عشان تظهر في «عبر السنين». <b>كل ما الصور تزيد، المجلة تتملي أكتر من غير تكرار.</b></p>
+    <label class="drop"><input type="file" id="pics" accept="image/*" multiple><b>📷 اختاري صور من موبايلك</b><span class="note">ممكن كذا صورة مرة واحدة · لحد ٤٠ صورة</span></label>
+    <div class="count"><span id="pCount"></span><span>⭐ = صورة الغلاف</span></div>
+    <div class="pgrid" id="pgrid"></div>
+    </fieldset>
+  </section>
+
+  <!-- 3 words -->
+  <section data-s="words" hidden>
+    <fieldset class="lock">
+    <h1>الكلام</h1>
+    <div class="card">
+      <label class="f" for="dedication">الإهداء <small>(أول صفحة بعد الغلاف)</small></label>
+      <textarea class="in" id="dedication" data-k="dedication" maxlength="500"></textarea>
+      <label class="f" for="loves">حاجات بنحبها فيه/فيها <small>(كل حاجة في سطر)</small></label>
+      <textarea class="in" id="loves" maxlength="800" placeholder="ضحكتك اللي بتطلع من قلبك&#10;إنك بتفتكري كل التفاصيل"></textarea>
+      <label class="f" for="quote">جملة كبيرة على صورة كاملة <small>(اختياري)</small></label>
+      <input class="in" id="quote" data-k="quote" maxlength="90">
+      <label class="f" for="finalMsg">رسالة الختام</label>
+      <textarea class="in" id="finalMsg" data-k="finalMsg" maxlength="300"></textarea>
+    </div>
+    </fieldset>
+  </section>
+
+  <!-- 4 letters -->
+  <section data-s="letters" hidden>
+    <fieldset class="lock">
+    <h1>الرسائل</h1>
+    <p class="lead">رسائل من الصحاب والعيلة. اكتبيها بالنيابة عنهم أو انسخيها من الواتساب.</p>
+    <div class="card">
+      <label class="f" for="lName">الاسم</label><input class="in" id="lName" maxlength="30">
+      <label class="f" for="lRel">صلة القرابة <small>(اختياري)</small></label><input class="in" id="lRel" maxlength="30" placeholder="صاحبة الجامعة">
+      <label class="f" for="lMsg">الرسالة</label><textarea class="in" id="lMsg" maxlength="600"></textarea>
+      <button class="btn b2" id="addLetter" type="button">+ ضيفي الرسالة</button>
+    </div>
+    <div id="letList"></div>
+    </fieldset>
+  </section>
+
+  <!-- 5 voices -->
+  <section data-s="voices" hidden>
+    <fieldset class="lock">
+    <h1>رسائل صوتية <small style="font-size:16px;color:var(--mute)">(اختياري)</small></h1>
+    <p class="lead">سجّلي رسالة من الموبايل أو ارفعي تسجيل جاهز (فويس واتساب مثلًا). لحد ٣ دقايق للرسالة.</p>
+    <div class="card">
+      <label class="f" for="vName">صاحب الرسالة</label><input class="in" id="vName" maxlength="30" placeholder="مثلًا: ماما">
+      <button class="btn b2" id="recBtn" type="button">🎙️ سجّلي دلوقتي</button>
+      <div class="rec" id="recBox" hidden><span class="dot"></span><span id="recT">0:00</span><button class="btn b1" id="stopBtn" type="button" style="margin:0;width:auto;padding:8px 18px">إيقاف وحفظ</button></div>
+      <label class="btn b3" style="cursor:pointer">📁 ارفعي ملف صوتي<input type="file" id="vFile" accept="audio/*,.m4a,.mp3,.aac,.wav,.ogg,.opus" hidden></label>
+      <div class="err" id="vErr"></div>
+    </div>
+    <div id="vList"></div>
+    <audio id="vAud" preload="none"></audio>
+    </fieldset>
+  </section>
+
+  <!-- 6 review + order -->
+  <section data-s="review" hidden>
+    <div id="statusBox2"></div>
+    <h1>المراجعة والطلب</h1>
+    <div class="card">
+      <b>شوفي المجلة كاملة قبل ما تطلبي</b>
+      <p class="note" id="pageNote"></p>
+      <button class="btn b1" id="pvBtn" type="button">👀 افتحي المعاينة</button>
+    </div>
+    <div class="card" id="orderCard">
+      <b>الطلب والدفع</b>
+      <div class="pay" style="margin-top:8px">حوّلي <b id="priceTxt"></b> على <b>InstaPay</b> للرقم:
+        <div class="num"><span id="ipNum">01280067110</span><button type="button" id="cpNum">نسخ</button></div>وارفعي سكرين شوت التحويل:</div>
+      <label class="rcpt"><input type="file" id="rcpt" accept="image/*"><img id="rcptPrev" alt="" hidden><span id="rcptTxt">📎 اختاري صورة التحويل</span></label>
+      <label class="f" for="bName">اسمك</label><input class="in" id="bName" maxlength="60" autocomplete="name">
+      <label class="f" for="bPhone">رقم موبايلك (واتساب)</label><input class="in" id="bPhone" type="tel" dir="ltr" maxlength="20" placeholder="01xxxxxxxxx">
+      <button class="btn b1" id="orderBtn" type="button">ابعتي الطلب</button>
+      <div class="err" id="orderErr"></div>
+      <p class="note">بعد ما نأكد التحويل، المجلة بتتنشر ويطلعلك لينكها. وتقدري تعدّلي فيها ٧ أيام من النشر، وبعدها بتفضل متاحة للمشاهدة.</p>
+    </div>
+    <div class="card" id="liveCard" hidden>
+      <b>🎉 مجلتك منشورة</b>
+      <div class="link" id="liveLink" style="margin-top:8px"></div>
+      <a class="btn b1" id="liveOpen" target="_blank" rel="noopener">افتحي المجلة</a>
+      <a class="btn b3" id="liveWa" target="_blank" rel="noopener">ابعتيها على واتساب</a>
+    </div>
+  </section>
+</main>
+
+<nav class="bar"><div class="in2"><button class="btn b3" id="back" type="button">رجوع</button><button class="btn b1" id="next" type="button">التالي</button></div></nav>
+<div class="pv" id="pv" hidden><button class="x" id="pvX" type="button">✕ قفل المعاينة</button><iframe id="pvF" title="معاينة المجلة"></iframe></div>
+<div class="toast" id="toast"></div>
+
+<script src="../memories/config.js"></script>
+<script src="../fa.js"></script>
+<script>
+(()=>{
+const C=window.FM,$=id=>document.getElementById(id);
+const MAG_PRICE=C.magPrice||null;   // set in memories/config.js when the price is decided
+const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2600)};
+const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+/* ---- small Supabase client: anonymous session, rpc, storage ---- */
+const SB=(()=>{const K="farhetna-mag";let S=null;try{S=JSON.parse(localStorage.getItem(K)||"null")}catch(e){}
+  const keep=s=>{S=s?{access_token:s.access_token,refresh_token:s.refresh_token,expires_at:s.expires_at||Math.floor(Date.now()/1000)+(s.expires_in||3600)}:null;try{S?localStorage.setItem(K,JSON.stringify(S)):localStorage.removeItem(K)}catch(e){}};
+  const H=(t,x)=>Object.assign({apikey:C.sbKey,Authorization:"Bearer "+(t||C.sbKey)},x||{"Content-Type":"application/json"});
+  const j=async r=>{const t=await r.text();let d=null;try{d=t?JSON.parse(t):null}catch(e){}return{ok:r.ok,status:r.status,data:d}};
+  async function signIn(){const r=await j(await fetch(C.sbUrl+"/auth/v1/signup",{method:"POST",headers:H(),body:JSON.stringify({data:{}})}));if(!r.ok||!r.data||!r.data.access_token)throw new Error("anon");keep(r.data)}
+  async function refresh(){if(!S||!S.refresh_token)return signIn();const r=await j(await fetch(C.sbUrl+"/auth/v1/token?grant_type=refresh_token",{method:"POST",headers:H(),body:JSON.stringify({refresh_token:S.refresh_token})}));if(r.ok&&r.data&&r.data.access_token)keep(r.data);else{keep(null);await signIn()}}
+  async function token(){if(!S)await signIn();else if(S.expires_at-60<Date.now()/1000)await refresh();return S.access_token}
+  async function call(fn){let r=await fn(await token());if(r.status===401){await refresh();r=await fn(S.access_token)}return r}
+  return{
+    rpc:async(fn,b)=>{const r=await call(async t=>j(await fetch(C.sbUrl+"/rest/v1/rpc/"+fn,{method:"POST",headers:H(t),body:JSON.stringify(b||{})})));if(!r.ok)throw new Error((r.data&&(r.data.message||r.data.msg))||("HTTP "+r.status));return r.data},
+    upload:(path,blob,type,onp)=>token().then(t=>new Promise((res,rej)=>{const x=new XMLHttpRequest();x.open("POST",C.sbUrl+"/storage/v1/object/magazine/"+path);
+      x.setRequestHeader("apikey",C.sbKey);x.setRequestHeader("Authorization","Bearer "+t);x.setRequestHeader("Content-Type",type);x.setRequestHeader("x-upsert","false");
+      x.upload.onprogress=e=>{if(e.lengthComputable&&onp)onp(e.loaded/e.total)};x.onload=()=>x.status<300?res(C.sbUrl+"/storage/v1/object/public/magazine/"+path):rej(new Error("HTTP "+x.status));x.onerror=()=>rej(new Error("net"));x.send(blob)})),
+    remove:path=>call(async t=>j(await fetch(C.sbUrl+"/storage/v1/object/magazine",{method:"DELETE",headers:H(t),body:JSON.stringify({prefixes:[path]})})))
+  }})();
+
+/* ---- demo mode (?demo=1): everything stays on this phone, nothing is sent ---- */
+const DEMO=/[?&]demo=1/.test(location.search);
+if(DEMO){let PR=null;const view=()=>JSON.parse(JSON.stringify(PR));
+  Object.assign(SB,{rpc:async(fn,b)=>{await new Promise(r=>setTimeout(r,250));
+      if(fn==="mag_create"){PR={id:"demo",slug:"demo",edition:b.p_edition,lang:b.p_lang,occasion:b.p_occasion,recipient:b.p_recipient,data:{},status:"draft",editable:true};return{code:"GDEMO2026XYZ",project:view()}}
+      if(fn==="mag_claim"){if(!PR)throw new Error("bad_code");return view()}
+      if(fn==="mag_save"){PR.data=b.p_data;return new Date().toISOString()}
+      if(fn==="mag_order"){PR.status="pending";return view()}
+      if(fn==="demo_activate"){PR.status="active";PR.editUntil=new Date(Date.now()+7*864e5).toISOString();return view()}
+      throw new Error("demo")},
+    upload:(path,blob,type,onp)=>new Promise(r=>{let k=0;const t=setInterval(()=>{k+=.25;onp&&onp(k);if(k>=1){clearInterval(t);r(URL.createObjectURL(blob))}},120)}),
+    remove:async()=>({ok:true})})}
+/* ---- state ---- */
+const STEPS=["start","basics","photos","words","letters","voices","review"];
+let step=0,CODE="",P=null,D={photos:[],letters:[],voices:[],loves:[]},EDITABLE=true,pendingUploads=0;
+const OCCS=[["birthday","عيد ميلاد 🎂"],["friendship","صداقة 🤍"],["love","حب ❤️"],["anniversary","ذكرى ارتباط 💍"],["mother","للأم 🌷"],["father","للأب"],["graduation","تخرج 🎓"],["other","مناسبة تانية"]];
+const EDS=[{id:"emerald",name:"Emerald",ar:"زمردي ودهبي",bg:"linear-gradient(160deg,#1c4537,#0b1f19)",c:"#e8cf94"},{id:"blush",name:"Blush Romance",ar:"قريبًا",bg:"linear-gradient(160deg,#f6dfe0,#e8bcc0)",c:"#7a3f4b",soon:1},
+  {id:"vogue",name:"Vogue Style",ar:"قريبًا",bg:"#111",c:"#fff",soon:1},{id:"birthday",name:"Birthday",ar:"قريبًا",bg:"linear-gradient(160deg,#fff1d6,#f3d6c9)",c:"#a05a3c",soon:1}];
+let occ="birthday",edition="emerald",lang="ar";
+OCCS.forEach(([v,t])=>{const b=document.createElement("button");b.type="button";b.dataset.v=v;b.textContent=t;if(v===occ)b.className="on";$("occ").appendChild(b)});
+EDS.forEach(e=>{const b=document.createElement("button");b.type="button";b.className="ed"+(e.id===edition?" on":"");b.dataset.v=e.id;if(e.soon)b.disabled=true;
+  b.innerHTML=`<div class="sw" style="background:${e.bg};color:${e.c}">${e.name.split(" ")[0].toUpperCase()}</div>${e.soon?'<span class="soon">قريبًا</span>':""}<b>${e.name}</b><small>${e.ar}</small>`;$("eds").appendChild(b)});
+const chipPick=(box,cb)=>$(box).addEventListener("click",e=>{const b=e.target.closest("button");if(!b||b.disabled)return;[...$(box).children].forEach(x=>x.classList.toggle("on",x===b));cb(b.dataset.v)});
+chipPick("occ",v=>occ=v);chipPick("eds",v=>edition=v);chipPick("lng",v=>lang=v);chipPick("gen",v=>{D.male=v==="m";dirty()});
+STEPS.forEach(()=>$("steps").appendChild(document.createElement("i")));
+
+function show(i){step=Math.max(0,Math.min(STEPS.length-1,i));document.querySelectorAll("main>section").forEach(s=>s.hidden=s.dataset.s!==STEPS[step]);
+  [...$("steps").children].forEach((x,k)=>x.classList.toggle("on",k<=step));$("back").style.visibility=step>1?"visible":"hidden";document.querySelector(".bar").hidden=step===0;
+  $("next").textContent=step===STEPS.length-1?"👀 المعاينة":"التالي";scrollTo(0,0);if(STEPS[step]==="review")review();else status();try{sessionStorage.setItem("mag_step",step)}catch(e){}}
+$("back").onclick=()=>show(step-1);
+$("next").onclick=async()=>{if(step===STEPS.length-1){openPreview();return}await saveNow();show(step+1)};
+
+/* ---- create / resume ---- */
+$("startBtn").onclick=async()=>{const n=$("rec0").value.trim();if(n.length<2){$("startErr").textContent="اكتبي اسم صاحب المجلة";return}
+  const b=$("startBtn");b.disabled=true;b.textContent="بنجهز مجلتك…";
+  try{const r=await SB.rpc("mag_create",{p_edition:edition,p_lang:lang,p_occasion:occ,p_recipient:n});CODE=r.code;
+    D=Object.assign(D,{recipient:n,occasion:occ,lang,edition});if(!DEMO)try{localStorage.setItem("mag_code",CODE)}catch(e){}
+    load(r.project,true);await saveNow();show(1)}
+  catch(e){$("startErr").textContent=/rate/.test(e.message)?"اتعملت مجلات كتير من الجهاز ده، جربي بعد شوية":"في مشكلة في الاتصال، جربي تاني"}
+  b.disabled=false;b.textContent="ابدأي المجلة"};
+async function resume(code){CODE=(code||"").trim().toUpperCase();if(CODE.length<8)return;
+  try{const p=await SB.rpc("mag_claim",{p_code:CODE});try{localStorage.setItem("mag_code",CODE)}catch(e){}load(p,false);
+    let s=1;try{s=+sessionStorage.getItem("mag_step")||1}catch(e){}show(p.status==="active"||p.status==="pending"?6:Math.max(1,s))}
+  catch(e){$("resumeErr").textContent=/bad_code/.test(e.message)?"الكود ده مش صحيح":"في مشكلة في الاتصال، جربي تاني";show(0)}}
+$("resumeBtn").onclick=()=>resume($("codeIn").value);
+
+function load(p,isNew){P=p;D=Object.assign({photos:[],letters:[],voices:[],loves:[]},p.data||{});D.recipient=D.recipient||p.recipient;D.occasion=D.occasion||p.occasion;D.lang=D.lang||p.lang;D.edition=D.edition||p.edition;
+  EDITABLE=p.editable!==false;$("who").textContent=D.recipient?"· مجلة "+D.recipient:"";
+  $("codeCard").hidden=!isNew;$("codeShow").textContent=CODE;
+  $("codeWa").href="https://wa.me/?text="+encodeURIComponent(`🔒 كود مجلتي على فرحتنا (ما تبعتيهوش لحد):\n${CODE}\n\nأكمّل منين: ${C.site}/magazine/create.html`);
+  document.querySelectorAll("[data-k]").forEach(el=>el.value=D[el.dataset.k]||"");$("loves").value=(D.loves||[]).join("\n");
+  [...$("gen").children].forEach(b=>b.classList.toggle("on",(b.dataset.v==="m")===!!D.male));
+  document.querySelectorAll("fieldset.lock").forEach(f=>f.disabled=!EDITABLE);
+  status();drawPhotos();drawLetters();drawVoices()}
+function status(){const b=$("statusBox");if(!P){b.innerHTML="";return}const s=P.status;let h="";
+  const dd=x=>new Date(x).toLocaleDateString("ar-EG",{day:"numeric",month:"long"});
+  if(s==="pending")h='<div class="status pending">⏳ طلبك وصل وبنراجع التحويل. تقدري تكمّلي تعديل لحد ما المجلة تتنشر.</div>';
+  else if(s==="active"&&EDITABLE)h=`<div class="status active">✅ مجلتك منشورة. تقدري تعدّلي لحد ${dd(P.editUntil)}، وأي تعديل بيظهر في نفس اللينك.</div>`;
+  else if(s==="active")h='<div class="status locked">🔒 مدة التعديل خلصت. المجلة متاحة للمشاهدة على نفس اللينك.</div>';
+  b.innerHTML=h;$("orderCard").hidden=s==="active"||s==="pending";$("liveCard").hidden=s!=="active";
+  if(s==="active"){const u=C.site+"/magazine/view.html#"+P.slug;$("liveLink").textContent=u.replace("https://","");$("liveOpen").href=u;
+    $("liveWa").href="https://wa.me/?text="+encodeURIComponent(`عملتلك حاجة صغيرة 💌\n${u}`)}
+  if(s==="pending"){$("orderCard").hidden=true;$("liveCard").hidden=true;
+    if(DEMO)b.innerHTML+='<button class="btn b2" id="demoAct" type="button">🧪 (تجربة) اعتبري الأدمن وافق ونشر المجلة</button>'}
+  if(DEMO&&s==="active"){$("liveOpen").removeAttribute("href");$("liveOpen").onclick=e=>{e.preventDefault();openPreview()}}
+  $("statusBox2").innerHTML=b.innerHTML;b.innerHTML=STEPS[step]==="review"?"":b.innerHTML;
+  const da=document.getElementById("demoAct");if(da)da.onclick=async()=>{P=await SB.rpc("demo_activate");EDITABLE=true;status();toast("اتنشرت (تجربة) 🎉")}}
+
+/* ---- autosave ---- */
+let saveT=0,saving=false,again=false;
+function dirty(){if(!CODE||!EDITABLE)return;$("saveTag").textContent="بيتحفظ…";clearTimeout(saveT);saveT=setTimeout(saveNow,1200);try{localStorage.setItem("mag_backup_"+CODE,JSON.stringify(D))}catch(e){}}
+async function saveNow(){clearTimeout(saveT);if(!CODE||!EDITABLE)return;if(saving){again=true;return}saving=true;
+  const data=JSON.parse(JSON.stringify(D));data.photos=(data.photos||[]).filter(p=>p.url);data.voices=(data.voices||[]).filter(v=>v.url);
+  try{await SB.rpc("mag_save",{p_code:CODE,p_data:data,p_edition:D.edition,p_lang:D.lang,p_recipient:D.recipient,p_occasion:D.occasion});$("saveTag").textContent="✓ اتحفظ"}
+  catch(e){$("saveTag").textContent=/locked/.test(e.message)?"🔒 التعديل مقفول":"⚠️ ما اتحفظش — هنحاول تاني";if(!/locked/.test(e.message))setTimeout(dirty,4000)}
+  saving=false;if(again){again=false;saveNow()}}
+document.querySelectorAll("[data-k]").forEach(el=>el.addEventListener("input",()=>{D[el.dataset.k]=el.value;if(el.id==="recipient")$("who").textContent="· مجلة "+el.value;dirty()}));
+$("loves").addEventListener("input",()=>{D.loves=$("loves").value.split("\n").map(s=>s.trim()).filter(Boolean).slice(0,10);dirty()});
+addEventListener("beforeunload",e=>{if(pendingUploads||$("saveTag").textContent==="بيتحفظ…"){saveNow();e.preventDefault();e.returnValue=""}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden)saveNow()});
+
+/* ---- photos ---- */
+const rid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+async function shrink(f){try{const bmp=await createImageBitmap(f,{imageOrientation:"from-image"}).catch(()=>createImageBitmap(f));
+  const M=1800,s=Math.min(1,M/Math.max(bmp.width,bmp.height)),c=document.createElement("canvas");c.width=Math.round(bmp.width*s);c.height=Math.round(bmp.height*s);
+  const x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(bmp,0,0,c.width,c.height);const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.86));if(!b)throw 0;return{b,w:c.width,h:c.height}}
+  catch(e){return{b:f,w:0,h:0}}}
+$("pics").onchange=async e=>{const fs=[...e.target.files].filter(f=>/^image\//.test(f.type)||/\.(heic|heif|jpe?g|png|webp)$/i.test(f.name));e.target.value="";
+  const room=40-D.photos.length;if(fs.length>room)toast(`الحد ٤٠ صورة — هنرفع أول ${ar(Math.max(0,room))}`);
+  for(const f of fs.slice(0,Math.max(0,room))){if(f.size>25*1048576){toast("في صورة كبيرة أوي واتخطّيناها");continue}
+    const it={id:rid(),url:"",cap:"",year:"",_local:URL.createObjectURL(f),_p:0};if(!D.photos.length||!D.photos.some(p=>p.cover))it.cover=1;D.photos.push(it);drawPhotos();
+    pendingUploads++;try{const s=await shrink(f);const path=P.id+"/p-"+it.id+".jpg";it.url=await SB.upload(path,s.b,"image/jpeg",p=>{it._p=p;bar(it)});it.path=path;it.w=s.w;it.h=s.h;delete it._err}
+    catch(err){it._err=1;toast("في صورة ما اترفعتش — امسحيها وجربي تاني")}
+    pendingUploads--;drawPhotos();dirty()}};
+function bar(it){const el=document.querySelector(`[data-id="${it.id}"] .bar i`);if(el)el.style.width=Math.round(it._p*100)+"%"}
+function drawPhotos(){const g=$("pgrid");g.innerHTML="";$("pCount").textContent=ar(D.photos.length)+" صورة";
+  D.photos.forEach((p,i)=>{const d=document.createElement("div");d.className="pi"+(p._err?" err":"");d.dataset.id=p.id;
+    d.innerHTML=`<div class="th" style="background-image:url('${p._local||p.url}')">${p.cover?'<span class="cv">⭐ الغلاف</span>':""}${!p.url&&!p._err?'<div class="bar"><i></i></div>':""}</div>
+      <div class="fl"><input class="in" placeholder="تعليق (اختياري)" maxlength="60"><div class="row"><input class="in" placeholder="السنة" inputmode="numeric" maxlength="4" dir="ltr"></div>
+      <div class="acts"><button type="button" class="cvb">⭐ خليها الغلاف</button><button type="button" class="del">مسح</button></div></div>`;
+    const [cap,yr]=d.querySelectorAll("input");cap.value=p.cap||"";yr.value=p.year||"";
+    cap.oninput=()=>{p.cap=cap.value;dirty()};yr.oninput=()=>{p.year=yr.value.replace(/\D/g,"").slice(0,4);dirty()};
+    d.querySelector(".cvb").onclick=()=>{D.photos.forEach(x=>delete x.cover);p.cover=1;drawPhotos();dirty()};
+    d.querySelector(".del").onclick=()=>{if(!confirm("تمسحي الصورة دي؟"))return;D.photos.splice(D.photos.indexOf(p),1);if(p.path)SB.remove(p.path);if(p.cover&&D.photos[0])D.photos[0].cover=1;drawPhotos();dirty()};
+    g.appendChild(d);bar(p)})}
+
+/* ---- letters ---- */
+$("addLetter").onclick=()=>{const n=$("lName").value.trim(),m=$("lMsg").value.trim();if(!n||!m){toast("اكتبي الاسم والرسالة");return}
+  D.letters.push({name:n,rel:$("lRel").value.trim(),msg:m});$("lName").value=$("lRel").value=$("lMsg").value="";drawLetters();dirty();toast("اتضافت ✓")};
+function drawLetters(){const b=$("letList");b.innerHTML="";D.letters.forEach((t,i)=>{const d=document.createElement("div");d.className="item";
+  d.innerHTML=`<b></b> <small></small><p></p><button class="x" type="button">مسح</button>`;d.querySelector("b").textContent=t.name;d.querySelector("small").textContent=t.rel||"";d.querySelector("p").textContent=t.msg;
+  d.querySelector(".x").onclick=()=>{if(confirm("تمسحي الرسالة دي؟")){D.letters.splice(i,1);drawLetters();dirty()}};b.appendChild(d)})}
+
+/* ---- voice notes ---- */
+let rec=null,chunks=[],recStart=0,recTick=0;
+const fmt=s=>Math.floor(s/60)+":"+String(Math.round(s%60)).padStart(2,"0");
+$("recBtn").onclick=async()=>{$("vErr").textContent="";if(!$("vName").value.trim()){$("vErr").textContent="اكتبي اسم صاحب الرسالة الأول";return}
+  if(!navigator.mediaDevices||!window.MediaRecorder){$("vErr").textContent="الموبايل ده مش بيدعم التسجيل من الصفحة — ارفعي ملف صوتي بدل كده";return}
+  try{const st=await navigator.mediaDevices.getUserMedia({audio:true});const type=["audio/mp4","audio/webm;codecs=opus","audio/webm"].find(t=>MediaRecorder.isTypeSupported(t))||"";
+    rec=new MediaRecorder(st,type?{mimeType:type}:{});chunks=[];rec.ondataavailable=e=>e.data.size&&chunks.push(e.data);
+    rec.onstop=()=>{st.getTracks().forEach(t=>t.stop());clearInterval(recTick);$("recBox").hidden=true;$("recBtn").hidden=false;
+      const b=new Blob(chunks,{type:rec.mimeType||"audio/mp4"});addVoice(b,(Date.now()-recStart)/1000)};
+    rec.start();recStart=Date.now();$("recBox").hidden=false;$("recBtn").hidden=true;
+    recTick=setInterval(()=>{const s=(Date.now()-recStart)/1000;$("recT").textContent=fmt(s);if(s>=180)rec.stop()},250)}
+  catch(e){$("vErr").textContent="محتاجين إذن الميكروفون — اسمحي بيه من إعدادات المتصفح، أو ارفعي ملف"}};
+$("stopBtn").onclick=()=>rec&&rec.state!=="inactive"&&rec.stop();
+$("vFile").onchange=async e=>{const f=e.target.files[0];e.target.value="";$("vErr").textContent="";if(!f)return;
+  if(!$("vName").value.trim()){$("vErr").textContent="اكتبي اسم صاحب الرسالة الأول";return}
+  if(f.size>10*1048576){$("vErr").textContent="الملف أكبر من ١٠ ميجا";return}
+  const dur=await new Promise(r=>{const a=new Audio();a.preload="metadata";a.onloadedmetadata=()=>r(isFinite(a.duration)?a.duration:0);a.onerror=()=>r(-1);a.src=URL.createObjectURL(f)});
+  if(dur<0){$("vErr").textContent="الملف ده مش بيشتغل على المتصفح — جربي mp3 أو m4a";return}if(dur>185){$("vErr").textContent="الرسالة أطول من ٣ دقايق";return}addVoice(f,dur)};
+async function addVoice(blob,dur){const it={id:rid(),name:$("vName").value.trim(),url:"",dur:Math.round(dur)};D.voices.push(it);drawVoices();pendingUploads++;
+  const ext=/mp4|m4a|aac/.test(blob.type)?"m4a":/webm/.test(blob.type)?"webm":/ogg|opus/.test(blob.type)?"ogg":/wav/.test(blob.type)?"wav":"mp3";
+  try{const path=P.id+"/v-"+it.id+"."+ext;it.url=await SB.upload(path,blob,blob.type||"audio/mpeg");it.path=path;$("vName").value="";toast("الرسالة اتضافت ✓")}
+  catch(e){D.voices.splice(D.voices.indexOf(it),1);$("vErr").textContent="ما اترفعتش، جربي تاني"}pendingUploads--;drawVoices();dirty()}
+function drawVoices(){const b=$("vList");b.innerHTML="";D.voices.forEach((v,i)=>{const d=document.createElement("div");d.className="item";
+  d.innerHTML=`<div class="vrow"><button class="pl" type="button">▶</button><div><b></b><br><small>${v.url?fmt(v.dur||0):"بيترفع…"}</small></div></div><button class="x" type="button">مسح</button>`;
+  d.querySelector("b").textContent=v.name;const a=$("vAud");
+  d.querySelector(".pl").onclick=e=>{if(!v.url)return;if(!a.paused&&a.dataset.id===v.id){a.pause();e.target.textContent="▶";return}document.querySelectorAll(".vrow .pl").forEach(x=>x.textContent="▶");a.dataset.id=v.id;a.src=v.url;a.play().catch(()=>toast("الملف ده مش بيشتغل هنا"));e.target.textContent="❚❚";a.onended=()=>e.target.textContent="▶"};
+  d.querySelector(".x").onclick=()=>{if(!confirm("تمسحي الرسالة الصوتية دي؟"))return;D.voices.splice(i,1);if(v.path)SB.remove(v.path);drawVoices();dirty()};b.appendChild(d)})}
+
+/* ---- review, preview, order ---- */
+function review(){const n=D.photos.filter(p=>p.url).length;$("pageNote").textContent=`عندك ${ar(n)} صورة و${ar(D.letters.length)} رسالة و${ar(D.voices.length)} رسالة صوتية.`+(n<12?" المجلة بتبقى أحلى بـ١٥ صورة أو أكتر.":"");
+  $("priceTxt").textContent=MAG_PRICE?ar(MAG_PRICE)+" جنيه":"(السعر هيتحدد قبل الإطلاق)";status()}
+function openPreview(){const f=$("pvF");$("pv").hidden=false;f.src="view.html#preview";
+  const onMsg=e=>{if(e.origin!==location.origin||!e.data||e.data.t!=="mag-ready")return;removeEventListener("message",onMsg);
+    const data=JSON.parse(JSON.stringify(D));data.photos=data.photos.filter(p=>p.url);data.voices=data.voices.filter(v=>v.url);
+    f.contentWindow.postMessage({t:"mag-preview",p:{edition:D.edition||"emerald",lang:D.lang||"ar",data}},location.origin)};addEventListener("message",onMsg)}
+$("pvBtn").onclick=openPreview;$("pvX").onclick=()=>{$("pv").hidden=true;$("pvF").src="about:blank"};
+$("cpNum").onclick=async()=>{try{await navigator.clipboard.writeText($("ipNum").textContent);toast("اتنسخ ✓")}catch(e){toast("اضغطي مطوّل على الرقم وانسخيه")}};
+let receipt=null;
+$("rcpt").onchange=async e=>{const f=e.target.files[0];if(!f)return;$("rcptTxt").textContent="بيتجهز…";
+  try{receipt=await new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{const m=1100,s=Math.min(1,m/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);c.getContext("2d").drawImage(im,0,0,c.width,c.height);let q=.75,d=c.toDataURL("image/jpeg",q);while(d.length>600000&&q>.35){q-=.1;d=c.toDataURL("image/jpeg",q)}res(d)};im.src=r.result};r.readAsDataURL(f)});
+    $("rcptPrev").src=receipt;$("rcptPrev").hidden=false;$("rcptTxt").textContent="✓ اتضافت"}catch(err){receipt=null;$("rcptTxt").textContent="الصورة دي مش شغالة، جربي تاني"}};
+$("orderBtn").onclick=async()=>{const err=$("orderErr");err.textContent="";
+  if(pendingUploads){err.textContent="استني لحد ما الصور تخلص رفع";return}
+  if(D.photos.filter(p=>p.url).length<4){err.textContent="ارفعي ٤ صور على الأقل";return}
+  if(!receipt){err.textContent="ارفعي صورة التحويل";return}if($("bName").value.trim().length<2){err.textContent="اكتبي اسمك";return}
+  if($("bPhone").value.replace(/\D/g,"").length<10){err.textContent="اكتبي رقم موبايلك";return}
+  const b=$("orderBtn");b.disabled=true;b.textContent="بيتبعت…";
+  try{await saveNow();const p=await SB.rpc("mag_order",{p_code:CODE,p_name:$("bName").value.trim(),p_phone:$("bPhone").value.trim(),p_receipt:receipt,p_price:MAG_PRICE,p_src:(window.farhetnaSource&&window.farhetnaSource())||null});
+    P=p;status();toast("طلبك وصل 🤍");scrollTo(0,0)}
+  catch(e){err.textContent=/receipt/.test(e.message)?"صورة التحويل مش واضحة":/phone/.test(e.message)?"رقم الموبايل مش صحيح":"في مشكلة في الاتصال، جربي تاني"}
+  b.disabled=false;b.textContent="ابعتي الطلب"};
+
+/* ---- start ---- */
+let saved="";try{saved=localStorage.getItem("mag_code")||""}catch(e){}
+const hc=(location.hash.match(/c=([A-Z0-9]+)/i)||[])[1];
+if(DEMO){document.querySelector(".top b").textContent="My Magazine · تجربة";show(0)}else if(hc||saved)resume(hc||saved);else show(0);
+})();
+</script>
+</body>
+</html>
