@@ -60,7 +60,16 @@ img{display:block;max-width:100%}
 .b1{background:linear-gradient(160deg,#6f8464,#4f6346);color:#fffaf0;box-shadow:0 14px 28px -14px rgba(60,71,51,.8)}
 .b2{background:var(--paper);color:var(--olive);box-shadow:inset 0 0 0 1.5px rgba(127,143,112,.6)}
 .b1:active,.b2:active{transform:scale(.97)}
-.trust{display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;font-size:13.5px;color:var(--sage2)}
+.try{display:flex;align-items:center;gap:12px;text-align:right;border-radius:18px;padding:14px 18px;min-height:64px;color:#fffaf0;background:linear-gradient(160deg,#6f8464,#4f6346);box-shadow:0 16px 30px -14px rgba(60,71,51,.85);position:relative;overflow:hidden;transition:transform .15s}
+.try:active{transform:scale(.97)}
+.try:after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.18) 48%,transparent 66%);transform:translateX(100%);animation:tshine 3.8s 1s infinite}
+@keyframes tshine{0%{transform:translateX(100%)}45%,100%{transform:translateX(-100%)}}
+.try .ti{width:42px;height:42px;flex:none;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.16);font-size:20px}
+.try b{display:block;font-size:17.5px;line-height:1.4}
+.try small{display:block;font-size:14px;opacity:.9;line-height:1.5}
+.try svg{width:20px;height:20px;margin-inline-start:auto;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:860px){.ctas{flex-direction:column;align-items:stretch;max-width:420px;margin-inline:auto}.ctas .b2{width:100%}}
+.trust{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;font-size:14px;color:var(--sage2)}
 @media(max-width:860px){.trust{justify-content:center}}
 .trust span:before{content:"✓";color:var(--gold2);font-weight:700;margin-inline-end:5px}
 
@@ -88,6 +97,7 @@ img{display:block;max-width:100%}
 
 /* section shell */
 section.s{padding:64px 0}
+@media(max-width:700px){section.s{padding:38px 0}.h{margin-bottom:20px!important}.h h2{font-size:30px}.hero{padding:26px 0 8px!important}.qnote{margin-top:14px!important}.steps{gap:12px!important}.st{padding:18px 18px!important}.st .ic{width:52px!important;height:52px!important;margin-bottom:8px!important}.dl{gap:10px!important}.band{padding:44px 20px!important}.vis{height:360px!important}.pc{padding:24px 20px!important}}
 .h{text-align:center;max-width:620px;margin:0 auto 34px}
 .h .k{font-family:var(--latin);font-style:italic;letter-spacing:3px;color:var(--gold2);font-size:15px}
 .h h2{font-family:var(--ruq);color:var(--olive);font-size:clamp(30px,6vw,42px);line-height:1.35}
@@ -152,8 +162,10 @@ section.s{padding:64px 0}
 .dl li span{font-size:14.5px;color:var(--mute)}
 .dev{width:330px;max-width:88vw;margin:0 auto;aspect-ratio:9/18.6;border-radius:46px;background:#1f211c;padding:11px;box-shadow:0 40px 60px -26px rgba(40,40,30,.6),inset 0 0 0 2px #3a3c35;position:relative}
 .dev:before{content:"";position:absolute;top:20px;left:50%;width:30%;height:22px;transform:translateX(-50%);background:#1f211c;border-radius:20px;z-index:2}
-.dev iframe{width:100%;height:100%;border:0;border-radius:36px;background:var(--ivory);display:block}
-.devcap{text-align:center;font-size:13.5px;color:var(--mute);margin-top:12px}
+.dev .scr{width:100%;height:100%;border-radius:36px;overflow:hidden;background:#3c4733;padding-top:46px;position:relative}
+.dev .scr:before{content:"9:41";position:absolute;top:14px;right:28px;font:600 13px/1 -apple-system,system-ui,sans-serif;color:#f6efdd;direction:ltr}
+.dev iframe{width:100%;height:100%;border:0;background:var(--ivory);display:block}
+.devcap{text-align:center;font-size:14px;color:var(--mute);margin-top:12px}
 
 /* couple album preview */
 .alb{background:linear-gradient(180deg,#f3ece0,var(--ivory))}
@@ -202,7 +214,10 @@ section.s{padding:64px 0}
 .pc li:before{content:"✓";color:var(--gold);font-weight:700;margin-inline-end:8px}
 .pc .b1,.pc .b2{width:100%}
 .pc.main .b1{background:linear-gradient(180deg,#d8b97f,#b08a4e);color:#fffdf6}
-.pnote{text-align:center;color:var(--mute);font-size:13.5px;margin-top:18px}
+.pc .plus{font-size:.6em;vertical-align:.35em;margin-inline-end:2px;color:var(--gold2)}
+.pc .ex{margin-top:12px;font-size:14px;background:#f6efe2;border-radius:12px;padding:8px 10px;color:var(--ink)}
+.pc .ex b{color:var(--olive)}
+.pnote{text-align:center;color:var(--mute);font-size:14.5px;max-width:520px;margin-inline:auto;margin-top:18px}
 
 /* faq */
 .faq{max-width:760px;margin:0 auto;display:grid;gap:10px}
@@ -231,18 +246,18 @@ footer a{color:var(--gold2);font-weight:600}
   <div class="in">
     <a class="logo" href="../">فرحتنا<small>MEMORIES</small></a>
     <nav><a href="#how">إزاي بيشتغل</a><a href="#demo">جرّبي بنفسك</a><a href="#album">ألبومكم</a><a href="#price">السعر</a><a href="../">الدعوات</a></nav>
-    <a class="pill" href="#price">اطلبي</a>
+    <a class="pill" href="#price">احجزي</a>
   </div>
 </header>
 
 <section class="hero">
   <div class="in">
     <div>
-      <span class="tag">✨ جديد من فرحتنا</span>
+      <span class="tag">✨ جديد من فرحتنا · الحجز المسبق مفتوح</span>
       <div class="kick">Farhetna Memories</div>
       <h1>كل صور فرحكم<br>في <em>ألبوم واحد</em></h1>
       <p class="lead">كارت QR أنيق على الترابيزات، الضيوف يمسحوه ويرفعوا صورهم وفيديوهاتهم وتهانيهم من موبايلهم في ثواني — من غير تطبيق ولا تسجيل. وكلها توصلكم في ألبوم خاص بيكم.</p>
-      <div class="ctas"><a class="b1" href="#price">اطلبي ألبومك · <span class="pr">399</span> جنيه</a><a class="b2" href="#demo">جرّبي زي الضيف 📱</a></div>
+      <div class="ctas"><a class="try" href="../m/index.html#demo"><span class="ti">📱</span><span><b>جرّبي بنفسك</b><small>إزاي ضيوفك هيشاركوا صورهم</small></span><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></a><a class="b2" href="#price">احجزي ألبومك · <span class="pr">399</span> جنيه</a></div>
       <div class="trust"><span>من غير تطبيق</span><span>صور وفيديوهات</span><span>ألبوم خاص ومقفول</span></div>
     </div>
     <div class="vis" aria-hidden="true">
@@ -293,13 +308,13 @@ footer a{color:var(--gold2);font-weight:600}
         <li class="rv"><i>⚡</i><div><b>سريعة حتى على نت ضعيف</b><span>الصور بتتصغّر على الموبايل قبل الرفع من غير ما جودتها تبان أقل.</span></div></li>
       </ul>
     </div>
-    <div class="rv"><div class="dev"><iframe src="../m/index.html#demo" title="تجربة صفحة الضيف" loading="lazy"></iframe></div><p class="devcap">مرّري جوه الموبايل ودوسي على الزرار الأخضر</p></div>
+    <div class="rv"><div class="dev"><div class="scr"><iframe src="../m/index.html#demo" title="تجربة صفحة الضيف" loading="lazy"></iframe></div></div><p class="devcap">مرّري جوه الموبايل ودوسي على الزرار الأخضر · <a href="../m/index.html#demo" style="color:var(--gold2);font-weight:700">افتحيها بملء الشاشة</a></p></div>
   </div>
 </section>
 
 <section class="s alb" id="album">
   <div class="in">
-    <div class="h rv"><div class="k">Your private album</div><h2>ألبومكم الخاص</h2><p>بكود سري يوصلكم لوحدكم. هنا كل اللي ضيوفكم شاركوه.</p><div class="orn">✦</div></div>
+    <div class="h rv"><div class="k">Your private album</div><h2>ألبومكم الخاص</h2><p>بكود سري يوصلكم لوحدكم. ده شكل توضيحي لألبومكم.</p><div class="orn">✦</div></div>
     <div class="abox rv">
       <div class="ahead"><div class="t">أحمد &amp; مريم<small>١٢٨ صورة · ١٤ فيديو · ٣٧ تهنئة</small></div><button class="dlall" type="button" id="dlDemo">⬇️ نزّلي الكل</button></div>
       <div class="tabs" id="tabs"><button class="on" data-f="all">الكل</button><button data-f="p">الصور</button><button data-f="v">الفيديوهات</button><button data-f="m">التهاني</button></div>
@@ -315,17 +330,17 @@ footer a{color:var(--gold2);font-weight:600}
         <div class="x" data-k="p" style="background-image:url(img/s4.webp);background-position:50% 30%"><span class="by">من ماما</span></div>
         <div class="m" data-k="m"><span>«ألف مبروك يا أحمد! أخيرًا 😂 ربنا يجعلها بداية كل خير.»</span><b>— محمود، صاحب العريس</b></div>
       </div>
-      <div class="lockline">🔒 الضيوف بيرفعوا بس، ومحدش منهم يقدر يشوف الألبوم</div>
+      <div class="lockline">🔒 الضيوف بيرفعوا بس، ومحدش منهم يقدر يشوف الألبوم · <span style="color:var(--mute)">مثال توضيحي</span></div>
     </div>
   </div>
 </section>
 
 <section class="s" id="features">
   <div class="in">
-    <div class="h rv"><div class="k">Everything included</div><h2>كل اللي محتاجاه</h2><div class="orn">✦</div></div>
+    <div class="h rv"><div class="k">Everything included</div><h2>كل اللي محتاجاه</h2><p>دي مميزات الخدمة اللي بنجهزها للإطلاق.</p><div class="orn">✦</div></div>
     <div class="feat">
       <div class="fe rv"><i>📱</i><b>من غير تطبيق ولا تسجيل</b><span>الضيف يمسح الكود ويرفع على طول، من آيفون أو أندرويد.</span></div>
-      <div class="fe rv"><i>🎬</i><b>صور وفيديوهات</b><span>الفيديو لحد ٥٠ ميجا (حوالي دقيقة)، والصور بعدد مفتوح في حدود مساحة الألبوم.</span></div>
+      <div class="fe rv"><i>🎬</i><b>صور وفيديوهات</b><span>الضيوف يرفعوا صور وفيديوهات قصيرة من الموبايل، وحدود الرفع بتظهرلهم بوضوح قبل ما يرفعوا.</span></div>
       <div class="fe rv"><i>🔒</i><b>خصوصية كاملة</b><span>الصور في تخزين خاص ومقفول، مش على لينك عام.</span></div>
       <div class="fe rv"><i>⬇️</i><b>نزّلي كل حاجة</b><span>صورة صورة، أو الألبوم كله مرة واحدة.</span></div>
       <div class="fe rv"><i>🗑️</i><b>إنتي المتحكمة</b><span>امسحي أي صورة مش عاجباكي، واقفلي الرفع وقت ما تحبي.</span></div>
@@ -339,15 +354,15 @@ footer a{color:var(--gold2);font-weight:600}
     <div class="h rv"><div class="k">Pricing</div><h2>السعر</h2><p>دفعة واحدة، من غير اشتراك.</p><div class="orn">✦</div></div>
     <div class="pw">
       <div class="pc main rv"><span class="bd">ألبوم الذكريات</span>
-        <h3>ألبوم لوحده</h3><div class="amt"><span class="pr">399</span><small>جنيه</small></div><div class="sub">لأي فرح، حتى لو دعوتك مش من عندنا</div>
+        <h3>ألبوم الذكريات لوحده</h3><div class="amt"><span class="pr">399</span><small>جنيه</small></div><div class="sub">لو مش محتاجة دعوة — ويشتغل مع أي فرح</div>
         <ul><li>صفحة رفع باسم العروسين</li><li>كارت QR جاهز للطباعة</li><li>صور وفيديوهات وتهاني</li><li>ألبوم خاص بكود + تنزيل الكل</li></ul>
-        <a class="b1" id="orderBtn" href="#">اطلبي ألبومك</a></div>
+        <a class="b1" id="orderBtn" href="#">احجزي ألبومك</a></div>
       <div class="pc rv"><span class="bd">مع دعوة من فرحتنا</span>
-        <h3>إضافة على دعوتك</h3><div class="amt"><span class="pa">249</span><small>جنيه</small></div><div class="sub">لما تطلبي دعوة من فرحتنا</div>
+        <h3>إضافة الألبوم على دعوتك</h3><div class="amt"><span class="plus">+</span><span class="pa">249</span><small>جنيه</small></div><div class="sub">بتتضاف على سعر الدعوة — مش سعر الاتنين مع بعض</div><div class="ex">مثال: دعوة فاخرة <b>٣٥٠</b> + الألبوم <b>٢٤٩</b> = <b>٥٩٩ جنيه</b></div>
         <ul><li>كل مميزات الألبوم</li><li>الكارت بنفس ألوان دعوتك</li><li>كل حاجة من نفس الحساب</li></ul>
         <a class="b2" href="../studio.html">اختاري دعوتك الأول</a></div>
     </div>
-    <p class="pnote">الدفع بإنستاباي، والألبوم بيتفعّل بعد تأكيد الدفع خلال ٢٤ ساعة.</p>
+    <p class="pnote">بنجهز لإطلاق الخدمة دلوقتي — احجزي على الواتساب وهنأكدلك كل التفاصيل وميعاد التفعيل قبل أي دفع.</p>
   </div>
 </section>
 
@@ -357,15 +372,15 @@ footer a{color:var(--gold2);font-weight:600}
     <div class="faq">
       <details><summary>الضيوف محتاجين ينزّلوا تطبيق؟</summary><p>لا خالص. بيمسحوا الكود بكاميرا الموبايل، والصفحة بتفتح على طول ويرفعوا.</p></details>
       <details><summary>حد من الضيوف يقدر يشوف صور غيره؟</summary><p>لا. الضيف بيرفع بس، والألبوم نفسه مقفول بكود ما بيوصلش غير للعروسين.</p></details>
-      <details><summary>في حد لحجم الفيديو؟</summary><p>أيوه، الفيديو الواحد لحد ٥٠ ميجا (حوالي دقيقة بجودة الموبايل العادية). لو أكبر، الصفحة بتقول للضيف يقصّه من الاستوديو بتاع موبايله ويرفعه تاني.</p></details>
-      <details><summary>الألبوم بيفضل لحد إمتى؟</summary><p>الألبوم بيفضل متاح ٦ شهور من تاريخ الفرح، وده وقت كفاية تنزّلي فيه كل حاجة. وقبل ما المدة تخلص بنفكّرك.</p></details>
+      <details hidden><summary>في حد لحجم الفيديو؟</summary><p>أيوه، الفيديو الواحد لحد ٥٠ ميجا (حوالي دقيقة بجودة الموبايل العادية). لو أكبر، الصفحة بتقول للضيف يقصّه من الاستوديو بتاع موبايله ويرفعه تاني.</p></details>
+      <details hidden><summary>الألبوم بيفضل لحد إمتى؟</summary><p>الألبوم بيفضل متاح ٦ شهور من تاريخ الفرح، وده وقت كفاية تنزّلي فيه كل حاجة. وقبل ما المدة تخلص بنفكّرك.</p></details>
       <details><summary>ينفع أستخدمه في خطوبة أو سبوع أو عيد ميلاد؟</summary><p>أيوه طبعًا، أي مناسبة عايزة تجمعي صورها في مكان واحد.</p></details>
       <details><summary>ينفع آخده لو دعوتي مش من فرحتنا؟</summary><p>أيوه، الألبوم منتج لوحده ويشتغل مع أي فرح.</p></details>
     </div>
   </div>
 </section>
 
-<section class="band"><h2>ذكريات فرحكم تستاهل تتجمع</h2><p>كل صورة صوّرها حد بيحبكم، في مكان واحد.</p><a class="b1" href="#price">اطلبي ألبوم الذكريات</a></section>
+<section class="band"><h2>ذكريات فرحكم تستاهل تتجمع</h2><p>كل صورة صوّرها حد بيحبكم، في مكان واحد.</p><a class="b1" href="../m/index.html#demo">جرّبي زي الضيف 📱</a></section>
 <footer>ألبوم الذكريات من <a href="../">فرحتنا 💌</a> · دعوات زفاف رقمية</footer>
 
 <script src="config.js"></script>
@@ -398,7 +413,7 @@ document.getElementById("dlDemo").onclick=e=>{const b=e.currentTarget;b.textCont
 /* order: for now the request goes to WhatsApp with the source; the full order form comes in the next step */
 const src=(window.farhetnaSource&&window.farhetnaSource())||null;
 document.getElementById("orderBtn").href="https://wa.me/201280067110?text="+encodeURIComponent(
-  `أهلًا فرحتنا 🤍 عايزة أطلب «ألبوم الذكريات» (${C.price} جنيه).`+(src&&src.ad?`\n— ref: إعلان · ${src.camp||""}`:""));
+  `أهلًا فرحتنا 🤍 عايزة أحجز «ألبوم الذكريات» (${C.price} جنيه).`+(src&&src.ad?`\n— ref: إعلان · ${src.camp||""}`:""));
 document.getElementById("orderBtn").addEventListener("click",()=>{try{window.fbq&&fbq("track","InitiateCheckout",{content_name:"memories",value:C.price,currency:"EGP"})}catch(e){}});
 try{window.fbq&&fbq("track","ViewContent",{content_name:"memories",value:C.price,currency:"EGP"})}catch(e){}
 
