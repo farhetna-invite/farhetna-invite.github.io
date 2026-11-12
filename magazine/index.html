@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="فرحتنا · Farhetna">
 <meta property="og:title" content="My Magazine — مجلة معمولة مخصوص ليه">
-<meta property="og:description" content="صوره وذكرياته ورسائل صحابه وأصواتهم… في عدد خاص باسمه.">
+<meta property="og:description" content="تخيّلي حد يفتح هديته… يلاقي مجلة كاملة بتحكي حكايته!">
 <meta property="og:image" content="https://farhetnainvite.com/home-svc-surprise-plum.webp">
 <meta property="og:url" content="https://farhetnainvite.com/magazine/">
 <meta property="og:locale" content="ar_EG">
@@ -113,6 +113,18 @@ section{padding:64px 0}
 .ed.soon .bd{background:rgba(255,255,255,.88);color:var(--plum3)}
 .ed.soon .sw{filter:saturate(.75);opacity:.85}
 
+.edit{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px;max-width:760px;margin:0 auto}
+.ep{display:block;position:relative}
+.ep:nth-child(even){transform:translateY(22px)}
+.ep img{width:100%;aspect-ratio:.72;object-fit:cover;border-radius:4px;box-shadow:0 24px 36px -22px rgba(60,40,70,.65),0 0 0 1px rgba(114,90,128,.12)}
+.ep span{display:block;text-align:center;font-size:13.5px;color:var(--ink);margin-top:9px;line-height:1.5}
+.ep span b{display:block;font-family:var(--lat);letter-spacing:.2em;font-size:10.5px;color:#a88a55;font-weight:600}
+.ctas2{margin:44px auto 0;max-width:420px}
+.steps.s3{max-width:760px;margin:0 auto}
+.incl{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:22px auto 0;max-width:760px}
+.incl li{font-size:13.5px;color:var(--plum3);background:rgba(114,90,128,.08);border-radius:99px;padding:6px 13px}
+footer .home{display:inline-block;margin-bottom:8px;color:var(--plum);font-weight:700}
+@media(min-width:900px){.edit{grid-template-columns:repeat(4,1fr);max-width:none}.steps.s3{grid-template-columns:repeat(3,1fr);max-width:none}.ctas2{max-width:560px}}
 /* features */
 .fts{display:grid;gap:12px}
 .ft{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border-radius:16px;padding:14px 16px;border:1px solid rgba(114,90,128,.1)}
@@ -159,97 +171,64 @@ footer a{color:var(--plum)}
       <h1>تخيّلي حد يفتح هديته… <em>يلاقي مجلة كاملة بتحكي حكايته!</em></h1>
       <p class="lead">صوره، ذكرياته، وضحكاته مع اللي بيحبهم… كلها في مجلة شخصية معمولة مخصوص عشانه.<br><span class="lead2">هدية مش بس هيفتحها، دي هيفضل فاكرها.</span></p>
       <div class="ctas">
-        <a class="btn b-gold b-two" href="view.html#sample" data-ev="sample"><span class="bl"><svg viewBox="0 0 24 24"><path d="M4 6c3-1.5 5.5-1.5 8 0v13c-2.5-1.5-5-1.5-8 0zM20 6c-3-1.5-5.5-1.5-8 0v13c2.5-1.5 5-1.5 8 0z"/></svg>افتحي مجلة تجريبية</span><small>وشوفي الهدية من جوّه قبل ما تصمميها</small></a>
-        <a class="btn b-line" href="create.html" data-ev="create">✨ صممي مجلتك مجانًا</a>
+        <a class="btn b-gold b-two" href="view.html#sample" data-track="ViewContent" data-design="My Magazine sample"><span class="bl"><svg viewBox="0 0 24 24"><path d="M4 6c3-1.5 5.5-1.5 8 0v13c-2.5-1.5-5-1.5-8 0zM20 6c-3-1.5-5.5-1.5-8 0v13c2.5-1.5 5-1.5 8 0z"/></svg>افتحي مجلة تجريبية</span><small>وشوفي الهدية من جوّه قبل ما تصمميها</small></a>
+        <a class="btn b-line" href="create.html" data-track="ViewContent" data-design="My Magazine builder">✨ صممي مجلتك مجانًا</a>
       </div>
       <ul class="trust"><li><i>👀</i>معاينة قبل الدفع</li><li><i>📱</i>من غير أبليكيشن</li><li><i>🌍</i>عربي أو English</li></ul>
     </div>
-    <a class="mag" href="view.html#sample" aria-label="افتحي المجلة التجريبية">
+    <a class="mag" href="view.html#sample" data-track="ViewContent" data-design="My Magazine sample" aria-label="افتحي المجلة التجريبية">
       <div class="vol"><div class="sp"></div><div class="fr"><img src="sample/cover.webp" alt="غلاف مجلة MALAK — The Birthday Issue" width="700" height="971"></div><div class="gl"></div><div class="pg"></div><span class="tagN">افتحيها ←</span></div>
     </a>
   </div>
 </section>
 
-<section>
+<section class="ins">
   <div class="in">
-    <div class="h2"><div class="k">Inside the issue</div><h2>جوه المجلة</h2><p>دي صفحات من مجلة «ملك» التجريبية. افتحيها كاملة وقلّبيها بنفسك.</p></div>
-    <div class="strip">
-      <figure><img src="sample/p-candids.webp" alt="صفحة صور الضحك" loading="lazy"><figcaption><b>CANDIDS</b>صور محدش كان مستعد ليها</figcaption></figure>
-      <figure><img src="sample/p-adventures.webp" alt="صفحة المغامرات" loading="lazy"><figcaption><b>ADVENTURES</b>رحلاتكم بصور بولارويد</figcaption></figure>
-      <figure><img src="sample/p-years.webp" alt="صفحة عبر السنين" loading="lazy"><figcaption><b>THROUGH THE YEARS</b>حكايته عبر السنين</figcaption></figure>
-      <figure><img src="sample/p-letters.webp" alt="صفحة الرسائل" loading="lazy"><figcaption><b>LETTERS</b>رسائل من ناس بتحبه</figcaption></figure>
-      <figure><img src="sample/p-voices.webp" alt="صفحة الرسائل الصوتية" loading="lazy"><figcaption><b>VOICE NOTES</b>يسمعهم بصوتهم</figcaption></figure>
+    <div class="h2"><div class="k">Inside the issue</div><h2>جوه المجلة</h2><p>صفحات حقيقية من مجلة «ملك» التجريبية.</p></div>
+    <div class="edit">
+      <a class="ep" href="view.html#sample" data-track="ViewContent" data-design="My Magazine sample"><img src="sample/p-candids.webp" alt="صفحة Candids" loading="lazy"><span><b>CANDIDS</b>صور محدش كان مستعد ليها</span></a>
+      <a class="ep" href="view.html#sample" data-track="ViewContent" data-design="My Magazine sample"><img src="sample/p-years.webp" alt="صفحة Through The Years" loading="lazy"><span><b>THROUGH THE YEARS</b>حكايته عبر السنين</span></a>
+      <a class="ep" href="view.html#sample" data-track="ViewContent" data-design="My Magazine sample"><img src="sample/p-letters.webp" alt="صفحة الرسائل" loading="lazy"><span><b>LETTERS</b>رسائل من ناس بتحبه</span></a>
+      <a class="ep" href="view.html#sample" data-track="ViewContent" data-design="My Magazine sample"><img src="sample/p-voices.webp" alt="صفحة الرسائل الصوتية" loading="lazy"><span><b>VOICE NOTES</b>يسمعهم بصوتهم</span></a>
     </div>
-    <div class="center"><a class="btn b-plum" href="view.html#sample" data-ev="sample">افتحي المجلة التجريبية كاملة</a></div>
-  </div>
-</section>
-
-<section style="padding-top:20px">
-  <div class="in">
-    <div class="h2"><div class="k">How it works</div><h2>بتتعمل إزاي؟</h2><p>كلها من موبايلك، وبتشوفي النتيجة قبل ما تدفعي.</p></div>
-    <div class="steps">
-      <div class="st"><div><b>اختاري المناسبة واكتبي اسمه</b><p>عيد ميلاد، صحاب، عيد جواز، لماما… والمجلة بتتظبط على المناسبة.</p></div></div>
-      <div class="st"><div><b>ارفعي الصور واكتبي الحكايات</b><p>صور، وذكريات بالسنين، ورسائل من صحابه، وتسجيلات صوتية بصوتهم. كل حاجة بتتحفظ لوحدها أول بأول.</p></div></div>
-      <div class="st"><div><b>شوفي مجلتك كاملة</b><p>معاينة حقيقية بصورك وكلامك، وعدّلي لحد ما تبقي مبسوطة بيها.</p></div></div>
-      <div class="st"><div><b>انشريها وابعتيله اللينك</b><p>بعد الدفع بـ InstaPay وتأكيده، يتفعّل لينك المجلة وتبعتيهوله على الواتساب.</p></div></div>
+    <div class="ctas ctas2">
+      <a class="btn b-plum" href="view.html#sample" data-track="ViewContent" data-design="My Magazine sample">📖 افتحي المجلة كاملة وقلّبيها</a>
+      <a class="btn b-gold" href="create.html" data-track="ViewContent" data-design="My Magazine builder">✨ صممي مجلتك مجانًا</a>
     </div>
   </div>
 </section>
 
-<section style="padding-top:20px">
+<section style="padding-top:10px">
+  <div class="in">
+    <div class="h2"><div class="k">How it works</div><h2>٣ خطوات بس</h2></div>
+    <div class="steps s3">
+      <div class="st"><div><b>اختاري المناسبة والتصميم</b><p>واكتبي اسمه، وابدئي على طول من غير تسجيل.</p></div></div>
+      <div class="st"><div><b>ضيفي الصور والحكايات والأصوات</b><p>والمجلة بتترتب لوحدها، وكل حاجة بتتحفظ أول بأول.</p></div></div>
+      <div class="st"><div><b>شوفيها كاملة، وانشريها</b><p>معاينة قبل الدفع، وبعد تأكيد الدفع بـ InstaPay يتفعّل لينكها وتبعتيهوله.</p></div></div>
+    </div>
+    <ul class="incl"><li>📖 لحد ١٢ صفحة</li><li>📷 صوره وذكرياته</li><li>💌 رسائل من حبايبه</li><li>🎙️ رسائل صوتية</li><li>✏️ تعديل ٧ أيام بعد النشر</li><li>🔗 لينك خاص للمشاهدة</li></ul>
+  </div>
+</section>
+
+<section style="padding-top:10px">
   <div class="in">
     <div class="h2"><div class="k">For every occasion</div><h2>تنفع لأي حد بتحبيه</h2></div>
     <div class="occ"><span>🎂 عيد ميلاد</span><span>👯‍♀️ صاحبة العمر</span><span>💞 حبيبك</span><span>💍 عيد جواز</span><span>🌷 لماما</span><span>🤍 لبابا</span><span>🎓 تخرج</span><span>✨ أي مناسبة</span></div>
   </div>
 </section>
 
-<section style="padding-top:20px">
-  <div class="in">
-    <div class="h2"><div class="k">Editions</div><h2>التصميمات</h2><p>كل تصميم بشكل مجلة مختلف. المتاح دلوقتي Emerald، والباقي جاي قريب.</p></div>
-    <div class="eds">
-      <a class="ed ok" href="view.html#sample"><span class="bd">متاح</span><div class="sw"><img src="sample/cover.webp" alt="Emerald Edition" loading="lazy"></div><div class="tx"><b>Emerald Edition</b><small>زمردي ودهبي، فخم وكلاسيك</small></div></a>
-      <div class="ed soon"><span class="bd">قريبًا</span><div class="sw" style="background:linear-gradient(160deg,#f6dcd6,#e9b9b0);color:#9a5a55">BLUSH</div><div class="tx"><b>Blush Romance</b><small>بينك ناعم ورومانسي</small></div></div>
-      <div class="ed soon"><span class="bd">قريبًا</span><div class="sw" style="background:#141214;color:#f5f1ea">VOGUE</div><div class="tx"><b>Vogue Style</b><small>أبيض وأسود بروح مجلات الموضة</small></div></div>
-      <div class="ed soon"><span class="bd">قريبًا</span><div class="sw" style="background:linear-gradient(160deg,#fff1d6,#f3d6c9);color:#a05a3c">BIRTHDAY</div><div class="tx"><b>Birthday Edition</b><small>ألوان مبهجة لأعياد الميلاد</small></div></div>
-    </div>
-  </div>
-</section>
-
-<section style="padding-top:20px">
-  <div class="in">
-    <div class="h2"><div class="k">What you get</div><h2>هتاخدي إيه؟</h2></div>
-    <div class="fts">
-      <div class="ft"><i>📖</i><div><b>لحد ١٢ صفحة</b><p>الغلاف وصفحات الذكريات والرسائل والصوت بتترتب لوحدها حسب اللي بترفعيه.</p></div></div>
-      <div class="ft"><i>🎙️</i><div><b>رسائل صوتية حقيقية</b><p>كل رسالة بصوت صاحبها: يسجلها من الموبايل أو ترفعيها.</p></div></div>
-      <div class="ft"><i>👀</i><div><b>معاينة قبل الدفع</b><p>بتشوفي المجلة كاملة بصورك قبل ما تدفعي أي حاجة.</p></div></div>
-      <div class="ft"><i>✏️</i><div><b>تعديل ٧ أيام</b><p>بعد التفعيل تقدري تعدّلي ٧ أيام، وبعدها المجلة بتفضل متاحة للمشاهدة والمشاركة.</p></div></div>
-      <div class="ft"><i>🔗</i><div><b>لينك خاص للمشاهدة</b><p>لينك يفتح المجلة بس، منفصل عن صفحة التعديل بتاعتك.</p></div></div>
-      <div class="ft"><i>💾</i><div><b>حفظ تلقائي</b><p>لو قفلتي الصفحة، ترجعي تكمّلي من نفس المكان.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section style="padding-top:20px">
+<section style="padding-top:10px">
   <div class="in" style="max-width:760px">
-    <div class="h2"><div class="k">Questions</div><h2>أسئلة بتتكرر</h2></div>
+    <div class="h2"><div class="k">Questions</div><h2>أسئلة سريعة</h2></div>
     <details><summary>لازم أدفع عشان أجرب؟</summary><p>لأ. بتصممي مجلتك وتشوفيها كاملة مجانًا. الدفع بيكون بس لما تحبي تنشريها وتبعتي لينكها.</p></details>
-    <details><summary>لو قفلت الصفحة وأنا بصمم، هيضيع اللي عملته؟</summary><p>لأ. كل حاجة بتتحفظ لوحدها أول بأول. لو رجعتي من نفس الموبايل هتكملي على طول، ولو من موبايل تاني استخدمي لينك الاستكمال اللي بنديهولك أول ما تبدأي.</p></details>
-    <details><summary>الشخص اللي المجلة عشانه محتاج ينزّل حاجة؟</summary><p>لأ. بيفتح اللينك من أي موبايل ويقلّب الصفحات على طول.</p></details>
-    <details><summary>الصوت في المجلة التجريبية بصوت مين؟</summary><p>في المجلة التجريبية الصوت نغمة تجريبية بس. في مجلتك، كل رسالة صوتية هتكون بصوت صاحبها الحقيقي.</p></details>
+    <details><summary>لو قفلت الصفحة وأنا بصمم، هيضيع اللي عملته؟</summary><p>لأ. كل حاجة بتتحفظ لوحدها. لو رجعتي من نفس الموبايل هتكملي على طول، ولو من موبايل تاني استخدمي لينك الاستكمال اللي بنديهولك أول ما تبدأي.</p></details>
+    <details><summary>هو محتاج ينزّل أبليكيشن؟</summary><p>لأ. بيفتح اللينك من أي موبايل ويقلّب الصفحات على طول.</p></details>
+    <details><summary>أقدر أعدّل بعد النشر؟</summary><p>أيوه، لمدة ٧ أيام من تاريخ التفعيل. بعدها المجلة بتفضل متاحة للمشاهدة والمشاركة على نفس اللينك.</p></details>
     <details><summary>بدفع إزاي؟</summary><p>بـ InstaPay، وبتبعتي صورة التحويل من نفس الصفحة. أول ما نأكد الدفع، لينك مجلتك بيتفعّل.</p></details>
   </div>
 </section>
 
-<div class="final">
-  <h2>جاهزة تعمليله المفاجأة؟</h2>
-  <p>ابدئي دلوقتي، ومش هتدفعي غير لما تشوفي مجلتك وتعجبك.</p>
-  <div class="ctas">
-    <a class="btn b-gold" href="create.html" data-ev="create">✨ صممي مجلتك مجانًا</a>
-    <a class="btn b-line" href="view.html#sample" data-ev="sample">افتحي مجلة تجريبية</a>
-  </div>
-</div>
-
-<footer>My Magazine من <a href="../">فرحتنا 💌</a> · The Surprise</footer>
+<footer><a class="home" href="../">← الصفحة الرئيسية لفرحتنا</a><br>My Magazine من <a href="../">فرحتنا 💌</a> · The Surprise</footer>
 
 <script src="../fa.js"></script>
 </body>

@@ -87,7 +87,7 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 @keyframes bl{50%{opacity:.2}}
 /* bottom bar */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(246,240,227,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom))}
-.bar .in2{max-width:560px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:10px}
+.bar .in2{max-width:560px;margin:0 auto;display:flex;gap:10px}.bar .in2>.btn{flex:2}.bar .in2>#back{flex:1}.bar .in2>[hidden]{display:none}
 .bar .btn{margin:0}
 .status{border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:14.5px;line-height:1.8}
 .status.pending{background:#fff4dd;color:#7a5600}
@@ -105,6 +105,12 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 .rcpt input{display:none}.rcpt img{max-width:100%;max-height:200px;margin:0 auto 6px;display:block;border-radius:8px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translate(-50%,30px);opacity:0;background:var(--em);color:var(--gold2);border-radius:30px;padding:10px 18px;font-size:14px;transition:.3s;z-index:60;max-width:90vw;text-align:center}
 .toast.on{transform:translate(-50%,0);opacity:1}
+.mlist{display:grid;gap:8px;margin-top:10px}
+.mtr{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);cursor:pointer}
+.mtr.on{box-shadow:inset 0 0 0 2px var(--gold,#c9a45c);background:#fffaf0}
+.mtr .pl{flex:0 0 36px;height:36px;border-radius:50%;border:0;display:grid;place-items:center;background:var(--em);color:var(--gold2);font-size:13px;cursor:pointer}
+.mtr .tx{flex:1;line-height:1.4}.mtr .tx b{display:block;font-size:14.5px}.mtr .tx small{color:var(--mute);font-size:12.5px}
+.mtr .ck{font-size:16px;color:var(--em);visibility:hidden}.mtr.on .ck{visibility:visible}
 fieldset{border:0}fieldset[disabled]{opacity:.6}
 .lnk{display:block;margin:14px auto 0;background:none;border:0;color:var(--em2,#1c4537);font:inherit;font-size:14.5px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
 .resume .card{margin-top:10px}
@@ -119,22 +125,14 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
 </header>
 
 <main class="wrap">
-  <!-- 0 start -->
-  <section data-s="start">
+  <!-- 1 occasion -->
+  <section data-s="occ">
     <h1>صممي مجلة لحد بتحبيه</h1>
     <a class="smpl" href="view.html#sample">📖 لسه ما شفتيش المجلة؟ <b>افتحي مجلة تجريبية</b></a>
-    <p class="lead">اختاري المناسبة والتصميم، وارفعي الصور والكلام، والمجلة بتترتب لوحدها في ١٢ صفحة. وكل حاجة بتتحفظ أول بأول.</p>
+    <p class="lead">٣ اختيارات صغيرة وتبدأي على طول. مفيش تسجيل، وكل حاجة بتتحفظ أول بأول.</p>
     <div class="card">
-      <label class="f">المناسبة</label>
+      <label class="f">المجلة دي بمناسبة إيه؟</label>
       <div class="chips" id="occ"></div>
-      <label class="f">تصميم المجلة (Edition)</label>
-      <div class="eds" id="eds"></div>
-      <label class="f">لغة المجلة</label>
-      <div class="chips" id="lng"><button data-v="ar" class="on" type="button">عربي</button><button data-v="en" type="button">English</button></div>
-      <label class="f" for="rec0">اسم الشخص اللي المجلة عشانه</label>
-      <input class="in" id="rec0" maxlength="30" placeholder="مثلًا: ملك">
-      <button class="btn b1" id="startBtn" type="button">ابدأي تصميم مجلتك مجانًا</button>
-      <div class="err" id="startErr"></div>
     </div>
     <div class="resume">
       <button class="lnk" id="haveCode" type="button">بدأتي مجلة قبل كده من موبايل تاني؟</button>
@@ -147,9 +145,35 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
     </div>
   </section>
 
+  <!-- 2 edition -->
+  <section data-s="ed" hidden>
+    <h1>اختاري التصميم</h1>
+    <p class="lead">كل تصميم بشكل مجلة مختلف. المتاح دلوقتي Emerald، والباقي جاي قريب.</p>
+    <div class="card">
+      <div class="eds" id="eds"></div>
+      <a class="lnk" href="view.html#sample" style="text-align:center">شوفي Emerald من جوّه</a>
+    </div>
+  </section>
+
+  <!-- 3 language + name -->
+  <section data-s="start" hidden>
+    <h1>لغة المجلة واسمه</h1>
+    <p class="lead">بعد الخطوة دي هتبدأي تضيفي البيانات والصور على طول.</p>
+    <div class="card">
+      <label class="f">لغة المجلة</label>
+      <div class="chips" id="lng"><button data-v="ar" class="on" type="button">عربي</button><button data-v="en" type="button">English</button></div>
+      <label class="f" for="rec0">اسم الشخص اللي المجلة عشانه</label>
+      <input class="in" id="rec0" maxlength="30" placeholder="مثلًا: ملك">
+      <button class="btn b1" id="startBtn" type="button">ابدأي تصميم مجلتك مجانًا</button>
+      <div class="err" id="startErr"></div>
+    </div>
+  </section>
+
   <!-- 1 basics -->
   <section data-s="basics" hidden>
     <div id="statusBox"></div>
+    <fieldset class="lock">
+    <h1>البيانات الأساسية</h1>
     <div class="card" id="codeCard" hidden>
       <b>🔗 لينك استكمال مجلتك</b>
       <p class="note">مجلتك بتتحفظ لوحدها، ولو رجعتي من نفس الموبايل هتلاقيها على طول. عشان تكمّلي من أي موبايل تاني، ابعتي اللينك ده لنفسك. ده مفتاح مجلتك، فما تبعتيهوش لحد.</p>
@@ -157,8 +181,6 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
       <button class="lnk" id="codeCopy" type="button">نسخ اللينك</button>
       <p class="note" style="margin-top:6px">الكود: <span class="code" id="codeShow" style="display:inline;font-size:inherit;padding:0"></span></p>
     </div>
-    <fieldset class="lock">
-    <h1>البيانات الأساسية</h1>
     <div class="card">
       <label class="f" for="recipient">اسم صاحب المجلة <small>(بيظهر في الصفحات)</small></label>
       <input class="in" id="recipient" data-k="recipient" maxlength="30">
@@ -235,6 +257,12 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
     </div>
     <div id="vList"></div>
     <audio id="vAud" preload="none"></audio>
+    <div class="card" id="musCard">
+      <b>🎵 مزيكا خلفية <small style="color:var(--mute);font-weight:400">(اختياري)</small></b>
+      <p class="note">مش بتشتغل لوحدها: اللي بيفتح المجلة يشغّلها بزرار، وبتقف لوحدها لما يسمع رسالة صوتية.</p>
+      <div class="mlist" id="mList"></div>
+      <audio id="mAud" preload="none"></audio>
+    </div>
     </fieldset>
   </section>
 
@@ -272,6 +300,7 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
 <div class="toast" id="toast"></div>
 
 <script src="../memories/config.js"></script>
+<script src="music.js"></script>
 <script src="../fa.js"></script>
 <script>
 (()=>{
@@ -309,7 +338,7 @@ if(DEMO){let PR=null;const view=()=>JSON.parse(JSON.stringify(PR));
     upload:(path,blob,type,onp)=>new Promise(r=>{let k=0;const t=setInterval(()=>{k+=.25;onp&&onp(k);if(k>=1){clearInterval(t);r(URL.createObjectURL(blob))}},120)}),
     remove:async()=>({ok:true})})}
 /* ---- state ---- */
-const STEPS=["start","basics","photos","words","letters","voices","review"];
+const STEPS=["occ","ed","start","basics","photos","words","letters","voices","review"],B=STEPS.indexOf("basics"),R=STEPS.length-1,PRE=STEPS.indexOf("start");
 let step=0,CODE="",P=null,D={photos:[],letters:[],voices:[],loves:[]},EDITABLE=true,pendingUploads=0;
 const OCCS=[["birthday","عيد ميلاد 🎂"],["friendship","صداقة 🤍"],["love","حب ❤️"],["anniversary","ذكرى ارتباط 💍"],["mother","للأم 🌷"],["father","للأب"],["graduation","تخرج 🎓"],["other","مناسبة تانية"]];
 const EDS=[{id:"emerald",name:"Emerald",ar:"زمردي ودهبي",bg:"linear-gradient(160deg,#1c4537,#0b1f19)",c:"#e8cf94"},{id:"blush",name:"Blush Romance",ar:"قريبًا",bg:"linear-gradient(160deg,#f6dfe0,#e8bcc0)",c:"#7a3f4b",soon:1},
@@ -322,23 +351,39 @@ const chipPick=(box,cb)=>$(box).addEventListener("click",e=>{const b=e.target.cl
 chipPick("occ",v=>occ=v);chipPick("eds",v=>edition=v);chipPick("lng",v=>lang=v);chipPick("gen",v=>{D.male=v==="m";dirty()});
 STEPS.forEach(()=>$("steps").appendChild(document.createElement("i")));
 
-function show(i){step=Math.max(0,Math.min(STEPS.length-1,i));document.querySelectorAll("main>section").forEach(s=>s.hidden=s.dataset.s!==STEPS[step]);
-  [...$("steps").children].forEach((x,k)=>x.classList.toggle("on",k<=step));$("back").style.visibility=step>1?"visible":"hidden";document.querySelector(".bar").hidden=step===0;
-  $("next").textContent=step===STEPS.length-1?"👀 المعاينة":"التالي";scrollTo(0,0);if(STEPS[step]==="review")review();else status();try{sessionStorage.setItem("mag_step",step)}catch(e){}}
+function show(i){try{if(!mAud.paused)mAud.pause()}catch(e){}step=Math.max(0,Math.min(R,i));if(CODE&&step<B)step=B;if(!CODE&&step>PRE)step=PRE;
+  document.querySelectorAll("main>section").forEach(s=>s.hidden=s.dataset.s!==STEPS[step]);
+  [...$("steps").children].forEach((x,k)=>x.classList.toggle("on",k<=step));
+  $("back").hidden=!(CODE?step>B:step>0);
+  $("next").hidden=step===PRE;
+  $("next").textContent=step===R?"👀 المعاينة":"التالي";scrollTo(0,0);if(STEPS[step]==="review")review();else status();try{if(CODE)sessionStorage.setItem("mag_step2",step)}catch(e){}}
 $("back").onclick=()=>show(step-1);
-$("next").onclick=async()=>{if(step===STEPS.length-1){openPreview();return}await saveNow();show(step+1)};
+$("next").onclick=async()=>{if(step===R){openPreview();return}if(step<PRE){show(step+1);return}await saveNow();show(step+1)};
 
+/* ---- background music picker (optional) ---- */
+const mAud=$("mAud");let mPrev=null;
+function drawMusic(){const box=$("mList");box.innerHTML="";const list=[{id:"",name:"من غير مزيكا",sub:"المجلة هادية"}].concat(window.MAG_MUSIC||[]);
+  list.forEach(t=>{const r=document.createElement("div");r.className="mtr"+(((D.music||"")===t.id)?" on":"");r.setAttribute("role","radio");r.setAttribute("aria-checked",(D.music||"")===t.id);
+    r.innerHTML=(t.src?'<button class="pl" type="button" aria-label="اسمعي">▶</button>':'<span class="pl" style="background:#efe8da;color:var(--mute)">✕</span>')+'<span class="tx"><b></b><small></small></span><span class="ck">✓</span>';
+    r.querySelector("b").textContent=t.name;r.querySelector("small").textContent=t.sub||"";
+    r.onclick=e=>{if(e.target.closest(".pl")&&t.src){if(mPrev===t.id&&!mAud.paused){mAud.pause();return}stopVoicePreview();mAud.src=t.src;mAud.currentTime=0;mAud.play().catch(()=>{});mPrev=t.id;drawPlay();return}
+      if(!EDITABLE)return;D.music=t.id||undefined;if(!t.id)delete D.music;dirty();[...box.children].forEach(x=>{x.classList.toggle("on",x===r);x.setAttribute("aria-checked",x===r)})};
+    box.appendChild(r)});drawPlay()}
+function drawPlay(){[...$("mList").children].forEach((r,i)=>{const b=r.querySelector("button.pl");if(!b)return;const id=(window.MAG_MUSIC||[])[i-1].id;b.textContent=(mPrev===id&&!mAud.paused)?"❚❚":"▶"})}
+function stopVoicePreview(){try{const v=$("vAud");if(v&&!v.paused)v.pause()}catch(e){}}
+mAud.addEventListener("pause",drawPlay);mAud.addEventListener("play",drawPlay);mAud.addEventListener("ended",drawPlay);
+try{$("vAud").addEventListener("play",()=>{if(!mAud.paused)mAud.pause()})}catch(e){}
 /* ---- create / resume ---- */
 $("startBtn").onclick=async()=>{const n=$("rec0").value.trim();if(n.length<2){$("startErr").textContent="اكتبي اسم صاحب المجلة";return}
   const b=$("startBtn");b.disabled=true;b.textContent="بنجهز مجلتك…";
   try{const r=await SB.rpc("mag_create",{p_edition:edition,p_lang:lang,p_occasion:occ,p_recipient:n});CODE=r.code;
     D=Object.assign(D,{recipient:n,occasion:occ,lang,edition});if(!DEMO)try{localStorage.setItem("mag_code",CODE)}catch(e){}
-    load(r.project,true);await saveNow();show(1)}
+    load(r.project,true);await saveNow();show(B);try{window.farhetnaTrack&&farhetnaTrack("Lead",{content_name:"My Magazine"})}catch(e){}}
   catch(e){$("startErr").textContent=/rate/.test(e.message)?"اتعملت مجلات كتير من الجهاز ده، جربي بعد شوية":"في مشكلة في الاتصال، جربي تاني"}
   b.disabled=false;b.textContent="ابدأي تصميم مجلتك مجانًا"};
 async function resume(code){CODE=(code||"").trim().toUpperCase();if(CODE.length<8)return;
   try{const p=await SB.rpc("mag_claim",{p_code:CODE});try{localStorage.setItem("mag_code",CODE)}catch(e){}load(p,false);
-    let s=1;try{s=+sessionStorage.getItem("mag_step")||1}catch(e){}show(p.status==="active"||p.status==="pending"?6:Math.max(1,s))}
+    let s=B;try{s=+sessionStorage.getItem("mag_step2")||B}catch(e){}show(p.status==="active"||p.status==="pending"?R:Math.max(B,s))}
   catch(e){$("resumeErr").textContent=/bad_code/.test(e.message)?"الكود ده مش صحيح":"في مشكلة في الاتصال، جربي تاني";show(0)}}
 $("resumeBtn").onclick=()=>resume($("codeIn").value);
 $("haveCode").onclick=()=>{$("resumeBox").hidden=false;$("haveCode").hidden=true;$("codeIn").focus()};
@@ -350,7 +395,7 @@ function load(p,isNew){P=p;D=Object.assign({photos:[],letters:[],voices:[],loves
   $("codeWa").href="https://wa.me/?text="+encodeURIComponent(`🔒 لينك استكمال مجلتي على فرحتنا (ما تبعتيهوش لحد):\n${rl}`);
   $("codeCopy").onclick=()=>{try{navigator.clipboard.writeText(rl).then(()=>toast("اتنسخ ✓"),()=>prompt("انسخي اللينك:",rl))}catch(e){prompt("انسخي اللينك:",rl)}};
   document.querySelectorAll("[data-k]").forEach(el=>el.value=D[el.dataset.k]||"");$("loves").value=(D.loves||[]).join("\n");
-  [...$("gen").children].forEach(b=>b.classList.toggle("on",(b.dataset.v==="m")===!!D.male));
+  [...$("gen").children].forEach(b=>b.classList.toggle("on",(b.dataset.v==="m")===!!D.male));drawMusic();
   document.querySelectorAll("fieldset.lock").forEach(f=>f.disabled=!EDITABLE);
   status();drawPhotos();drawLetters();drawVoices()}
 function status(){const b=$("statusBox");if(!P){b.innerHTML="";return}const s=P.status;let h="";
@@ -460,7 +505,7 @@ $("orderBtn").onclick=async()=>{const err=$("orderErr");err.textContent="";
   if($("bPhone").value.replace(/\D/g,"").length<10){err.textContent="اكتبي رقم موبايلك";return}
   const b=$("orderBtn");b.disabled=true;b.textContent="بيتبعت…";
   try{await saveNow();const p=await SB.rpc("mag_order",{p_code:CODE,p_name:$("bName").value.trim(),p_phone:$("bPhone").value.trim(),p_receipt:receipt,p_price:MAG_PRICE,p_src:(window.farhetnaSource&&window.farhetnaSource())||null});
-    P=p;status();toast("طلبك وصل 🤍");scrollTo(0,0)}
+    P=p;status();toast("طلبك وصل 🤍");scrollTo(0,0);try{window.farhetnaTrack&&farhetnaTrack("InitiateCheckout",{content_name:"My Magazine",currency:"EGP",value:MAG_PRICE||undefined})}catch(e){}}
   catch(e){err.textContent=/receipt/.test(e.message)?"صورة التحويل مش واضحة":/phone/.test(e.message)?"رقم الموبايل مش صحيح":"في مشكلة في الاتصال، جربي تاني"}
   b.disabled=false;b.textContent="ابعتي الطلب"};
 
