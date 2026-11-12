@@ -129,7 +129,7 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
   <section data-s="occ">
     <h1>صممي مجلة لحد بتحبيه</h1>
     <a class="smpl" href="view.html#sample">📖 لسه ما شفتيش المجلة؟ <b>افتحي مجلة تجريبية</b></a>
-    <p class="lead">٣ اختيارات صغيرة وتبدأي على طول. مفيش تسجيل، وكل حاجة بتتحفظ أول بأول.</p>
+    <p class="lead">٣ اختيارات صغيرة وتبدأي على طول. مفيش تسجيل، وكل حاجة بتتحفظ أول بأول.<br><b id="freeNote">التصميم والمعاينة مجانًا، وبتدفعي بس لما تحبي تاخدي لينك المجلة وتبعتيه.</b></p>
     <div class="card">
       <label class="f">المجلة دي بمناسبة إيه؟</label>
       <div class="chips" id="occ"></div>
@@ -305,7 +305,8 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
 <script>
 (()=>{
 const C=window.FM,$=id=>document.getElementById(id);
-const MAG_PRICE=C.magPrice||null;   // set in memories/config.js when the price is decided
+const MAG_PRICE=C.magPrice||null;
+try{if(MAG_PRICE)document.getElementById("freeNote").textContent="التصميم والمعاينة مجانًا. وبتدفعي "+String(MAG_PRICE).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d])+" جنيه بس لما تحبي تاخدي لينك المجلة وتبعتيه."}catch(e){}   // set in memories/config.js when the price is decided
 const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2600)};
 const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
 /* ---- small Supabase client: anonymous session, rpc, storage ---- */
@@ -391,6 +392,7 @@ $("haveCode").onclick=()=>{$("resumeBox").hidden=false;$("haveCode").hidden=true
 function load(p,isNew){P=p;D=Object.assign({photos:[],letters:[],voices:[],loves:[]},p.data||{});D.recipient=D.recipient||p.recipient;D.occasion=D.occasion||p.occasion;D.lang=D.lang||p.lang;D.edition=D.edition||p.edition;
   EDITABLE=p.editable!==false;$("who").textContent=D.recipient?"· مجلة "+D.recipient:"";
   $("codeCard").hidden=!isNew;$("codeShow").textContent=CODE;
+  if(p.buyerName&&!$("bName").value)$("bName").value=p.buyerName;if(p.buyerPhone&&!$("bPhone").value)$("bPhone").value=p.buyerPhone;
   const rl=`${C.site}/magazine/create.html#c=${CODE}`;
   $("codeWa").href="https://wa.me/?text="+encodeURIComponent(`🔒 لينك استكمال مجلتي على فرحتنا (ما تبعتيهوش لحد):\n${rl}`);
   $("codeCopy").onclick=()=>{try{navigator.clipboard.writeText(rl).then(()=>toast("اتنسخ ✓"),()=>prompt("انسخي اللينك:",rl))}catch(e){prompt("انسخي اللينك:",rl)}};
@@ -403,6 +405,7 @@ function status(){const b=$("statusBox");if(!P){b.innerHTML="";return}const s=P.
   if(s==="pending")h='<div class="status pending">⏳ طلبك وصل وبنراجع التحويل. تقدري تكمّلي تعديل لحد ما المجلة تتنشر.</div>';
   else if(s==="active"&&EDITABLE)h=`<div class="status active">✅ مجلتك منشورة. تقدري تعدّلي لحد ${dd(P.editUntil)}، وأي تعديل بيظهر في نفس اللينك.</div>`;
   else if(s==="active")h='<div class="status locked">🔒 مدة التعديل خلصت. المجلة متاحة للمشاهدة على نفس اللينك.</div>';
+  else if(s==="rejected")h='<div class="status pending" style="background:#fbeeee;color:#7a2e2e">❌ ما لقيناش التحويل ده. مجلتك محفوظة زي ما هي: راجعي التحويل وابعتي صورته تاني تحت، أو <a href="https://wa.me/201280067110" style="text-decoration:underline">كلّمينا على واتساب</a>.</div>';
   b.innerHTML=h;$("orderCard").hidden=s==="active"||s==="pending";$("liveCard").hidden=s!=="active";
   if(s==="active"){const u=C.site+"/magazine/view.html#"+P.slug;$("liveLink").textContent=u.replace("https://","");$("liveOpen").href=u;
     $("liveWa").href="https://wa.me/?text="+encodeURIComponent(`عملتلك حاجة صغيرة 💌\n${u}`)}
