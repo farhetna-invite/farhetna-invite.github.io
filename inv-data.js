@@ -121,8 +121,9 @@ window.farhetnaRsvp=function(r){
   if(mode!=="live"||!raw)return false;var wa=(raw.wa||"").replace(/\D/g,"");if(!wa)return false;
   if(/^0/.test(wa))wa="2"+wa;
   var B=raw.bride||raw.brideEn||"",G=raw.groom||raw.groomEn||"";
-  var msg=r.yes?("السلام عليكم 🤍\nأنا "+r.name+"، وبأكد حضوري فرح "+B+" و"+G+" إن شاء الله"+(r.count?"\nعدد الضيوف: "+r.count:""))
-               :("السلام عليكم 🤍\nأنا "+r.name+"، وللأسف مش هقدر أحضر فرح "+B+" و"+G+". ألف مبروك!");
+  var EV=/خطوب/.test(raw.kind||"")?"خطوبة":/كتب|قران/.test(raw.kind||"")?"كتب كتاب":/حن/.test(raw.kind||"")?"حنة":"فرح";
+  var msg=r.yes?("السلام عليكم 🤍\nأنا "+r.name+"، وبأكد حضوري "+EV+" "+B+" و"+G+" إن شاء الله"+(r.count?"\nعدد الضيوف: "+r.count:""))
+               :("السلام عليكم 🤍\nأنا "+r.name+"، وللأسف مش هقدر أحضر "+EV+" "+B+" و"+G+". ألف مبروك!");
   if(r.msg)msg+="\n"+r.msg;
   setTimeout(function(){location.href="https://wa.me/"+wa+"?text="+encodeURIComponent(msg)},600);return true;
 };

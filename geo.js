@@ -20,6 +20,7 @@
     ["BH","البحرين","BHD"],["OM","عُمان","OMR"],["JO","الأردن","JOD"],["GB","بريطانيا","GBP"],["EU","أوروبا","EUR"],
     ["US","أمريكا","USD"],["CA","كندا","CAD"],["AU","أستراليا","AUD"],["XX","دولة تانية","USD"]
   ];
+  var CEN={"EG": "Egypt", "SA": "Saudi Arabia", "AE": "UAE", "KW": "Kuwait", "QA": "Qatar", "BH": "Bahrain", "OM": "Oman", "JO": "Jordan", "GB": "UK", "EU": "Europe", "US": "USA", "CA": "Canada", "AU": "Australia", "XX": "Other country"};
   var TZ={"Africa/Cairo":"EG","Asia/Riyadh":"SA","Asia/Dubai":"AE","Asia/Kuwait":"KW","Asia/Qatar":"QA","Asia/Bahrain":"BH",
     "Asia/Muscat":"OM","Asia/Amman":"JO","Europe/London":"GB","Europe/Dublin":"EU"};
   function guess(){
@@ -64,7 +65,7 @@
     /* a small "🌍 الأسعار لـ: … · تغيير" switch */
     switcher:function(host){if(!host)return;
       var w=document.createElement("div");w.className="fg-sw";
-      var sel='<select aria-label="الدولة">'+COUNTRIES.map(function(c){return '<option value="'+c[0]+'"'+(c[0]===code?" selected":"")+'>'+c[1]+'</option>'}).join("")+'</select>';
+      var sel='<select aria-label="الدولة">'+COUNTRIES.map(function(c){return '<option value="'+c[0]+'" data-en="'+(CEN[c[0]]||c[1])+'"'+(c[0]===code?" selected":"")+'>'+c[1]+'</option>'}).join("")+'</select>';
       w.innerHTML='<span>🌍 الأسعار لـ</span>'+sel;host.appendChild(w);
       w.querySelector("select").onchange=function(e){FG.setCountry(e.target.value)}},
     /* note for visitors outside Egypt until card payments are live */
