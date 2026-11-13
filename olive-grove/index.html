@@ -210,6 +210,7 @@ var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){re
 function t12(hm){if(!hm)return"";var p=String(hm).split(":"),h=+p[0],m=p[1]||"00";return ar((h%12||12)+(m!=="00"?":"+m:""))+(h<12?" صباحًا":" مساءً")}
 var dt=new Date((D.date||"2027-01-01")+"T"+(D.time||"19:00")+":00");
 var G=D.groom||D.groomEn||"",B=D.bride||D.brideEn||"";
+var HID=function(k){return(D.hide||[]).indexOf(k)>-1};
 document.title="💌 "+G+" و"+B+" · دعوة فرح";
 var day=dt.toLocaleDateString("ar-EG",{weekday:"long"}),dm=dt.toLocaleDateString("ar-EG",{day:"numeric",month:"long",year:"numeric"});
 var two=function(n){return ar(n<10?"0"+n:n)};
@@ -228,26 +229,26 @@ if(D.story)h+='<section class="sec rv"><div class="st-h"><img src="img/lantern.w
 if(D.pGroom||D.pBride)h+='<section class="sec rv"><div class="kk">With love, by our side</div><h2>بمحبة، معانا</h2><p class="q">ولا حاجة كانت هتكمل من غير الناس اللي سندونا وعلّمونا الحب من غير شروط</p>'+
   '<div class="fam"><div class="cards"><div><b>أهل العروسة</b><span>'+esc(D.pBride)+'</span></div><div><b>أهل العريس</b><span>'+esc(D.pGroom)+'</span></div></div><img class="log" src="img/log.webp" alt=""></div></section>';
 if(D.witnesses)h+='<section class="sec rv"><div class="kk">Our witnesses</div><h2>شهودنا</h2><div class="heart"><img src="img/heart.webp" alt=""><div class="in"><b>'+esc(D.witnesses)+'</b></div></div><p class="q">ممتنين لوجودكم جنبنا في أهم خطوة في حياتنا</p></section>';
-h+='<section class="sec rv"><img class="gar" src="img/garland.webp" alt=""><div class="kk">Counting down</div><h2>فاضل على يومنا</h2><div class="cd" id="cd"><div><b id="cdD">٠</b><span>يوم</span></div><div><b id="cdH">٠</b><span>ساعة</span></div><div><b id="cdM">٠</b><span>دقيقة</span></div><div><b id="cdS">٠</b><span>ثانية</span></div></div><div class="today hide" id="today">النهارده يومنا 🤍</div></section>';
+if(!HID("cd"))h+='<section class="sec rv"><img class="gar" src="img/garland.webp" alt=""><div class="kk">Counting down</div><h2>فاضل على يومنا</h2><div class="cd" id="cd"><div><b id="cdD">٠</b><span>يوم</span></div><div><b id="cdH">٠</b><span>ساعة</span></div><div><b id="cdM">٠</b><span>دقيقة</span></div><div><b id="cdS">٠</b><span>ثانية</span></div></div><div class="today hide" id="today">النهارده يومنا 🤍</div></section>';
 h+='<section class="sec rv"><p class="q">كل يوم بيقربنا أكتر من اللحظة اللي مستنيينها</p><img class="bq" src="img/bouquet.webp" alt="" style="margin-top:18px"><div class="kk">When &amp; where</div><h2>إمتى وفين</h2><p class="txt">هنا هنقول «قبلت»… وهنفضل نرقص لآخر الليل 🤍</p>';
 h+='<div class="sign"><img src="img/sign.webp" alt="">';evs.slice(0,3).forEach(function(e,i){h+='<a class="b'+(i+1)+'" href="#ev'+i+'"><b>'+esc(e.title)+'</b><span>'+t12(e.time)+'</span></a>'});h+='</div></section>';
 h+='<section class="sec" style="padding-top:0">';
 evs.forEach(function(e,i){var q=encodeURIComponent(e.place||"");var link=(!e.own&&D.map)?D.map:("https://www.google.com/maps/search/?api=1&query="+q);
   h+='<article class="paper ev rv" id="ev'+i+'"><h3>'+esc(e.title)+'</h3><div class="phw"><img class="ph" src="'+EVIMG[i%3]+'" alt="" loading="lazy">'+(i%3===1?'<span class="wel">أهلًا بيكم</span>':'')+'</div>'+
    '<div class="inf"><b>📍 '+esc(e.place||"—")+'</b>'+esc(day)+' '+esc(dm)+'<br>الساعة '+t12(e.time)+'</div>'+
-   (e.place?'<iframe loading="lazy" title="خريطة '+esc(e.title)+'" src="https://maps.google.com/maps?q='+q+'&z=15&output=embed" referrerpolicy="no-referrer-when-downgrade"></iframe>':'')+
+   (e.place&&!HID("map")?'<iframe loading="lazy" title="خريطة '+esc(e.title)+'" src="https://maps.google.com/maps?q='+q+'&z=15&output=embed" referrerpolicy="no-referrer-when-downgrade"></iframe>':'')+
    '<div class="btns"><a class="bt" href="'+esc(link)+'" target="_blank" rel="noopener">افتحوا في الخريطة ↗</a></div></article>'});
 h+='<div class="btns rv"><button class="bt ln" id="ics" type="button">ضيفوا الفرح للتقويم 🗓️</button></div></section>';
 var ph=(D.photos||[]).filter(Boolean).slice(D.story?1:0);if(ph.length>5)ph=ph.slice(0,5);
 if(ph.length)h+='<section class="sec rv"><img class="bq" src="img/bouquet.webp" alt=""><div class="kk">Moments</div><h2>لحظات بتعرّفنا</h2><p class="q">حتة من حكايتنا، متصورة في لقطات دافية</p><div class="gal">'+ph.map(function(u){return'<img src="'+esc(u)+'" alt="" loading="lazy">'}).join("")+'</div></section>';
 if(D.band)h+='<section class="sec rv"><div class="note">♫</div><h2>الأجواء</h2><div class="hang"><img class="br" src="img/garland.webp" alt=""><div class="pp"><i>الأجواء هتبقى مع</i><b>'+esc(D.band)+'</b></div></div><img class="band" src="img/band.webp" alt="" loading="lazy"></section>';
 if(D.notes||D.attire)h+='<section class="sec rv"><div class="paper"><div class="kk">Notes</div><h2>قبل ما تيجوا</h2>'+(D.attire?'<p class="txt">👗 '+esc(D.attire)+'</p>':'')+(D.notes?'<p class="txt">'+esc(D.notes)+'</p>':'')+'</div></section>';
-h+='<section class="sec rv"><div class="kk">Kindly reply</div><h2>مستنيين تأكيدكم</h2><p class="txt">وجودكم جزء من فرحتنا… قولولنا هتكونوا معانا؟</p><div class="paper" style="margin-top:16px">'+
+if(!HID("rsvp"))h+='<section class="sec rv"><div class="kk">Kindly reply</div><h2>مستنيين تأكيدكم</h2><p class="txt">وجودكم جزء من فرحتنا… قولولنا هتكونوا معانا؟</p><div class="paper" style="margin-top:16px">'+
   '<form id="rf" novalidate><label class="l" for="rn">الاسم أو اسم العيلة</label><input type="text" id="rn" autocomplete="name" placeholder="اكتب اسمك">'+
   '<div class="yn"><button type="button" data-a="1" aria-pressed="true"><i></i>أيوه، هحضر</button><button type="button" data-a="0" aria-pressed="false"><i></i>للأسف، مش هقدر</button></div>'+
   '<div id="cntBox"><label class="l">الكبار</label><div class="ctr"><button type="button" data-c="ad" data-d="-1">−</button><b id="ad">١</b><button type="button" data-c="ad" data-d="1">+</button></div>'+
-  '<label class="l">الأطفال</label><div class="ctr"><button type="button" data-c="ki" data-d="-1">−</button><b id="ki">٠</b><button type="button" data-c="ki" data-d="1">+</button></div>'+
-  '<label class="chk"><input type="checkbox" id="tr"> محتاجين مواصلات</label><label class="chk"><input type="checkbox" id="st"> محتاجين إقامة</label></div>'+
+  '<div'+(HID("extra")?' class="hide"':'')+'><label class="l">الأطفال</label><div class="ctr"><button type="button" data-c="ki" data-d="-1">−</button><b id="ki">٠</b><button type="button" data-c="ki" data-d="1">+</button></div>'+
+  '<label class="chk"><input type="checkbox" id="tr"> محتاجين مواصلات</label><label class="chk"><input type="checkbox" id="st"> محتاجين إقامة</label></div></div>'+
   '<label class="l" for="rm">رسالة لينا (اختياري)</label><textarea id="rm" placeholder="ألف مبروك 🤍"></textarea>'+
   '<button class="send" id="send" type="submit"><span>تأكيد الحضور</span></button><div class="err" id="err"></div></form>'+
   '<div class="done hide" id="done"><b id="dBig"></b><p id="dSub"></p><div class="btns"><a class="bt hide" id="dWa" target="_blank" rel="noopener">ابعته كمان على واتساب</a><button class="bt ln" id="dEdit" type="button">تعديل الرد</button></div></div></div></section>';
@@ -257,7 +258,7 @@ $("app").innerHTML=h;
 
 function tick(){var s=Math.max(0,Math.floor((dt-new Date())/1000));if(!s){$("cd").classList.add("hide");$("today").classList.remove("hide");return}
   $("cdD").textContent=ar(Math.floor(s/86400));$("cdH").textContent=ar(Math.floor(s%86400/3600));$("cdM").textContent=ar(Math.floor(s%3600/60));$("cdS").textContent=ar(s%60)}
-tick();setInterval(tick,1000);
+if($("cd")){tick();setInterval(tick,1000)}
 document.querySelectorAll('.sign a').forEach(function(a){a.onclick=function(e){e.preventDefault();var t=document.querySelector(a.getAttribute("href"));if(t){t.classList.add("in");t.scrollIntoView({behavior:"smooth",block:"start"})}}});
 $("ics").onclick=function(){var z=function(d){return d.toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"")},e=new Date(+dt+5*3600e3),q=function(x){return String(x||"").replace(/([,;\\])/g,"\\$1")},title="فرح "+G+" و"+B;
   var c=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Farhetna//Invite//AR","BEGIN:VEVENT","UID:"+z(dt)+"-"+Math.random().toString(36).slice(2)+"@farhetna","DTSTAMP:"+z(new Date()),"DTSTART:"+z(dt),"DTEND:"+z(e),
@@ -275,7 +276,7 @@ var opened=false;function open(){if(opened)return;opened=true;var g=$("gate");g.
   setTimeout(function(){document.body.classList.remove("locked");document.body.classList.add("open");$("app").removeAttribute("aria-hidden");g.classList.add("gone");watch()},2500)}
 $("gate").addEventListener("click",open);$("gate").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();open()}});
 
-/* RSVP: adults + children; children and the transport / stay requests go into the note the couple sees */
+if($("rf")){/* RSVP: adults + children; children and the transport / stay requests go into the note the couple sees */
 var att=true,C={ad:1,ki:0},DEV=(function(){try{var k="farhetna_dev",v=localStorage.getItem(k);if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem(k,v)}return v}catch(e){return""}})();
 var RK="farhetna_rsvp_olg_"+(D.slug||G+D.date);
 document.querySelectorAll(".yn button").forEach(function(b){b.onclick=function(){att=b.getAttribute("data-a")==="1";document.querySelectorAll(".yn button").forEach(function(x){x.setAttribute("aria-pressed",String(x===b))});$("cntBox").classList.toggle("hide",!att)}});
@@ -298,6 +299,7 @@ $("rf").onsubmit=function(e){e.preventDefault();var r={name:$("rn").value.trim()
   var note=[extra(r),r.msg].filter(Boolean).join("\n");
   fetch(SB.url+"/rest/v1/rpc/add_rsvp",{method:"POST",headers:{"Content-Type":"application/json",apikey:SB.key,Authorization:"Bearer "+SB.key},body:JSON.stringify({p_slug:D.slug,p_name:r.name,p_attending:r.yes,p_guests:r.adults+r.kids,p_note:note,p_device:DEV})})
   .then(function(res){if(!res.ok)throw new Error(res.status);try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}fin();done(r)}).catch(toWa)};
+}
 })();
 </script>
 

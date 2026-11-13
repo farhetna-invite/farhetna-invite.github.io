@@ -39,7 +39,7 @@ window.farhetnaData=function(key){
   if(key==="olg"){
     var oh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
-      intro:o.intro||"",story:o.story||"",pGroom:o.pGroom||"",pBride:o.pBride||"",witnesses:o.witnesses||"",band:o.band||"",program:prog,notes:o.notes||"",attire:o.dressNote||"",
+      intro:o.intro||"",story:o.story||"",pGroom:o.pGroom||"",pBride:o.pBride||"",hide:o.hide||[],witnesses:o.witnesses||"",band:o.band||"",program:prog,notes:o.notes||"",attire:o.dressNote||"",
       hero:oh||"img/hero.webp",photos:album,music:mu||"",slug:String(o._slug||"").toLowerCase()};}
   if(key==="bdy"||key==="bdn"){ /* birthday designs: groom = the birthday person's name, bride = the age */
     var bh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
