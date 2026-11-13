@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🎀 Little Bloom · فرحتنا</title>
+<meta name="description" content="دعوة سبوع تفاعلية من فرحتنا">
+<meta name="theme-color" content="#fbeef0">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bday/core.css">
+<style>
+:root{--bg:#fdf5f4;--ink:#5a3a45;--sub:#8f6f78;--name:#c4607a;--head:#a24f66;--card:#fffafa;--cell:#fdeef1;--num:#c4607a;--line:#f2d2da;--btn:#c4607a;--btnInk:#fff;--field:#fff;--chip:rgba(255,255,255,.88);--chipInk:#a24f66}
+body{background:linear-gradient(180deg,#fdf5f4,#f6dde2 60%,#fdf5f4) fixed}
+body{position:relative}.fl-t,.fl-b{position:absolute;left:0;right:0;pointer-events:none;z-index:0}
+.fl-t{top:-2px;height:auto;width:100%}.fl-b{bottom:-2px;width:100%}
+main{z-index:1}
+.card{box-shadow:0 16px 34px -24px rgba(90,60,70,.5);border:1px solid #f2d2da}
+.hero h1{color:#c4607a;text-shadow:0 2px 0 #fff,0 6px 18px rgba(0,0,0,.08)}
+.hero .k{margin-top:70px}
+.photo{width:210px;height:270px;border-radius:50%/42%;border:7px solid #fff;box-shadow:0 0 0 2px #efb2c1,0 18px 34px -18px rgba(90,60,70,.5)}
+.welc{font-family:"Cormorant Garamond",serif;letter-spacing:.32em;font-size:13px;color:#8f6f78;margin-top:4px}
+
+/* gate */
+#gate{background:linear-gradient(180deg,#fdf5f4,#f6dde2)}
+#gate .ft,#gate .fb{position:absolute;left:0;width:100%;pointer-events:none}
+#gate .ft{top:-2px}#gate .fb{bottom:-2px}
+.rib{position:absolute;left:50%;top:0;width:22px;margin-left:-11px;background:linear-gradient(90deg,#e294a8,#efb2c1 40%,#fff6 50%,#efb2c1 60%,#e294a8);box-shadow:0 2px 6px rgba(0,0,0,.08)}
+.hang{position:absolute;left:50%;top:0;transform-origin:50% 0;will-change:transform}
+.frame{width:min(68vw,290px);margin-left:calc(min(68vw,290px)/-2)}
+.frame .rib{height:21vh}
+.frame .body{position:relative;margin-top:calc(21vh - 18px)}
+.frame svg{width:100%;display:block;overflow:visible;filter:drop-shadow(0 16px 22px rgba(90,60,70,.25))}
+.frame .nm{position:absolute;left:0;right:0;top:20%;bottom:8%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.frame .nm b{font-family:"Aref Ruqaa",serif;font-size:min(16vw,70px);line-height:1.1;color:#c4607a;text-shadow:0 2px 0 rgba(255,255,255,.95),0 4px 10px rgba(90,60,70,.18)}
+.frame .nm small{font-family:"Cormorant Garamond",serif;letter-spacing:.3em;font-size:11px;color:#a24f66;opacity:.8;margin-top:6px}
+.swing,.hang2{display:flow-root}
+.swing{animation:swing 4s ease-in-out infinite}
+@keyframes swing{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+.card2{width:min(86vw,370px);margin-left:calc(min(86vw,370px)/-2);transform:translateY(-120vh)}
+.card2 .rib{height:25vh}
+.card2 .body{position:relative;margin-top:calc(25vh - 22px)}
+.card2 svg.sh{width:100%;display:block;filter:drop-shadow(0 18px 24px rgba(90,60,70,.25))}
+.card2 .seal{position:absolute;left:50%;top:52%;width:34%;transform:translate(-50%,-50%);transition:transform .6s cubic-bezier(.3,1.5,.4,1),opacity .5s .2s;cursor:pointer}
+.card2 .seal img{width:100%;display:block;filter:drop-shadow(0 6px 8px rgba(90,40,50,.3));animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+.card2 .txt{position:absolute;inset:16% 10% 12%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;transition:opacity .9s .35s;color:#5a3a45}
+.card2 .txt i{font-style:normal;font-size:13px;color:#8f6f78}
+.card2 .txt span{font-family:"Cormorant Garamond",serif;letter-spacing:.28em;font-size:10.5px;color:#8f6f78;margin-top:4px}
+.card2 .txt b{font-family:"Aref Ruqaa",serif;font-size:min(13vw,52px);color:#c4607a;line-height:1.2}
+.card2 .txt em{font-style:normal;font-size:13px;color:#8f6f78}
+.body svg.bow{position:absolute;left:50%;top:-30px;width:86px;margin-left:-43px;z-index:2;filter:drop-shadow(0 3px 4px rgba(90,60,70,.2))}
+#gate .gt{position:absolute;left:0;right:0;bottom:calc(150px + env(safe-area-inset-bottom));margin:0 auto;width:max-content;background:#fffc;color:#a24f66;box-shadow:0 8px 20px -12px rgba(0,0,0,.35);transition:opacity .3s}
+#gate.s1 .frame{transition:transform 1s cubic-bezier(.6,0,.4,1);transform:translateY(-130vh) rotate(6deg)}
+#gate.s1 .card2{transition:transform 1.3s cubic-bezier(.25,1.25,.4,1) .45s;transform:translateY(0)}
+#gate.s1 .card2 .hang2{animation:swing2 3.4s ease-in-out 1.8s infinite}
+@keyframes swing2{0%,100%{transform:rotate(-1.6deg)}50%{transform:rotate(1.6deg)}}
+#gate.s2 .card2 .seal{transform:translate(-50%,-50%) scale(1.5);opacity:0}
+#gate.s2 .card2 .seal img{animation:none}
+#gate.s2 .card2 .txt{opacity:1}
+#gate.s2 .gt{opacity:0}
+</style>
+</head>
+<body class="locked">
+<img class="fl-t" src="../sebou/top-pink.webp" alt=""><img class="fl-b" src="../sebou/bottom-pink.webp" alt="">
+<div class="flag" id="demoFlag">تجربة</div>
+<button id="mu" class="off" type="button" aria-label="المزيكا"><svg class="pa" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="pl" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+<audio id="bgm" loop preload="none"></audio>
+
+<div id="gate" role="button" tabindex="0" aria-label="افتح الدعوة">
+  <img class="ft" src="../sebou/top-pink.webp" alt=""><img class="fb" src="../sebou/bottom-pink.webp" alt="">
+  <div class="hang frame"><div class="swing" style="transform-origin:50% 0">
+    <div class="rib"></div>
+    <div class="body">
+      <svg class="bow" viewBox="0 0 100 60" aria-hidden="true"><path d="M50 30 C 30 2, 4 8, 10 26 C 14 38, 34 36, 50 30 Z" fill="#efb2c1" stroke="#e294a8" stroke-width="2"/><path d="M50 30 C 70 2, 96 8, 90 26 C 86 38, 66 36, 50 30 Z" fill="#efb2c1" stroke="#e294a8" stroke-width="2"/><path d="M46 32 L36 58 L44 54 L48 60 L52 34 Z M54 32 L64 58 L56 54 L52 60 L48 34 Z" fill="#efb2c1" stroke="#e294a8" stroke-width="1.5"/><ellipse cx="50" cy="30" rx="8" ry="7" fill="#e294a8"/></svg>
+      <svg viewBox="0 0 240 300" aria-hidden="true"><defs><radialGradient id="in" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#fbe6ea"/><stop offset="1" stop-color="#f2c9d2"/></radialGradient><linearGradient id="fr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".5" stop-color="#f6f1ee"/><stop offset="1" stop-color="#e9e1dc"/></linearGradient></defs>
+        <ellipse cx="120" cy="150" rx="116" ry="146" fill="url(#fr)"/><ellipse cx="120" cy="150" rx="104" ry="134" fill="none" stroke="#fff" stroke-width="3" opacity=".9"/><ellipse cx="120" cy="150" rx="98" ry="128" fill="url(#in)" stroke="#e6dcd6" stroke-width="2"/>
+        <g fill="#fff" opacity=".85"><circle cx="230.0" cy="150.0" r="2.6"/><circle cx="227.2" cy="181.2" r="2.6"/><circle cx="219.1" cy="210.7" r="2.6"/><circle cx="206.0" cy="237.3" r="2.6"/><circle cx="188.6" cy="259.5" r="2.6"/><circle cx="167.7" cy="276.1" r="2.6"/><circle cx="144.5" cy="286.5" r="2.6"/><circle cx="120.0" cy="290.0" r="2.6"/><circle cx="95.5" cy="286.5" r="2.6"/><circle cx="72.3" cy="276.1" r="2.6"/><circle cx="51.4" cy="259.5" r="2.6"/><circle cx="34.0" cy="237.3" r="2.6"/><circle cx="20.9" cy="210.7" r="2.6"/><circle cx="12.8" cy="181.2" r="2.6"/><circle cx="10.0" cy="150.0" r="2.6"/><circle cx="12.8" cy="118.8" r="2.6"/><circle cx="20.9" cy="89.3" r="2.6"/><circle cx="34.0" cy="62.7" r="2.6"/><circle cx="51.4" cy="40.5" r="2.6"/><circle cx="72.3" cy="23.9" r="2.6"/><circle cx="95.5" cy="13.5" r="2.6"/><circle cx="120.0" cy="10.0" r="2.6"/><circle cx="144.5" cy="13.5" r="2.6"/><circle cx="167.7" cy="23.9" r="2.6"/><circle cx="188.6" cy="40.5" r="2.6"/><circle cx="206.0" cy="62.7" r="2.6"/><circle cx="219.1" cy="89.3" r="2.6"/><circle cx="227.2" cy="118.8" r="2.6"/></g></svg>
+      <div class="nm"><b id="gName">وتين</b><small>WELCOME BABY GIRL</small></div>
+    </div></div></div>
+  <div class="hang card2"><div class="hang2" style="transform-origin:50% 0">
+    <div class="rib"></div>
+    <div class="body">
+      <svg class="bow" viewBox="0 0 100 60" aria-hidden="true"><path d="M50 30 C 30 2, 4 8, 10 26 C 14 38, 34 36, 50 30 Z" fill="#efb2c1" stroke="#e294a8" stroke-width="2"/><path d="M50 30 C 70 2, 96 8, 90 26 C 86 38, 66 36, 50 30 Z" fill="#efb2c1" stroke="#e294a8" stroke-width="2"/><path d="M46 32 L36 58 L44 54 L48 60 L52 34 Z M54 32 L64 58 L56 54 L52 60 L48 34 Z" fill="#efb2c1" stroke="#e294a8" stroke-width="1.5"/><ellipse cx="50" cy="30" rx="8" ry="7" fill="#e294a8"/></svg>
+      <svg class="sh" viewBox="0 0 300 220" aria-hidden="true"><path d="M34 14 Q62 14 74 4 H226 Q238 14 266 14 Q280 36 292 46 V174 Q280 184 266 206 Q238 206 226 216 H74 Q62 206 34 206 Q20 184 8 174 V46 Q20 36 34 14 Z" fill="#fbe6ea" stroke="#fff" stroke-width="4"/><path d="M40 24 Q64 24 76 15 H224 Q236 24 260 24 Q272 42 282 51 V169 Q272 177 260 196 Q236 196 224 205 H76 Q64 196 40 196 Q28 177 18 169 V51 Q28 42 40 24 Z" fill="none" stroke="#efb2c1" stroke-width="1.2" stroke-dasharray="3 4"/></svg>
+      <div class="txt"><i>أهلًا بيكي</i><b id="gName2">وتين</b><span>WELCOME BABY GIRL</span><em id="gPar">بنت أحمد ومنى</em></div>
+      <div class="seal"><img src="../sebou/seal-pink.webp" alt=""></div>
+    </div></div></div>
+  <div class="gt" id="gHint">المسوا البرواز 🎀</div>
+</div>
+<div class="fx" id="fx"></div>
+
+<main id="main" aria-hidden="true"></main>
+
+<script src="../inv-data.js"></script>
+<script src="../bday/core.js"></script>
+<script>
+(function(){
+window.BDAY_ICONS=["🍼","🎀","🧸","✨"];
+var g=document.getElementById("gate"),stage=0;
+/* first tap: the frame swings away and the card with the seal comes down; the second tap (the seal) opens the invitation */
+g.addEventListener("click",function(e){if(stage===0){stage=1;e.stopImmediatePropagation();g.classList.add("s1");document.getElementById("gHint").textContent="افتحوا الختم 👣";}
+  else if(stage===1&&!(e.target.closest&&e.target.closest(".card2"))){e.stopImmediatePropagation()}},true);
+var D=BDAY.start({key:"sbg",colors:["#f6b8c6","#fcd5dd","#ffffff","#e98fa5","#f9e3b0","#d9ecdf"],event:"سبوع",icon:"🎀",kicker:"أهلًا بأحلى ضيفة نوّرت دنيتنا",cdKicker:"باقي على يوم السبوع",msgPh:"ربنا يخليه/يخليها ليكم 🤍",sorry:"ربنا يخليها ليكم 🤍",
+  music:"../music-box.mp3",back:"../sebou/",
+  demo:{name:"وتين",parents:"بنت أحمد ومنى",date:"2027-03-06",time:"18:00",venue:"بيت العيلة",addr:"المعادي، القاهرة",map:"",wa:"",
+    intro:"جت الدنيا تنوّرها 🎀\nوعايزين نحتفل بيها مع أغلى الناس في سبوعها",program:[["18:00","استقبال الضيوف"],["18:30","دق الهون والغربال"],["19:00","زفة الشموع"],["19:30","توزيع الحلويات"]],
+    dress:"",gift:"",notes:"",photos:[],hero:"../sebou/baby-girl.webp",music:""},
+  open:function(g,confetti){g.classList.add("s2");setTimeout(function(){confetti(70,[innerWidth/2,innerHeight*.5])},350);return 2100}});
+if(D){var n=D.name||"";["gName","gName2"].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent=n});var p=document.getElementById("gPar");if(p)p.textContent=D.parents||"";}
+})();
+</script>
+</body>
+</html>

@@ -10,8 +10,8 @@ var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){re
 var SB={url:"https://fjoyqftndulavcjcxaya.supabase.co",key:"sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui"};
 
 function ageWord(n){n=+n;if(!n)return"";if(n===1)return"سنة";if(n===2)return"سنتين";if(n>=3&&n<=10)return"سنين";return"سنة"}
-function icon(txt,i){var R=[[/استقبال|وصول|welcome/i,"👋"],[/تورت|كيك|cake|شمع/i,"🎂"],[/هدايا|هدية|gift/i,"🎁"],[/عشا|غدا|أكل|بوفيه|dinner|food/i,"🍽️"],[/لعب|ألعاب|games/i,"🎠"],[/رقص|دي جي|dj|party|حفلة/i,"🪩"],[/صور|تصوير|photo/i,"📸"],[/ساحر|عروض|show/i,"🎩"]];
-  for(var k=0;k<R.length;k++)if(R[k][0].test(txt))return R[k][1];return["🎈","🎉","🎊","✨"][i%4]}
+function icon(txt,i){var R=[[/استقبال|وصول|welcome/i,"👋"],[/تورت|كيك|cake|شمع/i,"🎂"],[/هدايا|هدية|gift/i,"🎁"],[/عشا|غدا|أكل|بوفيه|dinner|food/i,"🍽️"],[/لعب|ألعاب|games/i,"🎠"],[/رقص|دي جي|dj|party|حفلة/i,"🪩"],[/صور|تصوير|photo/i,"📸"],[/ساحر|عروض|show/i,"🎩"],[/هون|غربال|دق/i,"🥁"],[/شمع|شموع|صينية/i,"🕯️"],[/حلويات|ملبس|بونبون|شنط/i,"🍬"]];
+  for(var k=0;k<R.length;k++)if(R[k][0].test(txt))return R[k][1];return(window.BDAY_ICONS||["🎈","🎉","🎊","✨"])[i%4]}
 function t12(hm){if(!hm)return"";var p=String(hm).split(":"),h=+p[0],m=p[1]||"00";return ar((h%12||12)+(m!=="00"?":"+m:""))+(h<12?" صباحًا":" مساءً")}
 
 /* ---------- music: the design's file, the bride's choice, or a soft music-box "Happy Birthday" (public-domain tune) ---------- */
@@ -34,16 +34,17 @@ window.BDAY={start:function(cfg){
   var MODE=window.farhetnaMode||null;
   var age=String(D.age||"").replace(/[٠-٩]/g,function(d){return AD.indexOf(d)}).replace(/\D/g,"");
   var dt=new Date((D.date||"2027-01-01")+"T"+(D.time||"17:00")+":00");
-  document.title="🎂 "+(D.name||"عيد ميلاد")+" · دعوة عيد ميلاد";
+  var EV=cfg.event||"عيد ميلاد";document.title=(cfg.icon||"🎂")+" "+(D.name||EV)+" · دعوة "+EV;
 
   /* ---------- page ---------- */
   var h="";
   h+='<section class="hero rv"><div class="k">'+esc(cfg.kicker||"يسعدنا تشاركونا فرحة عيد ميلاد")+'</div><h1>'+esc(D.name)+'</h1>';
+  if(D.parents)h+='<div class="par">'+esc(D.parents)+'</div>';
   if(age)h+='<div class="age"><b>'+ar(age)+'</b><small>'+(cfg.ageLabel?cfg.ageLabel(+age):ageWord(age))+'</small></div>';
   if(D.hero)h+='<div class="photo"><img src="'+esc(D.hero)+'" alt=""></div>';
   if(D.intro)h+='<p class="intro">'+esc(D.intro)+'</p>';
   h+='</section>';
-  h+='<section class="card rv" id="cdCard"><div class="kk">باقي على اليوم الحلو</div><h2>العدّ التنازلي</h2><div class="cd" id="cd"><div><b id="cdD">٠</b><span>يوم</span></div><div><b id="cdH">٠</b><span>ساعة</span></div><div><b id="cdM">٠</b><span>دقيقة</span></div><div><b id="cdS">٠</b><span>ثانية</span></div></div><div class="today hide" id="today">النهارده اليوم الحلو 🎉</div></section>';
+  h+='<section class="card rv" id="cdCard"><div class="kk">'+esc(cfg.cdKicker||"باقي على اليوم الحلو")+'</div><h2>العدّ التنازلي</h2><div class="cd" id="cd"><div><b id="cdD">٠</b><span>يوم</span></div><div><b id="cdH">٠</b><span>ساعة</span></div><div><b id="cdM">٠</b><span>دقيقة</span></div><div><b id="cdS">٠</b><span>ثانية</span></div></div><div class="today hide" id="today">النهارده اليوم الحلو 🎉</div></section>';
   var day=dt.toLocaleDateString("ar-EG",{weekday:"long"}),dm=dt.toLocaleDateString("ar-EG",{day:"numeric",month:"long",year:"numeric"});
   h+='<section class="card rv"><div class="kk">الميعاد والمكان</div><h2>مستنيينكم</h2><div class="when"><div><i>📅</i><b>'+esc(day)+'</b><span>'+esc(dm)+'</span></div><div><i>⏰</i><b>'+t12(D.time||"17:00")+'</b><span>ميعاد الحفلة</span></div></div>';
   if(D.venue||D.addr)h+='<div class="venue"><b>📍 '+esc(D.venue)+'</b><span>'+esc(D.addr)+'</span></div>';
@@ -59,7 +60,7 @@ window.BDAY={start:function(cfg){
     '<form id="rf" novalidate><label for="rn">الاسم</label><input id="rn" autocomplete="name" placeholder="اكتب اسمك">'+
     '<div class="two"><button type="button" data-a="1" aria-pressed="true">أكيد جاي 🎉</button><button type="button" data-a="0" aria-pressed="false">مش هقدر 😔</button></div>'+
     '<div id="cntBox"><label>عدد الحضور (معاك)</label><div class="cnt"><button type="button" id="minus">−</button><b id="cnt">١</b><button type="button" id="plus">+</button></div></div>'+
-    '<label for="rm">رسالة لـ'+esc(D.name)+' (اختياري)</label><textarea id="rm" placeholder="كل سنة وانت طيب 🎂"></textarea>'+
+    '<label for="rm">رسالة لـ'+esc(D.name)+' (اختياري)</label><textarea id="rm" placeholder="'+esc(cfg.msgPh||"كل سنة وانت طيب 🎂")+'"></textarea>'+
     '<button class="send" id="send" type="submit"><span>ابعت الرد</span></button><div class="err" id="err"></div></form>'+
     '<div class="done hide" id="done"><b id="dBig"></b><p id="dSub"></p><div class="btns"><a class="bt hide" id="dWa" target="_blank" rel="noopener">ابعته كمان على واتساب</a><button class="bt gh" id="dEdit" type="button">تعديل الرد</button></div></div></section>';
   h+='<footer>دعوة من <a href="https://farhetnainvite.com/" target="_blank" rel="noopener">فرحتنا</a> 🤍</footer>';
@@ -71,17 +72,17 @@ window.BDAY={start:function(cfg){
   tick();setInterval(tick,1000);
 
   /* calendar */
-  $("ics").onclick=function(){var z=function(d){return d.toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"")},e=new Date(+dt+4*3600e3),q=function(x){return String(x||"").replace(/([,;\\])/g,"\\$1")},title="عيد ميلاد "+(D.name||"");
+  $("ics").onclick=function(){var z=function(d){return d.toISOString().replace(/[-:]/g,"").replace(/\.\d+/,"")},e=new Date(+dt+4*3600e3),q=function(x){return String(x||"").replace(/([,;\\])/g,"\\$1")},title=EV+" "+(D.name||"");
     var c=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Farhetna//Birthday//AR","BEGIN:VEVENT","UID:"+z(dt)+"-"+Math.random().toString(36).slice(2)+"@farhetna","DTSTAMP:"+z(new Date()),"DTSTART:"+z(dt),"DTEND:"+z(e),
       "SUMMARY:"+q(title),"LOCATION:"+q([D.venue,D.addr].filter(Boolean).join(" - ")),"BEGIN:VALARM","TRIGGER:-P1D","ACTION:DISPLAY","DESCRIPTION:"+q(title),"END:VALARM","END:VEVENT","END:VCALENDAR"].join("\r\n");
-    var u=URL.createObjectURL(new Blob([c],{type:"text/calendar;charset=utf-8"})),a=document.createElement("a");a.href=u;a.download="birthday.ics";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000)};
+    var u=URL.createObjectURL(new Blob([c],{type:"text/calendar;charset=utf-8"})),a=document.createElement("a");a.href=u;a.download="invitation.ics";document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(u)},4000)};
 
   /* reveal on scroll */
   var io=("IntersectionObserver"in window)?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12}):null;
   function watch(){document.querySelectorAll("main .rv:not(.in)").forEach(function(e){if(io)io.observe(e);else e.classList.add("in")})}
 
   /* music */
-  var au=$("bgm"),useFile=D.music&&D.music!=="none",playing=false;
+  if(!D.music&&cfg.music)D.music=cfg.music;var au=$("bgm"),useFile=D.music&&D.music!=="none",playing=false;
   if(useFile)au.src=D.music;if(D.music==="none")$("mu").hidden=true;
   function setMu(on){playing=on;$("mu").classList.toggle("off",!on);
     if(useFile){if(on){var p=au.play();if(p&&p.catch)p.catch(function(){playing=false;$("mu").classList.add("off")})}else au.pause()}
@@ -110,7 +111,7 @@ window.BDAY={start:function(cfg){
   function showCnt(){$("cnt").textContent=ar(cnt)}
   $("minus").onclick=function(){if(cnt>1){cnt--;showCnt()}};$("plus").onclick=function(){if(cnt<15){cnt++;showCnt()}};
   function waLink(r){var wa=String(D.wa||"").replace(/\D/g,"");if(!wa)return"";if(/^0/.test(wa))wa="2"+wa;
-    var m=r.yes?("أهلًا 🎈\nأنا "+r.name+"، وبأكد حضوري عيد ميلاد "+D.name+" إن شاء الله\nعدد الحضور: "+r.count):("أهلًا 🎈\nأنا "+r.name+"، وللأسف مش هقدر أحضر عيد ميلاد "+D.name+". كل سنة وهو/هي طيب 🎂");
+    var m=r.yes?("أهلًا 🎈\nأنا "+r.name+"، وبأكد حضوري "+EV+" "+D.name+" إن شاء الله\nعدد الحضور: "+r.count):("أهلًا 🎈\nأنا "+r.name+"، وللأسف مش هقدر أحضر "+EV+" "+D.name+". "+(cfg.sorry||"كل سنة وهو/هي طيب 🎂"));
     if(r.msg)m+="\n\n"+r.msg;return"https://wa.me/"+wa+"?text="+encodeURIComponent(m)}
   function done(r,sub){$("rf").classList.add("hide");$("done").classList.remove("hide");$("dBig").textContent=r.yes?"مستنيينك 🎉":"هتوحشنا 🤍";$("dSub").textContent=sub||"شكرًا إنك عرّفتنا. تقدر تعدّل ردك في أي وقت.";
     var w=waLink(r);$("dWa").classList.toggle("hide",!w||MODE!=="live");if(w)$("dWa").href=w;if(r.yes)confetti(60,[innerWidth/2,innerHeight*.6])}
@@ -126,7 +127,7 @@ window.BDAY={start:function(cfg){
     .then(function(res){if(!res.ok)throw new Error(res.status);try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}fin();done(r)}).catch(toWa)};
 
   /* the back button on public demos goes to the birthday page */
-  setTimeout(function(){var b=$("fhBack");if(b)b.href="../birthday/"},1600);
+  setTimeout(function(){var b=$("fhBack");if(b)b.href=cfg.back||"../birthday/"},1600);
   return D;
 }};
 })();

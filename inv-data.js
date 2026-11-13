@@ -41,9 +41,10 @@ window.farhetnaData=function(key){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
       intro:o.intro||"",story:o.story||"",pGroom:o.pGroom||"",pBride:o.pBride||"",hide:o.hide||[],witnesses:o.witnesses||"",band:o.band||"",program:prog,notes:o.notes||"",attire:o.dressNote||"",
       hero:oh||"img/hero.webp",photos:album,music:mu||"",slug:String(o._slug||"").toLowerCase()};}
-  if(key==="bdy"||key==="bdn"){ /* birthday designs: groom = the birthday person's name, bride = the age */
+  if(key==="bdy"||key==="bdn"||key==="sbg"||key==="sbb"){ /* birthday: groom = name, bride = age · baby welcome (sbg/sbb): groom = baby name, bride = parents line */
     var bh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
-    return{name:o.groom||"",age:o.bride||"",intro:o.intro||"",date:o.date||"",time:o.time||"17:00",venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
+    var sb=key==="sbg"||key==="sbb";
+    return{name:o.groom||"",age:sb?"":(o.bride||""),parents:sb?(o.bride||""):"",intro:o.intro||"",date:o.date||"",time:o.time||"17:00",venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
       program:prog,dress:o.dressNote||"",gift:o.gift||"",notes:o.notes||"",hero:bh,photos:album,music:mu||"",slug:String(o._slug||"").toLowerCase()};}
   if(key==="bbl"||key==="bgd"){
     base.lang=hasEn?"en":"ar";if(hasEn){base.groom=o.groomEn;base.bride=o.brideEn;if(o.venueEn)base.venue=o.venueEn;}
