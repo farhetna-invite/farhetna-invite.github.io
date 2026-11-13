@@ -234,6 +234,13 @@ footer a{color:var(--plum)}
 
 <footer><a class="home" href="../">← الصفحة الرئيسية لفرحتنا</a><br>My Magazine من <a href="../">فرحتنا 💌</a> · The Surprise</footer>
 
+<script src="../geo.js"></script>
+<style>.hero .fg-ab{margin:6px 0 0}.hero .fg-ap{color:#f6e6bf;font-size:15px}.hero .fg-lp{background:rgba(241,223,180,.2);color:#f6e6bf}</style>
+<script>(function(){var G=window.FG;if(!G)return;G.switcher(document.querySelector(".hero .trust")&&document.querySelector(".hero .trust").parentNode);
+ if(!G.abroad)return;var P=G.money("magazine");
+ var hb=document.querySelector(".hero .price b");if(hb){hb.textContent=P;G.reword(hb.parentNode);G.tag(hb.parentNode)}
+ document.querySelectorAll(".incl li.pr,details p").forEach(function(e){if(e.innerHTML.indexOf("٢٩٩")<0)return;e.innerHTML=e.innerHTML.replace(/٢٩٩/g,P);G.reword(e)});
+})();</script>
 <script src="../fa.js"></script>
 </body>
 </html>

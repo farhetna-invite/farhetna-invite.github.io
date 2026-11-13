@@ -1392,6 +1392,7 @@ body.inviting .stbar{display:none}
 .lang-en #builder .trk .nm{text-align:left}
 .lang-en #builder .step{margin-left:0;margin-right:6px}
 </style>
+<script src="geo.js"></script>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
 </head>
@@ -3359,12 +3360,19 @@ let receiptData=null,useCode=false;
 function setMode(code){useCode=code;$("orderBox").hidden=code;$("codeBox").hidden=!code;
   $("saveBtn").textContent=edit.code?"حفظ التعديلات 💾":(code?"تفعيل ونشر الدعوة 💌":"تأكيد ونشر الدعوة 💌");}
 $("haveCode").onclick=()=>setMode(true);$("noCode").onclick=()=>setMode(false);
+/* outside Egypt: the abroad price (charged in EGP) */
+if(window.FG&&FG.abroad){CFG.price=FG.label("basic");CFG.pricePremium=FG.label("premium");}
 function priceOf(o){return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
 $("linkBtn").onclick=()=>{const o=collect();
   if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
   px("InitiateCheckout",{value:parseInt((priceOf(o)||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)))||0,currency:"EGP"});
   $("getForm").hidden=false;$("getDone").hidden=true;$("getErr").textContent="";
   $("payPrice").textContent=priceOf(o);$("payNum").textContent=CFG.instapay;
+  if(window.FG&&FG.abroad){const k=CFG.premium.includes(o.tpl)?"premium":"basic",pp=$("payPrice");
+    const row=pp.closest(".stp");
+    if(!$("fgCard")){const d=document.createElement("div");d.id="fgCard";d.className="stp";d.style.cssText="font-size:13px;opacity:.85";
+      d.innerHTML='💳 بتدفعي من برا مصر؟ الدفع بالكارت جاي قريب. لحد ما يتفعّل، <a href="https://wa.me/201280067110" target="_blank" rel="noopener" style="text-decoration:underline">كلّمينا على واتساب</a> ونظبطلك الدفع.';
+      pp.closest(".stp").insertAdjacentElement("beforebegin",d)}}
   if(edit.code){$("slugWrap").hidden=true;$("codeIn").value=edit.code;$("orderBox").hidden=true;$("codeBox").hidden=true;
     $("getSub").textContent="هتتحفظ التعديلات على نفس اللينك: "+CFG.site+edit.slug;$("saveBtn").textContent="حفظ التعديلات 💾";useCode=true;}
   else{$("slugWrap").hidden=false;$("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، وحوّلي وارفعي صورة التحويل، ودعوتك هتتفعّل خلال ٢٤ ساعة";setMode(false);}

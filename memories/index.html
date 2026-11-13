@@ -262,6 +262,7 @@ footer a{color:var(--gold2);font-weight:600}
 @media(max-width:700px){.hero .tag{display:none}.hero .lead{font-size:16px}.flow{font-size:12.5px;gap:3px;flex-wrap:nowrap}.flow li{padding:4px 8px;white-space:nowrap}.flow li+li:before{margin-inline-end:2px}
   .vis{height:420px;transform:scale(.82);transform-origin:50% 0;margin-bottom:-76px}}
 @media(max-width:359px){.flow{flex-wrap:wrap}}
+.pc.main .fg-lp{background:rgba(241,223,180,.18);color:#f1dfb4}.pc.main .fg-ap{color:#f1dfb4}
 </style>
 </head>
 <body>
@@ -416,6 +417,7 @@ footer a{color:var(--gold2);font-weight:600}
 <section class="band"><h2>ذكريات فرحكم تستاهل تتجمع</h2><p>كل صورة صوّرها حد بيحبكم، في مكان واحد.</p><a class="b1" href="designs.html">اطلبي ألبوم الذكريات</a></section>
 <footer>ألبوم الذكريات من <a href="../">فرحتنا 💌</a> · دعوات زفاف رقمية</footer>
 
+<script src="../geo.js"></script>
 <script src="config.js"></script>
 <script src="qr.js"></script>
 <script src="../fa.js"></script>
@@ -425,6 +427,10 @@ const C=window.FM||{price:399,addon:249,site:"https://farhetnainvite.com"};
 const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
 document.querySelectorAll(".pr").forEach(e=>e.textContent=ar(C.price));
 document.querySelectorAll(".pa").forEach(e=>e.textContent=ar(C.addon));
+if(window.FG){FG.switcher(document.querySelector("#price .pnote")||document.querySelector("#price .in"));
+  if(FG.abroad){document.querySelectorAll(".pr").forEach(e=>{e.textContent=FG.money("album");FG.reword(e.parentNode)});document.querySelectorAll(".pa").forEach(e=>{e.textContent=FG.money("albumAddon");FG.reword(e.parentNode)});
+    document.querySelectorAll("#price .amt").forEach(e=>FG.tag(e));
+    const ex=document.querySelector("#price .ex");if(ex){const s=Math.round((FG.local("premium")+FG.local("albumAddon"))*2)/2;ex.innerHTML="مثال: دعوة فاخرة <b>"+FG.money("premium")+"</b> + الألبوم <b>"+FG.money("albumAddon")+"</b> = <b>"+FG.ar(String(s).replace(".","٫"))+" "+FG.curName+"</b>"}}}
 
 /* demo design picker: Sage and Blush side by side, the phone shows the chosen one */
 document.querySelectorAll(".pick .op").forEach(b=>b.onclick=()=>{const t=b.dataset.t,u="../m/index.html#demo="+t;

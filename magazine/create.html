@@ -302,6 +302,7 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
 <div class="pv" id="pv" hidden><button class="x" id="pvX" type="button">✕ قفل المعاينة</button><iframe id="pvF" title="معاينة المجلة"></iframe></div>
 <div class="toast" id="toast"></div>
 
+<script src="../geo.js"></script>
 <script src="../memories/config.js"></script>
 <script src="music.js"></script>
 <script src="../fa.js"></script>
@@ -309,7 +310,7 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
 (()=>{
 const C=window.FM,$=id=>document.getElementById(id);
 const MAG_PRICE=C.magPrice||null;
-try{if(MAG_PRICE)document.getElementById("freeNote").textContent="التصميم والمعاينة مجانًا. وبتدفعي "+String(MAG_PRICE).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d])+" جنيه بس لما تحبي تاخدي لينك المجلة وتبعتيه."}catch(e){}   // set in memories/config.js when the price is decided
+try{if(MAG_PRICE)document.getElementById("freeNote").textContent="التصميم والمعاينة مجانًا. وبتدفعي "+(window.FG&&FG.abroad?FG.label("magazine"):String(MAG_PRICE).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d])+" جنيه")+" بس لما تحبي تاخدي لينك المجلة وتبعتيه."}catch(e){}   // set in memories/config.js when the price is decided
 const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2600)};
 const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
 /* ---- small Supabase client: anonymous session, rpc, storage ---- */
@@ -511,7 +512,7 @@ function drawVoices(){const b=$("vList");b.innerHTML="";D.voices.forEach((v,i)=>
 
 /* ---- review, preview, order ---- */
 function review(){const n=D.photos.filter(p=>p.url).length;$("pageNote").textContent=`عندك ${ar(n)} صورة و${ar(D.letters.length)} رسالة و${ar(D.voices.length)} رسالة صوتية.`+(n<12?" المجلة بتبقى أحلى بـ١٥ صورة أو أكتر.":"");
-  $("priceTxt").textContent=MAG_PRICE?ar(MAG_PRICE)+" جنيه":"(السعر هيتحدد قبل الإطلاق)";status()}
+  $("priceTxt").textContent=MAG_PRICE?(window.FG&&FG.abroad?FG.label("magazine"):ar(MAG_PRICE)+" جنيه"):"(السعر هيتحدد قبل الإطلاق)";if(window.FG&&FG.abroad&&!$("priceTxt").nextElementSibling?.classList.contains("fg-ab")){FG.tag($("priceTxt"));FG.cardNote($("orderCard"),"afterbegin")}status()}
 function openPreview(){const f=$("pvF");$("pv").hidden=false;f.src="view.html#preview";
   const onMsg=e=>{if(e.origin!==location.origin||!e.data||e.data.t!=="mag-ready")return;removeEventListener("message",onMsg);
     const data=JSON.parse(JSON.stringify(D));data.photos=data.photos.filter(p=>p.url);data.voices=data.voices.filter(v=>v.url);
@@ -528,7 +529,7 @@ $("orderBtn").onclick=async()=>{const err=$("orderErr");err.textContent="";
   if(!receipt){err.textContent="ارفعي صورة التحويل";return}if($("bName").value.trim().length<2){err.textContent="اكتبي اسمك";return}
   if($("bPhone").value.replace(/\D/g,"").length<10){err.textContent="اكتبي رقم موبايلك";return}
   const b=$("orderBtn");b.disabled=true;b.textContent="بيتبعت…";
-  try{await saveNow();const p=await SB.rpc("mag_order",{p_code:CODE,p_name:$("bName").value.trim(),p_phone:$("bPhone").value.trim(),p_receipt:receipt,p_price:MAG_PRICE,p_src:(window.farhetnaSource&&window.farhetnaSource())||null});
+  try{await saveNow();const p=await SB.rpc("mag_order",{p_code:CODE,p_name:$("bName").value.trim(),p_phone:$("bPhone").value.trim(),p_receipt:receipt,p_price:MAG_PRICE,p_src:Object.assign({},(window.farhetnaSource&&window.farhetnaSource())||{},window.FG&&FG.abroad?FG.info():{})});
     P=p;status();toast("طلبك وصل 🤍");scrollTo(0,0);try{window.farhetnaTrack&&farhetnaTrack("InitiateCheckout",{content_name:"My Magazine",currency:"EGP",value:MAG_PRICE||undefined})}catch(e){}}
   catch(e){err.textContent=/receipt/.test(e.message)?"صورة التحويل مش واضحة":/phone/.test(e.message)?"رقم الموبايل مش صحيح":"في مشكلة في الاتصال، جربي تاني"}
   b.disabled=false;b.textContent="ابعتي الطلب"};

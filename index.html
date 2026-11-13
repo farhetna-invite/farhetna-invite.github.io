@@ -1404,5 +1404,15 @@ v.addEventListener("click",function(){v.paused?play():v.pause()});
 <script>(function(){var b=document.getElementById("qMore");if(!b)return;b.addEventListener("click",function(){document.getElementById("faq").classList.add("q-all");b.hidden=true})})();</script>
 <script>(function(){var els=document.querySelectorAll(".rvx");if(!("IntersectionObserver"in window)){els.forEach(function(e){e.classList.add("in")});return}
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.18});els.forEach(function(e){io.observe(e)})})();</script>
+<script src="geo.js"></script>
+<script>/* prices by country: Egypt as is; abroad sees the price in their own currency */
+(function(){var G=window.FG;if(!G)return;var M={"٢٥٠":"basic","٣٥٠":"premium","٤٥٠":"custom"};
+ G.switcher(document.querySelector("#packages .pnote"));
+ if(!G.abroad)return;
+ document.querySelectorAll(".dc-p b,.pm-p b").forEach(function(b){var k=M[b.textContent.trim()];if(!k)return;b.textContent=G.money(k);G.reword(b.parentNode);
+});
+ document.querySelectorAll(".chips button[data-f]").forEach(function(c){c.childNodes.forEach(function(n){if(n.nodeType===3)n.textContent=n.textContent.replace("٣٥٠",G.money("premium")).replace("٢٥٠",G.money("basic"))})});
+ document.querySelectorAll("[data-price]").forEach(function(a){var v=a.getAttribute("data-price");if(v==="250")a.setAttribute("data-price",G.price("basic"));else if(v==="350")a.setAttribute("data-price",G.price("premium"))});
+})();</script>
 </body>
 </html>

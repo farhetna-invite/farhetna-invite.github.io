@@ -13,3 +13,9 @@ window.FM = {
   maxPhotoMB: 25,      // before shrinking on the phone
   maxFilesPerPick: 30
 };
+/* outside Egypt: abroad prices (charged in EGP) — see /geo.js */
+if (window.FG && window.FG.abroad) {
+  window.FM.price = window.FG.price("album");
+  window.FM.addon = window.FG.price("albumAddon");
+  window.FM.magPrice = window.FG.price("magazine");
+}

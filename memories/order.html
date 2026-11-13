@@ -129,6 +129,7 @@ textarea.in{min-height:80px;resize:vertical;line-height:1.8}
 </div>
 <div class="toast" id="toast"></div>
 
+<script src="../geo.js"></script>
 <script src="config.js"></script>
 <script src="qr.js"></script>
 <script src="themes.js"></script>
@@ -139,6 +140,7 @@ textarea.in{min-height:80px;resize:vertical;line-height:1.8}
 const C=window.FM,$=id=>document.getElementById(id);
 const ar=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
 $("price").textContent=ar(C.price);
+if(window.FG&&FG.abroad){$("price").textContent=FG.money("album");FG.reword($("price").parentNode);FG.tag($("price").parentNode);FG.cardNote($("price").closest(".sum").parentNode,"afterbegin");}
 const toast=t=>{const e=$("toast");e.textContent=t;e.classList.add("on");clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove("on"),2400)};
 const TH=window.FMThemes;let style=TH.get((new URLSearchParams(location.search).get("t")||"sage")).id,receipt=null;
 TH.list.forEach(id=>{const t=TH.all[id];const b=document.createElement("button");b.type="button";b.dataset.s=id;b.innerHTML=`<canvas></canvas><b>${t.name}</b>${t.ar}`;$("sty").appendChild(b)});
@@ -173,7 +175,7 @@ $("go").onclick=async()=>{const err=$("err");err.textContent="";
   if(v("name").length<2){err.textContent="اكتبي اسمك";$("name").focus();return}
   if(v("phone").replace(/\D/g,"").length<10){err.textContent="اكتبي رقم موبايلك";$("phone").focus();return}
   const b=$("go");b.disabled=true;b.textContent="بيتبعت…";
-  try{const src=(window.farhetnaSource&&window.farhetnaSource())||null;
+  try{let src=(window.farhetnaSource&&window.farhetnaSource())||null;if(window.FG&&FG.abroad)src=Object.assign({},src||{},FG.info(),{price:C.price});
     const r=await rpc("memories_create_order",{p_groom:v("groom"),p_bride:v("bride"),p_groom_en:v("groomEn"),p_bride_en:v("brideEn"),p_date:v("date"),
       p_welcome:v("welcome"),p_style:style,p_name:v("name"),p_phone:v("phone"),p_receipt:receipt,p_src:src});
     try{localStorage.setItem("fm_code",r.code)}catch(e){}
