@@ -2344,6 +2344,9 @@ const TPL={
 const TRACKS=[
   {id:"design",name:"مزيكا التصميم",sub:"المقطوعة الأصلية للتصميم"},
   {id:"none",name:"من غير مزيكا"},
+  {id:"hbd",name:"هابي بيرث داي",sub:"صندوق موسيقى",src:"music-hbd.mp3"},
+  {id:"hbdpiano",name:"هابي بيرث داي",sub:"بيانو",src:"music-hbdpiano.mp3"},
+  {id:"party",name:"حفلة مبهجة",sub:"إيقاع فرحان",src:"music-party.mp3"},
   {id:"zaffa",name:"زفة مصري",sub:"طبلة ومزمار",src:"music-zaffa.mp3"},
   {id:"zaffa2",name:"زفة سريعة",sub:"إيقاع فرح",src:"music-zaffa2.mp3"},
   {id:"oud",name:"عود شرقي",sub:"حجاز مع طبلة هادية",src:"music-oud.mp3"},
@@ -2470,7 +2473,8 @@ $("audioFile").onchange=e=>{
 };
 let bdMode=null;
 function applyMode(){const on=isBd(state.tpl);document.querySelectorAll(".tpl").forEach(b=>b.hidden=on!==b.classList.contains("bdt"));
-  document.querySelectorAll(".trk").forEach(d=>{if(["zaffa","zaffa2","bridal","entrance","waltz","orient","oudsolo","ney"].includes(d.dataset.k))d.hidden=on});
+  document.querySelectorAll(".trk").forEach(d=>{const k=d.dataset.k;if(["zaffa","zaffa2","bridal","entrance","waltz","orient","oudsolo","ney"].includes(k))d.hidden=on;if(["hbd","hbdpiano","party"].includes(k))d.hidden=!on});
+  if(!on&&["hbd","hbdpiano","party"].includes(state.music))state.music=SIG[state.tpl]?"design":"box";
   if(on&&["zaffa","zaffa2","bridal","entrance","waltz","orient","oudsolo","ney"].includes(state.music))state.music="design";
   if(on===bdMode)return;bdMode=on;document.body.classList.toggle("bdmode",on);
   const T=(id,a,b)=>{const e=$(id);if(e)e.textContent=on?a:b};
