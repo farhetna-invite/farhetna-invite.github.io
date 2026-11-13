@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>🎈 Balloon Party · فرحتنا</title>
+<meta name="description" content="دعوة عيد ميلاد تفاعلية من فرحتنا">
+<meta name="theme-color" content="#fff4ec">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../bday/core.css">
+<style>
+:root{--bg:#fff6ef;--ink:#4a3550;--sub:#86708c;--name:#e0607e;--head:#5a3a63;--card:#ffffff;--cell:#fff1f4;--num:#e0607e;--line:#f1d3dc;--btn:#e0607e;--btnInk:#fff;--field:#fffafb;--chip:rgba(255,255,255,.85);--chipInk:#5a3a63}
+body{background:
+  radial-gradient(circle at 12% 8%,rgba(246,165,184,.22) 0 60px,transparent 61px),
+  radial-gradient(circle at 92% 22%,rgba(168,220,200,.25) 0 46px,transparent 47px),
+  radial-gradient(circle at 6% 52%,rgba(200,182,240,.22) 0 38px,transparent 39px),
+  radial-gradient(circle at 96% 70%,rgba(255,200,154,.28) 0 54px,transparent 55px),
+  radial-gradient(circle,rgba(224,96,126,.10) 1.6px,transparent 2px) 0 0/22px 22px,#fff6ef}
+.card{box-shadow:0 14px 34px -22px rgba(120,60,90,.45);border:1.5px solid #fbe3ea}
+.card::before{content:"";position:absolute;top:-1px;left:24px;right:24px;height:5px;border-radius:0 0 6px 6px;background:linear-gradient(90deg,#f6a5b8,#ffc89a,#a8dcc8,#9fd0f2,#c8b6f0)}
+.age{background:conic-gradient(from 20deg,#f6a5b8,#ffc89a,#f3d36b,#a8dcc8,#9fd0f2,#c8b6f0,#f6a5b8);color:#fff;padding:7px}
+.age::before{content:"";position:absolute;inset:7px;border-radius:50%;background:#e0607e}
+.age b,.age small{position:relative}
+.photo{border:6px solid #fff;box-shadow:0 0 0 4px #f6a5b8,0 16px 30px -16px rgba(120,60,90,.5)}
+.hero::before,.hero::after{content:"🎈";position:absolute;font-size:44px;top:30px;animation:bob 4s ease-in-out infinite}
+.hero::before{right:2px}.hero::after{left:2px;animation-delay:-2s;filter:hue-rotate(150deg)}
+@keyframes bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-10px) rotate(6deg)}}
+
+/* gate */
+#gate{background:radial-gradient(120% 80% at 50% 40%,#fff9f4 0%,#ffe9ee 55%,#fde0e6 100%);color:#5a3a63}
+#gate .dots{position:absolute;inset:0;background:radial-gradient(circle,rgba(224,96,126,.14) 2px,transparent 2.5px) 0 0/26px 26px;opacity:.7}
+#gate .gk{position:relative;font-family:"Aref Ruqaa",serif;font-size:36px;font-weight:700;color:#e0607e;letter-spacing:0;margin-bottom:22px}
+#gate .gk small{display:block;font-family:"Noto Naskh Arabic",serif;font-size:15px;font-weight:500;color:#86708c;margin-top:2px}
+#gate .gt{position:relative;background:#fff;color:#5a3a63;box-shadow:0 8px 22px -12px rgba(120,60,90,.5)}
+.gift{position:relative;width:230px;height:230px;animation:wob 2.4s ease-in-out infinite}
+@keyframes wob{0%,82%,100%{transform:rotate(0)}86%{transform:rotate(-5deg)}90%{transform:rotate(5deg)}94%{transform:rotate(-3deg)}}
+.gift svg{width:100%;height:100%;overflow:visible}
+#lid{transform-box:fill-box;transform-origin:50% 100%;transition:transform 1s cubic-bezier(.2,1.4,.4,1),opacity .6s .5s}
+#gate.pop .gift{animation:none}
+#gate.pop #lid{transform:translate(70px,-260px) rotate(38deg);opacity:0}
+#gate.pop .glow{opacity:1;transform:scale(1.25)}
+.glow{position:absolute;left:50%;top:44%;width:260px;height:260px;margin:-130px 0 0 -130px;border-radius:50%;background:radial-gradient(circle,rgba(255,236,170,.95),rgba(255,236,170,0) 65%);opacity:0;transform:scale(.6);transition:opacity .5s,transform 1s}
+.bl{position:absolute;bottom:-160px;width:64px;will-change:transform}
+.bl svg{width:100%;overflow:visible}
+</style>
+</head>
+<body class="locked">
+<div class="flag" id="demoFlag">تجربة</div>
+<button id="mu" class="off" type="button" aria-label="المزيكا"><svg class="pa" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg><svg class="pl" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></button>
+<audio id="bgm" loop preload="none"></audio>
+
+<div id="gate" role="button" tabindex="0" aria-label="افتح الدعوة">
+  <div class="dots"></div>
+  <div class="gk">عندك دعوة! 🎈<small>فيه حفلة مستنياك</small></div>
+  <div class="gift">
+    <div class="glow"></div>
+    <svg viewBox="0 0 230 230" aria-hidden="true">
+      <defs>
+        <linearGradient id="bx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f8b3c4"/><stop offset="1" stop-color="#ee8ea7"/></linearGradient>
+        <linearGradient id="lx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbc3d0"/><stop offset="1" stop-color="#f29ab0"/></linearGradient>
+        <linearGradient id="rb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8fd3bb"/><stop offset=".5" stop-color="#b7ead8"/><stop offset="1" stop-color="#8fd3bb"/></linearGradient>
+      </defs>
+      <ellipse cx="115" cy="218" rx="92" ry="9" fill="rgba(120,60,90,.14)"/>
+      <rect x="30" y="102" width="170" height="112" rx="12" fill="url(#bx)"/>
+      <rect x="101" y="102" width="28" height="112" fill="url(#rb)"/>
+      <circle cx="62" cy="142" r="5" fill="#fff" opacity=".55"/><circle cx="168" cy="178" r="6" fill="#fff" opacity=".5"/><circle cx="75" cy="190" r="4" fill="#fff" opacity=".5"/><circle cx="160" cy="130" r="3.5" fill="#fff" opacity=".6"/>
+      <g id="lid">
+        <rect x="20" y="74" width="190" height="34" rx="10" fill="url(#lx)"/>
+        <rect x="99" y="74" width="32" height="34" fill="url(#rb)"/>
+        <path d="M115 76 C 86 34, 46 46, 60 66 C 70 80, 98 78, 115 76 Z" fill="#9fdcc6" stroke="#7cc6ac" stroke-width="2"/>
+        <path d="M115 76 C 144 34, 184 46, 170 66 C 160 80, 132 78, 115 76 Z" fill="#9fdcc6" stroke="#7cc6ac" stroke-width="2"/>
+        <circle cx="115" cy="74" r="10" fill="#b7ead8" stroke="#7cc6ac" stroke-width="2"/>
+      </g>
+    </svg>
+  </div>
+  <div class="gt">المس الهدية وافتحها 👆</div>
+</div>
+<div class="fx" id="fx"></div>
+
+<main id="main" aria-hidden="true"></main>
+
+<script src="../inv-data.js"></script>
+<script src="../bday/core.js"></script>
+<script>
+(function(){
+var COLS=["#f6a5b8","#ffc89a","#a8dcc8","#c8b6f0","#9fd0f2","#f3d36b"];
+function balloon(c){return '<svg viewBox="0 0 64 150"><path d="M32 82 C 26 100, 40 112, 30 128 S 36 146, 32 150" fill="none" stroke="rgba(90,58,99,.35)" stroke-width="1.4"/>'+
+  '<path d="M32 4 C 12 4, 2 22, 4 40 C 6 60, 22 76, 32 80 C 42 76, 58 60, 60 40 C 62 22, 52 4, 32 4 Z" fill="'+c+'"/>'+
+  '<path d="M28 80 L36 80 L34 86 L30 86 Z" fill="'+c+'"/><ellipse cx="21" cy="24" rx="6" ry="10" fill="#fff" opacity=".45" transform="rotate(-20 21 24)"/></svg>'}
+BDAY.start({key:"bdy",colors:COLS,
+  demo:{name:"ليلى",age:"5",date:"2027-03-20",time:"17:00",venue:"Kids Garden",addr:"الشيخ زايد، الجيزة",map:"",wa:"",
+    intro:"بنتنا الصغيرة كبرت سنة 🎂\nوعايزين نحتفل بيها مع أغلى الناس",
+    program:[["17:00","استقبال الضيوف"],["17:30","ألعاب ومسابقات"],["18:30","قطع التورتة"],["19:00","فتح الهدايا"]],
+    dress:"ألوان باستيل 🌸",gift:"",notes:"",photos:[],hero:"",music:""},
+  open:function(g,confetti){g.classList.add("pop");var fx=document.getElementById("fx"),W=innerWidth,H=innerHeight;
+    setTimeout(function(){confetti(90,[W/2,H*.48])},250);
+    for(var i=0;i<9;i++)(function(i){var b=document.createElement("div");b.className="bl";b.innerHTML=balloon(COLS[i%COLS.length]);
+      var x=(i/8)*W*.9+W*.02-32+(Math.random()-.5)*30,s=.75+Math.random()*.55;b.style.left=x+"px";b.style.transform="scale("+s+")";fx.appendChild(b);
+      b.animate([{transform:"translate(0,0) scale("+s+") rotate(-4deg)"},{transform:"translate("+((Math.random()-.5)*60)+"px,"+(-H*.6)+"px) scale("+s+") rotate(5deg)",offset:.55},{transform:"translate("+((Math.random()-.5)*90)+"px,"+(-H-260)+"px) scale("+s+") rotate(-3deg)"}],
+        {duration:3600+Math.random()*1600,delay:150+i*90,easing:"cubic-bezier(.3,.2,.4,1)",fill:"forwards"}).onfinish=function(){b.remove()}})(i);
+    return 1500}});
+})();
+</script>
+</body>
+</html>

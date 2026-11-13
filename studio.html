@@ -33,6 +33,7 @@ textarea{min-height:70px;resize:vertical}
 .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 
 .tpls{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tpl[hidden],[hidden].wedOnly,#builder [hidden]{display:none!important}
 .tpl{border:2px solid transparent;border-radius:14px;padding:0;background:#faf6f2;overflow:hidden;text-align:center}
 .tpl[aria-pressed="true"]{border-color:#6d1f2f}
 .tpl .thumb{height:110px;display:block}
@@ -1403,7 +1404,7 @@ body.inviting .stbar{display:none}
   <div class="stbar"><a href="index.html" class="home">‹ <span>الرئيسية</span></a><div class="rt"><a class="wa" href="https://wa.me/201280067110?text=%D8%A3%D9%87%D9%84%D8%A7%D9%8B%20%D9%81%D8%B1%D8%AD%D8%AA%D9%86%D8%A7%20%F0%9F%A4%8D%20%D9%85%D8%AD%D8%AA%D8%A7%D8%AC%D8%A9%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%88%D8%AF%D9%8A%D9%88" target="_blank" rel="noopener" data-track="Contact"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3.5A12.4 12.4 0 0 0 5.3 22.2L3.6 28.5l6.5-1.7A12.4 12.4 0 1 0 16 3.5zm0 22.6a10.2 10.2 0 0 1-5.2-1.4l-.4-.2-3.9 1 1-3.8-.2-.4A10.2 10.2 0 1 1 16 26.1z"/></svg><span>مساعدة</span></a><button class="lb" type="button" data-lang-btn>EN</button></div></div>
   <div class="brand">
     <h1 data-no-i18n>فرحتنا<small>FARHETNA</small></h1>
-    <p>كارت فرح تفاعلي بلينك واحد، يتبعت لكل الضيوف</p>
+    <p id="hdSub">كارت فرح تفاعلي بلينك واحد، يتبعت لكل الضيوف</p>
   </div>
   <div class="acctbar"><button class="acctbtn" id="acctBtn"><span class="av">👤</span><span id="acctTxt">تسجيل الدخول</span></button></div>
   <button class="editcode" id="editCodeBtn">عندك كود؟ عدّلي دعوتك ✏️</button>
@@ -1417,14 +1418,14 @@ body.inviting .stbar{display:none}
   </section>
 
   <section class="card">
-    <h2><span class="step">٢</span>العرسان</h2>
+    <h2><span class="step">٢</span><span id="st2">العرسان</span></h2>
     <div class="row">
-      <div><label for="groom">اسم العريس</label><input id="groom" value="يوسف"></div>
-      <div><label for="bride">اسم العروسة</label><input id="bride" value="مريم"></div>
+      <div><label for="groom" id="lGroom">اسم العريس</label><input id="groom" value="يوسف"></div>
+      <div><label for="bride" id="lBride">اسم العروسة</label><input id="bride" value="مريم"></div>
     </div>
-    <label for="mono">حروف الختم بالإنجليزي (اختياري) – زي K&S</label><input id="mono" maxlength="7" placeholder="لو فاضية هتتكتب أول حرف من الأسامي بالعربي" dir="ltr" style="text-align:right">
-    <label for="kind">المناسبة</label>
-    <select id="kind"><option>حفل زفاف</option><option>حفل خطوبة</option><option>عقد قران</option><option>حفل حنة</option></select>
+    <label for="mono" class="wedOnly">حروف الختم بالإنجليزي (اختياري) – زي K&S</label><input id="mono" maxlength="7" placeholder="لو فاضية هتتكتب أول حرف من الأسامي بالعربي" dir="ltr" style="text-align:right">
+    <label for="kind" class="wedOnly">المناسبة</label>
+    <select id="kind" class="wedOnly"><option>حفل زفاف</option><option>حفل خطوبة</option><option>عقد قران</option><option>حفل حنة</option><option>عيد ميلاد</option></select>
     <label for="intro">كلمة الدعوة</label>
     <textarea id="intro">يتشرف أهل العروسين بدعوتكم لمشاركتهم فرحتهم
 وجودكم يكمّل فرحتنا</textarea>
@@ -1436,7 +1437,7 @@ body.inviting .stbar{display:none}
       <div><label for="date">التاريخ</label><input id="date" type="date"></div>
       <div><label for="time">الساعة</label><input id="time" type="time" value="19:00"></div>
     </div>
-    <label for="venue">اسم القاعة / المكان</label><input id="venue" value="قاعة الياسمين">
+    <label for="venue" id="lVenue">اسم القاعة / المكان</label><input id="venue" value="قاعة الياسمين">
     <label for="addr">العنوان</label><input id="addr" value="التجمع الخامس، القاهرة">
     <label for="map">لينك جوجل ماب (اختياري)</label><input id="map" type="url" placeholder="https://maps.app.goo.gl/...">
     <label for="wa">رقم واتساب لتأكيد الحضور (اختياري)</label><input id="wa" type="tel" inputmode="tel" placeholder="201xxxxxxxxx">
@@ -1444,15 +1445,15 @@ body.inviting .stbar{display:none}
 
   <section class="card">
     <h2><span class="step">٤</span>تفاصيل إضافية <small style="color:#8a6b6f;font-weight:400">(اختياري)</small></h2>
-    <label for="poem">شعر الافتتاح (لتيمبلت «قصر الورد») – كل سطر لوحده</label>
+    <label for="poem" class="wedOnly">شعر الافتتاح (لتيمبلت «قصر الورد») – كل سطر لوحده</label>
     <textarea id="poem" rows="4" placeholder="لعلها دعوة صعدت إلى السماء&#10;فأجابها الله بلقاء لم يكن صدفة&#10;ولعلها أرواح كتب لها أن تلتقي&#10;لتكمل معًا ما تبقى من العمر"></textarea>
-    <label for="closing">كلمة الختام (لتيمبلت «قصر الورد»)</label>
+    <label for="closing" class="wedOnly">كلمة الختام (لتيمبلت «قصر الورد»)</label>
     <textarea id="closing" rows="2" placeholder="فكونوا بالقرب، لتشهدوا معنا بداية فصلنا الأجمل،&#10;وتكتمل بوجودكم فرحة العمر."></textarea>
     <label for="program">برنامج الحفل – كل فقرة في سطر</label>
     <textarea id="program" placeholder="7:00 م - استقبال الضيوف&#10;8:00 م - دخول العروسين&#10;10:00 م - العشاء"></textarea>
-    <label>الدريس كود – اختاري الألوان المقترحة</label>
-    <div class="pals" id="dressPick"></div>
-    <label for="dressNote">ملاحظة للبس (اختياري)</label><input id="dressNote" placeholder="ألوان هادية وباستيل">
+    <label class="wedOnly">الدريس كود – اختاري الألوان المقترحة</label>
+    <div class="pals wedOnly" id="dressPick"></div>
+    <label for="dressNote" id="lDress">ملاحظة للبس (اختياري)</label><input id="dressNote" placeholder="ألوان هادية وباستيل">
     <label for="gift">ملاحظة عن الهدايا (اختياري)</label><input id="gift" placeholder="وجودكم هو أجمل هدية">
     <label for="notes">ملاحظات للضيوف</label>
     <textarea id="notes" placeholder="الدعوة خاصة بالأسماء المذكورة فقط"></textarea>
@@ -1470,13 +1471,13 @@ body.inviting .stbar{display:none}
     <label for="dressEn">Dress code (English, optional)</label><input id="dressEn" dir="ltr" placeholder="Please wear something white or brown">
   </section>
   <section class="card" id="babBox" hidden>
-    <h2><span class="step">✦</span>صوركم وقصتكم <small style="color:#8a6b6f;font-weight:400">(للتصميمات الفاخرة الجديدة)</small></h2>
-    <label>الصورة الرئيسية (بتظهر أول ما الباب يتفتح)</label>
+    <h2><span class="step">✦</span><span id="stPh">صوركم وقصتكم</span> <small style="color:#8a6b6f;font-weight:400">(للتصميمات الفاخرة الجديدة)</small></h2>
+    <label id="lHero">الصورة الرئيسية (بتظهر أول ما الباب يتفتح)</label>
     <label class="phup" id="bHeroLbl"><input type="file" id="bHeroIn" accept="image/*" hidden><span id="bHeroTxt">📷 اختاري صورة لكم</span><img id="bHeroPrev" alt="" hidden></label>
-    <label>ألبوم صوركم (لحد ٤ صور)</label>
+    <label id="lAlb">ألبوم صوركم (لحد ٤ صور)</label>
     <label class="phup"><input type="file" id="bAlbIn" accept="image/*" multiple hidden><span id="bAlbTxt">🖼️ اختاري الصور</span></label>
     <div class="phgrid" id="bAlbPrev"></div>
-    <label for="story">قصتكم (كلمتين عنكم)</label>
+    <label for="story" class="wedOnly">قصتكم (كلمتين عنكم)</label>
     <textarea id="story" rows="4" placeholder="كل حكاية حب ليها بداية، وحكايتنا بدأت بصدفة جميلة..."></textarea>
     <div class="row">
       <div><label for="pBride">أهل العروسة</label><input id="pBride" placeholder="الأستاذ أحمد والسيدة منى"></div>
@@ -2370,7 +2371,9 @@ const SIG={bbl:{dir:"burgundy-bloom",name:"Burgundy Bloom",th:"home-t-bloom.webp
   azl:{dir:"azure-lake",name:"Azure Lake",th:"home-t-azure.webp"},
   gdc:{dir:"golden-calla",name:"Golden Calla",th:"home-t-calla.webp"},
   sga:{dir:"sage-arch",name:"Sage Arch",th:"home-t-arch.webp"},
-  bsw:{dir:"blush-swan",name:"Blush Swan",th:"home-t-swan.webp"}};
+  bsw:{dir:"blush-swan",name:"Blush Swan",th:"home-t-swan.webp"},
+  bdy:{dir:"birthday-balloons",name:"Balloon Party",th:"bday/t-balloons.webp"},
+  bdn:{dir:"birthday-gold",name:"Golden Night",th:"bday/t-gold.webp"}};
 const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a20","#c9a463","#8a6b6f")],
   ilr:[P("#f3ead9","#efe4d0","#d9c9ad","#f7f0e2","#fffaf2","#5a4a35","#c9a463","#8a7a62"),P("#e9eee3","#a9b996","#7f9172","#cfd9c4","#fafcf7","#3d4a34","#c9a463","#7d8a72"),P("#e7eef5","#a9c2da","#7f9bb8","#cfdcea","#f8fbfe","#2f4258","#c9a463","#7a8798"),P("#f6e7e6","#e3b9b6","#c99592","#f0d4d2","#fffafa","#5a3a38","#c9a463","#9a7a78")],
   pls:[P("#f3e3d2","#efe0cc","#d8c2a2","#f7ecdf","#fffaf2","#6f5232","#c49a58","#8f714c")],
@@ -2384,7 +2387,11 @@ const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a2
   azl:[P("#faf8f4","#a9c6dc","#56799a","#d7e6f1","#fffdf9","#3f4852","#c9a463","#8b9097")],
   gdc:[P("#f3eadc","#b08a4a","#8c6a32","#d6bd8a","#fffaf2","#5c4a36","#b08a4a","#8f7d66")],
   sga:[P("#f4eee3","#8a9a74","#55684a","#c9d3b8","#fbf7ef","#3f4a36","#c9a463","#7d8577")],
-  bsw:[P("#f8ece9","#e2aab0","#9b5a65","#f0d2d5","#fffaf8","#5c3f44","#c9a463","#9a8285")]};
+  bsw:[P("#f8ece9","#e2aab0","#9b5a65","#f0d2d5","#fffaf8","#5c3f44","#c9a463","#9a8285")],
+  bdy:[P("#fff6ef","#f6a5b8","#e0607e","#a8dcc8","#fffaf8","#5a3a63","#f3d36b","#86708c")],
+  bdn:[P("#0f0c16","#211a2c","#0b0910","#e9c977","#f6e2a2","#efe6d2","#e9c977","#b9ad95")]};
+/* birthday invitations (their own price and form wording) */
+const BD_TPL=["bdy","bdn"];const isBd=k=>BD_TPL.includes(k);
 Object.keys(SIG).forEach(k=>TPL[k]={name:SIG[k].name,opener:"ext",pals:SIG_PALS[k]});
 const SIG_ALBUM=["bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc","sga","bsw"];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
@@ -2442,8 +2449,8 @@ function thumb(k){
   }[k];
   return `<svg class="thumb" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice">${art}</svg>`;
 }
-["bsw","sga","gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k))).forEach(k=>{
-  const b=document.createElement("button");b.className="tpl";b.dataset.k=k;
+["bsw","sga","gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k)),BD_TPL).forEach(k=>{
+  const b=document.createElement("button");b.className="tpl"+(isBd(k)?" bdt":"");b.dataset.k=k;
   b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`+(CFG.premium.includes(k)?`<span class="prem">فاخر ✦</span>`:"");
   b.onclick=()=>{const was=!!SIG[state.tpl];state.tpl=k;state.pal=0;if(SIG[k]&&!was)state.music="design";if(!SIG[k]&&state.music==="design")state.music="box";drawBuilder();save();};
   $("tpls").appendChild(b);
@@ -2461,6 +2468,24 @@ $("audioFile").onchange=e=>{
   if(customUrl)URL.revokeObjectURL(customUrl);
   customUrl=URL.createObjectURL(f);customFile=f;edit.songUrl=null;$("upName").textContent="✔ "+f.name;
 };
+let bdMode=null;
+function applyMode(){const on=isBd(state.tpl);document.querySelectorAll(".tpl").forEach(b=>b.hidden=on!==b.classList.contains("bdt"));
+  document.querySelectorAll(".trk").forEach(d=>{if(["zaffa","zaffa2","bridal","entrance","waltz","orient","oudsolo","ney"].includes(d.dataset.k))d.hidden=on});
+  if(on&&["zaffa","zaffa2","bridal","entrance","waltz","orient","oudsolo","ney"].includes(state.music))state.music="design";
+  if(on===bdMode)return;bdMode=on;document.body.classList.toggle("bdmode",on);
+  const T=(id,a,b)=>{const e=$(id);if(e)e.textContent=on?a:b};
+  T("hdSub","دعوة عيد ميلاد تفاعلية بلينك واحد، تتبعت لكل الضيوف","كارت فرح تفاعلي بلينك واحد، يتبعت لكل الضيوف");
+  T("st2","صاحب عيد الميلاد","العرسان");T("lGroom","الاسم","اسم العريس");T("lBride","هيكمّل كام سنة؟ (اختياري)","اسم العروسة");
+  T("lVenue","مكان الحفلة","اسم القاعة / المكان");T("lDress","ملاحظة للبس أو الثيم (اختياري)","ملاحظة للبس (اختياري)");T("stPh","صور صاحب عيد الميلاد","صوركم وقصتكم");T("lHero","الصورة الرئيسية (بتظهر في أول الدعوة)","الصورة الرئيسية (بتظهر أول ما الباب يتفتح)");T("lAlb","صور حلوة (لحد ٤ صور)","ألبوم صوركم (لحد ٤ صور)");
+  document.querySelectorAll(".wedOnly").forEach(e=>e.hidden=on);
+  ["mono","poem","closing","story"].forEach(id=>{$(id).hidden=on});const pr=$("pBride")&&$("pBride").closest(".row");if(pr)pr.hidden=on;
+  $("bride").placeholder=on?"مثلًا ٥":"";$("bride").inputMode=on?"numeric":"text";
+  $("program").placeholder=on?"5:00 م - استقبال الضيوف\n6:30 م - قطع التورتة\n7:00 م - فتح الهدايا":"7:00 م - استقبال الضيوف\n8:00 م - دخول العروسين\n10:00 م - العشاء";
+  if(on){$("kind").value="عيد ميلاد";
+    if($("groom").value==="يوسف"&&$("bride").value==="مريم"){$("groom").value="ليلى";$("bride").value="٥"}
+    if(/العروسين|عروس/.test($("intro").value)||!$("intro").value.trim())$("intro").value="وجودكم هو أحلى هدية 🎁\nمستنيينكم نحتفل سوا";
+    if($("venue").value==="قاعة الياسمين")$("venue").value="";}
+  else if($("kind").value==="عيد ميلاد"){$("kind").value="حفل زفاف"}}
 function drawBuilder(){
   document.querySelectorAll(".tpl").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===state.tpl));
   const pals=$("pals");pals.innerHTML="";
@@ -2469,7 +2494,7 @@ function drawBuilder(){
     s.setAttribute("aria-label","لون "+(i+1));s.onclick=()=>{state.pal=i;drawBuilder();save();};pals.appendChild(s);});
   document.querySelectorAll(".trk").forEach(d=>{d.setAttribute("aria-pressed",d.dataset.k===state.music);
     const pb=d.querySelector(".play");if(pb)pb.textContent=Music.playing===d.dataset.k?"■":"▶";});
-  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl);$("iltExtra").hidden=state.tpl!=="ilt";$("tsnExtra").hidden=state.tpl!=="tsn";$("azlExtra").hidden=state.tpl!=="azl";$("sgaExtra").hidden=state.tpl!=="sga";$("ivyBox").hidden=!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
+  $("uploadBox").classList.toggle("show",state.music==="custom");$("babBox").hidden=!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM,BD_TPL).includes(state.tpl);$("iltExtra").hidden=state.tpl!=="ilt";$("tsnExtra").hidden=state.tpl!=="tsn";$("azlExtra").hidden=state.tpl!=="azl";$("sgaExtra").hidden=state.tpl!=="sga";$("ivyBox").hidden=isBd(state.tpl)||!["ivy","swn","olv","gld","lav","brd"].concat(Object.keys(SIG)).includes(state.tpl);applyMode();document.querySelectorAll('.trk[data-k="design"]').forEach(d=>d.hidden=!SIG[state.tpl]);
   const dp=$("dressPick");dp.innerHTML="";state.dress=state.dress||[];
   DRESS.forEach(c=>{const b=document.createElement("button");b.className="sw";b.style.background=c;b.setAttribute("aria-pressed",state.dress.includes(c));b.setAttribute("aria-label","لون");
     b.onclick=()=>{const i=state.dress.indexOf(c);if(i>=0)state.dress.splice(i,1);else state.dress.push(c);drawBuilder();save();};dp.appendChild(b);});
@@ -2818,7 +2843,7 @@ $("bAlbIn").onchange=async e=>{const fs=[...e.target.files].slice(0,4-PH.album.l
 async function uploadPhotos(slug){
   const up=async(u,i)=>{if(!u||/^http/.test(u))return u;const b=await (await fetch(u)).blob();const path=`${slug}/${Date.now()}-${i}.jpg`;
     const r=await SB.storage.from("photos").upload(path,b,{contentType:"image/jpeg",upsert:false});if(r.error)throw new Error("photo");return SB.storage.from("photos").getPublicUrl(path).data.publicUrl;};
-  if(!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM).includes(state.tpl))return;
+  if(!["bab","fyk","ivy","swn","olv","gld","lav","brd"].concat(SIG_ALBUM,BD_TPL).includes(state.tpl))return;
   PH.hero=await up(PH.hero,0);for(let i=0;i<PH.album.length;i++)PH.album[i]=await up(PH.album[i],i+1);}
 function babGarland(el){let s="";
   const cr=(x,y,r)=>gRose(x,y,r,"#efe6d4","#fbf7ef"),bl=(x,y,r)=>gFlower(x,y,r,"#fffdf8");
@@ -3375,7 +3400,7 @@ function setMode(code){useCode=code;$("orderBox").hidden=code;$("codeBox").hidde
 $("haveCode").onclick=()=>setMode(true);$("noCode").onclick=()=>setMode(false);
 /* outside Egypt: the abroad price (charged in EGP) */
 if(window.FG&&FG.abroad){CFG.price=FG.label("basic");CFG.pricePremium=FG.label("premium");}
-function priceOf(o){return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
+function priceOf(o){if(isBd(o.tpl))return window.FG&&FG.abroad?FG.label("birthday"):"١٤٩ جنيه";return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
 $("linkBtn").onclick=()=>{const o=collect();
   if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
   px("InitiateCheckout",{value:parseInt((priceOf(o)||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)))||0,currency:"EGP"});
@@ -3580,7 +3605,8 @@ if(!data&&sm){
     catch(e){ld.innerHTML="💌<div>الدعوة دي مش موجودة</div><small>اتأكد من اللينك أو كلّم صاحب الدعوة</small>";}})();
 }
 else if(data){showInvite(data,false);}
-else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}const tm=location.hash.match(/[#&]t=([a-z]+)/);if(tm&&TPL[tm[1]]){state.tpl=tm[1];state.pal=0;if(SIG[tm[1]])state.music="design";}if(HIDDEN_TPL.includes(state.tpl)){state.tpl="brd";state.pal=0;}drawBuilder();
+else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}const tm=location.hash.match(/[#&]t=([a-z]+)/);if(tm&&TPL[tm[1]]){state.tpl=tm[1];state.pal=0;if(SIG[tm[1]])state.music="design";}
+  if(/[#&]bd\b/.test(location.hash)&&!isBd(state.tpl)){state.tpl="bdy";state.pal=0;state.music="design";}if(HIDDEN_TPL.includes(state.tpl)){state.tpl="brd";state.pal=0;}drawBuilder();
   const em=location.hash.match(/[#&]e=([A-Za-z0-9]+)/);
   if(em){$("editCodeIn").value=em[1].toUpperCase();openM("editMdl");loadCode(em[1]);}}
 window.__test={showInvite,collect,state};

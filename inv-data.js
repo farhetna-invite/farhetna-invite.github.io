@@ -36,6 +36,10 @@ window.farhetnaData=function(key){
   var base={groom:o.groom||"",bride:o.bride||"",date:o.date||"",time:o.time||"19:00",venue:o.venue||"",addr:o.addr||"",
     city:lastPart(o.addr),map:o.map||"",wa:(o.wa||"").replace(/\D/g,""),album:album,program:prog};
   var mu=music(o);if(mu)base.music=mu;
+  if(key==="bdy"||key==="bdn"){ /* birthday designs: groom = the birthday person's name, bride = the age */
+    var bh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
+    return{name:o.groom||"",age:o.bride||"",intro:o.intro||"",date:o.date||"",time:o.time||"17:00",venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
+      program:prog,dress:o.dressNote||"",gift:o.gift||"",notes:o.notes||"",hero:bh,photos:album,music:mu||"",slug:String(o._slug||"").toLowerCase()};}
   if(key==="bbl"||key==="bgd"){
     base.lang=hasEn?"en":"ar";if(hasEn){base.groom=o.groomEn;base.bride=o.brideEn;if(o.venueEn)base.venue=o.venueEn;}
     if(key==="bbl")base.look={env:"burgundy",seal:"orig"};

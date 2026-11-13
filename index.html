@@ -751,7 +751,15 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 .drawer nav.svcnav a span{flex:1;line-height:1.35}
 .drawer nav.svcnav a b{display:block;font-weight:600;font-size:1.15rem}
 .drawer nav.svcnav a small{display:block;letter-spacing:0;text-align:right;direction:inherit;font-size:.8rem;color:var(--sage);font-family:inherit}
-.drawer nav.svcnav a:nth-child(3) i{background:rgba(114,90,128,.14)}
+.drawer nav.svcnav a:nth-child(4) i{background:rgba(114,90,128,.14)}
+.drawer nav.svcnav .grp{display:flex;align-items:center;gap:14px;min-height:62px;color:var(--olive)}
+.drawer nav.svcnav .grp i{font-style:normal;flex:0 0 44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.25rem;background:rgba(85,104,74,.08)}
+.drawer nav.svcnav .grp span{flex:1;line-height:1.35}.drawer nav.svcnav .grp b{display:block;font-weight:600;font-size:1.15rem}
+.drawer nav.svcnav .grp small{display:block;letter-spacing:0;font-size:.8rem;color:var(--sage)}
+.drawer nav.svcnav .sub{display:flex;flex-direction:column;padding-inline-start:58px;border-bottom:1px solid rgba(85,104,74,.18);padding-bottom:6px}
+.drawer nav.svcnav .sub a{min-height:46px;font-size:1.05rem;border-bottom:0;gap:8px;justify-content:flex-start}
+.drawer nav.svcnav .sub a::after{margin-inline-start:auto}
+.drawer nav.svcnav .sub em{font-style:normal;font-size:.7rem;font-weight:700;color:#fff;background:#e0607e;padding:1px 8px;border-radius:99px}
 .drawer nav.subnav{margin-top:18px;border-top:0;display:flex;flex-wrap:wrap;gap:6px 16px}
 .drawer nav.subnav a{min-height:36px;border-bottom:0;font-size:.98rem;color:var(--sage);text-decoration:underline;text-underline-offset:4px;animation:none}
 .drawer nav.subnav a::after{content:none}
@@ -1255,7 +1263,8 @@ html:not(.js) .why .feat{opacity:1;transform:none}
   <div class="dl">فرحتنا</div><small>FARHETNA</small>
   <div class="dsec">خدماتنا</div>
   <nav class="svcnav">
-    <a href="#designs"><i>💌</i><span><b>دعوات الفرح</b><small>Wedding Invitations</small></span></a>
+    <div class="grp"><i>💌</i><span><b>الدعوات</b><small>Invitations</small></span></div>
+    <div class="sub"><a href="#designs">💍 دعوات أفراح</a><a href="/birthday/">🎂 أعياد ميلاد <em>جديد</em></a></div>
     <a href="/memories/"><i>📸</i><span><b>ألبوم الذكريات</b><small>Guest Memories</small></span></a>
     <a href="/magazine/"><i>🎁</i><span><b>The Surprise</b><small>مجلة هدية رقمية</small></span></a>
   </nav>
