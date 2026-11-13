@@ -2519,7 +2519,7 @@ function applyMode(){const g=isBd(state.tpl)?"bd":isSb(state.tpl)?"sb":isRb(stat
   document.querySelectorAll(".wedOnly").forEach(e=>e.hidden=on);
   ["mono","poem","closing"].forEach(id=>{$(id).hidden=on});$("story").hidden=on&&g!=="rb";const sl=document.querySelector('label[for="story"]');if(sl){sl.hidden=on&&g!=="rb";sl.classList.toggle("wedOnly",g!=="rb");sl.textContent=g==="rb"?"كلمة من القلب ليها / ليه (اختياري)":"قصتكم (كلمتين عنكم)"}
   const pr=$("pBride")&&$("pBride").closest(".row");if(pr)pr.hidden=on&&g!=="rb";const pgw=$("pGroom")&&$("pGroom").parentElement;if(pgw)pgw.hidden=g==="rb";const pbl=document.querySelector('label[for="pBride"]');if(pbl)pbl.textContent=g==="rb"?"التوقيع – من مين؟ (زي: ولادك كريم وسلمى)":"أهل العروسة";
-  $("surpWrap").hidden=g!=="rb";$("ilWrap").hidden=!(g==="bd"||g==="sb");
+  $("surpWrap").hidden=g!=="rb";$("ilWrap").hidden=!(g==="bd"||g==="sb"||g==="rb");
   $("bride").placeholder=X.bph;$("bride").inputMode=(g==="bd"||g==="rb")?"numeric":"text";$("program").placeholder=X.prog;
   if(on){$("kind").value=X.kind;
     const defs=[["يوسف","مريم"],["ليلى","٥"],["وتين","بنت أحمد ومنى"],["هند","٤٥"]];if(defs.some(d=>$("groom").value===d[0]&&$("bride").value===d[1])){$("groom").value=X.n1;$("bride").value=X.n2}
