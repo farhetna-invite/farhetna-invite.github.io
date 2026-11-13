@@ -7,7 +7,7 @@
 (function(){
   var PRICES={            // EGP: [Egypt, abroad]
     basic:[250,599], premium:[350,749], custom:[450,999],
-    album:[399,799], albumAddon:[249,499], magazine:[299,599], birthday:[149,349], milestone:[249,599]
+    album:[399,799], albumAddon:[249,499], magazine:[299,599], birthday:[149,349], milestone:[249,599], sebouStory:[199,449]
   };
   var RATES_DATE="2026-11";
   var CUR={ // code: [EGP per unit, Arabic name, allows half units]

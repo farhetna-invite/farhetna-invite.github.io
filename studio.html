@@ -2395,6 +2395,8 @@ const SIG={bbl:{dir:"burgundy-bloom",name:"Burgundy Bloom",th:"home-t-bloom.webp
   bdy:{dir:"birthday-balloons",name:"Balloon Party",th:"bday/t-balloons.webp"},
   bdn:{dir:"birthday-gold",name:"Golden Night",th:"bday/t-gold.webp"},
   sbg:{dir:"sebou-girl",name:"Little Bloom 🎀",th:"sebou/t-girl.webp"},
+  ssg:{dir:"sebou-story-girl",name:"Sweet Story 🦋",th:"sebou/t-story-girl.webp"},
+  ssb:{dir:"sebou-story-boy",name:"Sky Story 💙",th:"sebou/t-story-boy.webp"},
   sbb:{dir:"sebou-boy",name:"Little Sky 💙",th:"sebou/t-boy.webp"},
   rbw:{dir:"rabee-her",name:"Golden Spring 🌿",th:"rabee/t-her.webp"},
   rbm:{dir:"rabee-him",name:"Golden Prime ✨",th:"rabee/t-him.webp"}};
@@ -2416,12 +2418,14 @@ const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a2
   bdy:[P("#fff6ef","#f6a5b8","#e0607e","#a8dcc8","#fffaf8","#5a3a63","#f3d36b","#86708c")],
   bdn:[P("#0f0c16","#211a2c","#0b0910","#e9c977","#f6e2a2","#efe6d2","#e9c977","#b9ad95")],
   sbg:[P("#fdf5f4","#efb2c1","#c4607a","#fbe6ea","#fffafa","#5a3a45","#e294a8","#8f6f78")],
+  ssb:[P("#f4f9fd","#b7d3ef","#3f6f9f","#e7f0f9","#fbfdff","#2f4256","#7fa9d6","#6b7f93")],
+  ssg:[P("#fdf5f4","#f7b6c8","#b8556f","#fbe6ea","#fffafa","#4a3038","#e98fa8","#8f6f78")],
   sbb:[P("#f4f9fd","#a8c8e8","#4a7aab","#e7f0f9","#fbfdff","#33465a","#86b0da","#6b7f93")],
   rbw:[P("#f5f3ea","#a9b996","#6f8a62","#e4e9dc","#fffdf7","#3b4535","#b8904a","#7a8370")],
   rbm:[P("#f2f4f8","#22365c","#1d2c48","#dae0eb","#fbfcff","#23314a","#b8904a","#6a778e")]};
 /* birthday invitations (their own price and form wording) */
 const BD_TPL=["bdy","bdn"];const isBd=k=>BD_TPL.includes(k);
-const SB_TPL=["sbg","sbb"];const isSb=k=>SB_TPL.includes(k);const RB_TPL=["rbw","rbm"];const isRb=k=>RB_TPL.includes(k);const KID_TPL=BD_TPL.concat(SB_TPL,RB_TPL);const isKid=k=>KID_TPL.includes(k);
+const SB_TPL=["sbg","sbb","ssg","ssb"];const isSb=k=>SB_TPL.includes(k);const RB_TPL=["rbw","rbm"];const isRb=k=>RB_TPL.includes(k);const KID_TPL=BD_TPL.concat(SB_TPL,RB_TPL);const isKid=k=>KID_TPL.includes(k);
 Object.keys(SIG).forEach(k=>TPL[k]={name:SIG[k].name,opener:"ext",pals:SIG_PALS[k]});
 const SIG_ALBUM=["olg","bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc","sga","bsw"];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
@@ -3441,7 +3445,7 @@ function setMode(code){useCode=code;$("orderBox").hidden=code;$("codeBox").hidde
 $("haveCode").onclick=()=>setMode(true);$("noCode").onclick=()=>setMode(false);
 /* outside Egypt: the abroad price (charged in EGP) */
 if(window.FG&&FG.abroad){CFG.price=FG.label("basic");CFG.pricePremium=FG.label("premium");}
-function priceOf(o){if(isRb(o.tpl))return window.FG&&FG.abroad?FG.label("milestone"):"٢٤٩ جنيه";if(isKid(o.tpl))return window.FG&&FG.abroad?FG.label("birthday"):"١٤٩ جنيه";return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
+function priceOf(o){if(o.tpl==="ssg"||o.tpl==="ssb")return window.FG&&FG.abroad?FG.label("sebouStory"):"١٩٩ جنيه";if(isRb(o.tpl))return window.FG&&FG.abroad?FG.label("milestone"):"٢٤٩ جنيه";if(isKid(o.tpl))return window.FG&&FG.abroad?FG.label("birthday"):"١٤٩ جنيه";return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
 $("linkBtn").onclick=()=>{const o=collect();
   if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
   px("InitiateCheckout",{value:parseInt((priceOf(o)||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)))||0,currency:"EGP"});
@@ -3649,7 +3653,7 @@ else if(data){showInvite(data,false);}
 else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(s);}catch(e){}const tm=location.hash.match(/[#&]t=([a-z]+)/);if(tm&&TPL[tm[1]]){state.tpl=tm[1];state.pal=0;if(SIG[tm[1]])state.music="design";}
   if(/[#&]bd\b/.test(location.hash)&&!isBd(state.tpl)){state.tpl="bdy";state.pal=0;state.music="design";}
   if(/[#&]rb\b/.test(location.hash)){const w=/[#&]rb=him/.test(location.hash)?"rbm":/[#&]rb=her/.test(location.hash)?"rbw":(isRb(state.tpl)?state.tpl:"rbw");if(w!==state.tpl){state.tpl=w;state.pal=0;state.music="design";}}
-  if(/[#&]sb\b/.test(location.hash)){const w=/[#&]sb=boy/.test(location.hash)?"sbb":/[#&]sb=girl/.test(location.hash)?"sbg":(isSb(state.tpl)?state.tpl:"sbg");if(w!==state.tpl){state.tpl=w;state.pal=0;state.music="design";}}if(HIDDEN_TPL.includes(state.tpl)){state.tpl="brd";state.pal=0;}drawBuilder();
+  if(/[#&]sb\b/.test(location.hash)){const w=/[#&]sb=boy/.test(location.hash)?"sbb":/[#&]sb=girl/.test(location.hash)?"sbg":/[#&]sb=story/.test(location.hash)?"ssg":(isSb(state.tpl)?state.tpl:"sbg");if(w!==state.tpl){state.tpl=w;state.pal=0;state.music="design";}}if(HIDDEN_TPL.includes(state.tpl)){state.tpl="brd";state.pal=0;}drawBuilder();
   const em=location.hash.match(/[#&]e=([A-Za-z0-9]+)/);
   if(em){$("editCodeIn").value=em[1].toUpperCase();openM("editMdl");loadCode(em[1]);}}
 window.__test={showInvite,collect,state};

@@ -44,9 +44,9 @@ window.farhetnaData=function(key){
   if(key==="rbw"||key==="rbm"){ /* milestone birthday: groom = name, bride = age, story = love note, pBride = signature */
     return{name:o.groom||"",age:o.bride||"",story:o.story||"",intro:o.intro||"",from:o.pBride||"",date:o.date||"",time:o.time||"20:00",venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
       program:prog,dress:o.dressNote||"",notes:o.notes||"",photos:album,surprise:!!o.surprise,music:mu||"",slug:String(o._slug||"").toLowerCase(),lang:o.invLang==="en"?"en":"ar"};}
-  if(key==="bdy"||key==="bdn"||key==="sbg"||key==="sbb"){ /* birthday: groom = name, bride = age · baby welcome (sbg/sbb): groom = baby name, bride = parents line */
+  if(key==="bdy"||key==="bdn"||key==="sbg"||key==="sbb"||key==="ssg"||key==="ssb"){ /* birthday: groom = name, bride = age · baby welcome (sbg/sbb): groom = baby name, bride = parents line */
     var bh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
-    var sb=key==="sbg"||key==="sbb";
+    var sb=key==="sbg"||key==="sbb"||key==="ssg"||key==="ssb";
     return{name:o.groom||"",age:sb?"":(o.bride||""),parents:sb?(o.bride||""):"",intro:o.intro||"",date:o.date||"",time:o.time||"17:00",venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
       program:prog,dress:o.dressNote||"",gift:o.gift||"",notes:o.notes||"",hero:bh,photos:album,music:mu||"",slug:String(o._slug||"").toLowerCase(),lang:o.invLang==="en"?"en":"ar"};}
   if(key==="bbl"||key==="bgd"){

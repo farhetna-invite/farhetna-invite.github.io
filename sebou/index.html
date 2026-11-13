@@ -88,6 +88,8 @@ footer a{color:var(--olive);font-weight:600;text-decoration:none}
   <div class="designs">
     <a class="d" href="../sebou-girl/"><img src="t-girl.webp" alt="تصميم Little Bloom"><b>Little Bloom 🎀</b><span>للبنوتة: ورد بينك وبرواز بشريطة</span><em class="sbp">١٤٩ <small>جنيه</small></em><i>جربيه ←</i></a>
     <a class="d" href="../sebou-boy/"><img src="t-boy.webp" alt="تصميم Little Sky"><b>Little Sky 💙</b><span>للولد: ورد لبني وبرواز بشريطة</span><em class="sbp">١٤٩ <small>جنيه</small></em><i>جربيه ←</i></a>
+    <a class="d" href="../sebou-story-girl/"><img src="t-story-girl.webp" alt="تصميم Sweet Story"><b>Sweet Story 🦋</b><span>للبنوتة: حكاية مشهد مشهد بالفراشات</span><em class="ssp">١٩٩ <small>جنيه</small></em><i>جربيه ←</i></a>
+    <a class="d" href="../sebou-story-boy/"><img src="t-story-boy.webp" alt="تصميم Sky Story"><b>Sky Story 💙</b><span>للولد: حكاية مشهد مشهد بالفراشات</span><em class="ssp">١٩٩ <small>جنيه</small></em><i>جربيه ←</i></a>
   </div>
 
   <h2>كل اللي في الدعوة</h2>
@@ -122,7 +124,7 @@ footer a{color:var(--olive);font-weight:600;text-decoration:none}
 <script src="../geo.js"></script>
 <script>
 (function(){var G=window.FG;if(!G)return;
-  if(G.abroad)document.querySelectorAll(".sbp").forEach(function(e){e.textContent=G.label("birthday")})
+  if(G.abroad){document.querySelectorAll(".sbp").forEach(function(e){e.textContent=G.label("birthday")});document.querySelectorAll(".ssp").forEach(function(e){e.textContent=G.label("sebouStory")})}
   G.switcher(document.querySelector(".hero .cta"));
 })();
 </script>
