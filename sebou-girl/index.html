@@ -100,10 +100,14 @@ main{z-index:1}
 window.BDAY_ICONS=["🍼","🎀","🧸","✨"];
 var g=document.getElementById("gate"),stage=0;
 /* first tap: the frame swings away and the card with the seal comes down; the second tap (the seal) opens the invitation */
-g.addEventListener("click",function(e){if(stage===0){stage=1;e.stopImmediatePropagation();g.classList.add("s1");document.getElementById("gHint").textContent="افتحوا الختم 👣";}
+g.addEventListener("click",function(e){if(stage===0){stage=1;e.stopImmediatePropagation();g.classList.add("s1");document.getElementById("gHint").textContent=document.documentElement.lang==="en"?"Open the seal 👣":"افتحوا الختم 👣";}
   else if(stage===1&&!(e.target.closest&&e.target.closest(".card2"))){e.stopImmediatePropagation()}},true);
 var D=BDAY.start({key:"sbg",colors:["#f6b8c6","#fcd5dd","#ffffff","#e98fa5","#f9e3b0","#d9ecdf"],event:"سبوع",icon:"🎀",kicker:"أهلًا بأحلى ضيفة نوّرت دنيتنا",cdKicker:"باقي على يوم السبوع",msgPh:"ربنا يخليه/يخليها ليكم 🤍",sorry:"ربنا يخليها ليكم 🤍",
   music:"../music-box.mp3",back:"../sebou/",
+  en:{event:"Sebou",kicker:"Welcome to the sweetest little guest who lit up our world",cdKicker:"Counting down to the Sebou",msgPh:"May God bless her for you 🤍",sorry:"May God bless her for you 🤍",
+    demo:{name:"Watin",parents:"Daughter of Ahmed & Mona",date:"2027-03-06",time:"18:00",venue:"The family home",addr:"Maadi, Cairo",map:"",wa:"",
+    intro:"She came to light up the world 🎀\nand we'd love to celebrate her Sebou with our dearest people",program:[["18:00","Guests arrive"],["18:30","Mortar & sieve ritual"],["19:00","Candle procession"],["19:30","Sweets"]],
+    dress:"",gift:"",notes:"",photos:[],hero:"../sebou/baby-girl.webp",music:""}},
   demo:{name:"وتين",parents:"بنت أحمد ومنى",date:"2027-03-06",time:"18:00",venue:"بيت العيلة",addr:"المعادي، القاهرة",map:"",wa:"",
     intro:"جت الدنيا تنوّرها 🎀\nوعايزين نحتفل بيها مع أغلى الناس في سبوعها",program:[["18:00","استقبال الضيوف"],["18:30","دق الهون والغربال"],["19:00","زفة الشموع"],["19:30","توزيع الحلويات"]],
     dress:"",gift:"",notes:"",photos:[],hero:"../sebou/baby-girl.webp",music:""},

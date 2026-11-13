@@ -48,7 +48,7 @@ window.farhetnaData=function(key){
     var bh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
     var sb=key==="sbg"||key==="sbb";
     return{name:o.groom||"",age:sb?"":(o.bride||""),parents:sb?(o.bride||""):"",intro:o.intro||"",date:o.date||"",time:o.time||"17:00",venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
-      program:prog,dress:o.dressNote||"",gift:o.gift||"",notes:o.notes||"",hero:bh,photos:album,music:mu||"",slug:String(o._slug||"").toLowerCase()};}
+      program:prog,dress:o.dressNote||"",gift:o.gift||"",notes:o.notes||"",hero:bh,photos:album,music:mu||"",slug:String(o._slug||"").toLowerCase(),lang:o.invLang==="en"?"en":"ar"};}
   if(key==="bbl"||key==="bgd"){
     base.lang=hasEn?"en":"ar";if(hasEn){base.groom=o.groomEn;base.bride=o.brideEn;if(o.venueEn)base.venue=o.venueEn;}
     if(key==="bbl")base.look={env:"burgundy",seal:"orig"};
@@ -182,7 +182,7 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
 })();
 /* Farhetna chrome (demo badge, back button, credit) follows the invitation's own language */
 (function(){
-  var T={"تجربة":"Demo","التصاميم":"Designs","💌 صمّمي دعوتك مع فرحتنا":"💌 Design yours with Farhetna"},R={};
+  var T={"تجربة":"Demo","معاينة":"Preview","التصاميم":"Designs","💌 صمّمي دعوتك مع فرحتنا":"💌 Design yours with Farhetna"},R={};
   for(var k in T)R[T[k]]=k;
   function run(){
     var en=document.documentElement.lang==="en",M=en?T:R;

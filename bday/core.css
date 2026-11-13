@@ -47,7 +47,7 @@ main{position:relative;max-width:520px;margin:0 auto;padding:0 18px 120px}
 .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
 .bt{display:inline-flex;align-items:center;gap:6px;height:44px;padding:0 18px;border-radius:99px;font-size:15px;font-weight:600;text-decoration:none;background:var(--btn);color:var(--btnInk)}
 .bt.gh{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line);color:var(--head)}
-.prog{list-style:none;text-align:right;max-width:340px;margin:0 auto}
+.prog{list-style:none;text-align:start;max-width:340px;margin:0 auto}
 .prog li{display:flex;gap:14px;align-items:center;padding:10px 0;border-bottom:1px dashed var(--line)}
 .prog li:last-child{border:0}
 .prog i{font-style:normal;font-size:24px;width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--cell);flex:none}
@@ -58,7 +58,7 @@ main{position:relative;max-width:520px;margin:0 auto;padding:0 18px 120px}
 .gal img:first-child:nth-last-child(odd){grid-column:1/-1;aspect-ratio:4/3}
 .notes p{font-size:16px;color:var(--sub);margin:4px 0;white-space:pre-line}
 .notes p b{color:var(--head)}
-form{text-align:right}
+form{text-align:start}
 form label{display:block;font-size:14px;color:var(--sub);margin:12px 0 4px}
 form input,form textarea{width:100%;font:inherit;font-size:16px;padding:11px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--field);color:var(--ink);outline:none}
 form textarea{min-height:76px;resize:vertical}

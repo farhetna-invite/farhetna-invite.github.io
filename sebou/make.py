@@ -6,14 +6,14 @@ T = {
       bg1="#fdf5f4", bg2="#f6dde2", ink="#5a3a45", sub="#8f6f78", name="#c4607a", head="#a24f66", card="#fffafa", cell="#fdeef1",
       line="#f2d2da", btn="#c4607a", inner1="#fbe6ea", inner2="#f2c9d2", ribbon="#efb2c1", ribbon2="#e294a8",
       kicker="أهلًا بأحلى ضيفة نوّرت دنيتنا", hello="أهلًا بيكي", welcome="WELCOME BABY GIRL", sorry="ربنا يخليها ليكم 🤍",
-      demo_name="وتين", parents="بنت أحمد ومنى", photo="baby-girl.webp", icon="🎀",
+      demo_name="وتين", en_name="Watin", en_par="Daughter of Ahmed & Mona", he="her", en_intro="She came to light up the world 🎀\\nand we'd love to celebrate her Sebou with our dearest people", parents="بنت أحمد ومنى", photo="baby-girl.webp", icon="🎀",
       intro="جت الدنيا تنوّرها 🎀\nوعايزين نحتفل بيها مع أغلى الناس في سبوعها",
       cols='["#f6b8c6","#fcd5dd","#ffffff","#e98fa5","#f9e3b0","#d9ecdf"]'),
   "boy": dict(dir="sebou-boy", key="sbb", c="blue", title="Little Sky", theme="#eaf2fa",
       bg1="#f4f9fd", bg2="#dbe8f4", ink="#33465a", sub="#6b7f93", name="#4a7aab", head="#3d6893", card="#fbfdff", cell="#ebf3fb",
       line="#cfe0f0", btn="#4f82b6", inner1="#e7f0f9", inner2="#c6dbef", ribbon="#a8c8e8", ribbon2="#86b0da",
       kicker="أهلًا بأحلى ضيف نوّر دنيتنا", hello="أهلًا بيك", welcome="WELCOME BABY BOY", sorry="ربنا يخليه ليكم 🤍",
-      demo_name="يوسف", parents="ابن كريم وسارة", photo="baby-boy.webp", icon="💙",
+      demo_name="يوسف", en_name="Youssef", en_par="Son of Karim & Sara", he="him", en_intro="He came to light up the world 💙\\nand we'd love to celebrate his Sebou with our dearest people", parents="ابن كريم وسارة", photo="baby-boy.webp", icon="💙",
       intro="جه الدنيا ينوّرها 💙\nوعايزين نحتفل بيه مع أغلى الناس في سبوعه",
       cols='["#a8c8e8","#d6e6f5","#ffffff","#7fa9d6","#f9e3b0","#d9ecdf"]'),
 }
@@ -119,10 +119,14 @@ main{{z-index:1}}
 window.BDAY_ICONS=["🍼","🎀","🧸","✨"];
 var g=document.getElementById("gate"),stage=0;
 /* first tap: the frame swings away and the card with the seal comes down; the second tap (the seal) opens the invitation */
-g.addEventListener("click",function(e){{if(stage===0){{stage=1;e.stopImmediatePropagation();g.classList.add("s1");document.getElementById("gHint").textContent="افتحوا الختم 👣";}}
+g.addEventListener("click",function(e){{if(stage===0){{stage=1;e.stopImmediatePropagation();g.classList.add("s1");document.getElementById("gHint").textContent=document.documentElement.lang==="en"?"Open the seal 👣":"افتحوا الختم 👣";}}
   else if(stage===1&&!(e.target.closest&&e.target.closest(".card2"))){{e.stopImmediatePropagation()}}}},true);
 var D=BDAY.start({{key:"{key}",colors:{cols},event:"سبوع",icon:"{icon}",kicker:"{kicker}",cdKicker:"باقي على يوم السبوع",msgPh:"ربنا يخليه/يخليها ليكم 🤍",sorry:"{sorry}",
   music:"../music-box.mp3",back:"../sebou/",
+  en:{{event:"Sebou",kicker:"Welcome to the sweetest little guest who lit up our world",cdKicker:"Counting down to the Sebou",msgPh:"May God bless {he} for you 🤍",sorry:"May God bless {he} for you 🤍",
+    demo:{{name:"{en_name}",parents:"{en_par}",date:"2027-03-06",time:"18:00",venue:"The family home",addr:"Maadi, Cairo",map:"",wa:"",
+    intro:"{en_intro}",program:[["18:00","Guests arrive"],["18:30","Mortar & sieve ritual"],["19:00","Candle procession"],["19:30","Sweets"]],
+    dress:"",gift:"",notes:"",photos:[],hero:"../sebou/{photo}",music:""}}}},
   demo:{{name:"{demo_name}",parents:"{parents}",date:"2027-03-06",time:"18:00",venue:"بيت العيلة",addr:"المعادي، القاهرة",map:"",wa:"",
     intro:"{intro_js}",program:[["18:00","استقبال الضيوف"],["18:30","دق الهون والغربال"],["19:00","زفة الشموع"],["19:30","توزيع الحلويات"]],
     dress:"",gift:"",notes:"",photos:[],hero:"../sebou/{photo}",music:""}},
