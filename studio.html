@@ -2160,7 +2160,7 @@ body.inviting .stbar{display:none}
   <h3>إزاي نساعدك؟ 🤍</h3>
   <p class="hs">دوسي على السؤال وهتلاقي الإجابة</p>
   <details><summary>أدفع إزاي؟</summary><p>لما تخلصي بيانات دعوتك، دوسي «احصلي على لينك دعوتك 💌». اختاري اسم اللينك، وحوّلي السعر على <b>إنستاباي</b> للرقم <b dir="ltr">01280067110</b>، وارفعي صورة التحويل، واكتبي رقم موبايلك.</p></details>
-  <details><summary>دعوتي هتشتغل إمتى؟</summary><p>بعد ما تبعتي صورة التحويل بنراجعه، ودعوتك بتتفعّل عند الضيوف خلال ٢٤ ساعة بالكتير. تقدري تبعتي اللينك لضيوفك من أول لحظة، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».</p></details>
+  <details><summary>دعوتي هتشتغل إمتى؟</summary><p>بعد ما تبعتي صورة التحويل بنراجعه، ودعوتك بتتفعّل عند الضيوف في دقايق. تقدري تبعتي اللينك لضيوفك من أول لحظة، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».</p></details>
   <details><summary>أشوف دعوتي قبل ما أدفع؟</summary><p>أكيد. دوسي «معاينة الكارت ✉️» تحت، وهتشوفيها بالظبط زي ما ضيوفك هيشوفوها، وتقدري تغيّري أي حاجة قبل ما تطلبي.</p></details>
   <details><summary>أعدّل دعوتي بعد ما أبعتها؟</summary><p>أيوه، وببلاش. من فوق دوسي «عندك كود؟ عدّلي دعوتك ✏️»، واكتبي كود التعديل اللي ظهرلك بعد الطلب. التعديل بيتحفظ على نفس اللينك، فضيوفك مش محتاجين لينك جديد.</p></details>
   <details><summary>أعرف مين جاي إزاي؟</summary><p>ادخلي بكود التعديل من «عندك كود؟ عدّلي دعوتك ✏️»، وهتلاقي زرار «ردود الحضور ✅» فيه كل اللي أكدوا واللي اعتذروا وعددهم.</p></details>
@@ -2201,11 +2201,11 @@ body.inviting .stbar{display:none}
   <div id="getDone" hidden>
     <h3>دعوتك جاهزة 🎉</h3>
     <div class="orderno" id="orderNo" hidden></div>
-    <div class="pendnote" id="pendNote" hidden>⏳ بنراجع التحويل، ودعوتك هتتفعّل عند الضيوف خلال ٢٤ ساعة. تقدري تبعتي اللينك من دلوقتي، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».</div>
+    <div class="pendnote" id="pendNote" hidden>⏳ بنراجع التحويل، ودعوتك هتتفعّل عند الضيوف في دقايق. تقدري تبعتي اللينك من دلوقتي، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».</div>
     <p class="sub">ده اللينك اللي تبعتيه لكل ضيوفك:</p>
     <div class="final" id="finalLink"></div>
     <div class="row2"><button class="btn primary" id="copyFinal">انسخي اللينك</button><a class="btn wa" id="shareFinal" target="_blank" rel="noopener">ابعتيه واتساب</a></div>
-    <div class="row2"><button class="btn ghost" id="viewFinal">شوفي دعوتك</button></div>
+    <div class="row2"><button class="btn ghost" id="viewFinal">شوفي دعوتك</button><button class="btn ghost" id="qrCardBtn">🖨️ كارت QR للطباعة</button></div>
     <div class="private">
       <b>🔒 كود التعديل بتاعك</b>
       <div class="code big" id="privCode"></div>
@@ -3353,6 +3353,19 @@ const MSG={bad_code:"الكود ده مش صحيح، اتأكدي منه",bad_sl
 function openM(id){$(id).classList.add("open");}
 function closeM(id){$(id).classList.remove("open");}
 document.querySelectorAll(".mdl").forEach(m=>{m.addEventListener("click",e=>{if(e.target===m||e.target.hasAttribute("data-close"))m.classList.remove("open");});});
+/* printable QR card for the invitation (uses the album card drawer) */
+function loadJs(u){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=u;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+async function qrCard(o,link,slug){const b=$("qrCardBtn"),t0=b.textContent;b.textContent="بنجهّز الكارت…";b.disabled=true;
+  try{if(!window.FarhetnaQR)await loadJs("memories/qr.js");if(!window.FMCard)await loadJs("memories/card.js");
+    const cv=document.createElement("canvas");
+    await FMCard.draw(cv,{groom:o.groom,bride:o.bride,date:o.date,url:link,style:"ivory",
+      top:"Y o u ' r e   i n v i t e d",head:"يسعدنا حضوركم فرحنا 💌",line1:"امسحوا الكود بكاميرا الموبايل وافتحوا الدعوة",line2:"📍 الميعاد والمكان والخريطة جوه الدعوة",foot:"دعوة فرحتنا"});
+    const blob=await new Promise(r=>cv.toBlob(r,"image/png"));const name="farhetna-qr-"+(slug||"card")+".png";
+    const f=new File([blob],name,{type:"image/png"});
+    if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:"كارت QR"});return}catch(e){if(e&&e.name==="AbortError")return}}
+    const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000);
+    toast("الكارت اتحمّل 🖨️ اطبعيه وحطيه على الترابيزات أو في المدخل");
+  }catch(e){toast("ما قدرناش نجهّز الكارت، جرّبي تاني")}finally{b.textContent=t0;b.disabled=false}}
 function waLink(t){return `https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(t)}`;}
 function errOf(e){const m=(e&&(e.message||e.details||""))+"";for(const k in MSG)if(m.includes(k))return MSG[k];return MSG.net;}
 function payload(o){const d=Object.assign({},o);const src=edit.src||(window.farhetnaSource&&window.farhetnaSource());if(src)d._src=src;if(d.music==="custom"){d.songUrl=edit.songUrl||null;if(!d.songUrl)d.music="piano";}return d;}
@@ -3375,7 +3388,7 @@ $("linkBtn").onclick=()=>{const o=collect();
       pp.closest(".stp").insertAdjacentElement("beforebegin",d)}}
   if(edit.code){$("slugWrap").hidden=true;$("codeIn").value=edit.code;$("orderBox").hidden=true;$("codeBox").hidden=true;
     $("getSub").textContent="هتتحفظ التعديلات على نفس اللينك: "+CFG.site+edit.slug;$("saveBtn").textContent="حفظ التعديلات 💾";useCode=true;}
-  else{$("slugWrap").hidden=false;$("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، وحوّلي وارفعي صورة التحويل، ودعوتك هتتفعّل خلال ٢٤ ساعة";setMode(false);}
+  else{$("slugWrap").hidden=false;$("getSub").textContent="اختاري اسم اللينك اللي هيتبعت لضيوفك، وحوّلي وارفعي صورة التحويل، ودعوتك هتتفعّل في دقايق";setMode(false);}
   openM("getMdl");};
 $("slugIn").addEventListener("input",e=>{e.target.value=e.target.value.toLowerCase().replace(/[\s_]+/g,"-").replace(/[^a-z0-9-]/g,"");});
 function shrinkImage(file){return new Promise((res,rej)=>{const r=new FileReader();r.onerror=rej;r.onload=()=>{const im=new Image();im.onerror=rej;im.onload=()=>{
@@ -3393,6 +3406,7 @@ async function uploadSong(slug){
   edit.songUrl=SB.storage.from("songs").getPublicUrl(path).data.publicUrl;customFile=null;}
 function showDone(slug,code,orderNo){
   const o=collect(),link=CFG.site+slug;
+  $("qrCardBtn").onclick=()=>qrCard(o,link,slug);
   $("finalLink").textContent=link;
   $("shareFinal").href=`https://wa.me/?text=${encodeURIComponent(`يسعدنا دعوتكم لـ${o.kind||"فرحنا"} 🤍\n${link}`)}`;
   $("privCode").textContent=code;

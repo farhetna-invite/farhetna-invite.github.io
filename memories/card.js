@@ -46,7 +46,7 @@ async function draw(canvas,o){
   c.strokeStyle=s.gold;c.globalAlpha=.85;c.lineWidth=4;rr(c,62,62,W-124,H-124,26);c.stroke();c.globalAlpha=.5;c.lineWidth=2;rr(c,88,88,W-176,H-176,18);c.stroke();c.globalAlpha=1;
   if(s.leaf){leaf(c,W-420,-10,2.2,0);leaf(c,420,H+10,2.2,Math.PI)}
   c.textAlign="center";c.direction="rtl";c.textBaseline="alphabetic";
-  c.fillStyle=s.gold;c.font='italic 500 46px "Cormorant Garamond",serif';c.direction="ltr";c.fillText("S h a r e   t h e   l o v e",W/2,250);
+  c.fillStyle=s.gold;c.font='italic 500 46px "Cormorant Garamond",serif';c.direction="ltr";c.fillText(o.top||"S h a r e   t h e   l o v e",W/2,250);
   c.direction="rtl";c.fillStyle=s.ink;
   // names: groom & bride, shrink to fit
   let fs=170;const nm=`${o.groom||""}  &  ${o.bride||""}`;
@@ -54,18 +54,18 @@ async function draw(canvas,o){
   const parts=[o.groom||"","&",o.bride||""];const ws=parts.map((p,i)=>{c.font=i===1?`500 ${fs}px "Cormorant Garamond",serif`:`700 ${fs}px "Aref Ruqaa",serif`;return c.measureText(p).width});
   const gap=fs*.32,tot=ws[0]+ws[1]+ws[2]+gap*2;let x=W/2+tot/2;const y=480;
   parts.forEach((p,i)=>{c.font=i===1?`500 ${fs}px "Cormorant Garamond",serif`:`700 ${fs}px "Aref Ruqaa",serif`;c.fillStyle=i===1?s.gold:s.ink;c.textAlign="right";c.fillText(p,x,y);x-=ws[i]+gap});
-  c.textAlign="center";c.fillStyle=s.sub;c.font='600 62px "Noto Naskh Arabic",serif';c.fillText("صوّروا فرحتنا وشاركونا صوركم 📸",W/2,640);
+  c.textAlign="center";c.fillStyle=s.sub;c.font='600 62px "Noto Naskh Arabic",serif';c.fillText(o.head||"صوّروا فرحتنا وشاركونا صوركم 📸",W/2,640);
   // qr
   const q=qrModules(o.url),n=q.getModuleCount(),box=860,bx=(W-box)/2,by=730;
   c.fillStyle=s.box;rr(c,bx-34,by-34,box+68,box+68,52);c.fill();c.strokeStyle=s.gold;c.globalAlpha=.55;c.lineWidth=3;rr(c,bx-34,by-34,box+68,box+68,52);c.stroke();c.globalAlpha=1;
   c.fillStyle="#fff";rr(c,bx,by,box,box,34);c.fill();c.strokeStyle=s.gold;c.globalAlpha=.6;c.lineWidth=2;c.stroke();c.globalAlpha=1;
   const pad=58,cell=Math.floor((box-pad*2)/n),off=bx+(box-cell*n)/2,offy=by+(box-cell*n)/2;c.fillStyle=s.qr;
   for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(q.isDark(r,k))c.fillRect(off+k*cell,offy+r*cell,cell,cell);
-  c.fillStyle=s.mute;c.font='500 50px "Noto Naskh Arabic",serif';c.fillText("امسحوا الكود بكاميرا الموبايل وارفعوا صوركم",W/2,by+box+130);
-  c.font='500 44px "Noto Naskh Arabic",serif';c.fillText("🔒 الصور بتوصل للعروسين بس",W/2,by+box+205);
+  c.fillStyle=s.mute;c.font='500 50px "Noto Naskh Arabic",serif';c.fillText(o.line1||"امسحوا الكود بكاميرا الموبايل وارفعوا صوركم",W/2,by+box+130);
+  c.font='500 44px "Noto Naskh Arabic",serif';c.fillText(o.line2||"🔒 الصور بتوصل للعروسين بس",W/2,by+box+205);
   // footer
   c.fillStyle=s.sub;c.font='500 46px "Noto Naskh Arabic",serif';const d=fmtDate(o.date);
-  c.fillText((d?d+"  ·  ":"")+"ألبوم ذكريات فرحتنا",W/2,H-170);
+  c.fillText((d?d+"  ·  ":"")+(o.foot||"ألبوم ذكريات فرحتنا"),W/2,H-170);
   c.fillStyle=s.mute;c.font='500 34px "Cormorant Garamond",serif';c.direction="ltr";c.fillText("farhetnainvite.com",W/2,H-118);c.direction="rtl";
   return canvas;
 }
