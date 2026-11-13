@@ -48,6 +48,7 @@ h2{font-family:"Aref Ruqaa",serif;font-size:34px;text-align:center;margin:44px 0
 .d img{width:100%;aspect-ratio:9/13;object-fit:cover;display:block}
 .d b{display:block;font-size:17px;margin-top:8px}
 .d span{display:block;font-size:13px;color:var(--sub);padding:0 8px 4px}
+.d em{display:block;font-style:normal;font-family:"Cormorant Garamond",serif;font-size:24px;font-weight:700;color:var(--pink);line-height:1.1;margin-top:4px}.d em small{font-family:inherit;font-size:13px;color:var(--sub);font-weight:400}
 .d i{display:inline-block;font-style:normal;font-size:13px;font-weight:700;color:var(--pink);margin:2px 0 12px}
 .feat{display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:620px;margin:0 auto}
 .feat div{background:#fff;border-radius:18px;padding:14px 12px;text-align:center;box-shadow:0 10px 24px -20px rgba(120,60,90,.6)}
@@ -76,7 +77,6 @@ footer a{color:var(--olive);font-weight:600;text-decoration:none}
     <div class="k">🍼 جديد في فرحتنا</div>
     <h1><b class="t-ar">دعوات <span>السبوع</span></b><b class="t-en" data-no-i18n>Sebou <span>Invitations</span></b></h1>
     <p>دعوة تفاعلية بلينك واحد لكل الضيوف. برواز متعلق باسم البيبي، وختم برجلين صغيرين بيتفتح على الترحيب، وفيها عدّ تنازلي وخريطة وتأكيد حضور.</p>
-    <div class="price"><b id="bdPrice">١٤٩</b><span id="bdCur">جنيه بس · مرة واحدة</span></div>
     <div class="cta">
       <a class="btn p" href="../studio.html#sb">صممي دعوة السبوع 🍼</a>
       <span class="note">صمميها بنفسك وشوفيها كاملة قبل ما تدفعي</span>
@@ -86,8 +86,8 @@ footer a{color:var(--olive);font-weight:600;text-decoration:none}
   <h2>اختاري التصميم</h2>
   <p class="sub2">افتحي أي تصميم وجربيه زي ما الضيوف هيشوفوه</p>
   <div class="designs">
-    <a class="d" href="../sebou-girl/"><img src="t-girl.webp" alt="تصميم Little Bloom"><b>Little Bloom 🎀</b><span>للبنوتة: ورد بينك وبرواز بشريطة</span><i>جربيه ←</i></a>
-    <a class="d" href="../sebou-boy/"><img src="t-boy.webp" alt="تصميم Little Sky"><b>Little Sky 💙</b><span>للولد: ورد لبني وبرواز بشريطة</span><i>جربيه ←</i></a>
+    <a class="d" href="../sebou-girl/"><img src="t-girl.webp" alt="تصميم Little Bloom"><b>Little Bloom 🎀</b><span>للبنوتة: ورد بينك وبرواز بشريطة</span><em class="sbp">١٤٩ <small>جنيه</small></em><i>جربيه ←</i></a>
+    <a class="d" href="../sebou-boy/"><img src="t-boy.webp" alt="تصميم Little Sky"><b>Little Sky 💙</b><span>للولد: ورد لبني وبرواز بشريطة</span><em class="sbp">١٤٩ <small>جنيه</small></em><i>جربيه ←</i></a>
   </div>
 
   <h2>كل اللي في الدعوة</h2>
@@ -122,7 +122,7 @@ footer a{color:var(--olive);font-weight:600;text-decoration:none}
 <script src="../geo.js"></script>
 <script>
 (function(){var G=window.FG;if(!G)return;
-  if(G.abroad){document.getElementById("bdPrice").textContent=G.money("birthday");document.getElementById("bdCur").textContent=G.curName+" · مرة واحدة"}
+  if(G.abroad)document.querySelectorAll(".sbp").forEach(function(e){e.textContent=G.label("birthday")})
   G.switcher(document.querySelector(".hero .cta"));
 })();
 </script>
