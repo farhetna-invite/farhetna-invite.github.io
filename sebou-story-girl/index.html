@@ -43,12 +43,15 @@ main{z-index:1}
 .s5 .tx{top:35%;left:20%;right:16%}
 .s5 .nm{display:block;font-size:min(19vw,84px);line-height:1.15;color:#b8556f;filter:blur(14px);opacity:0;transition:filter 1.6s ease .5s,opacity 1.2s ease .5s}
 .s5 .dt{display:block;font:600 min(5.4vw,23px)/1.4 "Cormorant Garamond",serif;letter-spacing:.12em;color:#3b2328;margin-top:6px;filter:blur(8px);opacity:0;transition:filter 1.4s ease 1.3s,opacity 1s ease 1.3s}
-.s5.typed .nm,.s5.typed .dt{filter:none;opacity:1}
+.s5 .sb{display:block;font:600 min(4.6vw,19px)/1.4 "Cormorant Garamond","Amiri",serif;letter-spacing:.3em;color:#8f6f78;opacity:0;transition:opacity 1s ease .2s}[lang=ar] .s5 .sb{font-family:"Amiri",serif;letter-spacing:.05em;font-size:min(5.4vw,23px)}
+[lang=ar] .s5 .dt{font-family:"Amiri",serif;letter-spacing:0}
+.s5.typed .sb,.s5.typed .nm,.s5.typed .dt{filter:none;opacity:1}
 .s6 .tx{top:17%;left:14%;right:14%}
 .s6 .bp{font-size:min(10vw,44px);line-height:1.2}
 .s6 .pn{display:block;font-size:min(7vw,30px);line-height:1.4;color:#b8556f;margin:2px 0 14px}
 [lang=ar] .s6 .pn{font-family:"Aref Ruqaa",serif}[lang=en] .s6 .pn{font-family:"Dancing Script",cursive}
 .s6 .du .ln{font:500 min(4.3vw,18px)/1.75 "Amiri",serif}[lang=en] .s6 .du .ln{font:italic 500 min(4.4vw,18.5px)/1.6 "Cormorant Garamond",serif;font-weight:600}
+.s6 .wt{font-size:min(7.4vw,31px);color:#b8556f;margin-top:10px}.sc.typed .s6 .wt,.s6.typed .wt{transition-delay:3.4s}
 .bf{display:block;width:min(15vw,62px);margin:0 auto 6px;animation:hov 3s ease-in-out infinite}
 .bf .w{transform-origin:50% 50%;animation:flap .5s ease-in-out infinite alternate}
 .bf .w2{animation-delay:.08s}
@@ -56,6 +59,21 @@ main{z-index:1}
 @keyframes hov{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 .s1 .bf{margin-top:10px}
 /* progress bars like a story */
+/* interactive calendar */
+.cal{text-align:center}
+.cal .mo{font:700 26px/1.3 "Aref Ruqaa",serif;color:#b8556f}[lang=en] .cal .mo{font:700 30px/1.2 "Dancing Script",cursive}
+.cal .yr{font:600 13px "Cormorant Garamond",serif;letter-spacing:.3em;color:#8f6f78;margin-bottom:12px}
+.cal .gr{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;max-width:330px;margin:0 auto}
+.cal .gr span{font-size:12px;color:#8f6f78;padding:4px 0}
+.cal .gr b{position:relative;font-weight:500;font-size:15px;color:#4a3038;height:38px;display:flex;align-items:center;justify-content:center;border-radius:50%}
+.cal .gr b.o{opacity:.28}
+.cal .gr b.ev{color:#fff;font-weight:700;cursor:pointer;z-index:1}
+.cal .gr b.ev::before{content:"";position:absolute;inset:-3px;z-index:-1;background:#c4607a;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.5 5c2.1 0 3.6 1.2 4.5 2.6C11.9 6.2 13.4 5 15.5 5 19 5 21.1 8.4 19.6 11.8 17.5 16.4 12 21 12 21z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.5 5c2.1 0 3.6 1.2 4.5 2.6C11.9 6.2 13.4 5 15.5 5 19 5 21.1 8.4 19.6 11.8 17.5 16.4 12 21 12 21z'/%3E%3C/svg%3E") center/contain no-repeat;transform:scale(0);transition:transform .7s cubic-bezier(.3,1.6,.4,1) .3s}
+.cal.in .gr b.ev::before{transform:scale(1.25);animation:beat 1.6s ease-in-out 1.2s infinite}
+@keyframes beat{0%,100%{transform:scale(1.25)}15%{transform:scale(1.42)}30%{transform:scale(1.25)}45%{transform:scale(1.36)}}
+.cal .gr b.ev i{position:absolute;top:-30px;left:50%;transform:translateX(-50%) scale(.6);opacity:0;font-style:normal;font-size:20px;transition:all .6s ease 1s}
+.cal.in .gr b.ev i{opacity:1;transform:translateX(-50%) scale(1)}
+.cal .hint{font-size:12.5px;color:#8f6f78;margin-top:12px}
 #bars{position:absolute;top:calc(8px + env(safe-area-inset-top));left:12px;right:12px;display:flex;gap:4px;z-index:5;direction:ltr;opacity:0;transition:opacity .4s}
 #bars i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.55);overflow:hidden;box-shadow:0 0 2px rgba(0,0,0,.15)}
 #bars i b{display:block;height:100%;width:0;background:#fff}
@@ -105,19 +123,37 @@ var D=BDAY.start({key:"ssg",colors:["#f6b8c6","#fcd5dd","#ffffff","#e98fa5","#f9
   open:function(g,confetti){setTimeout(function(){confetti(70,[innerWidth/2,innerHeight*.5])},150);return 900}});
 if(!D)return;
 var EN=document.documentElement.lang==="en";
+/* interactive calendar card, before the countdown */
+(function(){var en=document.documentElement.lang==="en",d=new Date((D.date||"2027-01-01")+"T12:00:00"),y=d.getFullYear(),m=d.getMonth(),day=d.getDate();
+  var N=function(n){return en?String(n):String(n).replace(/\d/g,function(x){return"٠١٢٣٤٥٦٧٨٩"[x]})};
+  var MO=en?["January","February","March","April","May","June","July","August","September","October","November","December"]:["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];
+  var WD=en?["Su","Mo","Tu","We","Th","Fr","Sa"]:["ح","ن","ث","ر","خ","ج","س"];
+  var first=new Date(y,m,1).getDay(),dim=new Date(y,m+1,0).getDate(),prev=new Date(y,m,0).getDate(),h="";
+  WD.forEach(function(w){h+="<span>"+w+"</span>"});
+  for(var i=first-1;i>=0;i--)h+='<b class="o">'+N(prev-i)+"</b>";
+  for(var k=1;k<=dim;k++)h+=k===day?'<b class="ev" role="button" tabindex="0" aria-label="'+(en?"Add to calendar":"ضيفوها للتقويم")+'">'+N(k)+"<i>🦋</i></b>":"<b>"+N(k)+"</b>";
+  var tail=(7-(first+dim)%7)%7;for(var t=1;t<=tail;t++)h+='<b class="o">'+N(t)+"</b>";
+  var sec=document.createElement("section");sec.className="card rv cal";
+  sec.innerHTML='<div class="kk">'+(en?"Save the date":"احفظوا الميعاد")+'</div><div class="mo">'+MO[m]+'</div><div class="yr">'+N(y)+'</div><div class="gr">'+h+'</div><div class="hint">'+(en?"Tap the heart to add it to your calendar 🗓️":"المسوا القلب عشان تضيفوها للتقويم 🗓️")+'</div>';
+  var cd=document.getElementById("cdCard");if(cd)cd.parentNode.insertBefore(sec,cd);
+  var ev=sec.querySelector(".ev"),go=function(){var b=document.getElementById("ics");if(b)b.click()};ev.addEventListener("click",go);ev.addEventListener("keydown",function(e){if(e.key==="Enter")go()});
+  if("IntersectionObserver"in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){sec.classList.add("in");io.disconnect()}})},{threshold:.4});io.observe(sec)}else sec.classList.add("in");
+})();
 var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
 var L=function(s,cls){return String(s).split("|").map(function(x){return'<span class="ln'+(cls?" "+cls:"")+'">'+esc(x)+'</span>'}).join("")};
 var BF='<svg class="bf" viewBox="0 0 64 48" aria-hidden="true"><g class="w"><path d="M32 24 C 22 2, 2 2, 6 16 C 8 24, 20 26, 32 24 Z" fill="#f7b6c8" stroke="#e98fa8" stroke-width="1.6"/><path d="M32 24 C 20 26, 8 32, 14 42 C 20 48, 30 36, 32 24 Z" fill="#f7b6c8" stroke="#e98fa8" stroke-width="1.6"/></g><g class="w w2"><path d="M32 24 C 42 2, 62 2, 58 16 C 56 24, 44 26, 32 24 Z" fill="#f7b6c8" stroke="#e98fa8" stroke-width="1.6"/><path d="M32 24 C 44 26, 56 32, 50 42 C 44 48, 34 36, 32 24 Z" fill="#f7b6c8" stroke="#e98fa8" stroke-width="1.6"/></g><path d="M32 14 V36" stroke="#8a5560" stroke-width="2.2" stroke-linecap="round"/></svg>';
 var dt=new Date((D.date||"2027-01-01")+"T12:00:00"),two=function(n){return(n<10?"0":"")+n};
-var dstr=two(dt.getDate())+"."+two(dt.getMonth()+1)+"."+dt.getFullYear();
+var dt2=new Date((D.date||"2027-01-01")+"T"+(D.time||"18:00")+":00"),hh=dt2.getHours(),mm=dt2.getMinutes();
+var tstr=EN?((hh%12||12)+(mm?":"+two(mm):"")+(hh<12?" AM":" PM")):((hh%12||12)+(mm?":"+two(mm):"")+(hh<12?" صباحًا":" مساءً")).replace(/\d/g,function(d){return"٠١٢٣٤٥٦٧٨٩"[d]});
+var dstr=dt.toLocaleDateString(EN?"en-GB":"ar-EG",{weekday:"long",day:"numeric",month:"long"}).replace(/[،,]/g,"")+(EN?" · ":"، الساعة ")+tstr;
 var par=String(D.parents||"").replace(/^(بنت|ابن|daughter of|son of)\s+/i,"");
 var S=[
   ["feet",'<div class="tx scr">'+(EN?L("Welcoming|Our Princess"):L("أهلًا بأميرتنا الصغيرة"))+BF+'</div>'],
   ["book",'<div class="tx scr">'+(EN?L("It's a|girl"):L("جالنا|بنوتة"))+'</div>'],
   ["bear",'<div class="tx scr">'+L(EN?"With hearts full of love":"بقلوب مليانة حب")+'</div>'],
-  ["curtain",'<div class="tx scr">'+(EN?L("We reveal the name of|our sweet little princess"):L("ونكشف لكم اسم|أميرتنا الحلوة"))+BF+'</div>'],
-  ["card",'<div class="tx">'+BF+'<span class="nm scr">'+esc(D.name)+'</span><span class="dt">'+dstr+'</span></div>'],
-  ["paper",'<div class="tx">'+'<span class="ln scr bp">'+(EN?"Blessed Parents":"بفرحة بابا وماما")+'</span>'+(par?'<span class="pn">'+esc(par)+'</span>':'')+'<div class="du">'+(EN?L("O Allah, bless our baby girl with health,|long life and happiness.|Make her the coolness of our eyes|and fill her life with barakah, love and mercy."):L("اللهم بارك لنا فيها، واجعلها قرة عين لنا،|وأنبتها نباتًا حسنًا،|واملأ حياتها بالبركة والحب والرحمة 🤍"))+'</div>'+BF+'</div>']];
+  ["curtain",'<div class="tx scr">'+(EN?L("We invite you to celebrate|the Sebou of our little princess"):L("بندعوكم تشاركونا|فرحة سبوع أميرتنا"))+BF+'</div>'],
+  ["card",'<div class="tx">'+BF+'<span class="sb">'+(EN?"Sebou":"سبوع")+'</span><span class="nm scr">'+esc(D.name)+'</span><span class="dt">'+esc(dstr)+'</span></div>'],
+  ["paper",'<div class="tx">'+'<span class="ln scr bp">'+(EN?"Blessed Parents":"بفرحة بابا وماما")+'</span>'+(par?'<span class="pn">'+esc(par)+'</span>':'')+'<div class="du">'+(EN?L("O Allah, bless our baby girl with health,|long life and happiness.|Make her the coolness of our eyes|and fill her life with barakah, love and mercy."):L("اللهم بارك لنا فيها، واجعلها قرة عين لنا،|وأنبتها نباتًا حسنًا،|واملأ حياتها بالبركة والحب والرحمة 🤍"))+'</div><span class="ln scr wt">'+(EN?"We can't wait to see you 🤍":"مستنيينكم 🤍")+'</span>'+BF+'</div>']];
 document.getElementById("scenes").innerHTML=S.map(function(s,i){return'<section class="sc s'+(i+1)+'"><div class="st"><img src="../sebou/story/'+s[0]+'-girl.webp" alt=""'+(i?' loading="eager"':'')+'>'+s[1]+'</div></section>'}).join("");
 var sc=[].slice.call(document.querySelectorAll(".sc")),bars=[].slice.call(document.querySelectorAll("#bars b"));
 var hint=document.getElementById("gHint"),tapT=document.getElementById("tapT");
