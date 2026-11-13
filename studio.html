@@ -2260,7 +2260,7 @@ const CFG={
   whatsapp:"201280067110",
   price:"٢٥٠ جنيه",
   pricePremium:"٣٥٠ جنيه",
-  premium:["ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd","sgp","sgm","ilt","tsn","azl","gdc","sga","bsw"],
+  premium:["olg","ivy","swn","olv","gld","lav","brd","bbl","ilr","pls","bhy","uws","bgd","sgp","sgm","ilt","tsn","azl","gdc","sga","bsw"],
   instapay:"01280067110",
   site:"https://farhetnainvite.com/",
   pixel:"" // رقم Meta Pixel (فيسبوك/إنستجرام) لما يبقى عندك
@@ -2375,6 +2375,7 @@ const SIG={bbl:{dir:"burgundy-bloom",name:"Burgundy Bloom",th:"home-t-bloom.webp
   gdc:{dir:"golden-calla",name:"Golden Calla",th:"home-t-calla.webp"},
   sga:{dir:"sage-arch",name:"Sage Arch",th:"home-t-arch.webp"},
   bsw:{dir:"blush-swan",name:"Blush Swan",th:"home-t-swan.webp"},
+  olg:{dir:"olive-grove",name:"Olive Grove",th:"home-t-olive.webp"},
   bdy:{dir:"birthday-balloons",name:"Balloon Party",th:"bday/t-balloons.webp"},
   bdn:{dir:"birthday-gold",name:"Golden Night",th:"bday/t-gold.webp"}};
 const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a20","#c9a463","#8a6b6f")],
@@ -2391,12 +2392,13 @@ const SIG_PALS={bbl:[P("#f3e3d2","#5b1424","#3f0d18","#8a2c3f","#f6ead9","#3a1a2
   gdc:[P("#f3eadc","#b08a4a","#8c6a32","#d6bd8a","#fffaf2","#5c4a36","#b08a4a","#8f7d66")],
   sga:[P("#f4eee3","#8a9a74","#55684a","#c9d3b8","#fbf7ef","#3f4a36","#c9a463","#7d8577")],
   bsw:[P("#f8ece9","#e2aab0","#9b5a65","#f0d2d5","#fffaf8","#5c3f44","#c9a463","#9a8285")],
+  olg:[P("#f4ede1","#7d8a62","#5b6b47","#d8cfb8","#fbf7ef","#3f3a2e","#b48a4a","#7d735f")],
   bdy:[P("#fff6ef","#f6a5b8","#e0607e","#a8dcc8","#fffaf8","#5a3a63","#f3d36b","#86708c")],
   bdn:[P("#0f0c16","#211a2c","#0b0910","#e9c977","#f6e2a2","#efe6d2","#e9c977","#b9ad95")]};
 /* birthday invitations (their own price and form wording) */
 const BD_TPL=["bdy","bdn"];const isBd=k=>BD_TPL.includes(k);
 Object.keys(SIG).forEach(k=>TPL[k]={name:SIG[k].name,opener:"ext",pals:SIG_PALS[k]});
-const SIG_ALBUM=["bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc","sga","bsw"];
+const SIG_ALBUM=["olg","bbl","ilr","bhy","bgd","sgm","ilt","tsn","azl","gdc","sga","bsw"];
 const HIDDEN_TPL=["classic","modern","islamic","floral"];let state={tpl:"brd",pal:0,music:"box"};
 let customUrl=null;
 
@@ -2452,7 +2454,7 @@ function thumb(k){
   }[k];
   return `<svg class="thumb" viewBox="0 0 160 110" preserveAspectRatio="xMidYMid slice">${art}</svg>`;
 }
-["bsw","sga","gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k)),BD_TPL).forEach(k=>{
+["olg","bsw","sga","gdc","azl","tsn","ilt","sgm","sgp","bbl","ilr","pls","bhy","uws","bgd"].concat(Object.keys(TPL).filter(k=>!SIG[k]&&!HIDDEN_TPL.includes(k)),BD_TPL).forEach(k=>{
   const b=document.createElement("button");b.className="tpl"+(isBd(k)?" bdt":"");b.dataset.k=k;
   b.innerHTML=thumb(k)+`<b>${TPL[k].name}</b>`+(CFG.premium.includes(k)?`<span class="prem">فاخر ✦</span>`:"");
   b.onclick=()=>{const was=!!SIG[state.tpl];state.tpl=k;state.pal=0;if(SIG[k]&&!was)state.music="design";if(!SIG[k]&&state.music==="design")state.music="box";drawBuilder();save();};

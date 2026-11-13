@@ -36,6 +36,11 @@ window.farhetnaData=function(key){
   var base={groom:o.groom||"",bride:o.bride||"",date:o.date||"",time:o.time||"19:00",venue:o.venue||"",addr:o.addr||"",
     city:lastPart(o.addr),map:o.map||"",wa:(o.wa||"").replace(/\D/g,""),album:album,program:prog};
   var mu=music(o);if(mu)base.music=mu;
+  if(key==="olg"){
+    var oh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
+    return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
+      intro:o.intro||"",story:o.story||"",pGroom:o.pGroom||"",pBride:o.pBride||"",program:prog,notes:o.notes||"",attire:o.dressNote||"",
+      hero:oh||"img/hero.webp",photos:album.length?album:["img/p1.webp","img/p2.webp","img/p3.webp"],music:mu||"",slug:String(o._slug||"").toLowerCase()};}
   if(key==="bdy"||key==="bdn"){ /* birthday designs: groom = the birthday person's name, bride = the age */
     var bh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
     return{name:o.groom||"",age:o.bride||"",intro:o.intro||"",date:o.date||"",time:o.time||"17:00",venue:o.venue||"",addr:o.addr||"",map:o.map||"",wa:base.wa,
