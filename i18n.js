@@ -236,6 +236,9 @@ function apply(){
 }
 function set(l){lang=l==="en"?"en":"ar";try{localStorage.setItem(KEY,lang)}catch(e){}apply()}
 window.FarhetnaLang={get:function(){return lang},set:set,t:function(s){return lang==="en"?(trans(s)||s):s}};
+var BIL=/(^|\/)(azure-lake|blush-swan|golden-calla|ivory-lantern|sage-arch|sage-meadow|sage-peony|terracotta-sunset)\/(index\.html)?$/;
+document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href]");if(!a)return;
+  try{var u=new URL(a.getAttribute("href"),location.href);if(u.origin===location.origin&&BIL.test(u.pathname)){u.searchParams.set("lang",lang);a.setAttribute("href",u.pathname+u.search+u.hash)}}catch(x){}},true);
 document.addEventListener("click",function(e){var b=e.target.closest&&e.target.closest("[data-lang-btn]");if(b){e.preventDefault();set(lang==="en"?"ar":"en")}});
 var mo=new MutationObserver(function(ms){if(busy||lang!=="en")return;busy=true;
   for(var i=0;i<ms.length;i++){var m=ms[i];

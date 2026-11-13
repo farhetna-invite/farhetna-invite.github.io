@@ -180,3 +180,16 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",add);else add();
 })();
 })();
+/* Farhetna chrome (demo badge, back button, credit) follows the invitation's own language */
+(function(){
+  var T={"تجربة":"Demo","التصاميم":"Designs","💌 صمّمي دعوتك مع فرحتنا":"💌 Design yours with Farhetna"},R={};
+  for(var k in T)R[T[k]]=k;
+  function run(){
+    var en=document.documentElement.lang==="en",M=en?T:R;
+    var els=document.querySelectorAll("#demoFlag,.flag,#fhBack span,#fhCredit a,footer a[href*='farhetnainvite']");
+    for(var i=0;i<els.length;i++){var e=els[i];if(e.children.length)continue;var t=e.textContent.trim();if(M[t])e.textContent=M[t]}
+    var b=document.getElementById("fhBack");if(b)b.setAttribute("aria-label",en?"Back to designs":"رجوع للتصاميم");
+  }
+  function go(){run();try{new MutationObserver(run).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]})}catch(e){}setTimeout(run,600);setTimeout(run,2000)}
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();
+})();

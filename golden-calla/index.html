@@ -302,7 +302,7 @@ function render(){
   var vs=$("vsmall");vs.innerHTML="";var v1=document.createElement("div");v1.textContent=pick(D.venue,D.venueEn);var v2=document.createElement("small");v2.textContent=pick(D.addr,D.addrEn);vs.appendChild(v1);vs.appendChild(v2);
   $("heroPh").style.backgroundImage="url('"+String(D.hero||photos()[0]||"img/p1.webp").replace(/'/g,"%27")+"')";
   /* families */
-  $("pG").textContent=D.pGroom||"";$("pB").textContent=D.pBride||"";$("gN").textContent=D.groom||G;$("bN").textContent=D.bride||B;
+  var PG=D.pGroom,PB=D.pBride;if(en&&D.demo){PG="Khalifa";PB="Ariam"}$("pG").textContent=PG||"";$("pB").textContent=PB||"";$("gN").textContent=en?G:(D.groom||G);$("bN").textContent=en?B:(D.bride||B);
   $("families").classList.toggle("hide",!D.pGroom&&!D.pBride);
   /* programme */
   var tl=$("tl");tl.innerHTML="";(D.program||[]).forEach(function(p,i){if(!p||!p[1])return;var f=info(p[1]),it=document.createElement("div");it.className="ti rv"+(i%2?" d1":"");

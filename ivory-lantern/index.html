@@ -306,6 +306,7 @@ var DEMO={groom:"هشام",bride:"أمل",groomEn:"Hisham",brideEn:"Aml",date:"2
   witnesses:"أحمد كمال\nو طارق حسن",witnessesEn:"Ahmed Kamal\n& Tarek Hassan",band:"فرقة الأوتار الذهبية",bandEn:"The Golden Strings Band",
   venue:"قاعة الياسمين الكبرى",venueEn:"Al Yasmine Grand Hall",addr:"شارع التسعين الشمالي، التجمع الخامس",addrEn:"North 90th Street, Fifth Settlement, New Cairo",map:"",wa:"",
   program:[["17:00","كتب الكتاب @ مسجد السلام، مدينة نصر"],["20:00","حفل الزفاف"],["22:00","السهرة"]],
+  programEn:[["17:00","Katb El-Ketab @ El-Salam Mosque, Nasr City"],["20:00","Wedding Party"],["22:00","The Evening"]],
   hero:"img/hero.webp",storyPhoto:"img/story.webp",album:["img/g1.webp","img/rings.webp","img/candles.webp","img/tunnel.webp","img/bouquet.webp","img/picnic.webp"],
   bandPhoto:"img/band.webp",music:"",slug:"",lang:"en",maxAdults:6,maxChildren:4};
 </script>
@@ -364,7 +365,7 @@ const KW=[[/كتب|عقد|قران|katb|vows/i,'katb','rings'],[/حن[اة]|henn
   [/استقبال|reception|welcome|cocktail/i,'arrive','welcome'],[/زفاف|فرح|ceremony|wedding|زفة/i,'ceremony','candles']];
 const PHOTO={rings:'img/rings.webp',candles:'img/candles_wide.webp',welcome:'img/sign.webp'};
 /* "كتب الكتاب @ مسجد السلام، مدينة نصر" → its own place; otherwise the main venue */
-function events(){return (D.program||[]).filter(p=>p&&p[1]).slice(0,4).map((p,i)=>{let lbl=String(p[1]),place='',addr='';
+function events(){return ((lang==="en"&&D.programEn)||D.program||[]).filter(p=>p&&p[1]).slice(0,4).map((p,i)=>{let lbl=String(p[1]),place='',addr='';
   const at=lbl.split(/\s*@\s*/);if(at.length>1){lbl=at[0];const pa=at[1].split(/[،,]/);place=pa[0].trim();addr=at[1].trim()}
   let k='other',art='candles';for(const r of KW)if(r[0].test(lbl)){k=r[1];art=r[2];break}
   const title=(k!=='other'&&(AR?!isAr(lbl):isAr(lbl)))?T[lang].ev[k]:lbl;

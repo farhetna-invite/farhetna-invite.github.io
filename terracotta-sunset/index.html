@@ -237,7 +237,7 @@ html[lang=en] #lgB{font:500 17px "Noto Naskh Arabic",serif}
 <script>
 var DEMO={groom:"عمر",bride:"ليلى",groomEn:"Omar",brideEn:"Laila",date:"2027-10-15",time:"19:00",quote:"",
   venue:"قاعة حديقة الياسمين",venueEn:"Al Yasmine Garden Hall",addr:"شارع التسعين الشمالي، التجمع الخامس",addrEn:"North 90th Street, Fifth Settlement, New Cairo",map:"",
-  dressNote:"رسمي · صيفي شيك",dressEn:"Formal · Chic summer",gift:"",ipay:"01000000000",ipayName:"عمر وليلى",ipayLink:"https://ipn.eg/",wa:"",
+  dressNote:"رسمي · صيفي شيك",dressEn:"Formal · Chic summer",gift:"",ipay:"01000000000",ipayName:"عمر وليلى",ipayNameEn:"Omar & Laila",ipayLink:"https://ipn.eg/",wa:"",
   hero:"img/hero.webp",p1:"img/p1.webp",p2:"img/p2.webp",music:"",slug:"",maxGuests:4};
 </script>
 <script src="../inv-data.js"></script>
@@ -342,7 +342,7 @@ function fill(){
   const hasPay=!!(D.ipay||D.ipayLink),gt=pick(D.gift,D.giftEn);$('#gifts').hidden=$('#aGift').hidden=!hasPay;
   $('.acts').style.gridTemplateColumns=hasPay?'':'repeat(3,1fr)';
   $('#giftTxt').textContent=gt||t('gift');
-  $('#pay').innerHTML=[D.ipay?'InstaPay · '+esc(D.ipay):'',esc(D.ipayName||'')].filter(Boolean).join('<br>');$('#copyBtn').hidden=!D.ipay;
+  $('#pay').innerHTML=[D.ipay?'InstaPay · '+esc(D.ipay):'',esc(((lang==="en"&&D.ipayNameEn)||D.ipayName)||'')].filter(Boolean).join('<br>');$('#copyBtn').hidden=!D.ipay;
   $('#qrWrap').hidden=!D.ipayLink;
   if(D.ipayLink){try{const Q=window.FarhetnaQR,qq=new Q(-1,0);qq.addData(String(D.ipayLink));qq.make();const n=qq.getModuleCount();let p='';for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(qq.isDark(r,c))p+=`M${c} ${r}h1v1h-1z`;
     $('#qr').innerHTML=`<svg viewBox="-1 -1 ${n+2} ${n+2}" shape-rendering="crispEdges"><rect x="-1" y="-1" width="${n+2}" height="${n+2}" fill="#fff"/><path d="${p}" fill="#4f4640"/></svg>`;
@@ -376,7 +376,7 @@ setInterval(tick,1000);
 
 /* ---------- copy ---------- */
 function toast(x){const e=$('#toast');e.textContent=x;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1800)}
-$('#copyBtn').onclick=async()=>{const x=['InstaPay '+D.ipay,D.ipayName].filter(Boolean).join(' – ');try{await navigator.clipboard.writeText(x);toast(t('copied'))}catch(e){toast(D.ipay)}};
+$('#copyBtn').onclick=async()=>{const x=['InstaPay '+D.ipay,((lang==="en"&&D.ipayNameEn)||D.ipayName)].filter(Boolean).join(' – ');try{await navigator.clipboard.writeText(x);toast(t('copied'))}catch(e){toast(D.ipay)}};
 
 /* ---------- RSVP: saved for the couple (Supabase); WhatsApp when there is no saved invitation ---------- */
 const Mm=$('#rsvpM'),st={att:null,n:1};
