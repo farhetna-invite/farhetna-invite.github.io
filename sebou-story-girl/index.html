@@ -74,6 +74,32 @@ main{z-index:1}
 .cal .gr b.ev i{position:absolute;top:-30px;left:50%;transform:translateX(-50%) scale(.6);opacity:0;font-style:normal;font-size:20px;transition:all .6s ease 1s}
 .cal.in .gr b.ev i{opacity:1;transform:translateX(-50%) scale(1)}
 .cal .hint{font-size:12.5px;color:#8f6f78;margin-top:12px}
+/* mortar (هون) */
+.hon{text-align:center}
+.hon .mt{position:relative;width:200px;height:190px;margin:6px auto 0;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.hon .bowl{position:absolute;left:30px;bottom:0;width:140px;transform-origin:50% 100%}
+.hon .pes{position:absolute;left:96px;top:-6px;width:46px;transform-origin:20% 92%;transform:rotate(28deg);transition:transform .12s ease-out}
+.hon .mt.hit .pes{transform:rotate(-6deg) translate(-10px,22px);transition:transform .09s ease-in}
+.hon .mt.hit .bowl{animation:shk .35s ease}
+@keyframes shk{0%,100%{transform:none}25%{transform:rotate(-2.5deg)}50%{transform:rotate(2deg)}75%{transform:rotate(-1deg)}}
+.hon .ring{position:absolute;left:50%;top:70px;width:40px;height:40px;margin-left:-20px;border:2px solid #e98fa8;border-radius:50%;opacity:0;pointer-events:none}
+.hon .mt.hit .ring{animation:rng .7s ease-out}
+@keyframes rng{from{transform:scale(.4);opacity:.9}to{transform:scale(3.4);opacity:0}}
+.hon .say{min-height:56px;margin-top:10px;font:700 21px/1.5 "Aref Ruqaa",serif;color:#b8556f;transition:opacity .25s}[lang=en] .hon .say{font:700 24px/1.35 "Dancing Script",cursive}
+.hon .cnt2{font-size:12.5px;color:#8f6f78}
+/* candles (زفة الشموع) */
+.cnd{text-align:center}
+.cnd .row{display:flex;justify-content:center;align-items:flex-end;gap:9px;margin:26px auto 6px;direction:ltr}
+.cnd .c{position:relative;width:26px;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cnd .c .wx{display:block;width:26px;border-radius:6px 6px 4px 4px;background:linear-gradient(90deg,#fff,#fbf3ee 45%,#efe2da);box-shadow:inset 0 -6px 0 #f7b6c8,0 6px 12px -8px rgba(0,0,0,.35)}
+.cnd .c .wk{position:absolute;left:50%;top:-8px;width:2px;height:9px;margin-left:-1px;background:#5a4636;border-radius:1px}
+.cnd .c .fl{position:absolute;left:50%;top:-34px;width:16px;height:28px;margin-left:-8px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:radial-gradient(ellipse at 50% 72%,#fff 0 18%,#ffe08a 34%,#ffb347 62%,rgba(255,140,60,0) 72%);opacity:0;transform:scale(.2);transform-origin:50% 100%;transition:opacity .3s,transform .45s cubic-bezier(.3,1.6,.4,1)}
+.cnd .c .gl{position:absolute;left:50%;top:-44px;width:60px;height:60px;margin-left:-30px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,140,.55),rgba(255,214,140,0) 70%);opacity:0;transition:opacity .5s;pointer-events:none}
+.cnd .c.on .fl{opacity:1;transform:scale(1);animation:flk 1.6s ease-in-out .5s infinite}
+.cnd .c.on .gl{opacity:1}
+@keyframes flk{0%,100%{transform:scale(1) rotate(-2deg)}30%{transform:scale(1.06,.94) rotate(2deg)}60%{transform:scale(.96,1.05) rotate(-1deg)}}
+.cnd .msg2{min-height:30px;font-size:14px;color:#8f6f78;margin-top:8px}
+.cnd.all .msg2{font:700 20px/1.5 "Aref Ruqaa",serif;color:#b8556f}[lang=en] .cnd.all .msg2{font:700 24px/1.3 "Dancing Script",cursive}
 #bars{position:absolute;top:calc(8px + env(safe-area-inset-top));left:12px;right:12px;display:flex;gap:4px;z-index:5;direction:ltr;opacity:0;transition:opacity .4s}
 #bars i{flex:1;height:2.5px;border-radius:2px;background:rgba(255,255,255,.55);overflow:hidden;box-shadow:0 0 2px rgba(0,0,0,.15)}
 #bars i b{display:block;height:100%;width:0;background:#fff}
@@ -138,6 +164,32 @@ var EN=document.documentElement.lang==="en";
   var cd=document.getElementById("cdCard");if(cd)cd.parentNode.insertBefore(sec,cd);
   var ev=sec.querySelector(".ev"),go=function(){var b=document.getElementById("ics");if(b)b.click()};ev.addEventListener("click",go);ev.addEventListener("keydown",function(e){if(e.key==="Enter")go()});
   if("IntersectionObserver"in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){sec.classList.add("in");io.disconnect()}})},{threshold:.4});io.observe(sec)}else sec.classList.add("in");
+})();
+/* interactive: tap the mortar (دق الهون) and light the seven candles (زفة الشموع) */
+(function(){var en=document.documentElement.lang==="en",nm=D.name||"",rs=document.getElementById("rsvp");if(!rs)return;
+  var N=function(n){return en?String(n):String(n).replace(/\d/g,function(x){return"٠١٢٣٤٥٦٧٨٩"[x]})};
+  var AC=null;function dong(){try{var C=window.AudioContext||window.webkitAudioContext;if(!C)return;AC=AC||new C();if(AC.state==="suspended")AC.resume();var t=AC.currentTime;
+    [[520,1,.9],[1430,.45,.6],[2810,.22,.35],[3900,.1,.2]].forEach(function(p){var o=AC.createOscillator(),g=AC.createGain();o.type="sine";o.frequency.value=p[0];g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.32*p[1],t+.004);g.gain.exponentialRampToValueAtTime(.0008,t+p[2]*1.6);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+p[2]*1.7)})}catch(e){}}
+  var SAY=en?["Listen to your mum! 😄","Listen to your dad too! 😉","Grow up healthy and happy 🤍","Be kind to your siblings 💕","Don't stay up too late! 🌙","Make us proud, little one ✨"]
+    :["اسمع كلام مامتك 😄","واسمع كلام باباك كمان 😉","تكبر وتبقى زي الفل 🤍","ما تزعّلش إخواتك 💕","ما تسهرش كتير 🌙","ربنا يحفظك ويخليك لينا ✨"];
+  var hs=document.createElement("section");hs.className="card rv hon";
+  hs.innerHTML='<div class="kk">'+(en?"A Sebou tradition":"من عادات السبوع")+'</div><h2>'+(en?"Ring the mortar":"دُقّوا الهون")+'</h2>'+
+    '<div class="mt" role="button" tabindex="0" aria-label="'+(en?"Ring the mortar":"دقوا الهون")+'"><div class="ring"></div>'+
+    '<svg class="pes" viewBox="0 0 40 150" aria-hidden="true"><defs><linearGradient id="pg" x1="0" x2="1"><stop offset="0" stop-color="#8a5d1f"/><stop offset=".35" stop-color="#f3d27a"/><stop offset=".6" stop-color="#c8963a"/><stop offset="1" stop-color="#7a5118"/></linearGradient></defs><rect x="13" y="0" width="14" height="118" rx="7" fill="url(#pg)"/><ellipse cx="20" cy="128" rx="17" ry="20" fill="url(#pg)"/></svg>'+
+    '<svg class="bowl" viewBox="0 0 140 120" aria-hidden="true"><defs><linearGradient id="bg2" x1="0" x2="1"><stop offset="0" stop-color="#7a5118"/><stop offset=".3" stop-color="#e9c46a"/><stop offset=".5" stop-color="#fff0b8"/><stop offset=".7" stop-color="#c8963a"/><stop offset="1" stop-color="#6e4813"/></linearGradient></defs><path d="M8 18 H132 L118 82 Q114 96 98 98 H42 Q26 96 22 82 Z" fill="url(#bg2)"/><ellipse cx="70" cy="18" rx="62" ry="10" fill="#5e3d10"/><ellipse cx="70" cy="17" rx="56" ry="7" fill="#3b2608"/><rect x="40" y="98" width="60" height="10" rx="3" fill="url(#bg2)"/><rect x="30" y="106" width="80" height="12" rx="4" fill="url(#bg2)"/><path d="M28 40 H112" stroke="#fff3c4" stroke-opacity=".45" stroke-width="2"/><path d="M33 62 H107" stroke="#6e4813" stroke-opacity=".35" stroke-width="2"/></svg></div>'+
+    '<div class="say" id="hSay">'+(en?"Tap the mortar 👆":"المسوا الهون 👆")+'</div><div class="cnt2" id="hCnt"></div>';
+  rs.parentNode.insertBefore(hs,rs);
+  var mt=hs.querySelector(".mt"),k=0,tm=null;function hit(){dong();if(navigator.vibrate)navigator.vibrate(25);mt.classList.remove("hit");void mt.offsetWidth;mt.classList.add("hit");clearTimeout(tm);tm=setTimeout(function(){mt.classList.remove("hit")},400);
+    var sy=document.getElementById("hSay");sy.style.opacity=0;setTimeout(function(){sy.textContent=SAY[k%SAY.length];sy.style.opacity=1},120);k++;
+    document.getElementById("hCnt").textContent=en?("Rang "+k+(k===1?" time":" times")):("دقيتوا "+N(k)+" "+(k===1?"مرة":k===2?"مرتين":(k<=10?"مرات":"مرة")))}
+  mt.addEventListener("click",hit);mt.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();hit()}});
+  var cs=document.createElement("section");cs.className="card rv cnd";var h="";for(var i=0;i<7;i++)h+='<div class="c" role="button" tabindex="0" aria-label="'+(en?"Light candle ":"نوّروا شمعة ")+N(i+1)+'"><i class="gl"></i><i class="fl"></i><i class="wk"></i><b class="wx" style="height:'+[54,62,70,78,70,62,54][i]+'px"></b></div>';
+  cs.innerHTML='<div class="kk">'+(en?"The candle procession":"زفة الشموع")+'</div><h2>'+(en?"Light the 7 candles":"نوّروا السبع شمعات")+'</h2><div class="row">'+h+'</div><div class="msg2" id="cMsg">'+(en?"Tap each candle to light it 🕯️":"المسوا كل شمعة عشان تنوّروها 🕯️")+'</div>';
+  rs.parentNode.insertBefore(cs,rs);
+  var lit=0;cs.querySelectorAll(".c").forEach(function(c){var f=function(){if(c.classList.contains("on"))return;c.classList.add("on");lit++;if(navigator.vibrate)navigator.vibrate(10);
+      var m=document.getElementById("cMsg");if(lit<7)m.textContent=en?(lit+" of 7 candles lit ✨"):(N(lit)+" من ٧ شمعات نوّرت ✨");
+      else{cs.classList.add("all");m.textContent=en?("You lit up "+nm+"'s Sebou 🕯️🤍"):("نوّرتوا سبوع "+nm+" 🕯️🤍");var r=cs.getBoundingClientRect();if(window.BDAY&&BDAY.confetti)BDAY.confetti(70,[innerWidth/2,r.top+r.height*.4])}};
+    c.addEventListener("click",f);c.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();f()}})});
 })();
 var esc=function(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})};
 var L=function(s,cls){return String(s).split("|").map(function(x){return'<span class="ln'+(cls?" "+cls:"")+'">'+esc(x)+'</span>'}).join("")};
