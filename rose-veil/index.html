@@ -16,7 +16,7 @@
   --ar:"Noto Naskh Arabic",serif;--ruq:"Aref Ruqaa","Noto Naskh Arabic",serif;--en:"Cormorant Garamond",Georgia,serif;--scr:"Pinyon Script","Cormorant Garamond",cursive}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;font-feature-settings:"lnum" 1}
 html{background:var(--pink)}
-body{font-family:var(--en);font-size:18px;color:var(--ink);min-height:100vh;overflow-x:hidden;line-height:1.6;background:linear-gradient(180deg,#f8d9d4,#f6cfc9 50%,#f8d9d4)}
+body{font-family:var(--en);font-size:18px;color:var(--ink);min-height:100vh;overflow-x:hidden;line-height:1.6;background:radial-gradient(120% 60% at 50% 0,#fae3de,#f6d2cc 60%,#f3cbc5)}
 html[lang=ar] body{font-family:var(--ar);font-size:16px;line-height:1.85}
 body.locked{overflow:hidden;height:100vh}
 button,input,textarea{font:inherit;color:inherit}
@@ -41,8 +41,7 @@ html[lang=en] #lg{font:500 17px var(--ar)}
 .e-open{opacity:0;transition:opacity 1s ease}
 #gate.s1 .e-open{opacity:1}
 .seal{position:absolute;left:39.5%;top:46%;width:21cqw;height:21cqw;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;transition:opacity .5s ease,transform .6s ease}
-.seal span{font:400 6.6cqw/1 var(--scr);color:#e9eedb;text-shadow:0 -.2cqw .1cqw rgba(40,55,25,.55),0 .25cqw 0 rgba(255,255,255,.35);direction:ltr;white-space:nowrap}
-html[lang=ar] .seal span{font:400 5.6cqw/1.2 var(--ruq)}
+.seal svg{width:80%;height:80%;color:#768c5c;filter:drop-shadow(0 -.25cqw .1cqw rgba(40,55,25,.6)) drop-shadow(0 .3cqw .05cqw rgba(225,235,205,.7))}
 .seal::after{content:"";position:absolute;inset:-12%;border-radius:50%;border:.5cqw solid rgba(255,255,255,.85);animation:ring 2.2s ease-out infinite}
 @keyframes ring{from{transform:scale(.85);opacity:.9}to{transform:scale(1.35);opacity:0}}
 #gate.s1 .seal{opacity:0;transform:scale(1.3)}
@@ -70,6 +69,7 @@ html[lang=ar] .e-card .nm{font:400 11cqw/1.5 var(--ruq)}
 main{position:relative;max-width:520px;margin:0 auto;padding-bottom:60px}
 .scene{position:relative;width:100%;aspect-ratio:941/1672;background:center/100% 100% no-repeat;container-type:inline-size;text-align:center}
 .scene+.scene{margin-top:-9cqw}
+#welcome{margin-bottom:-6cqw}
 .ov{position:absolute;left:21%;right:21%;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .rv{opacity:0;transform:translateY(18px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -94,120 +94,83 @@ html[lang=ar] .getting{font:400 4.8cqw var(--ruq);font-style:normal}
 html[lang=ar] .wdate{font:600 4cqw var(--ar);letter-spacing:0}
 .at{font-size:3.8cqw;color:#7a6a5e}
 
-/* 3 · countdown */
-#count{background-image:url(img/countdown.webp)}
-#count .t1{position:absolute;left:0;right:0;top:32.4%;font:italic 500 5cqw var(--en);color:var(--ol2)}
-html[lang=ar] #count .t1{font:400 5.2cqw var(--ruq);font-style:normal}
-.cb{position:absolute;top:43.8%;width:14.4cqw;height:7.4%;display:flex;flex-direction:column;align-items:center;justify-content:center;direction:ltr}
-.cb b{font:500 6.6cqw/1 var(--en);color:var(--ol2);font-variant-numeric:tabular-nums}
-.cb span{font:italic 500 2.6cqw var(--en);color:#8a7a6c;margin-top:.6cqw}
-html[lang=ar] .cb span{font:500 2.7cqw var(--ar);font-style:normal}
-.cb:nth-of-type(1){left:14.6%}.cb:nth-of-type(2){left:33.4%}.cb:nth-of-type(3){left:52%}.cb:nth-of-type(4){left:70.7%}
-#cdDone{position:absolute;left:0;right:0;top:44.5%;font:400 9cqw var(--scr);color:var(--rose)}
-html[lang=ar] #cdDone{font:400 7cqw var(--ruq)}
-.calbox{position:absolute;left:0;right:0;top:54.5%}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:42px;padding:0 20px;border-radius:30px;border:1px solid var(--ol);
-  background:rgba(255,250,246,.75);color:var(--ol2);font-size:15px;text-decoration:none;cursor:pointer;transition:transform .15s}
+/* simple sections: one cream card each on plain blush paper */
+.sec{position:relative;padding:22px 20px}
+.pc{position:relative;max-width:400px;margin:0 auto;padding:34px 24px 32px;text-align:center;background:#fcf3ea;border-radius:26px;
+  box-shadow:0 0 0 1px rgba(107,117,71,.55),0 0 0 6px #fcf3ea,0 0 0 7px rgba(107,117,71,.35),0 18px 40px -22px rgba(120,60,55,.45)}
+.pc .ico{display:block;width:40px;height:40px;margin:0 auto;color:var(--ol)}
+.pc .orn{width:130px;height:14px;margin:8px auto 10px}
+.pc h2{font:400 32px/1.25 var(--en);color:var(--ol2);white-space:pre-line}
+html[lang=ar] .pc h2{font:400 27px/1.6 var(--ruq)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 22px;border-radius:30px;border:1px solid var(--ol);
+  background:rgba(255,255,255,.6);color:var(--ol2);font-size:15px;text-decoration:none;cursor:pointer;transition:transform .15s}
 .btn.fill{background:linear-gradient(#77824f,#606b3f);border-color:#606b3f;color:#fff;box-shadow:0 6px 16px rgba(90,100,60,.3)}
 .btn:active{transform:scale(.97)}
 .btn svg{width:16px;height:16px;flex:none}
-.gl{display:block;margin-top:6px;font-size:13px;color:var(--ol2)}
-
-/* 4 · programme */
-#program{background-image:url(img/program.webp)}
-#program .t1{position:absolute;left:0;right:0;top:26.4%}
-.tl{position:absolute;left:24%;right:24%;top:31%;bottom:26.5%;display:flex;flex-direction:column;justify-content:space-evenly}
-.ti{display:flex;align-items:center;gap:3.5cqw;text-align:start}
-.ti .ic{flex:none;width:11cqw;height:11cqw;border-radius:50%;background:#f6dcd6;border:1px solid rgba(107,117,71,.45);display:grid;place-items:center;color:var(--ol2)}
-.ti .ic svg{width:7.4cqw;height:7.4cqw}
-.ti .tx{flex:1;border-bottom:1px solid rgba(107,117,71,.4);padding-bottom:1cqw}
-.ti .t{font:600 4.2cqw/1.2 var(--en);color:var(--ol2)}
-html[lang=ar] .ti .t{font:600 3.7cqw/1.4 var(--ar)}
-.ti .l{font-size:3.6cqw;line-height:1.3;color:#6a5f52}
-html[lang=ar] .ti .l{font-size:3.4cqw}
-
-.tl.many .ic{width:9cqw;height:9cqw}.tl.many .ti .l{font-size:3.1cqw}
-/* 5 · venue */
-#place{background-image:url(img/venue.webp)}
-#place .t1{position:absolute;left:0;right:0;top:48.9%;font:500 4.8cqw/1.2 var(--en);color:var(--ol2);padding:0 22%}
-html[lang=ar] #place .t1{font:400 4.6cqw/1.4 var(--ruq)}
-.maplink{position:absolute;left:21.5%;right:21.5%;top:52.6%;height:17.6%;border-radius:4cqw;display:block}
-.vlabel{position:absolute;left:4cqw;right:4cqw;bottom:2.5cqw;padding:1.6cqw 2cqw;border-radius:3cqw;background:rgba(255,250,245,.88);box-shadow:0 1cqw 3cqw rgba(90,70,50,.12)}
-.vn{font:600 4.2cqw/1.3 var(--en);color:var(--ol2)}
-html[lang=ar] .vn{font:600 3.8cqw/1.5 var(--ar)}
-.va{font-size:3.2cqw;color:#7a6a5e;line-height:1.3}
-#mapBtn{position:absolute;left:32%;right:32%;top:72.4%;height:4.6%;display:flex;align-items:center;justify-content:center;gap:2cqw;color:#fff;text-decoration:none;font:500 3.8cqw var(--en);border-radius:6cqw}
-html[lang=ar] #mapBtn{font:600 3.6cqw var(--ar)}
-#mapBtn span{margin-inline-start:4cqw}
-
-/* 6 · dress code (plain section between the cards) */
-.plain{position:relative;padding:44px 28px 60px;text-align:center}
-.plain h2{font:400 34px/1.2 var(--en);color:var(--ol2)}
-html[lang=ar] .plain h2{font:400 30px/1.5 var(--ruq)}
-.plain .orn{width:120px;height:14px;margin:12px auto}
-.corner{position:absolute;pointer-events:none;height:auto;width:min(42vw,190px)}
-.corner.tr{top:-30px;right:-24px}.corner.bl{bottom:-20px;left:-24px}
-.pal{font-size:20px;color:var(--ink)}html[lang=ar] .pal{font-size:17px}
+.gl{display:block;margin-top:8px;font-size:13px;color:var(--ol2)}
+/* countdown */
+.ct{font:italic 500 21px var(--en);color:var(--ol2);margin-bottom:16px}
+html[lang=ar] .ct{font:400 22px var(--ruq);font-style:normal}
+.cd{display:flex;justify-content:center;gap:8px;direction:ltr}
+.cd div{width:70px;padding:12px 0 8px;border-radius:16px;background:#f8e2dc;border:1px solid rgba(107,117,71,.45)}
+.cd b{display:block;font:500 30px/1 var(--en);color:var(--ol2);font-variant-numeric:tabular-nums}
+.cd span{font:italic 500 13px var(--en);color:#8a7a6c}
+html[lang=ar] .cd span{font:500 12px var(--ar);font-style:normal}
+#cdDone{font:400 32px var(--scr);color:var(--rose)}html[lang=ar] #cdDone{font:400 26px var(--ruq)}
+.calbox{margin-top:20px}
+/* programme */
+.tl{display:grid;gap:4px;max-width:300px;margin:6px auto 0}
+.ti{display:flex;align-items:center;gap:14px;text-align:start;padding:8px 0}
+.ti .ic{flex:none;width:48px;height:48px;border-radius:50%;background:#f8e2dc;border:1px solid rgba(107,117,71,.45);display:grid;place-items:center;color:var(--ol2)}
+.ti .ic svg{width:30px;height:30px}
+.ti .tx{flex:1;border-bottom:1px solid rgba(107,117,71,.35);padding-bottom:6px}
+.ti .t{font:600 18px/1.2 var(--en);color:var(--ol2)}html[lang=ar] .ti .t{font:600 15px/1.5 var(--ar)}
+.ti .l{font-size:15px;line-height:1.35;color:#6a5f52}
+/* venue */
+.vn{font:500 24px/1.3 var(--en);color:var(--ink)}html[lang=ar] .vn{font:400 24px/1.5 var(--ruq)}
+.va{font-style:italic;color:var(--mute);margin:2px 0 14px}html[lang=ar] .va{font-style:normal}
+.maplink{display:block;max-width:300px;margin:0 auto 16px;border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px rgba(107,117,71,.3)}
+.maplink img{display:block;width:100%}
+/* dress */
+.pal{font-size:19px;color:var(--ink)}html[lang=ar] .pal{font-size:17px}
 .pn{color:var(--mute);font-size:15px}
-.dots{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:20px auto;max-width:320px}
-.dot{width:72px;height:72px;border-radius:50%;position:relative;overflow:hidden;box-shadow:0 8px 18px rgba(110,70,60,.18),0 0 0 3px rgba(255,255,255,.8),0 0 0 4px var(--line)}
-.dot::before{content:"";position:absolute;inset:-20%;background:inherit;filter:blur(5px)}
+.dots{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:18px auto}
+.dot{width:66px;height:66px;border-radius:50%;position:relative;overflow:hidden;box-shadow:0 8px 18px rgba(110,70,60,.18),0 0 0 3px #fff,0 0 0 4px var(--line)}
 .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(ellipse 55% 35% at 34% 24%,rgba(255,255,255,.55),transparent 70%)}
 .dnote{max-width:28ch;margin:0 auto;font-style:italic}html[lang=ar] .dnote{font-style:normal}
-
-/* 7 · closing */
-#closing{background-image:url(img/closing.webp)}
-#closing .ov{top:31.5%;bottom:43%;justify-content:flex-start}
-.cl{font-size:3.6cqw;line-height:1.55;color:#5b5446}
-html[lang=ar] .cl{font-size:3.3cqw;line-height:1.8}
-#closing .h{font-size:6cqw}html[lang=ar] #closing .h{font-size:5.6cqw}
-.cl p+p{margin-top:1.6cqw}
-.sign{font:400 9cqw/1.2 var(--scr);color:var(--ol2);position:absolute;left:0;right:0;top:49%;white-space:nowrap}
-html[lang=ar] .sign{font:400 6.6cqw/1.4 var(--ruq)}
-
-/* 8 · RSVP (fields sit on the painted ones) */
-#rsvp{background-image:url(img/rsvp.webp)}
-#rsvp .t1{position:absolute;left:0;right:0;top:26.8%}
-#rsvp .t1 .h{font-size:5.6cqw}html[lang=ar] #rsvp .t1 .h{font-size:5.2cqw}
-.fld{position:absolute;left:23.6%;right:23.5%;height:5.4%;display:flex;align-items:center;padding-inline-start:12cqw;padding-inline-end:4cqw}
-#rn{width:100%;border:0;background:transparent;outline:none;font-size:4cqw;color:var(--ink)}
+/* closing */
+.cl{max-width:30ch;margin:10px auto 0;color:#5b5446}.cl p+p{margin-top:10px}
+.heart{color:var(--ol);font-size:26px;margin-top:12px}
+.sign{font:400 40px/1.25 var(--scr);color:var(--ol2);white-space:nowrap}html[lang=ar] .sign{font:400 30px/1.5 var(--ruq)}
+/* rsvp */
+.rsub{color:var(--mute);font-style:italic;font-size:16px;margin-top:4px}html[lang=ar] .rsub{font-style:normal;font-size:15px}
+form{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;width:100%;max-width:320px;margin:18px auto 0;text-align:start}
+.fld{display:flex;align-items:center;gap:10px;min-height:50px;padding:0 16px;border-radius:30px;background:#f8e2dc;border:1px solid rgba(107,117,71,.25)}
+.fld>svg{width:20px;height:20px;flex:none;color:var(--ol)}
+#rn{flex:1;min-width:0;border:0;background:transparent;outline:none;font-size:16px}
 #rn::placeholder{color:#a48f84}
-.f-name{top:31.2%}
-html[dir=rtl] .fld{padding-inline-start:4cqw;padding-inline-end:12cqw}
-html[dir=rtl] .f-name,html[dir=rtl] #cntBox{flex-direction:row}
-.f-name .ph{direction:inherit}
-#cntBox{top:39.8%;justify-content:space-between}
-#cntBox .lb{font-size:3.6cqw;color:#8a7a6c}
-.step{display:flex;align-items:center;gap:2.5cqw;direction:ltr}
-.step button{width:7.6cqw;height:7.6cqw;border-radius:50%;border:1px solid rgba(107,117,71,.4);background:rgba(255,255,255,.6);font-size:4.6cqw;line-height:1;color:var(--ol2);cursor:pointer}
-.step b{font:600 5cqw var(--en);color:var(--ol2);min-width:5cqw}
-html[dir=rtl] #cntBox{padding-inline-end:4cqw}
-.yn{position:absolute;top:50.3%;height:6.5%;width:25.5%;border-radius:6cqw;cursor:pointer;display:flex;align-items:flex-end;justify-content:center;padding-bottom:.8cqw;
-  font-size:2.9cqw;color:#7a6a5e;transition:box-shadow .2s,background .2s}
+.lb{flex:1;color:#8a7a6c;font-size:15px}
+.step{display:flex;align-items:center;gap:10px;direction:ltr}
+.step button{width:32px;height:32px;border-radius:50%;border:1px solid rgba(107,117,71,.4);background:#fff8;font-size:19px;line-height:1;color:var(--ol2);cursor:pointer}
+.step b{font:600 20px var(--en);color:var(--ol2);min-width:18px;text-align:center}
+.yns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.yn{position:relative;display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 6px;border-radius:22px;border:1px solid rgba(107,117,71,.3);background:#f8ecdf;cursor:pointer;font-size:14px;color:#6a5f52;text-align:center;transition:.2s}
+.yn.n{background:#f9e3df}
 .yn input{position:absolute;opacity:0;pointer-events:none}
-.yn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-.yn.y{left:23.6%}.yn.n{left:51%}
-html[dir=rtl] .yn.y{left:51%}html[dir=rtl] .yn.n{left:23.6%}
-.yn.on{box-shadow:0 0 0 .6cqw #77824f inset;background:rgba(119,130,79,.08)}
-.err{position:absolute;left:20%;right:20%;top:57.6%;font-size:3.3cqw;color:#a14a4a}
-#send{position:absolute;left:28.5%;right:28.5%;top:61.8%;height:4.8%;border:0;border-radius:6cqw;background:transparent;color:#fff;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font:600 3.8cqw var(--en)}
-html[lang=ar] #send{font:600 3.6cqw var(--ar)}
-#send{justify-content:flex-start;padding-inline-start:24cqw}
-#send[disabled]{opacity:.6}
-#note{position:absolute;left:24%;right:24%;top:68.6%;font-size:3.2cqw;color:var(--ol2);text-decoration:underline;background:none;border:0;cursor:pointer}
-#rm{position:absolute;left:23.6%;right:23.5%;top:68%;height:6.4%;border:1px solid rgba(107,117,71,.35);border-radius:3cqw;background:rgba(255,255,255,.7);padding:1.6cqw 2.6cqw;font-size:3.4cqw;resize:none;outline:none}
-.done{position:absolute;left:21%;right:21%;top:30%;bottom:31%;display:none;flex-direction:column;align-items:center;justify-content:center;background:#fbefe6;border-radius:4cqw}
+.yn i{font-style:normal;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ol);display:grid;place-items:center;color:var(--ol2);font-size:15px}
+.yn.on{box-shadow:0 0 0 2px #77824f;background:#eef0df}.yn.n.on{background:#f6dbd5}
+#note{background:none;border:0;color:var(--ol2);font-size:14px;text-decoration:underline;cursor:pointer}
+#rm{width:100%;min-height:80px;border:1px solid rgba(107,117,71,.3);border-radius:18px;background:#fff9;padding:10px 14px;font-size:15px;outline:none;resize:vertical}
+.err{color:#a14a4a;font-size:14px;min-height:1.1em;text-align:center}
+#send{width:100%;min-height:50px;font-size:16px}#send[disabled]{opacity:.6}
+.done{display:none;margin-top:16px;flex-direction:column;align-items:center}
 .done.on{display:flex;animation:pop .6s cubic-bezier(.2,.9,.3,1.3)}
 @keyframes pop{from{transform:scale(.92);opacity:0}}
-.done svg{width:12cqw;height:12cqw;color:#77824f}
-.done .big{font:400 8cqw/1.3 var(--scr);color:var(--ol2);margin:1cqw 0}
-html[lang=ar] .done .big{font:400 6.4cqw/1.5 var(--ruq)}
-.done .sub{font-size:3.3cqw;color:#7a6a5e;padding:0 4cqw}
-.done .row{display:flex;flex-wrap:wrap;gap:2cqw;justify-content:center;margin-top:3cqw}
-.done .btn{min-height:34px;font-size:13px;padding:0 14px}
-.rsvp-on .fld,.rsvp-on .yn,.rsvp-on #send,.rsvp-on #note,.rsvp-on #rm,.rsvp-on .err{visibility:hidden}
-
+.done svg{width:48px;height:48px;color:#77824f}
+.done .big{font:400 32px/1.3 var(--scr);color:var(--ol2)}html[lang=ar] .done .big{font:400 26px/1.5 var(--ruq)}
+.done .sub{font-size:14px;color:#7a6a5e}
+.done .row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+.rsvp-on #rf{display:none}
 #car{background-image:url(img/car.webp);margin-top:2cqw;-webkit-mask-image:linear-gradient(transparent,#000 7%);mask-image:linear-gradient(transparent,#000 7%)}
 .thanks{font:italic 500 4.6cqw/1.5 var(--en);color:#6b5a4c;white-space:pre-line}html[lang=ar] .thanks{font:500 4.2cqw/1.8 var(--ar);font-style:normal}
 .carn{font:400 10cqw/1.3 var(--scr);color:#5c4d40;white-space:nowrap;text-shadow:0 0 3cqw rgba(255,240,230,.8)}html[lang=ar] .carn{font:400 10cqw/1.5 var(--ruq)}
@@ -231,7 +194,11 @@ footer a{color:var(--ol2)}
   <div class="stage">
     <img class="e-closed" src="img/env-closed.webp" alt="" fetchpriority="high">
     <img class="e-open" src="img/env-open.webp" alt="">
-    <div class="seal"><span data-f="ini"></span></div>
+    <div class="seal"><svg viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round">
+<path d="M50 84C28 82 16 66 18 44"/><path d="M50 84C72 82 84 66 82 44"/></g><g fill="currentColor">
+<ellipse cx="19" cy="52" rx="3.6" ry="8" transform="rotate(-20 19 52)"/><ellipse cx="22" cy="63" rx="3.6" ry="8" transform="rotate(-40 22 63)"/><ellipse cx="29" cy="72" rx="3.6" ry="8" transform="rotate(-60 29 72)"/><ellipse cx="38" cy="79" rx="3.6" ry="8" transform="rotate(-75 38 79)"/><ellipse cx="18" cy="42" rx="3.2" ry="7" transform="rotate(-5 18 42)"/>
+<ellipse cx="81" cy="52" rx="3.6" ry="8" transform="rotate(20 81 52)"/><ellipse cx="78" cy="63" rx="3.6" ry="8" transform="rotate(40 78 63)"/><ellipse cx="71" cy="72" rx="3.6" ry="8" transform="rotate(60 71 72)"/><ellipse cx="62" cy="79" rx="3.6" ry="8" transform="rotate(75 62 79)"/><ellipse cx="82" cy="42" rx="3.2" ry="7" transform="rotate(5 82 42)"/>
+<path transform="translate(50 50) scale(1.15) translate(-50 -50)" d="M50 66C38 58 31 51 31 43c0-6 4.6-10 10-10 4 0 7 2.4 9 5.4 2-3 5-5.4 9-5.4 5.4 0 10 4 10 10 0 8-7 15-19 23z"/></g></svg></div>
     <div class="g-names"><div class="nm" data-f="names"></div><div class="dt" data-f="dots"></div></div>
     <div class="tap" data-t="tap"></div>
     <div class="e-card"><div class="in"><div class="k" data-t="kicker"></div><div class="nm" data-f="names"></div>
@@ -253,64 +220,69 @@ footer a{color:var(--ol2)}
     </div>
   </section>
 
-  <section class="scene" id="count">
-    <div class="t1 rv" data-t="countTitle"></div>
-    <div id="cd">
-      <div class="cb"><b id="cdD">0</b><span data-t="days"></span></div><div class="cb"><b id="cdH">0</b><span data-t="hours"></span></div>
-      <div class="cb"><b id="cdM">0</b><span data-t="mins"></span></div><div class="cb"><b id="cdS">0</b><span data-t="secs"></span></div>
+  <section class="sec" id="count"><div class="pc rv">
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4M8 14h2M12 14h2M16 14h0M8 17h2"/></svg><svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width=".9"><path d="M8 7h40M72 7h40"/><path d="M60 2c3 3 3 7 0 10-3-3-3-7 0-10zM50 7c4-3 7-3 10 0-3 3-6 3-10 0zm20 0c-4-3-7-3-10 0 3 3 6 3 10 0z" fill="currentColor" fill-opacity=".25"/></svg>
+    <div class="ct" data-t="countTitle"></div>
+    <div class="cd" id="cd">
+      <div><b id="cdD">0</b><span data-t="days"></span></div><div><b id="cdH">0</b><span data-t="hours"></span></div>
+      <div><b id="cdM">0</b><span data-t="mins"></span></div><div><b id="cdS">0</b><span data-t="secs"></span></div>
     </div>
     <div class="hide" id="cdDone" data-t="today"></div>
-    <div class="calbox rv d1">
+    <div class="calbox">
       <button class="btn" type="button" id="ics"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span data-t="addCal"></span></button>
       <a class="gl" id="gcal" target="_blank" rel="noopener">Google Calendar</a>
     </div>
-  </section>
+  </div></section>
 
-  <section class="scene" id="program">
-    <div class="t1 rv"><div class="h" data-t="progTitle"></div></div>
+  <section class="sec" id="program"><div class="pc rv">
+    <h2 data-t="progTitle"></h2><svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width=".9"><path d="M8 7h40M72 7h40"/><path d="M60 2c3 3 3 7 0 10-3-3-3-7 0-10zM50 7c4-3 7-3 10 0-3 3-6 3-10 0zm20 0c-4-3-7-3-10 0 3 3 6 3 10 0z" fill="currentColor" fill-opacity=".25"/></svg>
     <div class="tl" id="tl"></div>
-  </section>
+  </div></section>
 
-  <section class="scene" id="place">
-    <div class="t1 rv" data-t="venueTitle"></div>
-    <a class="maplink" id="mapLink" target="_blank" rel="noopener" aria-label="Map"><div class="vlabel rv d1"><div class="vn" data-f="venue"></div><div class="va" data-f="addr"></div></div></a>
-    <a id="mapBtn" target="_blank" rel="noopener"><span data-t="map"></span></a>
-  </section>
+  <section class="sec" id="place"><div class="pc rv">
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 22s7-6.6 7-12.2A7 7 0 0 0 5 9.8C5 15.4 12 22 12 22z"/><circle cx="12" cy="9.8" r="2.6"/></svg><h2 data-t="venueTitle"></h2><svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width=".9"><path d="M8 7h40M72 7h40"/><path d="M60 2c3 3 3 7 0 10-3-3-3-7 0-10zM50 7c4-3 7-3 10 0-3 3-6 3-10 0zm20 0c-4-3-7-3-10 0 3 3 6 3 10 0z" fill="currentColor" fill-opacity=".25"/></svg>
+    <div class="vn" data-f="venue"></div><div class="va" data-f="addr"></div>
+    <a class="maplink" id="mapLink" target="_blank" rel="noopener" aria-label="Map"><img src="img/map.webp" alt="" loading="lazy"></a>
+    <a class="btn fill" id="mapBtn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11.5 21 3l-8.5 18-2-7.5z"/></svg><span data-t="map"></span></a>
+  </div></section>
 
-  <section class="plain" id="dress">
-    <img class="corner tr" src="img/peony-tr.webp" alt="" loading="lazy">
-    <h2 class="rv" data-t="dressTitle"></h2>
-    <svg class="orn rv d1" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width=".9"><path d="M8 7h40M72 7h40"/><path d="M60 2c3 3 3 7 0 10-3-3-3-7 0-10zM50 7c4-3 7-3 10 0-3 3-6 3-10 0zm20 0c-4-3-7-3-10 0 3 3 6 3 10 0z" fill="currentColor" fill-opacity=".25"/></svg>
-    <div class="pal rv d1" id="palT"></div>
-    <div class="pn rv d1" data-f="palNames"></div>
-    <div class="dots rv d2" id="dots"></div>
-    <p class="dnote rv d3" data-f="dressNote"></p>
-    <img class="corner bl" src="img/peony-bl.webp" alt="" loading="lazy">
-  </section>
+  <section class="sec" id="dress"><div class="pc rv">
+    <h2 data-t="dressTitle"></h2><svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width=".9"><path d="M8 7h40M72 7h40"/><path d="M60 2c3 3 3 7 0 10-3-3-3-7 0-10zM50 7c4-3 7-3 10 0-3 3-6 3-10 0zm20 0c-4-3-7-3-10 0 3 3 6 3 10 0z" fill="currentColor" fill-opacity=".25"/></svg>
+    <div class="pal" id="palT"></div>
+    <div class="pn" data-f="palNames"></div>
+    <div class="dots" id="dots"></div>
+    <p class="dnote" data-f="dressNote"></p>
+  </div></section>
 
-  <section class="scene" id="closing">
-    <div class="ov"><div class="h rv" data-t="closeTitle"></div><div class="cl rv d1" id="cl" style="margin-top:2cqw"></div></div>
-    <div class="sign rv d2" data-f="names"></div>
-  </section>
+  <section class="sec" id="closing"><div class="pc rv">
+    <svg class="ico" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="14" r="7"/><circle cx="20" cy="14" r="7"/><path d="M18 5l2-2.5 2 2.5-2 2z"/></svg><svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width=".9"><path d="M8 7h40M72 7h40"/><path d="M60 2c3 3 3 7 0 10-3-3-3-7 0-10zM50 7c4-3 7-3 10 0-3 3-6 3-10 0zm20 0c-4-3-7-3-10 0 3 3 6 3 10 0z" fill="currentColor" fill-opacity=".25"/></svg>
+    <h2 data-t="closeTitle"></h2>
+    <div class="cl" id="cl"></div>
+    <div class="heart">♡</div>
+    <div class="sign" data-f="names"></div>
+  </div></section>
 
-  <section class="scene" id="rsvp">
-    <div class="t1 rv"><div class="h" data-t="rsvpTitle"></div></div>
+  <section class="sec" id="rsvp"><div class="pc rv">
+    <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="1.5"/><path d="m3.5 7 8.5 6.5L20.5 7"/><path d="M12 16.6c-1.4-1-2.3-1.7-2.3-2.6 0-.7.6-1.2 1.2-1.2.5 0 .9.3 1.1.6.2-.3.6-.6 1.1-.6.6 0 1.2.5 1.2 1.2 0 .9-.9 1.6-2.3 2.6z" fill="currentColor" stroke="none" opacity=".7"/></svg><svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width=".9"><path d="M8 7h40M72 7h40"/><path d="M60 2c3 3 3 7 0 10-3-3-3-7 0-10zM50 7c4-3 7-3 10 0-3 3-6 3-10 0zm20 0c-4-3-7-3-10 0 3 3 6 3 10 0z" fill="currentColor" fill-opacity=".25"/></svg>
+    <h2 data-t="rsvpTitle"></h2>
+    <p class="rsub" data-t="rsvpSub"></p>
     <form id="rf" novalidate>
-      <label class="fld f-name"><input type="text" id="rn" maxlength="60" autocomplete="name"></label>
-      <div class="fld" id="cntBox"><span class="lb" data-t="count"></span><div class="step"><button type="button" id="minus" aria-label="-">−</button><b id="cnt">1</b><button type="button" id="plus" aria-label="+">+</button></div></div>
-      <label class="yn y on"><input type="radio" name="att" value="1" checked><span data-t="yes"></span></label>
-      <label class="yn n"><input type="radio" name="att" value="0"><span data-t="no"></span></label>
-      <div class="err" id="err" role="alert"></div>
-      <button id="send" type="submit"><span data-t="send"></span></button>
+      <label class="fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.2-6.5 8-6.5s7 2 8 6.5"/></svg><input type="text" id="rn" maxlength="60" autocomplete="name"></label>
+      <div class="yns"><label class="yn y on"><input type="radio" name="att" value="1" checked><i>✓</i><span data-t="yes"></span></label>
+      <label class="yn n"><input type="radio" name="att" value="0"><i>✕</i><span data-t="no"></span></label></div>
+      <div class="fld" id="cntBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3.5"/><circle cx="16.5" cy="9" r="2.8"/><path d="M2.5 20c.8-3.8 3.3-5.5 6.5-5.5s5.7 1.7 6.5 5.5M15 14.6c3.3-.6 5.6.9 6.5 4.4"/></svg><span class="lb" data-t="count"></span><div class="step"><button type="button" id="minus" aria-label="-">−</button><b id="cnt">1</b><button type="button" id="plus" aria-label="+">+</button></div></div>
       <button type="button" id="note" data-t="addNote"></button>
       <textarea id="rm" class="hide" maxlength="300"></textarea>
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn fill" id="send" type="submit"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11.5 21 3l-6.5 18-3-7.5L3 11.5zm8.5 2 2 5 4.3-12.1-11.3 5.4 5 1.7z"/></svg><span data-t="send"></span></button>
     </form>
     <div class="done" id="done" role="status">
       <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="21"/><path d="m15 24.5 6 6 12-13"/></svg>
       <div class="big" id="dBig"></div><p class="sub" id="dSub"></p>
       <div class="row"><a class="btn hide" id="dWa" target="_blank" rel="noopener"><span data-t="waToo"></span></a><button class="btn" type="button" id="dEdit"><span data-t="edit"></span></button></div>
     </div>
-  </section>
+  </div></section>
+
   <section class="scene" id="car">
     <div class="ov" style="top:14%;bottom:auto;left:14%;right:14%"><div class="thanks rv" data-t="thanks"></div><div class="carn rv d1" data-f="names"></div></div>
   </section>
