@@ -75,7 +75,7 @@ html[lang=ar] .e-card .nm{font:400 11cqw/1.5 var(--ruq)}
 main{position:relative;max-width:520px;margin:0 auto;padding-bottom:60px}
 .scene{position:relative;width:100%;aspect-ratio:941/1672;background:center/100% 100% no-repeat;container-type:inline-size;text-align:center}
 .scene+.scene{margin-top:-9cqw}
-#welcome{margin-bottom:-6cqw}
+
 .ov{position:absolute;left:21%;right:21%;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .rv{opacity:0;transform:translateY(18px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
@@ -85,20 +85,27 @@ main{position:relative;max-width:520px;margin:0 auto;padding-bottom:60px}
 html[lang=ar] .h{font:400 6.2cqw/1.5 var(--ruq)}
 
 /* 2 · welcome (chiffon & chandelier) */
-#welcome{background-image:url(img/arch.webp)}
-#welcome .ov{top:31%;bottom:21%;left:20%;right:20%}
-.fam{font:italic 500 4.4cqw var(--en);color:#7d8857}
-html[lang=ar] .fam{font:400 4.6cqw var(--ruq);font-style:normal}
-.intro{font-size:3.7cqw;line-height:1.6;color:#5b5446;white-space:pre-line;margin-top:2cqw}
-html[lang=ar] .intro{font-size:3.4cqw;line-height:1.9}
-.names{margin:3cqw -6cqw 0;font:400 12.5cqw/1.25 var(--scr);color:var(--ol2);white-space:nowrap}
+#welcome{position:relative;min-height:100svh;padding:0 0 90px;text-align:center;container-type:inline-size;overflow:hidden;background:#f8cfca;display:flex;flex-direction:column;justify-content:flex-start;
+  -webkit-mask-image:linear-gradient(#000 88%,transparent);mask-image:linear-gradient(#000 88%,transparent)}
+#welcome .ov{margin-top:3cqw!important}
+.chw{position:relative;width:86%;margin:0 auto;animation:sway 7s ease-in-out infinite;transform-origin:50% 0}
+.ch{display:block;width:100%}
+@keyframes sway{50%{transform:rotate(1.2deg)}}
+.wc{position:absolute;pointer-events:none;width:46%}
+.wc.tr{top:-10px;right:-14%}.wc.bl{bottom:-10px;left:-14%}
+#welcome .ov{position:relative;left:auto;right:auto;margin:0 14%}
+.fam{font:italic 500 5.4cqw var(--en);color:#7d8857}
+html[lang=ar] .fam{font:400 5.6cqw var(--ruq);font-style:normal}
+.intro{font-size:4.4cqw;line-height:1.6;color:#5b5446;white-space:pre-line;margin-top:2cqw}
+html[lang=ar] .intro{font-size:4.1cqw;line-height:1.9}
+.names{margin:4cqw -8cqw 0;font:400 15cqw/1.25 var(--scr);color:var(--ol2);white-space:nowrap}
 .names .amp{font-size:.6em;color:var(--rose);margin:0 .1em}
-html[lang=ar] .names{font:400 11cqw/1.5 var(--ruq)}
-.getting{font:italic 500 4.8cqw var(--en);color:#7d8857}
-html[lang=ar] .getting{font:400 4.8cqw var(--ruq);font-style:normal}
-.wdate{font:500 4.4cqw var(--en);letter-spacing:.12em;color:var(--ol2);margin-top:1cqw}
-html[lang=ar] .wdate{font:600 4cqw var(--ar);letter-spacing:0}
-.at{font-size:3.8cqw;color:#7a6a5e}
+html[lang=ar] .names{font:400 13cqw/1.5 var(--ruq)}
+.getting{font:italic 500 5.8cqw var(--en);color:#7d8857}
+html[lang=ar] .getting{font:400 5.6cqw var(--ruq);font-style:normal}
+.wdate{font:500 5.4cqw var(--en);letter-spacing:.12em;color:var(--ol2);margin-top:1cqw}
+html[lang=ar] .wdate{font:600 4.8cqw var(--ar);letter-spacing:0}
+.at{font-size:4.4cqw;color:#7a6a5e}
 
 /* welcome: words come alive one after another */
 #welcome .w,#intro .il{opacity:0}
@@ -123,6 +130,7 @@ html[dir=rtl] #welcome .names{clip-path:inset(-30% 0 -30% 100%);-webkit-clip-pat
 @keyframes fade{to{opacity:1}}@keyframes draw{to{stroke-dashoffset:0}}
 @keyframes glow{50%{text-shadow:0 0 18px rgba(255,236,200,.95)}}
 .spk{position:absolute;inset:0;pointer-events:none;z-index:1}
+.chw .spk i{width:4.4cqw;height:4.4cqw}
 .spk i{position:absolute;width:3.2cqw;height:3.2cqw;margin:-1.6cqw;background:radial-gradient(circle,#fff 0 12%,rgba(255,244,214,.9) 22%,transparent 60%);
   clip-path:polygon(50% 0,58% 42%,100% 50%,58% 58%,50% 100%,42% 58%,0 50%,42% 42%);animation:tw 2.8s ease-in-out infinite;opacity:0}
 @keyframes tw{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:1;transform:scale(1.2) rotate(45deg)}}
@@ -242,8 +250,10 @@ footer a{color:var(--ol2)}
 </div>
 
 <main id="main" aria-hidden="true">
-  <section class="scene" id="welcome">
-    <div class="spk" aria-hidden="true"><i style="left:34%;top:12%"></i><i style="left:62%;top:9%;animation-delay:.7s"></i><i style="left:45%;top:21%;animation-delay:1.3s"></i><i style="left:57%;top:24%;animation-delay:.4s"></i><i style="left:29%;top:19%;animation-delay:1.9s"></i><i style="left:70%;top:17%;animation-delay:1.1s"></i><i style="left:50%;top:6%;animation-delay:2.4s"></i><i style="left:40%;top:28%;animation-delay:1.6s"></i></div>
+  <section id="welcome">
+    <img class="wc tr" src="img/peony-tr.webp" alt=""><img class="wc bl" src="img/peony-bl.webp" alt="">
+    <div class="chw"><img class="ch" src="img/chandelier.webp" alt="">
+    <div class="spk" aria-hidden="true"><i style="left:34%;top:12%"></i><i style="left:62%;top:9%;animation-delay:.7s"></i><i style="left:45%;top:21%;animation-delay:1.3s"></i><i style="left:57%;top:24%;animation-delay:.4s"></i><i style="left:29%;top:19%;animation-delay:1.9s"></i><i style="left:70%;top:17%;animation-delay:1.1s"></i><i style="left:50%;top:6%;animation-delay:2.4s"></i><i style="left:40%;top:28%;animation-delay:1.6s"></i></div></div>
     <div class="ov">
       <div class="fam w" data-t="fam"></div>
       <p class="intro" id="intro" data-f="intro"></p>
