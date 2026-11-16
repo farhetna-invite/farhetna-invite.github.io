@@ -65,6 +65,16 @@ html[lang=en] .tapT{font:italic 500 18px var(--en)}
 html[lang=en] .hn .n{font:400 clamp(46px,13vw,64px)/1.2 var(--scr)}
 .hn .s{font-size:18px;margin-top:2px;color:#4c5966}
 html[lang=en] .hn .s{font:italic 500 21px var(--en);letter-spacing:.08em}
+.hq{margin:22px auto 0;max-width:300px;padding:0 18px}
+.hq .orn{display:block;width:150px;height:18px;margin:0 auto 12px;color:var(--blue3)}
+.hq .q{font:400 27px/1.6 var(--ruq);color:#3d4a58}
+.hq .q2{font:400 16px/1.8 var(--ar);color:var(--blue3);margin-top:6px}
+html[lang=en] .hq .q{font:italic 500 20px/1.45 var(--en)}
+html[lang=en] .hq .q2{font:italic 400 16px/1.5 var(--en);letter-spacing:.02em}
+.hq>*{opacity:0;transform:translateY(10px);filter:blur(3px);transition:opacity 1.2s ease,transform 1.2s ease,filter 1.2s ease}
+#hero.on .hq>*{opacity:1;transform:none;filter:none}
+#hero.on .hq .orn{transition-delay:1.1s}#hero.on .hq .q{transition-delay:1.6s}#hero.on .hq .q2{transition-delay:2.3s}
+@media (prefers-reduced-motion:reduce){.hq>*{opacity:1;transform:none;filter:none;transition:none}}
 
 /* 3 · scratch date */
 #date{padding:30px 22px 40px;text-align:center}
@@ -200,7 +210,7 @@ footer a{color:var(--blue3)}
 </div>
 
 <main id="main" aria-hidden="true">
-  <section id="hero"><div class="hn"><div class="n" id="hNames"></div><div class="s" data-t="marrying"></div></div></section>
+  <section id="hero"><div class="hn"><div class="n" id="hNames"></div><div class="s" data-t="marrying"></div><div class="hq"><svg class="orn" viewBox="0 0 150 18" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M4 9H58M92 9H146" opacity=".55"/><path d="M75 14.5c-5-3.6-8-6.2-8-9a3.6 3.6 0 0 1 8-1.6A3.6 3.6 0 0 1 83 5.5c0 2.8-3 5.4-8 9z" fill="currentColor" fill-opacity=".18"/><circle cx="62" cy="9" r="1.6" fill="currentColor"/><circle cx="88" cy="9" r="1.6" fill="currentColor"/></svg><p class="q" data-t="heroQ"></p><p class="q2" data-t="heroQ2"></p></div></div></section>
 
   <section id="date">
     <h2 class="rv" data-t="dateT"></h2>
@@ -294,7 +304,7 @@ var $=function(id){return document.getElementById(id)};
 var AD="٠١٢٣٤٥٦٧٨٩",arN=function(s){return String(s).replace(/\d/g,function(d){return AD[d]})};
 var lang=(function(){var q=location.search.match(/[?&]lang=(ar|en)/);return q?q[1]:(D.lang==="en"?"en":"ar")})();
 var T={
-ar:{tap:"اضغط للفتح",marrying:"يتزوّجان",dateT:"التاريخ",scratch:"اخدشوا عشان يظهر التاريخ",day:"اليوم",month:"الشهر",year:"السنة",addCal:"أضف للتقويم",
+ar:{tap:"اضغط للفتح",heroQ:"جمعنا الحب على أجمل صدفة",heroQ2:"ويكتمل فرحنا بوجودكم معانا",marrying:"يتزوّجان",dateT:"التاريخ",scratch:"اخدشوا عشان يظهر التاريخ",day:"اليوم",month:"الشهر",year:"السنة",addCal:"أضف للتقويم",
   dear:"أعزائنا الأهل والأصدقاء،",letter:"إحنا بنستعد نقول «قبلت»، وحاسّين بالامتنان لوجود ناس طيبين زيكم في حياتنا.\n\nوجودكم معانا هيكون أجمل هدية، ويسعدنا تشاركونا بداية حياتنا الجديدة مع بعض.",
   progT:"برنامج حفل الزفاف",placeT:"المكان",openMap:"افتح في خرائط جوجل",dressT:"الزي المقترح",dressTxt:"يسعدنا لو اخترتوا لبس السهرة بألوان متناسقة مع ألوان الفرح.",
   palT:"الألوان<br>المقترحة",ladies:"السيدات:",ladiesT:"يُفضّل فستان سهرة طويل بألوان هادية.",gents:"السادة:",gentsT:"يُفضّل بدلة رسمية أو كلاسيك مع حذاء أنيق.",
@@ -303,7 +313,7 @@ ar:{tap:"اضغط للفتح",marrying:"يتزوّجان",dateT:"التاريخ"
   send:"إرسال الرد",sending:"بنبعت ردك…",errName:"اكتب اسمك من فضلك",errNet:"معرفناش نسجّل الرد. اتأكد من النت وجرب تاني.",okYes:"مستنيينك 🤍",okNo:"هتوحشنا",
   okSub:"شكرًا إنك عرّفتنا. تقدر تعدّل ردك في أي وقت.",waToo:"ابعته كمان على واتساب",edit:"تعديل الرد",demoNote:"دي دعوة تجريبية، فالرد مش بيتسجل. في الدعوة الحقيقية بيوصل للعروسين.",
   prevNote:"ده عرض معاينة، فالرد مش بيتسجل.",toWa:"هنحوّلك للواتساب عشان تبعت ردك للعروسين…"},
-en:{tap:"Tap to open",marrying:"are getting married",dateT:"The Date",scratch:"Scratch to reveal the date",day:"Day",month:"Month",year:"Year",addCal:"Add to calendar",
+en:{tap:"Tap to open",heroQ:"Love brought us together by the sweetest chance",heroQ2:"and our joy is complete with you there",marrying:"are getting married",dateT:"The Date",scratch:"Scratch to reveal the date",day:"Day",month:"Month",year:"Year",addCal:"Add to calendar",
   dear:"Dear family and friends,",letter:"As we get ready to say “I do”, our hearts are full of gratitude for the wonderful people in our lives.\n\nYour presence will be the most beautiful gift as we begin our new life together.",
   progT:"Order of the Day",placeT:"The Venue",openMap:"Open in Google Maps",dressT:"Dress Code",dressTxt:"We’d love to see you in evening wear that matches the colours of our day.",
   palT:"Suggested<br>colours",ladies:"Ladies:",ladiesT:"a long evening gown in soft tones.",gents:"Gentlemen:",gentsT:"a formal or classic suit with elegant shoes.",
@@ -389,7 +399,7 @@ function petals(n){if(reduce)return;var box=$("fall");for(var i=0;i<n;i++)(funct
   p.style.left=(Math.random()*100)+"vw";p.style.setProperty("--dx",(Math.random()*140-70)+"px");p.style.setProperty("--r",(Math.random()*720-360)+"deg");p.style.animationDuration=dur+"s";box.appendChild(p);setTimeout(function(){p.remove()},dur*1000+200)},i*500)})(i)}
 
 /* ---------- open ---------- */
-var opened=false;function openGate(){if(opened)return;opened=true;var g=$("gate");g.classList.add("open");if(D.music!=="none")setMu(true);if(navigator.vibrate)navigator.vibrate(12);
+var opened=false;function openGate(){if(opened)return;opened=true;var g=$("gate");g.classList.add("open");$("hero").classList.add("on");if(D.music!=="none")setMu(true);if(navigator.vibrate)navigator.vibrate(12);
   document.body.classList.remove("locked");$("main").removeAttribute("aria-hidden");
   setTimeout(function(){g.classList.add("gone");paintAll();petals(10);watch()},reduce?200:1500);setInterval(function(){if(!document.hidden)petals(3)},14000)}
 $("gate").addEventListener("click",openGate);$("gate").addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();openGate()}});
