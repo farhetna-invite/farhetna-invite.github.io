@@ -55,6 +55,7 @@ body.smp .book{height:calc(100dvh - 120px);width:min(100vw,calc((100dvh - 120px)
 <script src="music.js"></script>
 <script src="compose.js"></script>
 <script src="reader.js"></script>
+<script>{const g=(location.hash.match(/^#gift-([a-z0-9-]+)$/)||[])[1];if(g)document.write('<script src="gifts/'+g+'/data.js"><\/script>')}</script>
 <script>if(/^#sample/.test(location.hash))document.write('<script src="sample.js"><\/script>')</script>
 <script>
 (()=>{
@@ -69,6 +70,9 @@ if(/^#sample/.test(location.hash)){const en=location.hash==="#sample-en",S=windo
   lg.textContent=en?"ع":"EN";lg.href=en?"#sample":"#sample-en";if(en){mk.textContent="✨ Design yours for free";b.querySelector(".bk").textContent="←"}
   lg.onclick=e=>{e.preventDefault();location.replace(lg.href);location.reload()};
   document.getElementById("open").addEventListener("click",()=>{document.body.classList.add("smp");b.classList.add("on")});return}
+/* hand-made gift issues: a static file per gift, opened only by its private link */
+if(/^#gift-/.test(location.hash)){const G=window.MAG_GIFT;if(!G){msg("المجلة دي مش متاحة دلوقتي.");return}
+  const c=G.ar;MAG_MOUNT(c,"emerald",c.intro.t,{autoMusic:true});return}
 /* preview from the builder (same device, nothing published) */
 if(location.hash==="#preview"){addEventListener("message",e=>{if(e.origin!==location.origin||!e.data||e.data.t!=="mag-preview")return;show(e.data.p,{tag:"معاينة — مش منشورة"})});
   (window.opener||window.parent).postMessage({t:"mag-ready"},location.origin);return}

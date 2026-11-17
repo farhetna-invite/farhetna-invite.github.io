@@ -17,7 +17,7 @@ const book=$("book");const P=list.map((p,i)=>{const d=document.createElement("di
 let cur=0,busy=false;
 function cnt(){$("cnt").textContent=num(cur+1)+" / "+num(P.length);$("prev").style.opacity=cur?1:.35;$("next").style.opacity=cur<P.length-1?1:.35;
   [...$("tocL").children].forEach((li,k)=>li.classList.toggle("on",k===cur))}
-function go(to){if(busy||to<0||to>=P.length||to===cur)return;busy=true;stopAudio();const a=P[cur],b=P[to];
+function go(to){if(busy||to<0||to>=P.length||to===cur)return;busy=true;stopAudio();book.querySelectorAll("video").forEach(v=>{try{v.pause()}catch(e){}});const a=P[cur],b=P[to];
   if(to>cur){b.hidden=false;b.style.zIndex=1;a.style.zIndex=2;a.classList.add("out");setTimeout(()=>{a.classList.remove("out");a.hidden=true;a.style.zIndex="";b.style.zIndex="";cur=to;busy=false;cnt()},900)}
   else{b.hidden=false;b.style.zIndex=2;a.style.zIndex=1;b.classList.add("in");setTimeout(()=>{b.classList.remove("in");a.hidden=true;a.style.zIndex="";b.style.zIndex="";cur=to;busy=false;cnt()},900)}}
 $("next").onclick=()=>go(cur+1);$("prev").onclick=()=>go(cur-1);

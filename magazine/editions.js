@@ -38,6 +38,9 @@ const EDITIONS={
       ded:(p)=>`<div class="pg plain ded"><div class="bigq">“</div><p>${p.msg}</p><div class="sig">${p.sig}</div></div>`,
       voices:(p,i,L)=>`<div class="pg vnp"><div class="sechd" style="border-color:rgba(232,207,148,.45);color:var(--gold2)"><span>${p.kick}</span></div><h3>${p.title}</h3><p style="font-size:var(--fs-s);color:#cbbf9f">${p.sub}</p>
         ${p.items.map((t,k)=>`<div class="vn" data-src="${t.src||""}"><button aria-label="play"><svg viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z"/></svg></button><div class="w"><b>${t.n}</b><div class="wave">${Array.from({length:30},(_,j)=>`<i style="height:${22+Math.abs(Math.sin(j*1.7+k))*78}%"></i>`).join("")}</div></div><span class="tm" style="font-family:var(--cor);min-width:9cqw;text-align:center">${t.t}</span></div>`).join("")}${p.sample?`<p class="smp">${L.sample}</p>`:""}</div>`,
+      video:(p,i)=>`<div class="pg vid"><div class="sechd"><span>${p.kick}</span><b>${String(i+1).padStart(2,"0")}</b></div><h3>${p.title}</h3>
+        <div class="vbox"><video src="${p.src}" poster="${p.poster||""}" controls playsinline preload="metadata"></video></div>${p.note?`<div class="note">${p.note}</div>`:""}
+        <div class="folio"><span>MY MAGAZINE</span><span>${String(i+1).padStart(2,"0")}</span></div></div>`,
       fin:(p,i,L)=>`<div class="pg fin"><div class="ph" style="background-image:url(${p.img})"></div><p>${p.msg}</p><div class="end">${p.end}</div><button class="again" data-go="0">${L.again}</button></div>`
     }
   }
