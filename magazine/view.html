@@ -55,7 +55,7 @@ body.smp .book{height:calc(100dvh - 120px);width:min(100vw,calc((100dvh - 120px)
 <script src="music.js"></script>
 <script src="compose.js"></script>
 <script src="reader.js?v=2"></script>
-<script>{const g=(location.hash.match(/^#gift-([a-z0-9-]+)$/)||[])[1];if(g)document.write('<script src="gifts/'+g+'/data.js"><\/script>')}</script>
+<script>{const g=(location.hash.match(/^#gift-([a-z0-9-]+)$/)||[])[1];if(g)document.write('<script src="gifts/'+g+'/data.js?t='+Date.now()+'"><\/script>')}</script>
 <script>if(/^#sample/.test(location.hash))document.write('<script src="sample.js"><\/script>')</script>
 <script>
 (()=>{
