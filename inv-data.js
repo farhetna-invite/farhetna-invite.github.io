@@ -166,7 +166,7 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
     var a=document.createElement("a");a.id="fhBack";a.href="../index.html#designs";a.setAttribute("aria-label","رجوع للتصاميم");
     a.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg><span>التصاميم</span>';
     var s=document.createElement("style");
-    s.textContent='#fhBack{position:fixed;z-index:2147483000;left:14px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:4px;height:38px;padding:0 14px 0 10px;border-radius:999px;background:rgba(251,246,240,.92);color:#4a262d;font:500 14px "Noto Naskh Arabic",system-ui,sans-serif;text-decoration:none;direction:rtl;box-shadow:0 6px 16px -6px rgba(0,0,0,.35),inset 0 0 0 1px rgba(109,55,66,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fhIn .6s ease 1s both}'+
+    s.textContent='#fhBack{position:fixed;z-index:2147483000;left:14px;bottom:calc(16px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:4px;height:38px;padding:0 14px 0 10px;border-radius:999px;background:rgba(251,246,240,.92);color:#3c4733;font:500 14px "Noto Naskh Arabic",system-ui,sans-serif;text-decoration:none;direction:rtl;box-shadow:0 6px 16px -6px rgba(0,0,0,.35),inset 0 0 0 1px rgba(85,104,74,.25);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fhIn .6s ease 1s both}'+
       '#fhBack svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}'+
       '#fhBack:active{transform:scale(.95)}@keyframes fhIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}'+
       '@media (prefers-reduced-motion:reduce){#fhBack{animation:none}}';
