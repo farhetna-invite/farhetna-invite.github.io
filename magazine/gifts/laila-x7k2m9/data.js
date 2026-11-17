@@ -11,3 +11,9 @@ var st=document.createElement("style");st.textContent='.ed-emerald .vid{backgrou
 /* when the video plays, the background music steps aside */
 document.addEventListener("play",function(e){if(e.target&&e.target.tagName==="VIDEO"){var b=document.getElementById("musBtn");if(b&&b.classList.contains("on"))b.click()}},true);
 (function(){var st=document.createElement("style");st.textContent='.songbtn{display:inline-block;margin-top:4cqw;padding:2.4cqw 5cqw;border-radius:99px;border:1px solid rgba(232,207,148,.6);color:#e8cf94;font:600 4.2cqw/1.2 "Noto Naskh Arabic",serif;text-decoration:none;background:rgba(232,207,148,.08)}';document.head.appendChild(st)})();
+/* a small "listen" pill on every page that opens the song on YouTube */
+(function(){function add(){if(document.getElementById("songPill"))return;var a=document.createElement("a");a.id="songPill";a.href="https://youtu.be/wtGnenSS9_o";a.target="_blank";a.rel="noopener";a.textContent="🎵 اسمعي دي";
+a.addEventListener("click",function(){var b=document.getElementById("musBtn");if(b&&b.classList.contains("on"))b.click()});
+var st=document.createElement("style");st.textContent='#songPill{position:fixed;z-index:50;top:max(8px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);padding:4px 12px;font-size:12px!important;border-radius:99px;background:rgba(15,42,34,.82);border:1px solid rgba(232,207,148,.55);color:#e8cf94;font:600 13px "Noto Naskh Arabic",serif;text-decoration:none;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .6s}body.opened #songPill{opacity:1;pointer-events:auto}';
+document.head.appendChild(st);document.body.appendChild(a);var o=document.getElementById("open");if(o)o.addEventListener("click",function(){document.body.classList.add("opened")})}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",add);else add()})();
