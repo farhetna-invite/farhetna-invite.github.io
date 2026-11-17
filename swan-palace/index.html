@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Swan Palace · فرحتنا</title>
+<meta name="theme-color" content="#f3e2d3">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="preload" as="image" href="img/envelope.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Amiri+Quran&family=Aref+Ruqaa:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#b47a7c;--rose2:#9c6466;--ink:#6e5548;--mute:#9a8173;--line:rgba(156,100,102,.3);--paper:#f3e2d3;
+  --ar:"Noto Naskh Arabic",serif;--ruq:"Aref Ruqaa","Noto Naskh Arabic",serif;--en:"Cormorant Garamond",Georgia,serif;--scr:"Pinyon Script","Cormorant Garamond",cursive;
+  --ease:cubic-bezier(.45,.05,.2,1)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;font-feature-settings:"lnum" 1}
+html,body{height:100%;background:var(--paper);overflow:hidden;overscroll-behavior:none}
+body{font-family:var(--ar);color:var(--ink)}
+html[lang=en] body{font-family:var(--en)}
+
+/* every envelope layer shares one 941×1672 stage that covers the screen */
+.view{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.stg{position:absolute;left:50%;top:50%;width:min(100vw,100svh*941/1672);aspect-ratio:941/1672;transform:translate(-50%,-50%)}
+.lay{position:absolute;inset:0;background:no-repeat top center/100% auto}
+/* the envelope is shown whole; the spare space above/below is the same paper, softly blurred */
+.bl{position:absolute;inset:-40px;background:no-repeat center/cover;filter:blur(22px) saturate(.95);transform:scale(1.08)}
+#vClosed .bl{background-image:url(img/envelope.webp);transition:opacity 1.3s ease .5s}
+#vBack .bl{background-image:url(img/open.webp);transition:opacity 1.6s ease .6s}
+#vClosed.drop .bl{opacity:0}
+body.rise #vBack .bl{opacity:0}
+#vBack{z-index:1}#s3{z-index:2}#vFront{z-index:3}#vClosed{z-index:4}
+
+/* ---------- opened envelope (empty inside + pocket + raised flap) ---------- */
+.eb{background-image:url(img/open.webp)}
+#vFront .ef,#vFront .ep{background-image:url(img/open.webp)}
+#vFront .ef{clip-path:polygon(0.00% 0.00%,0.00% 1.20%,0.64% 1.20%,1.28% 1.20%,1.91% 1.20%,2.55% 1.20%,3.19% 1.20%,3.83% 1.20%,4.46% 3.17%,5.10% 3.53%,5.74% 3.77%,6.38% 4.01%,7.01% 4.19%,7.65% 4.25%,8.29% 4.84%,8.93% 5.38%,9.56% 5.92%,10.20% 6.28%,10.84% 6.52%,11.48% 6.76%,12.11% 6.94%,12.75% 7.06%,13.39% 7.12%,14.03% 7.18%,14.67% 7.18%,15.30% 7.18%,15.94% 7.18%,16.58% 7.42%,17.22% 7.78%,17.85% 8.13%,18.49% 8.37%,19.13% 8.55%,19.77% 8.73%,20.40% 8.91%,21.04% 8.97%,21.68% 9.03%,22.32% 9.09%,22.95% 9.09%,23.59% 9.09%,24.23% 9.09%,24.87% 9.03%,25.50% 8.91%,26.14% 8.79%,26.78% 8.79%,27.42% 8.79%,28.06% 8.97%,28.69% 9.27%,29.33% 9.57%,29.97% 9.75%,30.61% 9.93%,31.24% 10.05%,31.88% 10.17%,32.52% 10.23%,33.16% 10.35%,33.79% 10.35%,34.43% 10.35%,35.07% 10.35%,35.71% 10.29%,36.34% 10.29%,36.98% 10.17%,37.62% 10.05%,38.26% 9.87%,38.89% 9.69%,39.53% 9.69%,40.17% 9.69%,40.81% 9.99%,41.45% 10.23%,42.08% 10.47%,42.72% 10.71%,43.36% 10.83%,44.00% 11.00%,44.63% 11.12%,45.27% 11.24%,45.91% 11.30%,46.55% 11.42%,47.18% 11.48%,47.82% 11.48%,48.46% 11.54%,49.10% 11.54%,49.73% 11.54%,50.37% 11.54%,51.01% 11.54%,51.65% 11.54%,52.28% 11.48%,52.92% 11.42%,53.56% 11.36%,54.20% 11.24%,54.84% 11.18%,55.47% 11.06%,56.11% 10.89%,56.75% 10.77%,57.39% 10.53%,58.02% 10.35%,58.66% 10.17%,59.30% 9.87%,59.94% 9.81%,60.57% 9.81%,61.21% 9.81%,61.85% 9.99%,62.49% 10.11%,63.12% 10.17%,63.76% 10.29%,64.40% 10.35%,65.04% 10.35%,65.67% 10.35%,66.31% 10.29%,66.95% 10.23%,67.59% 10.17%,68.23% 10.11%,68.86% 9.99%,69.50% 9.81%,70.14% 9.63%,70.78% 9.45%,71.41% 9.15%,72.05% 8.85%,72.69% 8.85%,73.33% 8.85%,73.96% 8.85%,74.60% 8.97%,75.24% 9.03%,75.88% 9.09%,76.51% 9.09%,77.15% 9.09%,77.79% 9.03%,78.43% 9.03%,79.06% 8.91%,79.70% 8.85%,80.34% 8.67%,80.98% 8.49%,81.62% 8.25%,82.25% 7.95%,82.89% 7.66%,83.53% 7.30%,84.17% 7.24%,84.80% 7.18%,85.44% 7.18%,86.08% 7.18%,86.72% 7.06%,87.35% 6.94%,87.99% 6.82%,88.63% 6.58%,89.27% 6.40%,89.90% 6.10%,90.54% 5.68%,91.18% 5.26%,91.82% 4.55%,92.45% 4.25%,93.09% 4.13%,93.73% 3.95%,94.37% 3.77%,95.01% 3.47%,95.64% 1.20%,96.28% 1.20%,96.92% 1.20%,97.56% 1.20%,98.19% 1.20%,98.83% 1.20%,99.47% 1.20%,100.00% 1.20%,100.00% 0.00%);transition:transform 1.9s var(--ease),opacity 1.4s ease}
+#vFront .ep{clip-path:polygon(0.00% 57.42%,12.75% 62.92%,24.44% 68.18%,30.29% 70.93%,33.79% 73.09%,37.41% 75.00%,41.98% 76.67%,46.23% 77.51%,50.00% 77.69%,53.77% 77.51%,58.02% 76.67%,62.59% 75.00%,66.21% 73.09%,69.71% 70.93%,75.56% 68.18%,87.25% 62.92%,100.00% 57.42%,100.00% 100.00%,0.00% 100.00%);filter:drop-shadow(0 -4px 8px rgba(120,80,60,.14));transition:transform 2s var(--ease),opacity 1.5s ease .3s}
+#vBack .eb{transition:opacity 1.6s ease .6s}
+body.rise #vFront .ef{transform:translateY(-30%);opacity:0}
+body.rise #vFront .ep{transform:translateY(55%);opacity:0}
+body.rise #vBack .eb{opacity:0}
+
+/* ---------- scene 3 · the palace card (rises out of the pocket and becomes the page) ---------- */
+#s3{position:fixed;inset:0;background:transparent;transition:background-color 1.6s ease 1s}
+body.rise #s3{background-color:#efdcc9}
+.clip{position:absolute;inset:0;transition:clip-path 2.4s var(--ease)}
+.pal{position:absolute;inset:0;margin:auto;width:min(100vw,100svh*850/1851);aspect-ratio:850/1851;height:auto;transform-origin:0 0;transition:transform 2.4s var(--ease)}
+.pal .bg{position:absolute;inset:0;background:url(img/palace.webp) center/100% 100% no-repeat}
+.jet{position:absolute;mix-blend-mode:screen;opacity:.5;
+  background:repeating-linear-gradient(180deg,transparent 0 5px,rgba(255,255,255,.85) 7px,transparent 10px 16px);background-size:100% 32px;animation:fall 1s linear infinite;
+  -webkit-mask:radial-gradient(50% 50% at 50% 50%,#000 30%,transparent 75%);mask:radial-gradient(50% 50% at 50% 50%,#000 30%,transparent 75%)}
+@keyframes fall{to{background-position:0 32px}}
+.pool{position:absolute;mix-blend-mode:screen;opacity:.32;
+  background:repeating-linear-gradient(95deg,transparent 0 12px,rgba(255,255,255,.5) 15px,transparent 19px 34px);background-size:180px 100%;animation:ripple 10s linear infinite;
+  -webkit-mask:radial-gradient(50% 50% at 50% 50%,#000 35%,transparent 80%);mask:radial-gradient(50% 50% at 50% 50%,#000 35%,transparent 80%)}
+@keyframes ripple{to{background-position:180px 0}}
+
+/* text slides in the empty centre: one at a time, like the reference */
+.txt{position:absolute;left:14%;right:14%;top:17%;height:34%;font-size:min(4.3vw,1.98svh)}
+.sl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  opacity:0;transform:translateY(14px);filter:blur(4px);transition:opacity .7s ease,filter .7s ease,transform 0s linear .75s;pointer-events:none}
+.sl.on{opacity:1;transform:none;filter:none;pointer-events:auto;transition:opacity 1.4s ease .8s,transform 1.4s var(--ease) .8s,filter 1.4s ease .8s}
+.sl>*+*{margin-top:.45em}
+.bism{font:400 1.8em/1.7 var(--ruq);color:var(--rose2);white-space:nowrap}
+.verse{font:400 1.6em/2 "Amiri Quran","Amiri",serif;color:var(--ink);white-space:nowrap}
+.ref{font-size:.82em;color:var(--mute)}
+.orn{width:8.5em;height:1.1em;color:var(--rose)}
+.mono{font:400 4.2em/1.2 var(--ruq);color:var(--rose)}
+.mono i{font:400 .55em var(--scr);font-style:normal;margin:0 .15em;color:var(--rose2)}
+.dnum{font:500 1.15em var(--en);letter-spacing:.32em;color:var(--rose2);direction:ltr}
+.msg{font:400 1.55em/1.9 var(--ruq);color:var(--rose2);white-space:pre-line}
+.inv{font:400 1.3em/1.85 var(--ruq);color:var(--ink);white-space:pre-line}
+.names{font:400 2.5em/1.35 var(--ruq);color:var(--rose2);white-space:nowrap}
+.names i{font:400 .8em var(--scr);font-style:normal;margin:0 .2em;color:var(--rose)}
+.lead{font:400 1.3em/1.7 var(--ruq);color:var(--rose2)}
+.rows{display:flex;flex-direction:column;gap:.55em;align-items:center}
+.row{display:flex;flex-direction:column;align-items:center;gap:.15em;color:var(--ink);font-size:1.05em;line-height:1.45}
+.row svg{width:1.6em;height:1.6em;color:var(--rose)}
+.row a{color:inherit;text-decoration:none}
+.row small{font-size:.86em;color:var(--mute)}
+.row .en{font:500 1.05em var(--en);letter-spacing:.12em;direction:ltr}
+html[lang=en] .msg,html[lang=en] .inv,html[lang=en] .lead{font:italic 500 1.35em/1.5 var(--en)}
+html[lang=en] .names{font:400 2.7em/1.15 var(--scr)}
+html[lang=en] .mono{font:400 4em/1.1 var(--scr)}
+html[lang=en] .bism{font:italic 500 1.35em/1.45 var(--en);white-space:normal}
+html[lang=en] .verse{font:italic 500 1.4em/1.5 var(--en);white-space:normal}
+html[lang=en] .row{font:500 1.15em/1.4 var(--en)}
+html[lang=en] .txt{left:19%;right:19%}
+html[lang=en] .lead{font-size:1.2em}
+
+/* ---------- scene 1 · closed envelope (separate layers) ---------- */
+.env{background-image:url(img/envelope.webp)}
+.body{position:absolute;inset:0;transition:transform 1.9s var(--ease),opacity 1.3s ease .4s}
+.body .pk{clip-path:polygon(0.00% 22.61%,1.38% 27.87%,4.89% 30.98%,9.88% 32.06%,10.31% 32.36%,10.95% 35.17%,13.39% 37.26%,17.64% 38.34%,22.95% 38.88%,23.17% 39.11%,24.12% 41.21%,26.78% 42.58%,31.88% 43.36%,37.41% 43.12%,43.57% 43.54%,50.00% 43.78%,56.43% 43.54%,62.59% 43.12%,68.12% 43.36%,73.22% 42.58%,75.88% 41.21%,76.83% 39.11%,77.05% 38.88%,82.36% 38.34%,86.61% 37.26%,89.05% 35.17%,89.69% 32.36%,90.12% 32.06%,95.11% 30.98%,98.62% 27.87%,100.00% 22.61%,100% 100%,0% 100%);filter:drop-shadow(0 -3px 6px rgba(120,80,60,.12))}
+.flap{position:absolute;left:0;top:0;width:100%;height:43.96%}
+.flap .fw,.flap .fb{position:absolute;inset:0;transform-origin:50% 0;-webkit-backface-visibility:hidden;backface-visibility:hidden;
+  transition:transform 2.6s var(--ease),opacity .9s ease 1.8s}
+.flap .fw{transform:perspective(1700px) rotateX(0)}
+.flap .ff{position:absolute;inset:0;clip-path:polygon(0.00% 0.00%,0.00% 51.43%,1.38% 63.40%,4.89% 70.48%,9.88% 72.93%,10.31% 73.61%,10.95% 80.00%,13.39% 84.76%,17.64% 87.21%,22.95% 88.44%,23.17% 88.98%,24.12% 93.74%,26.78% 96.87%,31.88% 98.64%,37.41% 98.10%,43.57% 99.05%,50.00% 99.59%,56.43% 99.05%,62.59% 98.10%,68.12% 98.64%,73.22% 96.87%,75.88% 93.74%,76.83% 88.98%,77.05% 88.44%,82.36% 87.21%,86.61% 84.76%,89.05% 80.00%,89.69% 73.61%,90.12% 72.93%,95.11% 70.48%,98.62% 63.40%,100.00% 51.43%,100.00% 0.00%);background-size:100% auto}
+.flap .fb{clip-path:polygon(0.00% 100.00%,0.00% 48.57%,1.38% 36.60%,4.89% 29.52%,9.88% 27.07%,10.31% 26.39%,10.95% 20.00%,13.39% 15.24%,17.64% 12.79%,22.95% 11.56%,23.17% 11.02%,24.12% 6.26%,26.78% 3.13%,31.88% 1.36%,37.41% 1.90%,43.57% 0.95%,50.00% 0.41%,56.43% 0.95%,62.59% 1.90%,68.12% 1.36%,73.22% 3.13%,75.88% 6.26%,76.83% 11.02%,77.05% 11.56%,82.36% 12.79%,86.61% 15.24%,89.05% 20.00%,89.69% 26.39%,90.12% 27.07%,95.11% 29.52%,98.62% 36.60%,100.00% 48.57%,100.00% 100.00%);transform:perspective(1700px) rotateX(0) translateY(50%) rotateX(180deg) translateY(-50%);
+  background:repeating-conic-gradient(from 90deg at 50% 100%,rgba(160,120,100,.08) 0 1.2deg,transparent 1.2deg 6deg),linear-gradient(0deg,#f7ebe1,#ecd8c8)}
+.half{position:absolute;width:39.96%;aspect-ratio:1;background:url(img/envelope.webp) no-repeat;background-size:250.27% auto;background-position:49.91% 50.69%;transition:transform .7s var(--ease)}
+.flap .half{left:29.97%;top:89.39%;clip-path:polygon(0.00% 50.00%,0.01% 49.13%,0.03% 48.26%,0.07% 47.38%,0.12% 46.51%,0.19% 45.64%,0.27% 44.77%,0.37% 43.91%,0.49% 43.04%,0.62% 42.18%,0.76% 41.32%,0.92% 40.46%,1.09% 39.60%,1.28% 38.75%,1.49% 37.90%,1.70% 37.06%,1.94% 36.22%,2.18% 35.38%,2.45% 34.55%,2.72% 33.72%,3.02% 32.90%,3.32% 32.08%,3.64% 31.27%,3.97% 30.46%,4.32% 29.66%,4.68% 28.87%,5.06% 28.08%,5.45% 27.30%,5.85% 26.53%,6.27% 25.76%,6.70% 25.00%,7.14% 24.25%,7.60% 23.50%,8.07% 22.77%,8.55% 22.04%,9.04% 21.32%,9.55% 20.61%,10.07% 19.91%,10.60% 19.22%,11.14% 18.53%,11.70% 17.86%,12.26% 17.20%,12.84% 16.54%,13.43% 15.90%,14.03% 15.27%,14.64% 14.64%,15.27% 14.03%,15.90% 13.43%,16.54% 12.84%,17.20% 12.26%,17.86% 11.70%,18.53% 11.14%,19.22% 10.60%,19.91% 10.07%,20.61% 9.55%,21.32% 9.04%,22.04% 8.55%,22.77% 8.07%,23.50% 7.60%,24.25% 7.14%,25.00% 6.70%,25.76% 6.27%,26.53% 5.85%,27.30% 5.45%,28.08% 5.06%,28.87% 4.68%,29.66% 4.32%,30.46% 3.97%,31.27% 3.64%,32.08% 3.32%,32.90% 3.02%,33.72% 2.72%,34.55% 2.45%,35.38% 2.18%,36.22% 1.94%,37.06% 1.70%,37.90% 1.49%,38.75% 1.28%,39.60% 1.09%,40.46% 0.92%,41.32% 0.76%,42.18% 0.62%,43.04% 0.49%,43.91% 0.37%,44.77% 0.27%,45.64% 0.19%,46.51% 0.12%,47.38% 0.07%,48.26% 0.03%,49.13% 0.01%,50.00% 0.00%,50.87% 0.01%,51.74% 0.03%,52.62% 0.07%,53.49% 0.12%,54.36% 0.19%,55.23% 0.27%,56.09% 0.37%,56.96% 0.49%,57.82% 0.62%,58.68% 0.76%,59.54% 0.92%,60.40% 1.09%,61.25% 1.28%,62.10% 1.49%,62.94% 1.70%,63.78% 1.94%,64.62% 2.18%,65.45% 2.45%,66.28% 2.72%,67.10% 3.02%,67.92% 3.32%,68.73% 3.64%,69.54% 3.97%,70.34% 4.32%,71.13% 4.68%,71.92% 5.06%,72.70% 5.45%,73.47% 5.85%,74.24% 6.27%,75.00% 6.70%,75.75% 7.14%,76.50% 7.60%,77.23% 8.07%,77.96% 8.55%,78.68% 9.04%,79.39% 9.55%,80.09% 10.07%,80.78% 10.60%,81.47% 11.14%,82.14% 11.70%,82.80% 12.26%,83.46% 12.84%,84.10% 13.43%,84.73% 14.03%,85.36% 14.64%,85.97% 15.27%,86.57% 15.90%,87.16% 16.54%,87.74% 17.20%,88.30% 17.86%,88.86% 18.53%,89.40% 19.22%,89.93% 19.91%,90.45% 20.61%,90.96% 21.32%,91.45% 22.04%,91.93% 22.77%,92.40% 23.50%,92.86% 24.25%,93.30% 25.00%,93.73% 25.76%,94.15% 26.53%,94.55% 27.30%,94.94% 28.08%,95.32% 28.87%,95.68% 29.66%,96.03% 30.46%,96.36% 31.27%,96.68% 32.08%,96.98% 32.90%,97.28% 33.72%,97.55% 34.55%,97.82% 35.38%,98.06% 36.22%,98.30% 37.06%,98.51% 37.90%,98.72% 38.75%,98.91% 39.60%,99.08% 40.46%,99.24% 41.32%,99.38% 42.18%,99.51% 43.04%,99.63% 43.91%,99.73% 44.77%,99.81% 45.64%,99.88% 46.51%,99.93% 47.38%,99.97% 48.26%,99.99% 49.13%,100.00% 50.00%,100.00% 46.54%,88.89% 52.93%,77.78% 47.61%,66.67% 50.80%,55.56% 48.67%,44.44% 51.86%,33.33% 46.54%,22.22% 52.93%,11.11% 47.61%,0.00% 50.80%)}
+.body .half{left:29.97%;top:39.29%;clip-path:polygon(0.00% 50.80%,11.11% 47.61%,22.22% 52.93%,33.33% 46.54%,44.44% 51.86%,55.56% 48.67%,66.67% 50.80%,77.78% 47.61%,88.89% 52.93%,100.00% 46.54%,100.00% 50.00%,99.99% 50.87%,99.97% 51.74%,99.93% 52.62%,99.88% 53.49%,99.81% 54.36%,99.73% 55.23%,99.63% 56.09%,99.51% 56.96%,99.38% 57.82%,99.24% 58.68%,99.08% 59.54%,98.91% 60.40%,98.72% 61.25%,98.51% 62.10%,98.30% 62.94%,98.06% 63.78%,97.82% 64.62%,97.55% 65.45%,97.28% 66.28%,96.98% 67.10%,96.68% 67.92%,96.36% 68.73%,96.03% 69.54%,95.68% 70.34%,95.32% 71.13%,94.94% 71.92%,94.55% 72.70%,94.15% 73.47%,93.73% 74.24%,93.30% 75.00%,92.86% 75.75%,92.40% 76.50%,91.93% 77.23%,91.45% 77.96%,90.96% 78.68%,90.45% 79.39%,89.93% 80.09%,89.40% 80.78%,88.86% 81.47%,88.30% 82.14%,87.74% 82.80%,87.16% 83.46%,86.57% 84.10%,85.97% 84.73%,85.36% 85.36%,84.73% 85.97%,84.10% 86.57%,83.46% 87.16%,82.80% 87.74%,82.14% 88.30%,81.47% 88.86%,80.78% 89.40%,80.09% 89.93%,79.39% 90.45%,78.68% 90.96%,77.96% 91.45%,77.23% 91.93%,76.50% 92.40%,75.75% 92.86%,75.00% 93.30%,74.24% 93.73%,73.47% 94.15%,72.70% 94.55%,71.92% 94.94%,71.13% 95.32%,70.34% 95.68%,69.54% 96.03%,68.73% 96.36%,67.92% 96.68%,67.10% 96.98%,66.28% 97.28%,65.45% 97.55%,64.62% 97.82%,63.78% 98.06%,62.94% 98.30%,62.10% 98.51%,61.25% 98.72%,60.40% 98.91%,59.54% 99.08%,58.68% 99.24%,57.82% 99.38%,56.96% 99.51%,56.09% 99.63%,55.23% 99.73%,54.36% 99.81%,53.49% 99.88%,52.62% 99.93%,51.74% 99.97%,50.87% 99.99%,50.00% 100.00%,49.13% 99.99%,48.26% 99.97%,47.38% 99.93%,46.51% 99.88%,45.64% 99.81%,44.77% 99.73%,43.91% 99.63%,43.04% 99.51%,42.18% 99.38%,41.32% 99.24%,40.46% 99.08%,39.60% 98.91%,38.75% 98.72%,37.90% 98.51%,37.06% 98.30%,36.22% 98.06%,35.38% 97.82%,34.55% 97.55%,33.72% 97.28%,32.90% 96.98%,32.08% 96.68%,31.27% 96.36%,30.46% 96.03%,29.66% 95.68%,28.87% 95.32%,28.08% 94.94%,27.30% 94.55%,26.53% 94.15%,25.76% 93.73%,25.00% 93.30%,24.25% 92.86%,23.50% 92.40%,22.77% 91.93%,22.04% 91.45%,21.32% 90.96%,20.61% 90.45%,19.91% 89.93%,19.22% 89.40%,18.53% 88.86%,17.86% 88.30%,17.20% 87.74%,16.54% 87.16%,15.90% 86.57%,15.27% 85.97%,14.64% 85.36%,14.03% 84.73%,13.43% 84.10%,12.84% 83.46%,12.26% 82.80%,11.70% 82.14%,11.14% 81.47%,10.60% 80.78%,10.07% 80.09%,9.55% 79.39%,9.04% 78.68%,8.55% 77.96%,8.07% 77.23%,7.60% 76.50%,7.14% 75.75%,6.70% 75.00%,6.27% 74.24%,5.85% 73.47%,5.45% 72.70%,5.06% 71.92%,4.68% 71.13%,4.32% 70.34%,3.97% 69.54%,3.64% 68.73%,3.32% 67.92%,3.02% 67.10%,2.72% 66.28%,2.45% 65.45%,2.18% 64.62%,1.94% 63.78%,1.70% 62.94%,1.49% 62.10%,1.28% 61.25%,1.09% 60.40%,0.92% 59.54%,0.76% 58.68%,0.62% 57.82%,0.49% 56.96%,0.37% 56.09%,0.27% 55.23%,0.19% 54.36%,0.12% 53.49%,0.07% 52.62%,0.03% 51.74%,0.01% 50.87%,0.00% 50.00%)}
+#seal{position:absolute;left:29.97%;top:39.29%;width:39.96%;aspect-ratio:1;border-radius:50%;border:0;background:none;cursor:pointer;pointer-events:auto}
+#seal::after{content:"";position:absolute;inset:-3%;border-radius:50%;box-shadow:0 0 0 0 rgba(255,250,240,.65);animation:breathe 2.8s ease-in-out infinite}
+@keyframes breathe{50%{box-shadow:0 0 0 14px rgba(255,250,240,0)}}
+#seal:focus-visible{outline:2px solid var(--rose);outline-offset:4px}
+#vClosed.press .half{transform:scale(.975)}
+#vClosed.crack .flap .half{transform:translateY(-1.2%)}#vClosed.crack .body .half{transform:translateY(1.2%)}
+#vClosed.press #seal::after{animation:none;opacity:0}
+#vClosed.lift .flap .fw{transform:perspective(1700px) rotateX(-178deg);opacity:0}
+#vClosed.lift .flap .fb{transform:perspective(1700px) rotateX(-178deg) translateY(50%) rotateX(180deg) translateY(-50%);opacity:0}
+#vClosed.drop .body{transform:translateY(60%);opacity:0}
+.gone{display:none}
+
+/* chrome */
+.ctl{position:fixed;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,248,242,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--rose2);display:grid;place-items:center;cursor:pointer}
+#lg{top:max(14px,env(safe-area-inset-top));right:14px;font:600 14px var(--en)}
+#mu{bottom:max(16px,env(safe-area-inset-bottom));left:14px}
+#mu svg{width:20px;height:20px}
+#mu .bars rect{transform-origin:center bottom;animation:eq 1s ease-in-out infinite}
+#mu .bars rect:nth-child(2){animation-delay:-.4s}#mu .bars rect:nth-child(3){animation-delay:-.7s}#mu .bars rect:nth-child(4){animation-delay:-.2s}
+#mu.off .bars rect{animation:none;transform:scaleY(.35)}
+@keyframes eq{50%{transform:scaleY(.35)}}
+.flag{position:fixed;top:max(14px,env(safe-area-inset-top));left:14px;z-index:60;background:var(--rose2);color:#fff;font:500 12px var(--ar);padding:5px 12px;border-radius:20px}
+@media (prefers-reduced-motion:reduce){
+  .jet,.pool,#seal::after,#mu .bars rect{animation:none}
+  .flap .fw,.flap .fb,.body,.half,#vFront .ef,#vFront .ep,#vBack .eb,.clip,.pal,#s3{transition-duration:.01s!important;transition-delay:0s!important}
+  .sl{transform:none;filter:none}}
+</style>
+</head>
+<body>
+<div class="view" id="vBack"><div class="bl"></div><div class="stg"><div class="lay eb"></div></div></div>
+
+<section id="s3" aria-label="Invitation"><div class="clip" id="clip"><div class="pal" id="pal">
+  <div class="bg"></div>
+  <i class="jet" style="left:47.8%;top:79.6%;width:4.4%;height:5.2%"></i>
+  <i class="jet" style="left:41.4%;top:82.3%;width:3.4%;height:3.6%"></i><i class="jet" style="left:55.2%;top:82.3%;width:3.4%;height:3.6%"></i>
+  <i class="jet" style="left:27.3%;top:78.7%;width:3.2%;height:3.8%"></i><i class="jet" style="left:68.9%;top:78.7%;width:3.2%;height:3.8%"></i>
+  <i class="jet" style="left:8%;top:81.6%;width:3.6%;height:4.6%"></i><i class="jet" style="left:88.2%;top:81.6%;width:3.6%;height:4.6%"></i>
+  <i class="pool" style="left:24%;right:24%;top:85%;height:11%"></i>
+  <i class="pool" style="left:0;width:21%;top:84%;height:5%"></i><i class="pool" style="right:0;width:21%;top:84%;height:5%"></i>
+  <div class="txt" id="txt">
+    <div class="sl"><div class="bism" id="bism"></div>
+      <svg class="orn" viewBox="0 0 150 18" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M4 9H58M92 9H146" opacity=".55"/><path d="M75 14.5c-5-3.6-8-6.2-8-9a3.6 3.6 0 0 1 8-1.6A3.6 3.6 0 0 1 83 5.5c0 2.8-3 5.4-8 9z" fill="currentColor" fill-opacity=".2"/><circle cx="62" cy="9" r="1.6" fill="currentColor"/><circle cx="88" cy="9" r="1.6" fill="currentColor"/></svg>
+      <div class="verse" id="verse"></div><div class="ref" id="ref"></div></div>
+    <div class="sl"><div class="mono" id="mono"></div><div class="dnum" id="dnum"></div></div>
+    <div class="sl"><div class="msg" id="msg"></div></div>
+    <div class="sl"><div class="inv" id="inv"></div><div class="names" id="names"></div></div>
+    <div class="sl"><div class="lead" id="lead"></div>
+      <div class="rows">
+        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></svg><span id="dDay"></span><span class="en" id="dDate"></span></div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span class="en" id="dTime"></span></div>
+        <div class="row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></svg><a id="dVenue" target="_blank" rel="noopener"></a></div>
+      </div></div>
+  </div>
+</div></div></section>
+
+<div class="view" id="vFront"><div class="stg"><div class="lay ep"></div><div class="lay ef"></div></div></div>
+
+<div class="view" id="vClosed"><div class="bl"></div><div class="stg">
+  <div class="body"><div class="lay pk env"></div><div class="half"></div></div>
+  <div class="flap"><div class="fb"></div><div class="fw"><div class="ff env"></div><div class="half"></div></div></div>
+  <button id="seal" type="button" aria-label="افتح الدعوة"></button>
+</div></div>
+
+<button class="ctl" id="lg" type="button" aria-label="اللغة / Language">EN</button>
+<button class="ctl off" id="mu" type="button" aria-label="Music"><svg class="bars" viewBox="0 0 20 20" fill="currentColor"><rect x="3" y="5" width="2" height="11" rx="1"/><rect x="7.5" y="3" width="2" height="13" rx="1"/><rect x="12" y="6" width="2" height="10" rx="1"/><rect x="16" y="4" width="2" height="12" rx="1"/></svg></button>
+<div class="flag" id="demoFlag">تجربة</div>
+<audio id="bgm" loop preload="none" src="../music-ney.mp3"></audio>
+<script src="../inv-data.js"></script>
+<script>
+(function(){
+"use strict";
+/* demo data — replaced by the couple's details from the studio */
+var D={groom:"عمر",bride:"ليلى",groomEn:"Omar",brideEn:"Laila",mono:"",date:"2027-05-20",time:"19:00",
+  venue:"قصر الياسمين",venueEn:"Jasmine Palace",addr:"التجمع الخامس، القاهرة",addrEn:"New Cairo",map:"",intro:"",kind:"خطوبة",bism:true,music:"",lang:"ar"};
+var L=window.farhetnaData&&farhetnaData("swp");
+if(L){D=Object.assign({},D,L);D.lang=(L.groom||L.bride)?"ar":"en"}
+var MODE=window.farhetnaMode||null,$=function(i){return document.getElementById(i)};
+var lang=(function(){var q=location.search.match(/[?&]lang=(ar|en)/);return q?q[1]:(D.lang==="en"?"en":"ar")})();
+function ev(en){var k=String(D.kind||"");
+  if(/كتب|قران|katb/i.test(k))return en?"marriage ceremony":"عقد قران";
+  if(/حن|henna/i.test(k))return en?"henna night":"حنة";
+  if(/زفاف|فرح|wedding/i.test(k))return en?"wedding":"زفاف";
+  return en?"engagement":"خطوبة"}
+var T={
+ ar:{bism:"بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",verse:"﴿ وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾",ref:"سورة الروم ٢١",
+     msg:"تزهو ليلتنا بحضوركم\nوتكتمل فرحتنا بوجودكم",inv:"نتشرف بدعوتكم\nلحضور حفل ",lead:"وذلك بمشيئة الله تعالى",pm:"PM",am:"AM",demo:"تجربة",open:"افتح الدعوة"},
+ en:{bism:"In the name of God, the Most Gracious, the Most Merciful",verse:"“And He placed between you affection and mercy”",ref:"Ar-Rum 30:21",
+     msg:"Our evening blooms with your presence,\nand our joy is complete with you",inv:"We are honoured to invite you\nto celebrate the ",lead:"God willing, we will celebrate on",pm:"PM",am:"AM",demo:"Demo",open:"Open the invitation"}};
+function t(k){return T[lang][k]}
+function nm(en){return{g:en?(D.groomEn||D.groom):(D.groom||D.groomEn),b:en?(D.brideEn||D.bride):(D.bride||D.brideEn)}}
+function amp(el,a,b){el.textContent="";el.appendChild(document.createTextNode(a));var i=document.createElement("i");i.textContent="&";el.appendChild(i);el.appendChild(document.createTextNode(b))}
+function render(){
+  var en=lang==="en";document.documentElement.lang=lang;document.documentElement.dir=en?"ltr":"rtl";
+  $("lg").textContent=en?"ع":"EN";$("seal").setAttribute("aria-label",t("open"));
+  $("demoFlag").textContent=t("demo");$("demoFlag").hidden=!!MODE;
+  $("bism").textContent=t("bism");$("verse").textContent=t("verse");$("ref").textContent=t("ref");
+  var n=nm(en);
+  var mono=D.mono&&!en?D.mono:null;
+  if(mono){$("mono").textContent=mono}else amp($("mono"),(n.g||"").trim().charAt(0),(n.b||"").trim().charAt(0));
+  var d=new Date((D.date||"2027-01-01")+"T12:00:00"),p=function(x){return(x<10?"0":"")+x};
+  $("dnum").textContent=p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear();
+  $("msg").textContent=(!en&&D.intro)||t("msg");
+  $("inv").textContent=t("inv")+ev(en)+(en?" of":"");
+  amp($("names"),n.g,n.b);
+  $("lead").textContent=t("lead");
+  $("dDay").textContent=d.toLocaleDateString(en?"en-GB":"ar-EG",{weekday:"long"});$("dDate").textContent=$("dnum").textContent;
+  var ts=String(D.time||"19:00").replace(/[٠-٩]/g,function(c){return"٠١٢٣٤٥٦٧٨٩".indexOf(c)}),tp=ts.match(/\d+/g)||["19","00"],h=+tp[0]||0;if(/م|pm/i.test(ts)&&h<12)h+=12;if(/ص|am/i.test(ts)&&h===12)h=0;tp[1]=(tp[1]||"00");$("dTime").textContent=(h%12||12)+":"+(tp[1]||"00")+" "+(h>=12?t("pm"):t("am"));
+  var v=en?(D.venueEn||D.venue):D.venue,a=en?(D.addrEn||D.addr):D.addr;
+  var dv=$("dVenue");dv.textContent=v||a||"";if(v&&a){var sm=document.createElement("small");sm.textContent=a;dv.appendChild(document.createElement("br"));dv.appendChild(sm)}
+  $("dVenue").href=D.map||("https://www.google.com/maps/search/?api=1&query="+encodeURIComponent([D.venue,D.addr].filter(Boolean).join(" ")));
+  if(D.bism===false||D.bism==="off")SL[0].classList.add("gone");
+}
+var SL=[].slice.call(document.querySelectorAll(".sl"));
+render();
+$("lg").addEventListener("click",function(){lang=lang==="en"?"ar":"en";render();fitCard()});
+
+/* music */
+var au=$("bgm"),playing=false;if(D.music==="none"){au.removeAttribute("src");$("mu").hidden=true}else if(D.music)au.src=D.music;
+function setMu(on){playing=on;$("mu").classList.toggle("off",!on);if(on){var pr=au.play();if(pr&&pr.catch)pr.catch(function(){setMu(false)})}else au.pause()}
+$("mu").addEventListener("click",function(){setMu(!playing)});
+
+/* the palace card sits inside the open envelope until it rises: map the final page box onto the card slot */
+var risen=false;
+function fitCard(){
+  if(risen)return;
+  var s=document.querySelector("#vBack .stg").getBoundingClientRect(),k=s.width/941,pal=$("pal"),pr;
+  pal.style.transition="none";pal.style.transform="none";pr=pal.getBoundingClientRect();
+  var cw=891*k,sc=cw/pr.width,top=s.top+(1185-1630*891/850)*k,left=s.left+25*k;
+  pal.style.transform="translate("+(left-pr.left)+"px,"+(top-pr.top)+"px) scale("+sc+")";
+  void pal.offsetWidth;pal.style.transition="";
+  /* opening of the empty envelope, in screen pixels (same 6 points as the full-screen end state) */
+  var P=function(x,y){return(s.left+x*k).toFixed(1)+"px "+(s.top+y*k).toFixed(1)+"px"};
+  $("clip").style.clipPath="polygon("+[P(190,150),P(751,150),P(918,322),P(918,1320),P(23,1320),P(23,322)].join(",")+")";
+}
+fitCard();addEventListener("resize",fitCard);
+
+/* text slides */
+var cur=-1,timer=null,DUR=[6500,5000,6000,7000,11000];
+function act(){return SL.map(function(e,i){return i}).filter(function(i){return!SL[i].classList.contains("gone")})}
+function show(i){
+  if(cur>=0)SL[cur].classList.remove("on");cur=i;SL[cur].classList.add("on");
+  clearTimeout(timer);timer=setTimeout(next,DUR[cur]);
+}
+function next(){var a=act(),j=a.indexOf(cur)+1;if(j>=a.length)j=a.indexOf(1)>=0?a.indexOf(1):0;show(a[j])}
+$("s3").addEventListener("click",function(e){if(!risen||e.target.closest("a"))return;next()});
+
+/* opening */
+var vc=$("vClosed"),opened=false;
+function later(f,ms){setTimeout(f,ms)}
+function open(){
+  if(opened)return;opened=true;if(D.music!=="none")setMu(true);if(navigator.vibrate)navigator.vibrate(10);$("seal").disabled=true;
+  var R=matchMedia("(prefers-reduced-motion:reduce)").matches?.15:1;
+  vc.classList.add("press");
+  later(function(){vc.classList.add("crack")},450*R);
+  later(function(){vc.classList.add("lift")},1050*R);
+  later(function(){vc.classList.add("drop")},2300*R);
+  later(function(){vc.classList.add("gone")},4300*R);
+  later(function(){risen=true;document.body.classList.add("rise");$("clip").style.clipPath="polygon(0px 0px,"+innerWidth+"px 0px,"+innerWidth+"px 0px,"+innerWidth+"px "+innerHeight+"px,0px "+innerHeight+"px,0px 0px)";$("pal").style.transform="none"},5200*R);
+  later(function(){$("vFront").classList.add("gone");$("vBack").classList.add("gone");$("clip").style.clipPath="none";show(act()[0])},7700*R);
+}
+$("seal").addEventListener("click",open);
+if(/[?&]open=1/.test(location.search)){risen=true;vc.classList.add("gone");$("vFront").classList.add("gone");$("vBack").classList.add("gone");document.body.classList.add("rise");$("pal").style.transform="none";$("clip").style.clipPath="none";show(act()[0])}
+})();
+</script>
+</body>
+</html>
