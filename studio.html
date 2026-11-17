@@ -65,6 +65,7 @@ textarea{min-height:70px;resize:vertical}
 .btn{border:none;border-radius:14px;padding:15px;font-size:1.05rem;font-weight:700}
 .btn.primary{background:#6d1f2f;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.18)}
 .btn.ghost{background:#fff;color:#6d1f2f;border:1.5px solid #6d1f2f}
+.pnote{text-align:center;font-size:.85rem;color:#7a6a5c;margin:-4px 0 4px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#3a1a20;color:#fff;padding:10px 18px;border-radius:30px;font-size:.9rem;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .linkbox{display:none;margin-bottom:24px;font-size:.8rem;word-break:break-all;background:#fff;border:1px dashed #c9a463;border-radius:12px;padding:10px;color:#8a6b6f}
@@ -1412,7 +1413,7 @@ body.inviting .stbar{display:none}
     <p id="hdSub">كارت فرح تفاعلي بلينك واحد، يتبعت لكل الضيوف</p>
   </div>
   <div class="acctbar"><button class="acctbtn" id="acctBtn"><span class="av">👤</span><span id="acctTxt">تسجيل الدخول</span></button></div>
-  <button class="editcode" id="editCodeBtn">عندك كود؟ عدّلي دعوتك ✏️</button>
+  <button class="editcode" id="editCodeBtn">عملتي دعوتك قبل كده؟ عدّليها من هنا ✏️</button>
   <div id="gpBox" hidden><button class="btn ghost" id="rsBtn" type="button">ردود الحضور ✅</button><div class="gpw" id="rsWrap"></div><button class="btn ghost" id="gpBtn" type="button">صور الضيوف 📸</button><div class="gpw" id="gpWrap"></div><button class="btn ghost" id="vcBtn" type="button">رسايل الضيوف الصوتية 🎙️</button><div class="gpw" id="vcWrap"></div></div>
 
   <section class="card">
@@ -1536,8 +1537,9 @@ body.inviting .stbar{display:none}
   </section>
 
   <div class="actions">
-    <button class="btn primary" id="previewBtn">معاينة الكارت ✉️</button>
-    <button class="btn ghost" id="linkBtn">احصلي على لينك دعوتك 💌</button>
+    <button class="btn primary" id="previewBtn">شاهدي الدعوة 👀</button>
+    <button class="btn ghost" id="linkBtn">شاركي الدعوة 💌</button>
+    <div class="pnote" id="pNote"></div>
     <a class="walead" id="waLead" href="https://wa.me/201280067110" target="_blank" rel="noopener" data-track="Contact"><span>💬</span> ابعتيلي المعاينة على واتساب</a>
   </div>
   <div class="linkbox" id="linkbox"></div>
@@ -2176,11 +2178,11 @@ body.inviting .stbar{display:none}
 <div id="hlp" role="dialog" aria-modal="true" aria-label="مساعدة"><div class="hb">
   <h3>إزاي نساعدك؟ 🤍</h3>
   <p class="hs">دوسي على السؤال وهتلاقي الإجابة</p>
-  <details><summary>أدفع إزاي؟</summary><p>لما تخلصي بيانات دعوتك، دوسي «احصلي على لينك دعوتك 💌». اختاري اسم اللينك، وحوّلي السعر على <b>إنستاباي</b> للرقم <b dir="ltr">01280067110</b>، وارفعي صورة التحويل، واكتبي رقم موبايلك.</p></details>
+  <details><summary>أدفع إزاي؟</summary><p>لما تخلصي بيانات دعوتك، دوسي «شاركي الدعوة 💌». اختاري اسم اللينك، وحوّلي السعر على <b>إنستاباي</b> للرقم <b dir="ltr">01280067110</b>، وارفعي صورة التحويل، واكتبي رقم موبايلك.</p></details>
   <details><summary>دعوتي هتشتغل إمتى؟</summary><p>بعد ما تبعتي صورة التحويل بنراجعه، ودعوتك بتتفعّل عند الضيوف في دقايق. تقدري تبعتي اللينك لضيوفك من أول لحظة، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».</p></details>
-  <details><summary>أشوف دعوتي قبل ما أدفع؟</summary><p>أكيد. دوسي «معاينة الكارت ✉️» تحت، وهتشوفيها بالظبط زي ما ضيوفك هيشوفوها، وتقدري تغيّري أي حاجة قبل ما تطلبي.</p></details>
-  <details><summary>أعدّل دعوتي بعد ما أبعتها؟</summary><p>أيوه، وببلاش. من فوق دوسي «عندك كود؟ عدّلي دعوتك ✏️»، واكتبي كود التعديل اللي ظهرلك بعد الطلب. التعديل بيتحفظ على نفس اللينك، فضيوفك مش محتاجين لينك جديد.</p></details>
-  <details><summary>أعرف مين جاي إزاي؟</summary><p>ادخلي بكود التعديل من «عندك كود؟ عدّلي دعوتك ✏️»، وهتلاقي زرار «ردود الحضور ✅» فيه كل اللي أكدوا واللي اعتذروا وعددهم.</p></details>
+  <details><summary>أشوف دعوتي قبل ما أدفع؟</summary><p>أكيد. دوسي «شاهدي الدعوة 👀» تحت، وهتشوفيها بالظبط زي ما ضيوفك هيشوفوها، وتقدري تغيّري أي حاجة قبل ما تطلبي.</p></details>
+  <details><summary>أعدّل دعوتي بعد ما أبعتها؟</summary><p>أيوه، وببلاش. من فوق دوسي «عملتي دعوتك قبل كده؟ عدّليها من هنا ✏️»، واكتبي كود التعديل اللي ظهرلك بعد الطلب. التعديل بيتحفظ على نفس اللينك، فضيوفك مش محتاجين لينك جديد.</p></details>
+  <details><summary>أعرف مين جاي إزاي؟</summary><p>ادخلي بكود التعديل من «عملتي دعوتك قبل كده؟ عدّليها من هنا ✏️»، وهتلاقي زرار «ردود الحضور ✅» فيه كل اللي أكدوا واللي اعتذروا وعددهم.</p></details>
   <details><summary>أحط صوري أو أغنيتي إزاي؟</summary><p>الصور من جزء «صوركم وقصتكم»، وبيظهر في التصاميم اللي فيها ألبوم. والأغنية من جزء «المزيكا» ← «ارفعي أغنيتك»، وتختاري الملف من موبايلك.</p></details>
   <a class="hwa" id="hlpWa" target="_blank" rel="noopener" data-track="Contact">💬 كلّمينا على واتساب</a>
   <button class="hx" type="button" id="hlpX">قفل</button>
@@ -2534,7 +2536,12 @@ function applyMode(){const g=isBd(state.tpl)?"bd":isSb(state.tpl)?"sb":isRb(stat
     if(/العروسين|عروس|أحلى هدية|تنوّرها|لمشاركتها فرحتها/.test($("intro").value)||!$("intro").value.trim())$("intro").value=X.intro;
     if($("venue").value==="قاعة الياسمين")$("venue").value="";}
   else if(["عيد ميلاد","سبوع"].includes($("kind").value)){$("kind").value="حفل زفاف"}}
+function updNote(){const n=$("pNote");if(!n)return;let ed=false;try{ed=!!edit.code}catch(e){}
+  const en=document.documentElement.lang==="en",pr=priceOf({tpl:state.tpl});n.hidden=ed;
+  n.textContent=en?String(pr).replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)).replace("جنيه","EGP")+" once · see it free before you pay":pr+" مرة واحدة · تشوفيها ببلاش قبل ما تدفعي";}
+new MutationObserver(()=>{try{updNote()}catch(e){}}).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
 function drawBuilder(){
+  try{updNote()}catch(e){}
   document.querySelectorAll(".tpl").forEach(b=>b.setAttribute("aria-pressed",b.dataset.k===state.tpl));
   const pals=$("pals");pals.innerHTML="";
   TPL[state.tpl].pals.forEach((p,i)=>{const s=document.createElement("button");s.className="sw";
@@ -3520,7 +3527,7 @@ $("saveBtn").onclick=async()=>{
       edit.code=code;edit.slug=sv.data;
       showDone(sv.data,code,null);
     }
-    $("linkBtn").textContent="حفظ التعديلات 💾";
+    $("linkBtn").textContent="حفظ التعديلات 💾";try{updNote()}catch(e){}
   }catch(e){const m=(e&&e.message)||"";err.textContent=m==="photo"?"الصور ماترفعتش، جربي تاني أو صور أقل":m==="song"?"الأغنية ماترفعتش، جربي ملف أصغر أو اختاري مزيكا جاهزة":m.includes("bad_receipt")?"صورة التحويل مش واضحة، جربي سكرين شوت تاني":errOf(e);}
   finally{btn.disabled=false;btn.textContent=old;}
 };
@@ -3536,11 +3543,11 @@ async function loadCode(raw){
   const btn=$("loadBtn");btn.disabled=true;
   try{const r=await SB.rpc("load_by_code",{p_code:code});if(r.error)throw r.error;
     if(!r.data){const c=await SB.rpc("check_code",{p_code:code,p_slug:null});
-      err.textContent=(c.data==="bad_code")?MSG.bad_code:"الكود ده لسه ما اتفعّلش. اعملي دعوتك واضغطي «احصلي على لينك دعوتك» واكتبيه هناك";return;}
+      err.textContent=(c.data==="bad_code")?MSG.bad_code:"الكود ده لسه ما اتفعّلش. اعملي دعوتك واضغطي «شاركي الدعوة» واكتبيه هناك";return;}
     const d=r.data.data||{};fill(d);edit.src=d._src||null;edit.code=code;edit.slug=r.data.slug;edit.songUrl=d.songUrl||null;$("gpBox").hidden=false;$("gpBtn").hidden=$("gpWrap").hidden=!["ivy","sgm"].includes(d.tpl);$("vcBtn").hidden=$("vcWrap").hidden=d.tpl!=="sgm";["gpWrap","rsWrap","vcWrap"].forEach(id=>{$(id).innerHTML="";delete $(id).dataset.open;});
     if(edit.songUrl){customUrl=edit.songUrl;$("upName").textContent="✔ أغنيتك محفوظة";}
     drawBuilder();closeM("editMdl");toast("اتفتحت دعوتك، عدّلي واضغطي «حفظ التعديلات» 💌");
-    $("linkBtn").textContent="حفظ التعديلات 💾";
+    $("linkBtn").textContent="حفظ التعديلات 💾";try{updNote()}catch(e){}
   }catch(e){err.textContent=errOf(e);}finally{btn.disabled=false;}
 }
 
@@ -3637,7 +3644,7 @@ $("gpBtn").onclick=async()=>{const gw=$("gpWrap"),btn=$("gpBtn");if(gw.dataset.o
     rows.forEach(p=>{const u=SB.storage.from("photos").getPublicUrl(p.path).data.publicUrl;const a=document.createElement("a");a.href=u;a.target="_blank";a.rel="noopener";
       a.style.backgroundImage=`url("${u}")`;const n=document.createElement("span");n.textContent=p.name||"";a.appendChild(n);g.appendChild(a);});gw.appendChild(g);}
   catch(e){gw.innerHTML='<p class="err" style="text-align:center">في مشكلة في الاتصال، جربي تاني</p>';}};
-$("newInvBtn").onclick=()=>{closeM("acctMdl");edit.code=null;edit.slug=null;edit.songUrl=null;edit.src=null;$("linkBtn").textContent="احصلي على لينك دعوتك 💌";window.scrollTo({top:0,behavior:"smooth"});toast("اختاري التصميم وابدئي 💌");};
+$("newInvBtn").onclick=()=>{closeM("acctMdl");edit.code=null;edit.slug=null;edit.songUrl=null;edit.src=null;$("linkBtn").textContent="شاركي الدعوة 💌";try{updNote()}catch(e){}window.scrollTo({top:0,behavior:"smooth"});toast("اختاري التصميم وابدئي 💌");};
 $("logoutBtn").onclick=async()=>{try{await SB.auth.signOut();}catch(e){}USER=null;showUser();closeM("acctMdl");toast("خرجتي من حسابك");};
 if(SB&&!/[#&](i|s)=/.test(location.hash)){SB.auth.getSession().then(r=>{USER=r.data&&r.data.session?r.data.session.user:null;showUser();}).catch(()=>{});
   SB.auth.onAuthStateChange((ev,ses)=>{USER=ses?ses.user:null;showUser();});}
