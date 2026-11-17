@@ -3356,7 +3356,7 @@ $("opGld").addEventListener("click",function(){if(this.classList.contains("open"
   const fl=$("gsFall");this.appendChild(fl);setTimeout(()=>this.classList.add("gs-show"),3400);
   setTimeout(()=>{$("gld").insertBefore(fl,$("gld").firstChild);},8000);reveal(7900,"opGld");});
 function sigOpen(o,fromBuilder){
-  const d=Object.assign({},o);if(INV_SLUG)d._slug=INV_SLUG;if(d.music==="custom"&&!d.songUrl&&edit.songUrl)d.songUrl=edit.songUrl;
+  const d=Object.assign({},o);if(INV_SLUG)d._slug=INV_SLUG;if(d.music==="custom"&&!d.songUrl&&edit.songUrl)d.songUrl=edit.songUrl;if(fromBuilder&&d.music==="custom"&&!d.songUrl&&customUrl)d.songUrl=customUrl;
   if(fromBuilder){try{sessionStorage.setItem("farhetna_preview",JSON.stringify(d))}catch(e){toast("الصور كبيرة على المعاينة، جربي صور أقل");return}
     let ov=$("sigView");if(!ov){ov=document.createElement("div");ov.id="sigView";ov.innerHTML='<iframe title="معاينة الدعوة" allow="autoplay"></iframe><button type="button" class="sigBack">→ رجوع للتعديل</button>';document.body.appendChild(ov);
       ov.querySelector(".sigBack").onclick=()=>{ov.classList.remove("on");ov.querySelector("iframe").src="about:blank";document.body.style.overflow=""};}
