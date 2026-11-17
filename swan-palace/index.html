@@ -61,6 +61,7 @@ body.rise #s3{background-color:#efdcc9}
 .txt{position:absolute;left:14%;right:14%;top:17%;height:34%;font-size:min(4.3vw,1.98svh)}
 .sl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
   opacity:0;transform:translateY(14px);filter:blur(4px);transition:opacity .7s ease,filter .7s ease,transform 0s linear .75s;pointer-events:none}
+.sl.first{transition-delay:.2s!important}
 .sl.on{opacity:1;transform:none;filter:none;pointer-events:auto;transition:opacity 1.4s ease .8s,transform 1.4s var(--ease) .8s,filter 1.4s ease .8s}
 .sl>*+*{margin-top:.45em}
 .bism{font:400 1.8em/1.7 var(--ruq);color:var(--rose2);white-space:nowrap}
@@ -147,7 +148,7 @@ html[lang=en] .lead{font-size:1.2em}
     <div class="sl"><div class="bism" id="bism"></div>
       <svg class="orn" viewBox="0 0 150 18" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true"><path d="M4 9H58M92 9H146" opacity=".55"/><path d="M75 14.5c-5-3.6-8-6.2-8-9a3.6 3.6 0 0 1 8-1.6A3.6 3.6 0 0 1 83 5.5c0 2.8-3 5.4-8 9z" fill="currentColor" fill-opacity=".2"/><circle cx="62" cy="9" r="1.6" fill="currentColor"/><circle cx="88" cy="9" r="1.6" fill="currentColor"/></svg>
       <div class="verse" id="verse"></div><div class="ref" id="ref"></div></div>
-    <div class="sl"><div class="mono" id="mono"></div><div class="dnum" id="dnum"></div></div>
+    <div class="sl gone"><div class="mono" id="mono"></div><div class="dnum" id="dnum"></div></div>
     <div class="sl"><div class="msg" id="msg"></div></div>
     <div class="sl"><div class="inv" id="inv"></div><div class="names" id="names"></div></div>
     <div class="sl"><div class="lead" id="lead"></div>
@@ -244,10 +245,10 @@ fitCard();addEventListener("resize",fitCard);
 var cur=-1,timer=null,DUR=[6500,5000,6000,7000,11000];
 function act(){return SL.map(function(e,i){return i}).filter(function(i){return!SL[i].classList.contains("gone")})}
 function show(i){
-  if(cur>=0)SL[cur].classList.remove("on");cur=i;SL[cur].classList.add("on");
+  SL[i].classList.toggle("first",cur<0);if(cur>=0)SL[cur].classList.remove("on");cur=i;SL[cur].classList.add("on");
   clearTimeout(timer);timer=setTimeout(next,DUR[cur]);
 }
-function next(){var a=act(),j=a.indexOf(cur)+1;if(j>=a.length)j=a.indexOf(1)>=0?a.indexOf(1):0;show(a[j])}
+function next(){var a=act(),j=a.indexOf(cur)+1;if(j>=a.length)j=a.length>1?1:0;show(a[j])}
 $("s3").addEventListener("click",function(e){if(!risen||e.target.closest("a"))return;next()});
 
 /* opening */
@@ -261,8 +262,8 @@ function open(){
   later(function(){vc.classList.add("lift")},1050*R);
   later(function(){vc.classList.add("drop")},2300*R);
   later(function(){vc.classList.add("gone")},4300*R);
-  later(function(){risen=true;document.body.classList.add("rise");$("clip").style.clipPath="polygon(0px 0px,"+innerWidth+"px 0px,"+innerWidth+"px 0px,"+innerWidth+"px "+innerHeight+"px,0px "+innerHeight+"px,0px 0px)";$("pal").style.transform="none"},5200*R);
-  later(function(){$("vFront").classList.add("gone");$("vBack").classList.add("gone");$("clip").style.clipPath="none";show(act()[0])},7700*R);
+  later(function(){risen=true;document.body.classList.add("rise");$("clip").style.clipPath="polygon(0px 0px,"+innerWidth+"px 0px,"+innerWidth+"px 0px,"+innerWidth+"px "+innerHeight+"px,0px "+innerHeight+"px,0px 0px)";$("pal").style.transform="none";show(act()[0])},5200*R);
+  later(function(){$("vFront").classList.add("gone");$("vBack").classList.add("gone");$("clip").style.clipPath="none"},7700*R);
 }
 $("seal").addEventListener("click",open);
 if(/[?&]open=1/.test(location.search)){risen=true;vc.classList.add("gone");$("vFront").classList.add("gone");$("vBack").classList.add("gone");document.body.classList.add("rise");$("pal").style.transform="none";$("clip").style.clipPath="none";show(act()[0])}
