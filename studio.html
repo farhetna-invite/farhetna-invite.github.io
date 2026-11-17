@@ -1530,7 +1530,7 @@ body.inviting .stbar{display:none}
     <h2><span class="step">٥</span>المزيكا</h2>
     <div class="tracks" id="tracks"></div>
     <div class="upload" id="uploadBox">
-      <input type="file" id="audioFile" accept="audio/*">
+      <input type="file" id="audioFile">
       <div class="note" id="upName"></div>
     </div>
     <p class="note">المزيكا بتشتغل أول ما الضيف يفتح الدعوة، وفيه زرار يقفلها.</p>
@@ -2505,8 +2505,11 @@ TRACKS.forEach(t=>{
 });
 $("audioFile").onchange=e=>{
   const f=e.target.files[0];if(!f)return;
-  if(customUrl)URL.revokeObjectURL(customUrl);
-  customUrl=URL.createObjectURL(f);customFile=f;edit.songUrl=null;$("upName").textContent="✔ "+f.name;
+  /* no "accept" filter: iPhone greys out audio files saved without an extension, so the file is checked here instead */
+  const u=URL.createObjectURL(f),a=new Audio();a.preload="metadata";
+  a.onloadedmetadata=()=>{if(customUrl)URL.revokeObjectURL(customUrl);customUrl=u;customFile=f;edit.songUrl=null;$("upName").textContent="✔ "+f.name;};
+  a.onerror=()=>{URL.revokeObjectURL(u);e.target.value="";$("upName").textContent="الملف ده مش أغنية أو مش بيشتغل، جربي ملف mp3 أو m4a";};
+  a.src=u;
 };
 let bdMode=null;
 const WEDTRK=["zaffa","zaffa2","bridal","entrance","waltz","orient","oudsolo","ney"],BDTRK=["hbd","hbdpiano","party"];
@@ -3480,7 +3483,7 @@ $("rcptIn").onchange=async e=>{const f=e.target.files[0];if(!f)return;$("rcptTxt
   catch(err){receiptData=null;$("rcptTxt").textContent="الصورة دي مش شغالة، جربي سكرين شوت تاني";}};
 async function uploadSong(slug){
   const o=collect();if(!(o.music==="custom"&&customFile))return;
-  const ext=((customFile.name.split(".").pop()||"mp3").toLowerCase().replace(/[^a-z0-9]/g,""))||"mp3";
+  const ext=/\.(mp3|m4a|aac|wav|ogg|opus)$/i.test(customFile.name)?customFile.name.split(".").pop().toLowerCase():(/mp4|m4a|aac/.test(customFile.type)?"m4a":/ogg|opus/.test(customFile.type)?"ogg":/wav/.test(customFile.type)?"wav":"mp3");
   const path=`${slug}/${Date.now()}.${ext}`;
   const up=await SB.storage.from("songs").upload(path,customFile,{contentType:customFile.type||"audio/mpeg",upsert:false});
   if(up.error)throw new Error("song");

@@ -252,7 +252,7 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
       <label class="f" for="vName">صاحب الرسالة</label><input class="in" id="vName" maxlength="30" placeholder="مثلًا: ماما">
       <button class="btn b2" id="recBtn" type="button">🎙️ سجّلي دلوقتي</button>
       <div class="rec" id="recBox" hidden><span class="dot"></span><span id="recT">0:00</span><button class="btn b1" id="stopBtn" type="button" style="margin:0;width:auto;padding:8px 18px">إيقاف وحفظ</button></div>
-      <label class="btn b3" style="cursor:pointer">📁 ارفعي ملف صوتي<input type="file" id="vFile" accept="audio/*,.m4a,.mp3,.aac,.wav,.ogg,.opus" hidden></label>
+      <label class="btn b3" style="cursor:pointer">📁 ارفعي ملف صوتي<input type="file" id="vFile" hidden></label>
       <div class="err" id="vErr"></div>
     </div>
     <div id="vList"></div>
@@ -261,7 +261,7 @@ fieldset{border:0}fieldset[disabled]{opacity:.6}
       <b>🎵 مزيكا المجلة</b>
       <p class="note">كل تصميم ليه مزيكا مختارة مخصوص. مش بتشتغل لوحدها: اللي بيفتح المجلة يشغّلها بزرار، وبتقف لما يسمع رسالة صوتية. وتقدري ترفعي أغنية من اختيارك، أو تختاري «من غير مزيكا».</p>
       <div class="mlist" id="mList"></div>
-      <input type="file" id="songFile" accept="audio/*,.m4a,.mp3,.aac,.wav,.ogg" hidden>
+      <input type="file" id="songFile" hidden>
       <div class="err" id="mErr"></div>
       <p class="note" style="font-size:12.5px">لو رفعتي أغنية، اتأكدي إن مسموحلك تستخدميها. الأغنية بتظهر في مجلتك بس.</p>
       <audio id="mAud" preload="none"></audio>
