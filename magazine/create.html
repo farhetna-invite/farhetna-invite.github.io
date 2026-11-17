@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,500&family=Cormorant+Garamond:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
-:root{--em:#0f2a22;--em2:#173a2f;--gold:#c9a45c;--gold2:#e8cf94;--ivory:#f6f0e3;--paper:#fffdf8;--ink:#2a2620;--mute:#7b7468;--line:#e3d9c4;
+:root{--em:#0f2a22;--em2:#3f0c16;--gold:#c9a45c;--gold2:#e8cf94;--ivory:#f6f0e3;--paper:#fffdf8;--ink:#2a2620;--mute:#7b7468;--line:#e3d9c4;
   --ar:"Noto Naskh Arabic","Amiri",serif;--ruq:"Aref Ruqaa",serif;--disp:"Playfair Display",Georgia,serif;--cor:"Cormorant Garamond",Georgia,serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
@@ -49,7 +49,7 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 .ed .soon{position:absolute;top:8px;left:8px;font-size:11.5px;background:rgba(0,0,0,.55);color:#fff;border-radius:10px;padding:1px 8px}
 .ed[disabled]{opacity:.55}
 .btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;border-radius:14px;padding:14px;font-weight:700;font-size:16px;margin-top:12px}
-.b1{background:linear-gradient(180deg,#f3dda4,#c49b56);color:#14271f;box-shadow:0 12px 24px -14px rgba(160,120,50,.8)}
+.b1{background:linear-gradient(180deg,#f1a6b5,#c49b56);color:#2a0d13;box-shadow:0 12px 24px -14px rgba(160,120,50,.8)}
 .b2{background:var(--em);color:var(--gold2)}
 .b3{box-shadow:inset 0 0 0 1.5px var(--em);color:var(--em)}
 .btn[disabled]{opacity:.55}
@@ -57,7 +57,7 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 .note{font-size:13.5px;color:var(--mute);line-height:1.8}
 .code{font-family:var(--disp);font-weight:700;font-size:26px;letter-spacing:.16em;text-align:center;direction:ltr;color:var(--em);background:#f3ead6;border-radius:14px;padding:12px;margin:8px 0}
 /* photos */
-.drop{display:block;border:1.5px dashed #cdbb93;border-radius:16px;padding:18px;text-align:center;color:#6c5f45;cursor:pointer;background:#fffcf4}
+.drop{display:block;border:1.5px dashed #cdbb93;border-radius:16px;padding:18px;text-align:center;color:#6c5f45;cursor:pointer;background:#fff4f6}
 .drop b{display:block;font-size:16px;color:var(--em)}
 .drop input{display:none}
 .pgrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}
@@ -91,12 +91,12 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 .bar .btn{margin:0}
 .status{border-radius:14px;padding:12px 14px;margin-bottom:12px;font-size:14.5px;line-height:1.8}
 .status.pending{background:#fff4dd;color:#7a5600}
-.status.active{background:#e6f1e8;color:#21553a}
+.status.active{background:#f1e6e8;color:#5c1120}
 .status.locked{background:#efe9df;color:#5f574a}
 .link{direction:ltr;text-align:center;background:#f3ead6;border-radius:12px;padding:10px;font-family:var(--cor);font-size:17px;word-break:break-all;color:var(--em)}
 .pv{position:fixed;inset:0;z-index:50;background:#000}
 .pv iframe{width:100%;height:100%;border:0}
-.pv .x{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:51;border-radius:20px;padding:7px 14px;background:rgba(255,255,255,.9);color:#14271f;font-weight:700;font-size:14px}
+.pv .x{position:fixed;top:max(10px,env(safe-area-inset-top));left:10px;z-index:51;border-radius:20px;padding:7px 14px;background:rgba(255,255,255,.9);color:#2a0d13;font-weight:700;font-size:14px}
 .pay{background:#f6f1e5;border-radius:14px;padding:12px;font-size:15px;line-height:1.9}
 .num{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:12px;padding:8px 12px;margin:6px 0;box-shadow:inset 0 0 0 1px var(--line)}
 .num span{font-family:var(--disp);font-size:22px;letter-spacing:.06em;direction:ltr}
@@ -112,7 +112,7 @@ textarea.in{min-height:96px;resize:vertical;line-height:1.8}
 .mtr .tx{flex:1;line-height:1.4}.mtr .tx b{display:block;font-size:14.5px}.mtr .tx small{color:var(--mute);font-size:12.5px}
 .mtr .ck{font-size:16px;color:var(--em);visibility:hidden}.mtr.on .ck{visibility:visible}
 fieldset{border:0}fieldset[disabled]{opacity:.6}
-.lnk{display:block;margin:14px auto 0;background:none;border:0;color:var(--em2,#1c4537);font:inherit;font-size:14.5px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.lnk{display:block;margin:14px auto 0;background:none;border:0;color:var(--em2,#4b0f1b);font:inherit;font-size:14.5px;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
 .resume .card{margin-top:10px}
 .smpl{display:block;margin:-4px 0 14px;padding:10px 14px;border-radius:14px;background:rgba(114,90,128,.09);border:1px solid rgba(114,90,128,.22);color:#3e2f47;font-size:14.5px;text-decoration:none}
 .smpl b{color:#725A80}
@@ -346,7 +346,7 @@ if(DEMO){let PR=null;const view=()=>JSON.parse(JSON.stringify(PR));
 const STEPS=["occ","ed","start","basics","photos","words","letters","voices","review"],B=STEPS.indexOf("basics"),R=STEPS.length-1,PRE=STEPS.indexOf("start");
 let step=0,CODE="",P=null,D={photos:[],letters:[],voices:[],loves:[]},EDITABLE=true,pendingUploads=0;
 const OCCS=[["birthday","عيد ميلاد 🎂"],["friendship","صداقة 🤍"],["love","حب ❤️"],["anniversary","ذكرى ارتباط 💍"],["mother","للأم 🌷"],["father","للأب"],["graduation","تخرج 🎓"],["other","مناسبة تانية"]];
-const EDS=[{id:"emerald",name:"Emerald",ar:"زمردي ودهبي",bg:"linear-gradient(160deg,#1c4537,#0b1f19)",c:"#e8cf94"},{id:"blush",name:"Blush Romance",ar:"قريبًا",bg:"linear-gradient(160deg,#f6dfe0,#e8bcc0)",c:"#7a3f4b",soon:1},
+const EDS=[{id:"emerald",name:"Emerald",ar:"زمردي ودهبي",bg:"linear-gradient(160deg,#4b0f1b,#0b1f19)",c:"#e8cf94"},{id:"blush",name:"Blush Romance",ar:"قريبًا",bg:"linear-gradient(160deg,#f6dfe0,#e8bcc0)",c:"#7a3f4b",soon:1},
   {id:"vogue",name:"Vogue Style",ar:"قريبًا",bg:"#111",c:"#fff",soon:1},{id:"birthday",name:"Birthday",ar:"قريبًا",bg:"linear-gradient(160deg,#fff1d6,#f3d6c9)",c:"#a05a3c",soon:1}];
 let occ="birthday",edition="emerald",lang="ar";
 OCCS.forEach(([v,t])=>{const b=document.createElement("button");b.type="button";b.dataset.v=v;b.textContent=t;if(v===occ)b.className="on";$("occ").appendChild(b)});
