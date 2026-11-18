@@ -108,6 +108,13 @@ window.farhetnaData=function(key){
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",map:o.map||"",wa:base.wa,intro:o.intro||"",program:prog,
       dress:(o.dress||[]).filter(function(c){return/^#[0-9a-f]{3,8}$/i.test(c)}),dressNote:o.dressNote||"",dressEn:o.dressEn||"",
       closing:o.closing||"",notes:o.notes||"",album:album.slice(0,8),bism:o.bism!=="off",music:mu||null,slug:String(o._slug||"").toLowerCase()};}
+  if(key==="pgt"){
+    var vp=(o.photos&&(o.photos.venue||o.photos.hero))||"";
+    return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",mono:o.mono||"",date:o.date||"",time:base.time,
+      venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",addrEn:o.addrEn||"",map:o.map||"",intro:o.intro||"",kind:o.kind||"",
+      closing:o.closing||"",thanks:o.notes||"",wa:base.wa,program:prog,rsvpBy:o.rsvpBy||"",venuePhoto:/^(https?:|data:|blob:)/.test(vp)?vp:"",
+      dress:(o.dress||[]).filter(function(c){return/^#[0-9a-f]{3,8}$/i.test(c)}),dressNote:o.dressNote||"",dressEn:o.dressEn||"",
+      music:mu||null,slug:String(o._slug||"").toLowerCase()};}
   if(key==="snd"){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",mono:o.mono||"",date:o.date||"",time:base.time,
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",addrEn:o.addrEn||"",map:o.map||"",intro:o.intro||"",kind:o.kind||"",
@@ -177,7 +184,7 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
       '@media (prefers-reduced-motion:reduce){#fhBack{animation:none}}';
     var f=(location.pathname.match(/\/([a-z-]+)\/(?:index\.html)?$/)||[])[1]||"";
     var T="top:max(14px,env(safe-area-inset-top));bottom:auto;";
-    var P={"azure-lake":"left:66px;","swan-palace":"left:66px;","sunset-doors":"left:66px;","unwritten-story":"left:auto;right:14px;","burgundy-bloom":T,"ivory-lace-royal":T,"blue-hydrangea":T,"blushing-garden":T,
+    var P={"azure-lake":"left:66px;","swan-palace":"left:66px;","sunset-doors":"left:66px;","palace-gate":"left:66px;","unwritten-story":"left:auto;right:14px;","burgundy-bloom":T,"ivory-lace-royal":T,"blue-hydrangea":T,"blushing-garden":T,
       "pearl-silk":"top:calc(max(14px,env(safe-area-inset-top)) + 46px);bottom:auto;"};
     if(P[f])s.textContent+="#fhBack{"+P[f]+"}";
     document.head.appendChild(s);document.body.appendChild(a);
