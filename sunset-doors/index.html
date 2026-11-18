@@ -51,8 +51,8 @@ body.zoom #world{transform:scale(1.36);transition:transform 2.6s var(--ease)}
 #rK{background-image:url(img/r_knot.webp);left:47.396%;top:47.189%;width:6.270%;height:2.572%;transform-origin:50% 50%}
 /* 1 · a gentle tug on the knot */
 body.untie #rK{animation:kTug .5s ease-in-out,kGo 1s cubic-bezier(.5,0,.7,1) 1.9s forwards}
-body.untie #rTL{animation:tPullL .5s ease-in-out,tFallL 2s cubic-bezier(.45,0,.75,1) 2.1s forwards}
-body.untie #rTR{animation:tPullR .5s ease-in-out,tFallR 2s cubic-bezier(.45,0,.75,1) 2.15s forwards}
+body.untie #rTL{animation:tPullL .5s ease-in-out,tFallL 1.05s cubic-bezier(.55,0,.9,.6) 1.9s forwards}
+body.untie #rTR{animation:tPullR .5s ease-in-out,tFallR 1.05s cubic-bezier(.55,0,.9,.6) 1.95s forwards}
 /* 2 · the loops slide through the knot and collapse */
 body.untie #rLL{animation:lGoL 1.7s cubic-bezier(.55,0,.6,1) .45s forwards}
 body.untie #rLR{animation:lGoR 1.7s cubic-bezier(.55,0,.6,1) .55s forwards}
@@ -63,8 +63,8 @@ body.untie #rLR{animation:lGoR 1.7s cubic-bezier(.55,0,.6,1) .55s forwards}
 @keyframes lGoL{0%{transform:none}35%{transform:scaleX(.72) scaleY(.92) rotate(3deg)}70%{transform:scaleX(.3) scaleY(.7) rotate(8deg);opacity:1}100%{transform:scaleX(.04) scaleY(.4) rotate(12deg);opacity:0}}
 @keyframes lGoR{0%{transform:none}35%{transform:scaleX(.72) scaleY(.92) rotate(-3deg)}70%{transform:scaleX(.3) scaleY(.7) rotate(-8deg);opacity:1}100%{transform:scaleX(.04) scaleY(.4) rotate(-12deg);opacity:0}}
 /* 3 · the freed ends slip down and fall away, swaying like fabric */
-@keyframes tFallL{0%{transform:none}20%{transform:translateY(3%) rotate(2.5deg) skewX(-2deg)}45%{transform:translateY(16%) rotate(-3deg) skewX(3deg)}70%{transform:translateY(38%) rotate(4deg) skewX(-3deg);opacity:1}100%{transform:translateY(72%) rotate(-2deg) skewX(2deg);opacity:0}}
-@keyframes tFallR{0%{transform:none}20%{transform:translateY(3%) rotate(-2.5deg) skewX(2deg)}45%{transform:translateY(16%) rotate(3deg) skewX(-3deg)}70%{transform:translateY(38%) rotate(-4deg) skewX(3deg);opacity:1}100%{transform:translateY(72%) rotate(2deg) skewX(-2deg);opacity:0}}
+@keyframes tFallL{0%{transform:none}18%{transform:translateY(6%) rotate(2deg)}40%{transform:translateY(30%) rotate(-2.5deg)}62%{transform:translateY(80%) rotate(2deg)}82%{transform:translateY(150%) rotate(-1.5deg)}100%{transform:translateY(240%) rotate(1deg)}}
+@keyframes tFallR{0%{transform:none}18%{transform:translateY(6%) rotate(-2deg)}40%{transform:translateY(30%) rotate(2.5deg)}62%{transform:translateY(80%) rotate(-2deg)}82%{transform:translateY(150%) rotate(1.5deg)}100%{transform:translateY(240%) rotate(-1deg)}}
 /* 4 · then both leaves open slowly and together */
 body.open .lf.l{transform:rotateY(-86deg);filter:brightness(.86)}
 body.open .lf.r{transform:rotateY(86deg);filter:brightness(.86)}
@@ -456,13 +456,13 @@ function unlock(){more.removeAttribute("aria-hidden");revealAll()}
 var opened=false,R=matchMedia("(prefers-reduced-motion:reduce)").matches?.15:1;
 function later(f,ms){setTimeout(f,ms*R)}
 function open(){if(opened)return;opened=true;if(D.music!=="none")setMu(true);if(navigator.vibrate)navigator.vibrate(10);
-  document.body.classList.add("untie");                                   /* ribbon unties: 0 → 4.1s */
-  later(function(){document.body.classList.add("open")},4300);             /* doors open only after the ribbon is gone */
-  later(function(){document.body.classList.add("through")},7000);
-  later(function(){document.body.classList.add("zoom")},8800);
-  later(function(){document.body.classList.add("gone");unlock()},9400);
-  later(function(){document.body.classList.add("cueOn")},22000);
-  later(function(){show(0)},10600)}
+  document.body.classList.add("untie");                                   /* ribbon unties: 0 → 3s */
+  later(function(){document.body.classList.add("open")},3050);             /* doors open only after the ribbon is gone */
+  later(function(){document.body.classList.add("through")},5750);
+  later(function(){document.body.classList.add("zoom")},7550);
+  later(function(){document.body.classList.add("gone");unlock()},8150);
+  later(function(){document.body.classList.add("cueOn")},20750);
+  later(function(){show(0)},9350)}
 $("tap").addEventListener("click",open);
 if(/[?&]open=1/.test(location.search)){document.body.classList.add("untie","open","through","gone","zoom","cueOn");unlock();show(0)}
 })();
