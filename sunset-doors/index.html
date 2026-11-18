@@ -7,9 +7,7 @@
 <meta name="theme-color" content="#f3e6d6">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
-<link rel="preload" as="image" href="img/doors.webp" fetchpriority="high">
-<link rel="preload" as="image" href="img/untie.webp">
-<link rel="preload" as="image" href="img/ajar.webp">
+<link rel="preload" as="image" href="img/clean.webp" fetchpriority="high">
 <link rel="preload" as="image" href="img/scene.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +22,7 @@ body{font-family:var(--ar);color:var(--ink)}
 /* the artwork is always shown whole; spare space above/below is the same picture, softly blurred */
 .fill{position:fixed;inset:-40px;background:no-repeat center/cover;filter:blur(22px) saturate(.95);transform:scale(1.08)}
 #fScene{background-image:url(img/scene.webp)}
-#fDoor{background-image:url(img/doors.webp);transition:opacity 1.6s ease .8s}
+#fDoor{background-image:url(img/clean.webp);transition:opacity 1.6s ease .8s}
 body.open #fDoor{opacity:0}
 .stg{position:fixed;left:50%;top:50%;width:min(100vw,100svh*941/1672);aspect-ratio:941/1672;transform:translate(-50%,-50%);perspective:1700px;perspective-origin:50% 48%}
 .lay{position:absolute;inset:0;background:no-repeat center/100% 100%}
@@ -37,30 +35,47 @@ body.zoom #world{transform:scale(1.36);transition:transform 2.6s var(--ease)}
 .flick{position:absolute;width:3%;height:2.4%;border-radius:50%;background:radial-gradient(circle,rgba(255,226,160,.85),rgba(255,200,120,0) 70%);mix-blend-mode:screen;animation:fl 2.2s ease-in-out infinite}
 @keyframes fl{0%,100%{opacity:.55;transform:scale(1)}40%{opacity:.95;transform:scale(1.15)}70%{opacity:.7;transform:scale(.95)}}
 
-/* ---------- the doors: closed → ribbon unties → doors ajar → leaves swing in ---------- */
-#closed,#ajar{position:absolute;inset:0;transform-origin:50% 54%}
-#closed{transition:transform 3.2s cubic-bezier(.4,0,.6,1),opacity .9s ease}
-#closed .a,#closed .b{position:absolute;inset:0;background:no-repeat center/100% 100%}
-#closed .a{background-image:url(img/doors.webp)}
-#closed .b{background-image:url(img/untie.webp);opacity:0;transition:opacity 1.6s ease .2s}
-body.untie #closed{transform:scale(1.14)}
-body.untie #closed .b{opacity:1}
-body.ajar #closed{opacity:0}
-#ajar{perspective:1500px;opacity:0;transform:scale(.97);transition:opacity .9s ease,transform 3.2s cubic-bezier(.45,0,.55,1)}
-.leaf{position:absolute;inset:0;background:url(img/ajar.webp) no-repeat center/100% 100%;transition:transform 2.9s cubic-bezier(.5,.05,.3,1),filter 2.9s ease}
-.leaf.l{clip-path:inset(0 56.3% 1.6% 0);transform-origin:0 50%}
-.leaf.r{clip-path:inset(0 0 1.6% 59.1%);transform-origin:100% 50%}
-body.ajar #ajar{opacity:1;transform:scale(1)}
-body.open #ajar{transform:scale(1.7);opacity:0;transition:transform 3.2s cubic-bezier(.45,0,.55,1),opacity 1s ease 2.2s}
-body.open .leaf.l{transform:rotateY(82deg);filter:brightness(.9)}
-body.open .leaf.r{transform:rotateY(-82deg);filter:brightness(.9)}
+/* ---------- the doors: a real bow unties (separate ribbon layers), then both leaves swing open ---------- */
+#door{position:absolute;inset:0;transform-origin:50% 54%;perspective:1600px;perspective-origin:50% 50%;transition:transform 3.4s cubic-bezier(.45,0,.55,1),opacity 1s ease}
+#door .fr{position:absolute;inset:0;background:url(img/clean.webp) no-repeat center/100% 100%;z-index:3;pointer-events:none;
+  clip-path:polygon(0 0,28.9% 0,27.1% 4.2%,22.3% 9%,14.9% 12.9%,6.4% 15.3%,2.9% 15.7%,2.9% 95.7%,97% 95.7%,97% 15.7%,93.6% 15.3%,85.1% 12.9%,77.7% 9%,72.9% 4.2%,71.1% 0,100% 0,100% 100%,0 100%)}
+.lf{position:absolute;inset:0;background:url(img/clean.webp) no-repeat center/100% 100%;transition:transform 4s cubic-bezier(.62,0,.38,1),filter 4s ease;will-change:transform}
+.lf.l{clip-path:inset(0 50% 4.3% 2.9%);transform-origin:2.9% 50%}
+.lf.r{clip-path:inset(0 3% 4.3% 50%);transform-origin:97% 50%}
+#bow{position:absolute;inset:0;z-index:2;pointer-events:none}
+#bow i{position:absolute;background-repeat:no-repeat;background-size:100% 100%;will-change:transform,opacity}
+#rTL{background-image:url(img/r_tailL.webp);left:32.412%;top:49.222%;width:18.597%;height:26.914%;transform-origin:85% 0}
+#rTR{background-image:url(img/r_tailR.webp);left:50.159%;top:49.222%;width:17.428%;height:25.897%;transform-origin:15% 0}
+#rLL{background-image:url(img/r_loopL.webp);left:35.813%;top:45.156%;width:12.752%;height:6.160%;transform-origin:100% 50%}
+#rLR{background-image:url(img/r_loopR.webp);left:52.604%;top:45.156%;width:11.796%;height:6.160%;transform-origin:0 50%}
+#rK{background-image:url(img/r_knot.webp);left:47.396%;top:47.189%;width:6.270%;height:2.572%;transform-origin:50% 50%}
+/* 1 · a gentle tug on the knot */
+body.untie #rK{animation:kTug .5s ease-in-out,kGo 1s cubic-bezier(.5,0,.7,1) 1.9s forwards}
+body.untie #rTL{animation:tPullL .5s ease-in-out,tFallL 2s cubic-bezier(.45,0,.75,1) 2.1s forwards}
+body.untie #rTR{animation:tPullR .5s ease-in-out,tFallR 2s cubic-bezier(.45,0,.75,1) 2.15s forwards}
+/* 2 · the loops slide through the knot and collapse */
+body.untie #rLL{animation:lGoL 1.7s cubic-bezier(.55,0,.6,1) .45s forwards}
+body.untie #rLR{animation:lGoR 1.7s cubic-bezier(.55,0,.6,1) .55s forwards}
+@keyframes kTug{40%{transform:scale(1.05) translateY(-2%)}}
+@keyframes kGo{30%{transform:scale(.86) rotate(-6deg)}100%{transform:scale(.45) translateY(60%) rotate(-14deg);opacity:0}}
+@keyframes tPullL{40%{transform:rotate(1.6deg)}}
+@keyframes tPullR{40%{transform:rotate(-1.6deg)}}
+@keyframes lGoL{0%{transform:none}35%{transform:scaleX(.72) scaleY(.92) rotate(3deg)}70%{transform:scaleX(.3) scaleY(.7) rotate(8deg);opacity:1}100%{transform:scaleX(.04) scaleY(.4) rotate(12deg);opacity:0}}
+@keyframes lGoR{0%{transform:none}35%{transform:scaleX(.72) scaleY(.92) rotate(-3deg)}70%{transform:scaleX(.3) scaleY(.7) rotate(-8deg);opacity:1}100%{transform:scaleX(.04) scaleY(.4) rotate(-12deg);opacity:0}}
+/* 3 · the freed ends slip down and fall away, swaying like fabric */
+@keyframes tFallL{0%{transform:none}20%{transform:translateY(3%) rotate(2.5deg) skewX(-2deg)}45%{transform:translateY(16%) rotate(-3deg) skewX(3deg)}70%{transform:translateY(38%) rotate(4deg) skewX(-3deg);opacity:1}100%{transform:translateY(72%) rotate(-2deg) skewX(2deg);opacity:0}}
+@keyframes tFallR{0%{transform:none}20%{transform:translateY(3%) rotate(-2.5deg) skewX(2deg)}45%{transform:translateY(16%) rotate(3deg) skewX(-3deg)}70%{transform:translateY(38%) rotate(-4deg) skewX(3deg);opacity:1}100%{transform:translateY(72%) rotate(2deg) skewX(-2deg);opacity:0}}
+/* 4 · then both leaves open slowly and together */
+body.open .lf.l{transform:rotateY(-86deg);filter:brightness(.86)}
+body.open .lf.r{transform:rotateY(86deg);filter:brightness(.86)}
+body.through #door{transform:scale(1.65);opacity:0;transition:transform 3s cubic-bezier(.45,0,.55,1),opacity 1.1s ease 1.6s}
 #tap{position:absolute;left:28%;right:28%;top:42%;height:30%;border:0;background:none;cursor:pointer;border-radius:40%}
 #tap::after{content:"";position:absolute;inset:18%;border-radius:50%;box-shadow:0 0 0 0 rgba(255,250,236,.7);animation:br 2.6s ease-in-out infinite}
 @keyframes br{50%{box-shadow:0 0 0 18px rgba(255,250,236,0)}}
 .hint{position:absolute;left:0;right:0;top:66%;text-align:center;color:var(--gold2);font-size:min(4vw,1.9svh);text-shadow:0 1px 6px rgba(255,248,236,.9);animation:pl 2.4s ease-in-out infinite;transition:opacity .4s}
 @keyframes pl{50%{opacity:.5}}
 body.untie #tap::after,body.untie .hint{animation:none;opacity:0}
-body.gone #closed,body.gone #ajar,body.gone #tap,body.gone .hint{display:none}
+body.gone #door,body.gone #tap,body.gone .hint{display:none}
 
 /* ---------- text inside the gold oval ---------- */
 .txt{position:absolute;left:25%;right:25%;top:25.5%;bottom:32.5%;font-size:min(3.05vw,1.42svh);color:var(--ink)}
@@ -76,10 +91,10 @@ body.gone #closed,body.gone #ajar,body.gone #tap,body.gone .hint{display:none}
 .sl>*+*{margin-top:.55em}
 /* slide 1: script initials, names, date */
 .ini{position:relative;direction:ltr;line-height:1;height:8.6em;width:13em}
-.ini span,.ini i{font-family:var(--scr);font-style:normal;background:linear-gradient(170deg,#d2b06e,#9a7234 55%,#c49d5a);-webkit-background-clip:text;background-clip:text;color:transparent}
-#iniA{font-size:6.6em;position:absolute;left:24%;top:-2%}
-.ini i{font-size:2.8em;position:absolute;left:47%;top:34%}
-#iniB{font-size:6.6em;position:absolute;left:56%;top:30%}
+.ini span,.ini i{font-family:var(--en);font-style:italic;font-weight:500;background:linear-gradient(170deg,#d2b06e,#9a7234 55%,#c49d5a);-webkit-background-clip:text;background-clip:text;color:transparent}
+#iniA{font-size:6em;position:absolute;left:23%;top:0}
+.ini i{font-size:3em;position:absolute;left:47%;top:30%}
+#iniB{font-size:6em;position:absolute;left:58%;top:28%}
 .sprig{position:absolute;left:4%;top:24%;width:3.6em;height:4.2em;color:#b8914f}
 .dv,.dv2,.dv3{display:flex;align-items:center;justify-content:center;gap:.4em;color:#b08a4c;width:13em}
 .dv b,.dv2 b,.dv3 b{flex:1;height:1px;background:linear-gradient(90deg,transparent,currentColor 30%,currentColor 70%,transparent)}
@@ -115,6 +130,88 @@ html[lang=en] .names span{font:400 2.4em/1.2 var(--scr)}
 html[lang=en] .bism{font:italic 500 1.1em/1.5 var(--en);white-space:normal}
 html[lang=en] .it{font:500 1.08em/1.4 var(--en)}
 
+
+/* ---------- below the hero: countdown, dress code, reply ---------- */
+#more{position:fixed;inset:0;z-index:20;overflow:hidden;pointer-events:none;-webkit-overflow-scrolling:touch}
+body.gone #more{overflow-y:auto;pointer-events:auto}
+.spacer{height:100svh}
+.pg{position:relative;min-height:100svh;background:#f4e4d0 url(img/wall.webp) no-repeat center/cover;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:19svh 19% 25svh 10%;text-align:center;font-size:min(4vw,1.9svh)}
+.pg+.pg{margin-top:-1px}
+.pg:first-of-type{box-shadow:0 -30px 40px -10px rgba(120,90,50,.18)}
+.pg h2{font:700 2.2em/1.3 var(--ruq);background:linear-gradient(170deg,#c8a466,#8a6630 60%,#b89155);-webkit-background-clip:text;background-clip:text;color:transparent}
+html[lang=en] .pg h2{font:400 2.5em/1.2 var(--scr)}
+.pg .sub{color:var(--mute);margin-top:.3em;line-height:1.7}
+.orn2{width:9em;height:1.1em;color:#b08a4c;margin:.5em auto .2em;display:block}
+.rv{opacity:0;transform:translateY(16px);transition:opacity 1s ease,transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.15s}.rv.d2{transition-delay:.3s}.rv.d3{transition-delay:.45s}
+/* countdown */
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:.6em;margin-top:1.2em;width:100%;max-width:20em}
+.cd div{aspect-ratio:1;border-radius:50%;border:1px solid rgba(176,138,76,.6);box-shadow:inset 0 0 0 4px rgba(255,250,240,.6),0 6px 16px -8px rgba(120,90,50,.35);
+  background:radial-gradient(circle at 50% 35%,#fffaf1,#f3e3c9);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.cd b{font:600 1.7em/1 var(--en);color:#7d5b2c}
+.cd small{font-size:.72em;color:var(--mute);margin-top:.2em}
+.cdDone{font:700 1.6em var(--ruq);color:#8a6630;margin-top:1em}
+/* dress code: fabric ribbons that unfurl */
+.drs{display:flex;justify-content:center;gap:.7em;margin-top:1.3em;height:11em;align-items:flex-start}
+.fab{position:relative;width:2.6em;height:100%;cursor:pointer;transform-origin:50% 0}
+.fab .rod{position:absolute;left:-.25em;right:-.25em;top:0;height:.45em;border-radius:.3em;background:linear-gradient(#e2c98f,#a9833f);box-shadow:0 1px 2px rgba(0,0,0,.2);z-index:2}
+.fab .cl{position:absolute;left:0;right:0;top:.2em;bottom:0;transform-origin:50% 0;transform:scaleY(0);transition:transform 1.4s cubic-bezier(.3,1.25,.4,1);
+  clip-path:polygon(0 0,100% 0,100% 92%,82% 97%,62% 93%,42% 99%,22% 94%,0 98%);
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
+.fab .cl::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.14),rgba(255,255,255,.28) 30%,rgba(0,0,0,.05) 55%,rgba(255,255,255,.22) 75%,rgba(0,0,0,.12));
+  background-size:200% 100%;animation:sheen 5s ease-in-out infinite}
+@keyframes sheen{50%{background-position:100% 0}}
+.drs.in .fab .cl{transform:scaleY(1)}
+.drs.in .fab:nth-child(2) .cl{transition-delay:.15s}.drs.in .fab:nth-child(3) .cl{transition-delay:.3s}.drs.in .fab:nth-child(4) .cl{transition-delay:.45s}.drs.in .fab:nth-child(5) .cl{transition-delay:.6s}.drs.in .fab:nth-child(6) .cl{transition-delay:.75s}
+.fab.sw .cl{animation:sway 1.6s ease-in-out}
+@keyframes sway{20%{transform:scaleY(1) rotate(5deg)}45%{transform:scaleY(1) rotate(-4deg)}70%{transform:scaleY(1) rotate(2deg)}}
+.dnote{margin-top:1.1em;color:var(--ink);line-height:1.8}
+.tapc{font-size:.8em;color:var(--mute);margin-top:.5em}
+/* reply */
+form{display:grid;grid-template-columns:minmax(0,1fr);gap:.75em;width:100%;max-width:18em;margin:1.2em auto 0;text-align:start}
+.yn{min-width:0}
+.fld{display:flex;align-items:center;gap:.6em;min-height:3em;padding:0 1em;border-radius:2em;background:rgba(255,251,244,.85);border:1px solid rgba(176,138,76,.4)}
+.fld>svg{width:1.25em;height:1.25em;flex:none;color:#a07d45}
+#rn{flex:1;min-width:0;border:0;background:transparent;outline:none;font:inherit;font-size:16px;color:var(--ink)}
+.lb{flex:1;color:var(--mute)}
+.stp{display:flex;align-items:center;gap:.6em;direction:ltr}
+.stp button{width:2em;height:2em;border-radius:50%;border:1px solid rgba(176,138,76,.5);background:#fffaf2;font-size:1.1em;line-height:1;color:#7d5b2c;cursor:pointer}
+.stp b{font:600 1.25em var(--en);color:#7d5b2c;min-width:1em;text-align:center}
+.yns{display:grid;grid-template-columns:1fr 1fr;gap:.6em}
+.yn{position:relative;display:flex;flex-direction:column;align-items:center;gap:.15em;padding:.65em .4em;border-radius:1.4em;border:1px solid rgba(176,138,76,.4);background:rgba(255,251,244,.85);cursor:pointer;color:var(--ink);text-align:center;font-size:.92em}
+.yn input{position:absolute;opacity:0;pointer-events:none}
+.yn i{font-style:normal;width:1.9em;height:1.9em;border-radius:50%;border:1.5px solid #a07d45;display:grid;place-items:center;color:#7d5b2c}
+.yn.on{box-shadow:0 0 0 2px #b08a4c;background:#fbf0de}
+#note{background:none;border:0;color:#7d5b2c;font:inherit;font-size:.9em;text-decoration:underline;cursor:pointer}
+#rm{width:100%;min-height:5em;border:1px solid rgba(176,138,76,.4);border-radius:1.2em;background:rgba(255,251,244,.85);padding:.7em .9em;font:inherit;font-size:16px;outline:none;resize:vertical}
+.hide{display:none!important}
+.err{color:#a14a4a;font-size:.9em;min-height:1.1em;text-align:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:3em;padding:0 1.4em;border-radius:2em;border:1px solid #a07d45;background:rgba(255,251,244,.9);color:#7d5b2c;font:inherit;font-weight:600;cursor:pointer;text-decoration:none}
+.btn.gbtn{background:linear-gradient(170deg,#c8a466,#94703a);color:#fff;border:0;box-shadow:0 8px 18px -10px rgba(120,90,50,.7)}
+.btn svg{width:1.1em;height:1.1em}
+#send{width:100%}#send[disabled]{opacity:.6}
+.done{display:none;margin-top:1em;flex-direction:column;align-items:center}
+.done.on{display:flex;animation:pop .6s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.done svg{width:3em;height:3em;color:#a07d45}
+.done .big{font:700 1.7em/1.5 var(--ruq);color:#8a6630}
+.done .sm{font-size:.9em;color:var(--mute);line-height:1.7}
+.done .row{display:flex;flex-wrap:wrap;gap:.5em;justify-content:center;margin-top:.8em}
+.rsvp-on #rf{display:none}
+.thx{font:500 1.15em/1.9 var(--ar);color:var(--ink)}
+.thx b{display:block;font:700 2.2em/1.4 var(--ruq);background:linear-gradient(170deg,#c8a466,#8a6630 60%,#b89155);-webkit-background-clip:text;background-clip:text;color:transparent;margin-top:.2em}
+html[lang=en] .thx{font:italic 500 1.3em/1.6 var(--en)}html[lang=en] .thx b{font:400 2.2em/1.2 var(--scr);font-style:normal}
+.foot{margin-top:2em;font-size:.85em}.foot a{color:var(--mute);text-decoration:none;border-bottom:1px dotted var(--line)}
+/* scroll cue on the hero */
+.cue{position:fixed;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:2px;color:#7d5b2c;font-size:13px;
+  background:rgba(255,250,242,.82);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:6px 14px 4px;border-radius:20px;border:1px solid var(--line);opacity:0;pointer-events:none;transition:opacity .8s}
+.cue svg{width:16px;height:16px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(4px)}}
+body.cueOn .cue{opacity:1}
+body.scrolled .cue{opacity:0}
+
 /* chrome */
 .ctl{position:fixed;z-index:60;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,250,242,.85);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--gold2);display:grid;place-items:center;cursor:pointer}
 #lg{top:max(14px,env(safe-area-inset-top));right:14px;font:600 14px var(--en)}
@@ -125,7 +222,7 @@ html[lang=en] .it{font:500 1.08em/1.4 var(--en)}
 #mu.off .bars rect{animation:none;transform:scaleY(.35)}
 @keyframes eq{50%{transform:scaleY(.35)}}
 .flag{position:fixed;top:max(14px,env(safe-area-inset-top));left:14px;z-index:60;background:var(--gold2);color:#fff;font:500 12px var(--ar);padding:5px 12px;border-radius:20px}
-@media (prefers-reduced-motion:reduce){.flick,#tap::after,.hint,#mu .bars rect{animation:none}.leaf,#closed,#ajar,#world{transition-duration:.01s!important;transition-delay:0s!important}}
+@media (prefers-reduced-motion:reduce){.flick,#tap::after,.hint,#mu .bars rect{animation:none}.lf,#door,#world,#bow i{animation-duration:.01s!important;animation-delay:0s!important;transition-duration:.01s!important;transition-delay:0s!important}}
 </style>
 </head>
 <body>
@@ -161,24 +258,70 @@ html[lang=en] .it{font:500 1.08em/1.4 var(--en)}
       <svg class="nokid" id="nokid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><path d="M5 5l14 14"/><circle cx="12" cy="8.2" r="1.8"/><path d="M9.3 18.5v-4.2l-1.6-2.1M14.7 18.5v-4.2l1.6-2.1M9.3 12.3h5.4"/></svg>
     </div>
   </div></div>
-  <div id="closed"><div class="a"></div><div class="b"></div></div>
-  <div id="ajar"><div class="leaf l"></div><div class="leaf r"></div></div>
+  <div id="door">
+    <div class="lf l"></div><div class="lf r"></div>
+    <div id="bow"><i id="rTL"></i><i id="rTR"></i><i id="rLL"></i><i id="rLR"></i><i id="rK"></i></div>
+    <div class="fr"></div>
+  </div>
   <button id="tap" type="button" aria-label="افتح الدعوة"></button>
   <div class="hint" id="hint"></div>
 </div>
+
+<div id="more" aria-hidden="true">
+  <div class="spacer"></div>
+  <section class="pg" id="pCount">
+    <h2 class="rv" data-t="cdTitle"></h2>
+    <svg class="orn2 rv d1" viewBox="0 0 150 18" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 9H58M92 9H146" opacity=".6"/><path d="M75 14.5c-5-3.6-8-6.2-8-9a3.6 3.6 0 0 1 8-1.6A3.6 3.6 0 0 1 83 5.5c0 2.8-3 5.4-8 9z" fill="currentColor" fill-opacity=".18"/></svg>
+    <div class="cd rv d2" id="cd"><div><b id="cdD">0</b><small data-t="days"></small></div><div><b id="cdH">0</b><small data-t="hours"></small></div><div><b id="cdM">0</b><small data-t="mins"></small></div><div><b id="cdS">0</b><small data-t="secs"></small></div></div>
+    <div class="cdDone hide" id="cdDone" data-t="today"></div>
+    <a class="btn rv d3" id="cal" style="margin-top:1.3em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4M12 12.5v5M9.5 15h5"/></svg><span data-t="addCal"></span></a>
+  </section>
+  <section class="pg" id="pDress">
+    <h2 class="rv" data-t="dressTitle"></h2>
+    <svg class="orn2 rv d1" viewBox="0 0 150 18" fill="none" stroke="currentColor" stroke-width="1"><path d="M4 9H58M92 9H146" opacity=".6"/><path d="M75 14.5c-5-3.6-8-6.2-8-9a3.6 3.6 0 0 1 8-1.6A3.6 3.6 0 0 1 83 5.5c0 2.8-3 5.4-8 9z" fill="currentColor" fill-opacity=".18"/></svg>
+    <div class="drs" id="drs"></div>
+    <div class="tapc rv" data-t="tapFab"></div>
+    <div class="dnote rv" id="dnote"></div>
+  </section>
+  <section class="pg" id="rsvp">
+    <h2 class="rv" data-t="rsvpTitle"></h2>
+    <p class="sub rv d1" data-t="rsvpSub"></p>
+    <form id="rf" class="rv d2" novalidate>
+      <label class="fld"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.2-6.5 8-6.5s7 2 8 6.5"/></svg><input type="text" id="rn" maxlength="60" autocomplete="name"></label>
+      <div class="yns"><label class="yn on"><input type="radio" name="att" value="1" checked><i>✓</i><span data-t="yes"></span></label>
+      <label class="yn"><input type="radio" name="att" value="0"><i>✕</i><span data-t="no"></span></label></div>
+      <div class="fld" id="cntBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="8" r="3.5"/><circle cx="16.5" cy="9" r="2.8"/><path d="M2.5 20c.8-3.8 3.3-5.5 6.5-5.5s5.7 1.7 6.5 5.5M15 14.6c3.3-.6 5.6.9 6.5 4.4"/></svg><span class="lb" data-t="guests"></span><span class="stp"><button type="button" id="minus">−</button><b id="cnt">1</b><button type="button" id="plus">+</button></span></div>
+      <button type="button" id="note" data-t="addNote"></button>
+      <textarea id="rm" class="hide" maxlength="300"></textarea>
+      <div class="err" id="err" role="alert"></div>
+      <button class="btn gbtn" id="send" type="submit"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 11.5 21 3l-6.5 18-3-7.5L3 11.5zm8.5 2 2 5 4.3-12.1-11.3 5.4 5 1.7z"/></svg><span data-t="send"></span></button>
+    </form>
+    <div class="done" id="done" role="status">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="21"/><path d="m15 24.5 6 6 12-13"/></svg>
+      <div class="big" id="dBig"></div><p class="sm" id="dSub"></p>
+      <div class="row"><a class="btn hide" id="dWa" target="_blank" rel="noopener"><span data-t="waToo"></span></a><button class="btn" type="button" id="dEdit"><span data-t="edit"></span></button></div>
+    </div>
+  </section>
+  <section class="pg" id="pEnd">
+    <div class="thx rv"><span data-t="thanks"></span><b id="endNames"></b></div>
+    <div class="foot rv d2"><a href="https://farhetnainvite.com/">💌 صمّمي دعوتك مع فرحتنا</a></div>
+  </section>
+</div>
+<div class="cue" id="cue"><span data-t="scroll"></span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 9 6 6 6-6"/></svg></div>
 <button class="ctl" id="lg" type="button" aria-label="اللغة / Language">EN</button>
 <button class="ctl off" id="mu" type="button" aria-label="Music"><svg class="bars" viewBox="0 0 20 20" fill="currentColor"><rect x="3" y="5" width="2" height="11" rx="1"/><rect x="7.5" y="3" width="2" height="13" rx="1"/><rect x="12" y="6" width="2" height="10" rx="1"/><rect x="16" y="4" width="2" height="12" rx="1"/></svg></button>
 <div class="flag" id="demoFlag">تجربة</div>
-<audio id="bgm" loop preload="none" src="../music-harp.mp3"></audio>
+<audio id="bgm" loop preload="none" src="../music-waltz.mp3"></audio>
 <script src="../inv-data.js"></script>
+<script>var SB={url:"https://fjoyqftndulavcjcxaya.supabase.co",key:"sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui"};</script>
 <script>
 (function(){
 "use strict";
 /* demo data — replaced by the couple's details from the studio */
 var D={groom:"سامح",bride:"تمارا",groomEn:"Sameh",brideEn:"Tamara",mono:"",date:"2026-11-29",time:"20:00",
-  venue:"قاعة الأفراح",venueEn:"The Grand Hall",addr:"",addrEn:"",map:"",intro:"",kind:"",closing:"",notes:"جنة الأطفال منازلهم",music:"",lang:"ar"};
+  venue:"قاعة الأفراح",venueEn:"The Grand Hall",addr:"",addrEn:"",map:"",intro:"",kind:"",closing:"",notes:"جنة الأطفال منازلهم",dress:["#f4ead8","#e3cba4","#c9a77a","#a8865a","#7e6347"],dressNote:"",dressEn:"",wa:"",music:"",lang:"ar"};
 var L=window.farhetnaData&&farhetnaData("snd");
-if(L){D=Object.assign({},D,{notes:""},L);D.lang=(L.groom||L.bride)?"ar":"en"}
+if(L){D=Object.assign({},D,{notes:"",dress:[]},L);D.lang=(L.groom||L.bride)?"ar":"en"}
 var MODE=window.farhetnaMode||null,$=function(i){return document.getElementById(i)};
 var lang=(function(){var q=location.search.match(/[?&]lang=(ar|en)/);return q?q[1]:(D.lang==="en"?"en":"ar")})();
 var AD="٠١٢٣٤٥٦٧٨٩";
@@ -191,11 +334,25 @@ var T={
  ar:{tap:"المسوا الفيونكة لفتح الدعوة",bism:"بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
    poem:"ابتدأ العمر بك، وبدأت الحكاية معك\nفكان اللقاء قدرًا، وكانت السعادة أنت",
    inv:"نتشرف بدعوتكم لحضور حفل ",lead:"وذلك بمشيئة الله تعالى",tl:"الساعة",closing:"بحضوركم يتم لنا الفرح والسرور",
-   pm:"مساءً",am:"صباحًا",demo:"تجربة",open:"افتح الدعوة"},
+   pm:"مساءً",am:"صباحًا",demo:"تجربة",open:"افتح الدعوة",
+   cdTitle:"باقي على فرحتنا",days:"يوم",hours:"ساعة",mins:"دقيقة",secs:"ثانية",today:"النهارده فرحتنا 🤍",addCal:"ضيفي الميعاد لتقويمك",
+   dressTitle:"الدريس كود",tapFab:"المسي الألوان",dressDef:"يسعدنا تشاركونا بألوان هادية من الدرجات دي",
+   rsvpTitle:"هتشاركونا فرحتنا؟",rsvpSub:"يسعدنا تأكيدكم في أقرب وقت",yourName:"الاسم بالكامل",yes:"أكيد هحضر",no:"مش هقدر أحضر",guests:"عدد الحضور",
+   addNote:"+ اكتبي رسالة للعروسين",send:"إرسال الرد",sending:"بنبعت ردك…",errName:"اكتب اسمك من فضلك",errNet:"معرفناش نسجّل الرد. اتأكد من النت وجرب تاني.",
+   okYes:"مستنيينك 🤍",okNo:"هتوحشنا",okSub:"شكرًا إنك عرّفتنا. تقدر تعدّل ردك في أي وقت.",waToo:"ابعته كمان على واتساب",edit:"تعديل الرد",
+   demoNote:"دي دعوة تجريبية، فالرد مش بيتسجل. في الدعوة الحقيقية ردك بيوصل للعروسين.",prevNote:"ده عرض معاينة، فالرد مش بيتسجل.",
+   toWa:"هنحوّلك للواتساب عشان تبعت ردك للعروسين…",thanks:"مستنيينكم تنوّروا فرحتنا",scroll:"اسحبي لتحت"},
  en:{tap:"Tap the bow to open",bism:"In the name of God, the Most Gracious, the Most Merciful",
    poem:"Life began with you, and our story began together;\nmeeting you was fate, and happiness was you",
    inv:"We are honoured to invite you to our ",lead:"God willing, we will celebrate on",tl:"Time",closing:"Your presence completes our joy",
-   pm:"PM",am:"AM",demo:"Demo",open:"Open the invitation"}};
+   pm:"PM",am:"AM",demo:"Demo",open:"Open the invitation",
+   cdTitle:"Counting down to our day",days:"Days",hours:"Hours",mins:"Mins",secs:"Secs",today:"Today is our day 🤍",addCal:"Add to calendar",
+   dressTitle:"Dress code",tapFab:"Tap the colours",dressDef:"We'd love to see you in these soft tones",
+   rsvpTitle:"Will you celebrate with us?",rsvpSub:"Kindly let us know at your earliest convenience",yourName:"Full name",yes:"Joyfully accept",no:"Regretfully decline",guests:"Guests",
+   addNote:"+ Add a note for the couple",send:"Send reply",sending:"Sending…",errName:"Please write your name",errNet:"We couldn't save your reply. Please check your connection and try again.",
+   okYes:"See you there!",okNo:"You'll be missed",okSub:"Thank you for letting us know. You can edit your reply any time.",waToo:"Also send on WhatsApp",edit:"Edit reply",
+   demoNote:"This is a sample invitation, so replies aren't saved. On a real invitation your reply reaches the couple.",prevNote:"This is a preview, so replies aren't saved.",
+   toWa:"Taking you to WhatsApp to send your reply…",thanks:"We can't wait to celebrate with you",scroll:"Scroll down"}};
 function t(k){return T[lang][k]}
 function render(){
   var en=lang==="en";document.documentElement.lang=lang;document.documentElement.dir=en?"ltr":"rtl";
@@ -225,9 +382,18 @@ function render(){
   $("closing").textContent=(!en&&D.closing)||t("closing");
   var n=en?"":String(D.notes||"");$("notes").textContent=n;$("notes").hidden=!n;
   $("nokid").style.display=/أطفال|اطفال|children|kids/i.test(n)?"":"none";
+  document.querySelectorAll("[data-t]").forEach(function(e){var v=t(e.getAttribute("data-t"));if(v!=null)e.textContent=v});
+  $("rn").placeholder=t("yourName");
+  var dn=en?(D.dressEn||""):(D.dressNote||"");$("dnote").textContent=dn||((D.dress||[]).length?t("dressDef"):"");
+  $("pDress").hidden=!((D.dress||[]).length||dn);
+  $("endNames").textContent=(B||"")+" & "+(G||"");
+  $("cnt").textContent=en?cntV:String(cntV).replace(/\d/g,function(x){return AD[x]});
 }
+var cntV=1;
+var drs=$("drs");(D.dress||[]).slice(0,6).forEach(function(c){var f=document.createElement("div");f.className="fab";
+  f.innerHTML='<i class="rod"></i><i class="cl" style="background:'+c+'"></i>';f.onclick=function(){f.classList.remove("sw");void f.offsetWidth;f.classList.add("sw")};drs.appendChild(f)});
 render();
-$("lg").addEventListener("click",function(){lang=lang==="en"?"ar":"en";render()});
+$("lg").addEventListener("click",function(){lang=lang==="en"?"ar":"en";render();tick()});
 
 var au=$("bgm"),playing=false;if(D.music==="none"){au.removeAttribute("src");$("mu").hidden=true}else if(D.music)au.src=D.music;
 function setMu(on){playing=on;$("mu").classList.toggle("off",!on);if(on){var pr=au.play();if(pr&&pr.catch)pr.catch(function(){setMu(false)})}else au.pause()}
@@ -240,17 +406,65 @@ function show(i){if(cur>=0)SL[cur].classList.remove("on");cur=i;
   clearTimeout(timer);if(cur<SL.length-1)timer=setTimeout(function(){show(cur+1)},DUR[cur])}
 $("txt").addEventListener("click",function(e){if(!document.body.classList.contains("open")||e.target.closest("a"))return;show((cur+1)%SL.length)});
 
+
+/* ---------- below the hero ---------- */
+var more=$("more");
+function revealAll(){var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{root:more,threshold:.25}):null;
+  document.querySelectorAll(".rv,.drs").forEach(function(el){io?io.observe(el):el.classList.add("in")})}
+more.addEventListener("scroll",function(){if(more.scrollTop>40)document.body.classList.add("scrolled")},{passive:true});
+/* countdown */
+var tgt=(function(){var ts=String(D.time||"20:00").replace(/[٠-٩]/g,function(c){return AD.indexOf(c)}),tp=ts.match(/\d+/g)||["20","00"],h=+tp[0]||0;
+  if(/م|pm/i.test(ts)&&h<12)h+=12;if(/ص|am/i.test(ts)&&h===12)h=0;var d=new Date((D.date||"2027-01-01")+"T00:00:00");d.setHours(h,+(tp[1]||0),0,0);return d})();
+function num(n){return lang==="en"?String(n):String(n).replace(/\d/g,function(x){return AD[x]})}
+function tick(){var ms=tgt-new Date();if(ms<=0){$("cd").classList.add("hide");$("cdDone").classList.remove("hide");return}
+  var s=Math.floor(ms/1000);$("cdD").textContent=num(Math.floor(s/86400));$("cdH").textContent=num(Math.floor(s%86400/3600));$("cdM").textContent=num(Math.floor(s%3600/60));$("cdS").textContent=num(s%60)}
+tick();setInterval(tick,1000);
+$("cal").onclick=function(){var p=function(x){return(x<10?"0":"")+x},dt=tgt,f=function(d){return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+"T"+p(d.getHours())+p(d.getMinutes())+"00"};
+  var end=new Date(dt.getTime()+4*3600e3),G=D.groom||D.groomEn,B=D.bride||D.brideEn;
+  var ics="BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Farhetna//EN\r\nBEGIN:VEVENT\r\nUID:"+Date.now()+"@farhetna\r\nDTSTART:"+f(dt)+"\r\nDTEND:"+f(end)+"\r\nSUMMARY:"+(lang==="en"?"Wedding of ":"فرح ")+B+" & "+G+"\r\nLOCATION:"+[D.venue,D.addr].filter(Boolean).join(" - ")+"\r\nEND:VEVENT\r\nEND:VCALENDAR";
+  var a=document.createElement("a");a.href="data:text/calendar;charset=utf-8,"+encodeURIComponent(ics);a.download="farhetna.ics";document.body.appendChild(a);a.click();a.remove()};
+/* reply */
+var DEV=(function(){try{var k="farhetna_dev",v=localStorage.getItem(k);if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem(k,v)}return v}catch(e){return""}})();
+var RK="farhetna_rsvp_snd_"+(D.slug||D.groom+D.date);
+function att(){return document.querySelector('input[name=att]:checked').value==="1"}
+function ynSync(){document.querySelectorAll(".yn").forEach(function(l){l.classList.toggle("on",l.querySelector("input").checked)})}
+document.querySelectorAll('input[name=att]').forEach(function(r){r.onchange=function(){$("cntBox").style.visibility=att()?"":"hidden";ynSync()}});
+$("note").onclick=function(){$("note").classList.add("hide");$("rm").classList.remove("hide");$("rm").focus()};
+function showCnt(){$("cnt").textContent=num(cntV)}
+$("minus").onclick=function(){if(cntV>1){cntV--;showCnt()}};$("plus").onclick=function(){if(cntV<10){cntV++;showCnt()}};
+function waLink(r){var wa=String(D.wa||"").replace(/\D/g,"");if(!wa)return"";if(/^0/.test(wa))wa="2"+wa;
+  var B=D.bride||D.brideEn,G=D.groom||D.groomEn,m=r.yes?("السلام عليكم 🤍\nأنا "+r.name+"، وبأكد حضوري فرح "+B+" و"+G+" إن شاء الله\nعدد الحضور: "+r.count):("السلام عليكم 🤍\nأنا "+r.name+"، وللأسف مش هقدر أحضر فرح "+B+" و"+G+". ألف مبروك!");
+  if(r.msg)m+="\n"+r.msg;return"https://wa.me/"+wa+"?text="+encodeURIComponent(m)}
+function done(r,sub){$("rsvp").classList.add("rsvp-on");$("done").classList.add("on");$("dBig").textContent=r.yes?t("okYes"):t("okNo");$("dSub").textContent=sub||t("okSub");
+  var w=waLink(r);$("dWa").classList.toggle("hide",!w||MODE!=="live");if(w)$("dWa").href=w}
+$("dEdit").onclick=function(){$("done").classList.remove("on");$("rsvp").classList.remove("rsvp-on");$("rn").focus()};
+try{var prev=JSON.parse(localStorage.getItem(RK)||"null");if(prev&&MODE==="live"){$("rn").value=prev.name;cntV=prev.count||1;showCnt();
+  document.querySelector('input[name=att][value="'+(prev.yes?1:0)+'"]').checked=true;$("cntBox").style.visibility=prev.yes?"":"hidden";ynSync();$("rm").value=prev.msg||"";done(prev)}}catch(e){}
+$("rf").onsubmit=function(e){e.preventDefault();var r={name:$("rn").value.trim(),yes:att(),count:att()?cntV:0,msg:$("rm").value.trim()};$("err").textContent="";
+  if(r.name.length<2){$("err").textContent=t("errName");$("rn").focus();return}
+  if(MODE!=="live"){done(r,MODE==="preview"?t("prevNote"):t("demoNote"));$("dWa").classList.add("hide");return}
+  var btn=$("send"),lbl=btn.querySelector("span");btn.disabled=true;lbl.textContent=t("sending");
+  var finish=function(){btn.disabled=false;lbl.textContent=t("send")};
+  var toWa=function(){var w=waLink(r);if(w){$("err").textContent=t("toWa");setTimeout(function(){location.href=w},800)}else $("err").textContent=t("errNet");finish()};
+  if(!D.slug){toWa();return}
+  fetch(SB.url+"/rest/v1/rpc/add_rsvp",{method:"POST",headers:{"Content-Type":"application/json",apikey:SB.key,Authorization:"Bearer "+SB.key},
+    body:JSON.stringify({p_slug:D.slug,p_name:r.name,p_attending:r.yes,p_guests:r.count,p_note:r.msg,p_device:DEV})})
+  .then(function(res){if(!res.ok)throw new Error(res.status);return res.json()})
+  .then(function(){try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}finish();done(r);if(navigator.vibrate)navigator.vibrate([8,30,8])})
+  .catch(toWa)};
+function unlock(){more.removeAttribute("aria-hidden");revealAll()}
 var opened=false,R=matchMedia("(prefers-reduced-motion:reduce)").matches?.15:1;
 function later(f,ms){setTimeout(f,ms*R)}
 function open(){if(opened)return;opened=true;if(D.music!=="none")setMu(true);if(navigator.vibrate)navigator.vibrate(10);
-  document.body.classList.add("untie");
-  later(function(){document.body.classList.add("ajar")},2200);
-  later(function(){document.body.classList.add("open")},3300);
-  later(function(){document.body.classList.add("zoom")},6200);
-  later(function(){document.body.classList.add("gone")},6600);
-  later(function(){show(0)},8200)}
+  document.body.classList.add("untie");                                   /* ribbon unties: 0 → 4.1s */
+  later(function(){document.body.classList.add("open")},4300);             /* doors open only after the ribbon is gone */
+  later(function(){document.body.classList.add("through")},7000);
+  later(function(){document.body.classList.add("zoom")},8800);
+  later(function(){document.body.classList.add("gone");unlock()},9400);
+  later(function(){document.body.classList.add("cueOn")},22000);
+  later(function(){show(0)},10600)}
 $("tap").addEventListener("click",open);
-if(/[?&]open=1/.test(location.search)){document.body.classList.add("untie","ajar","open","gone","zoom");show(0)}
+if(/[?&]open=1/.test(location.search)){document.body.classList.add("untie","open","through","gone","zoom","cueOn");unlock();show(0)}
 })();
 </script>
 </body>

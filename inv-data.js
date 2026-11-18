@@ -111,7 +111,8 @@ window.farhetnaData=function(key){
   if(key==="snd"){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",mono:o.mono||"",date:o.date||"",time:base.time,
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",addrEn:o.addrEn||"",map:o.map||"",intro:o.intro||"",kind:o.kind||"",
-      closing:o.closing||"",notes:o.notes||"",music:mu||null,slug:String(o._slug||"").toLowerCase()};}
+      closing:o.closing||"",notes:o.notes||"",wa:base.wa,dress:(o.dress||[]).filter(function(c){return/^#[0-9a-f]{3,8}$/i.test(c)}),
+      dressNote:o.dressNote||"",dressEn:o.dressEn||"",music:mu||null,slug:String(o._slug||"").toLowerCase()};}
   if(key==="swp"){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",mono:o.mono||"",date:o.date||"",time:base.time,
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",addrEn:o.addrEn||"",map:o.map||"",intro:o.intro||"",kind:o.kind||"",
