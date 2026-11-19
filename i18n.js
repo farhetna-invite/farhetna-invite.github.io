@@ -139,7 +139,7 @@ var D={
 "حسابي":"My account","اعملي دعوة جديدة ✨":"Create a new invitation ✨","تسجيل الخروج":"Sign out","عدّلي دعوتك ✏️":"Edit your invitation ✏️","اكتبي كود التفعيل اللي استلمتيه، وهتظهرلك بيانات دعوتك تعدّلي فيها":"Enter the activation code you received and your invitation details will appear for editing",
 "افتحي دعوتي":"Open my invitation","كلاسيك فخم":"Luxury classic","ورود وأزهار":"Roses & flowers","مودرن بسيط":"Modern minimal","زخارف إسلامية":"Islamic motifs",
 "من غير مزيكا":"No music","زفة مصري":"Egyptian Zaffa","طبلة ومزمار":"Drum & mizmar","زفة سريعة":"Fast Zaffa","إيقاع فرح":"Festive rhythm","عود شرقي":"Oriental oud","حجاز مع طبلة هادية":"Hijaz with soft drum",
-"تقاسيم عود":"Oud improvisation","نهاوند هادي":"Gentle Nahawand","ناي وعود":"Ney & oud","روحاني وهادي":"Spiritual & calm","أوركسترا شرقي":"Oriental orchestra","كمنجات وطبلة":"Violins & drum","بيانو رومانسي":"Romantic piano",
+"تقاسيم عود":"Oud improvisation","نهاوند هادي":"Gentle Nahawand","ناي وعود":"Ney & oud","تلاوة قرآنية":"Quran recitation","آيات هادية بصوت قارئ":"Calm verses, recited","روحاني وهادي":"Spiritual & calm","أوركسترا شرقي":"Oriental orchestra","كمنجات وطبلة":"Violins & drum","بيانو رومانسي":"Romantic piano",
 "ناعم ودافي":"Soft & warm","بيانو هادي":"Calm piano","فالس رقيق":"Gentle waltz","الرقصة الأولى":"The first dance","بيانو وكمنجات":"Piano & violins","كانون":"Canon","المقطوعة الكلاسيك للأفراح":"The classic wedding piece",
 "مارش الزفاف":"Wedding march","دخلة ملكية":"Royal entrance","كمنجات فخمة":"Grand violins","هارب حالم":"Dreamy harp","ناعمة وحالمة":"Soft & dreamy","صندوق موسيقى":"Music box","تهويدة رقيقة":"Gentle lullaby",
 "ارفعي أغنيتك":"Upload your song","ملف من الموبايل":"A file from your phone","اسمعي":"Listen","فاخر ✦":"Premium ✦","لون":"Colour",
