@@ -35,7 +35,7 @@ var D={
 "تجارب فرحتنا المميزة":"Farhetna Signature Experiences","Signature Collection":"Signature Collection",
 "دعوات تفاعلية جديدة، جرّبي كل واحدة بنفسك زي ما ضيوفك هيشوفوها":"Our newest interactive invitations — try each one exactly as your guests will see it",
 "اسحبي لتشوفي باقي التصميمات":"Swipe to see more designs",
-"إزاي تصممي دعوتك؟":"How do you design your invitation?","بخطوات بسيطة وسريعة،":"In a few simple, quick steps,","تصميمك الجاهز بين إيديكي":"your finished design is in your hands",
+"إزاي تصممي دعوتك؟":"How do you design your invitation?","خطوات بسيطة… ودعوتك جاهزة 🤍":"A few simple steps… and your invitation is ready 🤍","من تشكيلة تصميمات كتير، وتقدري تجرّبي أي دعوة قبل ما تختاري.":"From a wide collection of designs, and you can try any invitation before you choose.","بخطوات بسيطة وسريعة،":"In a few simple, quick steps,","تصميمك الجاهز بين إيديكي":"your finished design is in your hands",
 "اختاري التصميم اللي يعجبك":"Choose the design you love","من ١١ تصميم، وتقدري تجرّبي أي دعوة قبل ما تختاري.":"From 26 designs — try any invitation before you choose.",
 "من ٢٧ تصميم، وتقدري تجرّبي أي دعوة قبل ما تختاري.":"From 27 designs — try any invitation before you choose.",
 "أضيفي تفاصيل مناسبتك":"Add your event details","الأسامي، والميعاد، والمكان، والمزيكا، وشوفي دعوتك بتتغير قدامك.":"Names, date, venue and music — and watch your invitation update in front of you.",
