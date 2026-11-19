@@ -66,6 +66,10 @@ textarea{min-height:70px;resize:vertical}
 .btn.primary{background:#6d1f2f;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.18)}
 .btn.ghost{background:#fff;color:#6d1f2f;border:1.5px solid #6d1f2f}
 .btn.slim{background:transparent;color:#6d1f2f;border:1.5px dashed #b98a92;padding:10px;font-size:.98rem}.btn.slim[hidden]{display:none}
+.tplmore{display:block;width:100%;margin-top:10px;padding:11px;border-radius:12px;border:1.5px dashed #b98a92;background:transparent;color:#6d1f2f;font-weight:700;font-size:.95rem}.tplmore[hidden]{display:none}
+#tpls.coll .tpl:not([aria-pressed="true"]){display:none}#tpls.coll{grid-template-columns:minmax(0,230px);justify-content:center}
+#tracks:not(.all) .trk.more{display:none}
+.dfy{display:block;text-align:center;margin:-8px auto 18px;color:#6d3742;font-size:.88rem;text-decoration:underline}
 .pnote{text-align:center;font-size:.85rem;color:#7a6a5c;margin:-4px 0 4px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#3a1a20;color:#fff;padding:10px 18px;border-radius:30px;font-size:.9rem;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -1415,11 +1419,13 @@ body.inviting .stbar{display:none}
   </div>
   <div class="acctbar"><button class="acctbtn" id="acctBtn"><span class="av">👤</span><span id="acctTxt">تسجيل الدخول</span></button></div>
   <button class="editcode" id="editCodeBtn">عملتي دعوتك قبل كده؟ عدّليها من هنا ✏️</button>
+  <a class="dfy" id="dfyLink" href="#" target="_blank" rel="noopener">حاسّة إنها كتير؟ ابعتيلنا تفاصيلك على واتساب وإحنا نعملهالك 💬</a>
   <div id="gpBox" hidden><button class="btn ghost" id="rsBtn" type="button">ردود الحضور ✅</button><div class="gpw" id="rsWrap"></div><button class="btn ghost" id="gpBtn" type="button">صور الضيوف 📸</button><div class="gpw" id="gpWrap"></div><button class="btn ghost" id="vcBtn" type="button">رسايل الضيوف الصوتية 🎙️</button><div class="gpw" id="vcWrap"></div></div>
 
   <section class="card">
     <h2><span class="step">١</span>اختاري التصميم</h2>
     <div class="tpls" id="tpls"></div>
+    <button type="button" class="tplmore" id="tplToggle" hidden>غيّري التصميم ▾</button>
     <label>اللون</label>
     <div class="pals" id="pals"></div>
   </section>
@@ -1427,8 +1433,8 @@ body.inviting .stbar{display:none}
   <section class="card">
     <h2><span class="step">٢</span><span id="st2">العرسان</span></h2>
     <div class="row">
-      <div><label for="groom" id="lGroom">اسم العريس</label><input id="groom" value="يوسف"></div>
-      <div><label for="bride" id="lBride">اسم العروسة</label><input id="bride" value="مريم"></div>
+      <div><label for="groom" id="lGroom">اسم العريس</label><input id="groom" placeholder="مثلًا: يوسف"></div>
+      <div><label for="bride" id="lBride">اسم العروسة</label><input id="bride" placeholder="مثلًا: مريم"></div>
     </div>
     <label for="mono" class="wedOnly">حروف الختم بالإنجليزي (اختياري) – زي K&S</label><input id="mono" maxlength="7" placeholder="لو فاضية هتتكتب أول حرف من الأسامي بالعربي" dir="ltr" style="text-align:right">
     <label for="kind" class="wedOnly">المناسبة</label>
@@ -1446,17 +1452,17 @@ body.inviting .stbar{display:none}
       <div><label for="date">التاريخ</label><input id="date" type="date"></div>
       <div><label for="time">الساعة</label><input id="time" type="time" value="19:00"></div>
     </div>
-    <label for="venue" id="lVenue">اسم القاعة / المكان</label><input id="venue" value="قاعة الياسمين">
-    <label for="addr">العنوان</label><input id="addr" value="التجمع الخامس، القاهرة">
+    <label for="venue" id="lVenue">اسم القاعة / المكان</label><input id="venue" placeholder="مثلًا: قاعة الياسمين">
+    <label for="addr">العنوان</label><input id="addr" placeholder="مثلًا: التجمع الخامس، القاهرة">
     <label for="map">لينك جوجل ماب (اختياري)</label><input id="map" type="url" placeholder="https://maps.app.goo.gl/...">
     <label for="wa">رقم واتساب لتأكيد الحضور (اختياري)</label><input id="wa" type="tel" inputmode="tel" placeholder="201xxxxxxxxx">
   </section>
 
   <section class="card">
     <h2><span class="step">٤</span>تفاصيل إضافية <small style="color:#8a6b6f;font-weight:400">(اختياري)</small></h2>
-    <label for="poem" class="wedOnly">شعر الافتتاح (لتيمبلت «قصر الورد») – كل سطر لوحده</label>
+    <label for="poem" class="wedOnly">شعر الافتتاح – كل سطر لوحده</label>
     <textarea id="poem" rows="4" placeholder="لعلها دعوة صعدت إلى السماء&#10;فأجابها الله بلقاء لم يكن صدفة&#10;ولعلها أرواح كتب لها أن تلتقي&#10;لتكمل معًا ما تبقى من العمر"></textarea>
-    <label for="closing" class="wedOnly">كلمة الختام (لتيمبلت «قصر الورد»)</label>
+    <label for="closing" class="wedOnly">كلمة الختام</label>
     <textarea id="closing" rows="2" placeholder="فكونوا بالقرب، لتشهدوا معنا بداية فصلنا الأجمل،&#10;وتكتمل بوجودكم فرحة العمر."></textarea>
     <label for="program">برنامج الحفل – كل فقرة في سطر</label>
     <textarea id="program" placeholder="7:00 م - استقبال الضيوف&#10;8:00 م - دخول العروسين&#10;10:00 م - العشاء"></textarea>
@@ -1530,6 +1536,7 @@ body.inviting .stbar{display:none}
   <section class="card">
     <h2><span class="step">٥</span>المزيكا</h2>
     <div class="tracks" id="tracks"></div>
+    <button type="button" class="tplmore" id="trkMore">مزيكا أكتر ▾</button>
     <div class="upload" id="uploadBox">
       <input type="file" id="audioFile">
       <div class="note" id="upName"></div>
@@ -2532,7 +2539,7 @@ function applyMode(){const g=isBd(state.tpl)?"bd":isSb(state.tpl)?"sb":isRb(stat
         prog:"6:00 م - استقبال الضيوف\n6:30 م - دق الهون والغربال\n7:00 م - زفة الشموع\n7:30 م - توزيع الحلويات",n1:"وتين",n2:"بنت أحمد ومنى",intro:"جت الدنيا تنوّرها 🎀\nوعايزين نحتفل بيها مع أغلى الناس في سبوعها"},
     rb:{hd:"دعوة عيد ميلاد فاخرة بلينك واحد، تتبعت لكل الضيوف",st2:"صاحب / صاحبة عيد الميلاد",gr:"الاسم",br:"السن (رقم) – زي ٤٥",ven:"مكان الحفلة",dr:"ملاحظة للبس (اختياري)",ph:"صور من رحلة العمر",hero:"صورة (اختياري)",alb:"صور من سنين مختلفة (لحد ٤ صور)",bph:"٤٥",kind:"عيد ميلاد",
         prog:"8:00 م - الاستقبال\n8:30 م - لحظة المفاجأة\n9:00 م - العشاء\n10:00 م - التورتة والشموع",n1:"هند",n2:"٤٥",intro:"بكل الود ندعوكم لمشاركتها فرحتها"},
-    wed:{hd:"كارت فرح تفاعلي بلينك واحد، يتبعت لكل الضيوف",st2:"العرسان",gr:"اسم العريس",br:"اسم العروسة",ven:"اسم القاعة / المكان",dr:"ملاحظة للبس (اختياري)",ph:"صوركم وقصتكم",hero:"الصورة الرئيسية (بتظهر أول ما الباب يتفتح)",alb:"ألبوم صوركم (لحد ٤ صور)",bph:"",kind:"حفل زفاف",
+    wed:{hd:"كارت فرح تفاعلي بلينك واحد، يتبعت لكل الضيوف",st2:"العرسان",gr:"اسم العريس",br:"اسم العروسة",ven:"اسم القاعة / المكان",dr:"ملاحظة للبس (اختياري)",ph:"صوركم وقصتكم",hero:"الصورة الرئيسية (بتظهر أول ما الباب يتفتح)",alb:"ألبوم صوركم (لحد ٤ صور)",bph:"مثلًا: مريم",kind:"حفل زفاف",
         prog:"7:00 م - استقبال الضيوف\n8:00 م - دخول العروسين\n10:00 م - العشاء"}}[g];
   const T=(id,v)=>{const e=$(id);if(e)e.textContent=v};
   T("hdSub",X.hd);T("st2",X.st2);T("lGroom",X.gr);T("lBride",X.br);T("lVenue",X.ven);T("lDress",X.dr);T("stPh",X.ph);T("lHero",X.hero);T("lAlb",X.alb);
@@ -2540,7 +2547,7 @@ function applyMode(){const g=isBd(state.tpl)?"bd":isSb(state.tpl)?"sb":isRb(stat
   ["mono","poem","closing"].forEach(id=>{$(id).hidden=on});$("story").hidden=on&&g!=="rb";const sl=document.querySelector('label[for="story"]');if(sl){sl.hidden=on&&g!=="rb";sl.classList.toggle("wedOnly",g!=="rb");sl.textContent=g==="rb"?"كلمة من القلب ليها / ليه (اختياري)":"قصتكم (كلمتين عنكم)"}
   const pr=$("pBride")&&$("pBride").closest(".row");if(pr)pr.hidden=on&&g!=="rb";const pgw=$("pGroom")&&$("pGroom").parentElement;if(pgw)pgw.hidden=g==="rb";const pbl=document.querySelector('label[for="pBride"]');if(pbl)pbl.textContent=g==="rb"?"التوقيع – من مين؟ (زي: ولادك كريم وسلمى)":"أهل العروسة";
   $("surpWrap").hidden=g!=="rb";$("ilWrap").hidden=!(g==="bd"||g==="sb"||g==="rb");
-  $("bride").placeholder=X.bph;$("bride").inputMode=(g==="bd"||g==="rb")?"numeric":"text";$("program").placeholder=X.prog;
+  $("bride").placeholder=X.bph;$("groom").placeholder="مثلًا: "+(X.n1||"يوسف");$("bride").inputMode=(g==="bd"||g==="rb")?"numeric":"text";$("program").placeholder=X.prog;
   if(on){$("kind").value=X.kind;
     const defs=[["يوسف","مريم"],["ليلى","٥"],["وتين","بنت أحمد ومنى"],["هند","٤٥"]];if(defs.some(d=>$("groom").value===d[0]&&$("bride").value===d[1])){$("groom").value=X.n1;$("bride").value=X.n2}
     if(/العروسين|عروس|أحلى هدية|تنوّرها|لمشاركتها فرحتها/.test($("intro").value)||!$("intro").value.trim())$("intro").value=X.intro;
@@ -3435,7 +3442,10 @@ $("waLead").addEventListener("click",function(){
   ov.addEventListener("click",e=>{if(e.target===ov)ov.classList.remove("open");});
 })();
 $("previewBtn").onclick=()=>{const o=collect();
+  const ph=id=>($(id).placeholder||"").replace(/^مثلًا:?\s*/,"");let demo=false;
+  ["groom","bride","venue","addr"].forEach(id=>{if(!o[id]&&ph(id)){o[id]=ph(id);demo=true;}});
   if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
+  if(demo)setTimeout(()=>toast("دي معاينة بأسامي تجريبية، اكتبي تفاصيلك تحت ✏️"),400);
   if(o.music==="custom"&&!customUrl)toast("لسه ما اخترتيش ملف الأغنية");
   Music.stop();drawBuilder();showInvite(o,true);};
 /* ---------------- get link / save (Supabase) ---------------- */
@@ -3687,6 +3697,28 @@ const mark=()=>{if(!touched){touched=true;sync();}};
 FIELDS.forEach(f=>{const el=$(f);if(el){el.addEventListener("input",mark);el.addEventListener("change",mark);}});
 setInterval(()=>{if(!B.hidden&&isEd())sync();},1500);
 sync();})();
+/* simpler studio: relevant fields, collapsed design grid, short music list, done-for-you link */
+(function(){
+  const POEM=["royal"],CLOSE=["royal","bab","fyk","sga","bsw","pgt","snd","sgp","rvl"];
+  let draft=false;try{draft=!!localStorage.getItem("da3wati2")}catch(e){}
+  let gridOpen=!(draft||/[#&]t=/.test(location.hash)),trkAll=false;
+  const tg=$("tplToggle"),grid=$("tpls"),tm=$("trkMore"),tr=$("tracks");
+  function rel(){const t=state.tpl;
+    [["poem",POEM],["closing",CLOSE]].forEach(([id,L])=>{const show=L.includes(t)&&!$(id).hidden;const lb=document.querySelector('label[for="'+id+'"]');
+      const off=!L.includes(t);$(id).style.display=off?"none":"";if(lb)lb.style.display=off?"none":"";});
+    grid.classList.toggle("coll",!gridOpen);tg.hidden=gridOpen;
+    const vis=[...tr.querySelectorAll(".trk")].filter(d=>!d.hidden);let n=0;
+    vis.forEach(d=>{const k=d.dataset.k;const keep=k===state.music||k==="custom"||(n<5&&k!=="custom");if(k!=="custom"&&k!==state.music&&n<5)n++;d.classList.toggle("more",!keep);});
+    tr.classList.toggle("all",trkAll);tm.hidden=trkAll||!vis.some(d=>d.classList.contains("more"));}
+  const db=drawBuilder;drawBuilder=function(){db.apply(this,arguments);try{rel()}catch(e){}};
+  grid.addEventListener("click",e=>{if(e.target.closest(".tpl")&&gridOpen){gridOpen=false;setTimeout(()=>{rel();grid.closest("section").scrollIntoView({behavior:"smooth",block:"start"});},0);}});
+  tg.onclick=()=>{gridOpen=true;rel();};
+  tm.onclick=()=>{trkAll=true;rel();};
+  const dl=$("dfyLink");dl.addEventListener("click",()=>{const nm=(TPL[state.tpl]||{}).name||"";
+    const m="أهلاً فرحتنا 🤍\nعايزة تعملولي الدعوة.\nالتصميم: "+nm+"\nاسم العريس:\nاسم العروسة:\nالمناسبة (فرح / خطوبة / كتب كتاب):\nالتاريخ والساعة:\nالقاعة والعنوان:\nلينك اللوكيشن (لو موجود):";
+    dl.href="https://wa.me/"+CFG.whatsapp+"?text="+encodeURIComponent(m);});
+  rel();
+})();
 window.__test={showInvite,collect,state};
 })();
 </script>
