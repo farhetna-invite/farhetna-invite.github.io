@@ -65,6 +65,7 @@ textarea{min-height:70px;resize:vertical}
 .btn{border:none;border-radius:14px;padding:15px;font-size:1.05rem;font-weight:700}
 .btn.primary{background:#6d1f2f;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.18)}
 .btn.ghost{background:#fff;color:#6d1f2f;border:1.5px solid #6d1f2f}
+.btn.slim{background:transparent;color:#6d1f2f;border:1.5px dashed #b98a92;padding:10px;font-size:.98rem}.btn.slim[hidden]{display:none}
 .pnote{text-align:center;font-size:.85rem;color:#7a6a5c;margin:-4px 0 4px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:#3a1a20;color:#fff;padding:10px 18px;border-radius:30px;font-size:.9rem;opacity:0;transition:.3s;pointer-events:none;z-index:99;max-width:90vw;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -1538,6 +1539,7 @@ body.inviting .stbar{display:none}
 
   <div class="actions">
     <button class="btn primary" id="previewBtn">شاهدي الدعوة 👀</button>
+    <button class="btn slim" id="detBtn">عدّلي الدعوة بتفاصيلك انتي ✏️</button>
     <button class="btn ghost" id="linkBtn">شاركي الدعوة 💌</button>
     <div class="pnote" id="pNote"></div>
     <a class="walead" id="waLead" href="https://wa.me/201280067110" target="_blank" rel="noopener" data-track="Contact"><span>💬</span> ابعتيلي المعاينة على واتساب</a>
@@ -3674,6 +3676,16 @@ else{try{const s=JSON.parse(localStorage.getItem("da3wati2")||"null");if(s)fill(
   if(/[#&]sb\b/.test(location.hash)){const w=/[#&]sb=boy/.test(location.hash)?"sbb":/[#&]sb=girl/.test(location.hash)?"sbg":/[#&]sb=story/.test(location.hash)?"ssg":(isSb(state.tpl)?state.tpl:"sbg");if(w!==state.tpl){state.tpl=w;state.pal=0;state.music="design";}}if(HIDDEN_TPL.includes(state.tpl)){state.tpl="brd";state.pal=0;}drawBuilder();
   const em=location.hash.match(/[#&]e=([A-Za-z0-9]+)/);
   if(em){$("editCodeIn").value=em[1].toUpperCase();openM("editMdl");loadCode(em[1]);}}
+/* middle button: jump to the details until she starts typing them */
+(function(){const B=$("detBtn");if(!B)return;let touched=false;
+try{touched=!!localStorage.getItem("da3wati2")}catch(e){}
+const isEd=()=>{try{return !!edit.code}catch(e){return false}};
+function sync(){B.hidden=touched||isEd();}
+B.onclick=()=>{const g=$("groom"),c=g.closest("section");c.scrollIntoView({behavior:"smooth",block:"start"});setTimeout(()=>{try{g.focus({preventScroll:true});g.select()}catch(e){}},650);};
+const mark=()=>{if(!touched){touched=true;sync();}};
+FIELDS.forEach(f=>{const el=$(f);if(el){el.addEventListener("input",mark);el.addEventListener("change",mark);}});
+setInterval(()=>{if(!B.hidden&&isEd())sync();},1500);
+sync();})();
 window.__test={showInvite,collect,state};
 })();
 </script>
