@@ -1434,6 +1434,96 @@ body.inviting .stbar{display:none}
 <script src="geo.js"></script>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
+<style id="wzcss">/* ===== wizard (beta) ===== */
+body.wz-on #builder>.stbar,body.wz-on #builder>.brand,body.wz-on #builder>.hero7,body.wz-on #builder>.acctbar,body.wz-on #builder .actions,body.wz-on #builder>.lk7,body.wz-on .wz-old,body.wz-on #hlpBtn,body.wz-on .wa-help{display:none!important}
+body.wz-on #builder{padding-bottom:140px}
+body.wz-on #builder .linkbox{display:none}
+.wz{max-width:560px;margin:0 auto}
+.wz [hidden]{display:none!important}
+.wz-top{display:flex;align-items:center;justify-content:space-between;padding:4px 0 6px}
+.wz-top b{font-family:"Aref Ruqaa",serif;font-size:26px;color:#5a1d2a;line-height:1}
+.wz-back{border:0;background:none;font:inherit;font-size:14px;color:#6d3742;padding:8px 2px}
+.wz-help{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#fbf6f0;box-shadow:inset 0 0 0 1px rgba(169,110,122,.3)}
+.wz-help svg{width:18px;height:18px;fill:none;stroke:#6d1f2f;stroke-width:1.6}
+.wz-prog{padding:2px 2px 0}.wz-prog .bars{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.wz-prog .bars i{height:5px;border-radius:9px;background:#e8d9cf}.wz-prog .bars i.on{background:#6d1f2f}.wz-prog .bars i.done{background:#b98a92}
+.wz-prog .lbl{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:6px;font-size:11.5px;color:#a08a8e;text-align:center}
+.wz-prog .lbl .on{color:#6d1f2f;font-weight:700}.wz-prog .lbl .done{color:#8a5a63}
+.wz-mini{margin-top:10px;background:#fffaf4;border-radius:18px;box-shadow:0 10px 22px -18px rgba(80,30,40,.6),inset 0 0 0 1px rgba(201,168,140,.45);overflow:hidden}
+.wz-mini .mh{display:flex;width:100%;align-items:center;gap:12px;padding:8px 10px;border:0;background:none;font:inherit;text-align:right;color:inherit}
+.wz-mini .th{flex:none;width:42px;height:56px;border-radius:9px;background:#eadccf center 20%/cover}
+.wz-mini .tx{flex:1;min-width:0}.wz-mini .tx small{display:block;font-size:11px;color:#a08a8e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wz-mini .tx b{display:block;font-size:17px;font-weight:700;color:#5a1d2a;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.wz-mini .tx b.ph{color:#c2adb1;font-weight:600}
+.wz-mini .tg{flex:none;font-size:12px;color:#6d3742;padding:6px 10px;border-radius:99px;background:#f3e7e2}
+.wz-mini .mb{display:none;gap:12px;align-items:center;padding:0 12px 12px}.wz-mini.open .mb{display:flex}.wz-mini.open .th{display:none}
+.wz-mini .big{flex:none;width:92px;aspect-ratio:9/16;border-radius:12px;background:#eadccf center 20%/cover;box-shadow:0 10px 18px -12px rgba(60,30,30,.6)}
+.wz-mini .mb p{font-size:12.5px;line-height:1.7;color:#7a5b60}.wz-mini .mb p b{color:#6d1f2f}
+.wz-h{padding:14px 2px 2px}.wz-h .k{font-size:12px;color:#a8854a}
+.wz-h h1{font-family:"Aref Ruqaa",serif;font-weight:700;font-size:26px;color:#4a1f29;line-height:1.3}
+.wz-h p{font-size:14px;color:#7a5b60}
+.wz-step label{font-size:14px!important;font-weight:600;color:#4a262d;margin:12px 0 5px!important;display:flex!important;align-items:center;gap:8px}
+.wz-step .row label{margin-top:12px!important}
+.wz-step em.rq{font-style:normal;font-size:11px;font-weight:600;color:#a0636f;background:#f6e9e6;padding:1px 8px;border-radius:99px;margin-inline-start:auto}
+.wz-step em.rq.op{color:#8a7a7c;background:#efe8e3}
+.wz-step input:not([type=checkbox]):not([type=file]),.wz-step select,.wz-step textarea{font-size:16px!important;border-radius:14px!important}
+.wz-step input:not([type=checkbox]):not([type=file]),.wz-step select{min-height:50px}
+.wz-step .kchips button{min-height:46px}
+.wz-step .card{background:none!important;box-shadow:none!important;padding:0!important;margin:8px 0 0!important}
+.wz-step .card>h2{display:none}
+.ac{background:#fffaf4;border-radius:16px;box-shadow:inset 0 0 0 1px rgba(201,168,140,.45);margin-top:10px}
+.ac summary{list-style:none;display:flex;align-items:center;gap:11px;padding:11px 12px;cursor:pointer}
+.ac summary::-webkit-details-marker{display:none}
+.ac .ic{flex:none;width:36px;height:36px;border-radius:50%;background:#f6ece6;display:grid;place-items:center}
+.ac .ic svg{width:19px;height:19px;fill:none;stroke:#6d1f2f;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.ac .t{flex:1;min-width:0}.ac .t b{display:block;font-size:14.5px;font-weight:700;color:#3d2228}.ac .t small{display:block;font-size:12px;color:#8a6b6f;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac .bd{font-style:normal;font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.ac .bd.auto{background:#e9f1e4;color:#4f7444}.ac .bd.rec{background:#f6ead2;color:#8a6428}.ac .bd.op{background:#efe8e3;color:#8a7a7c}
+.ac .chev{font-style:normal;color:#9a7a80;font-size:12px}.ac[open] .chev{transform:rotate(180deg)}
+.ac .in{padding:2px 12px 14px;border-top:1px solid rgba(201,168,140,.3)}
+.wz-grp{display:grid;grid-template-columns:minmax(0,1fr)}
+.wz-note{margin-top:10px;padding:10px 12px;border-radius:14px;background:#f3ebe1;font-size:13px;color:#6a4d52;display:flex;gap:8px;align-items:center}
+.wz-note svg{flex:none;width:18px;height:18px;fill:none;stroke:#a8854a;stroke-width:1.6}
+.hint{font-size:12px;color:#8a6b6f;margin-top:6px;line-height:1.6}
+.ferr{font-size:12.5px;color:#b3261e;margin-top:5px}
+.bad{border-color:#d0675e!important;background:#fff7f6!important}
+.wz-cover{position:relative;display:block;width:100%;height:300px;margin-top:12px;border:0;border-radius:22px;overflow:hidden;padding:0;background:#eadccf;box-shadow:0 18px 30px -20px rgba(60,30,30,.7)}
+.wz-cover .img{position:absolute;inset:0;background:center 20%/cover}
+.wz-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(40,15,20,.55))}
+.wz-cover .go{position:absolute;z-index:2;left:50%;bottom:18px;transform:translateX(-50%);display:flex;align-items:center;gap:9px;white-space:nowrap;padding:12px 22px;border-radius:99px;background:#fffaf4;color:#5a1d2a;font:inherit;font-weight:700;font-size:15.5px}
+.wz-cover .go i{width:30px;height:30px;border-radius:50%;background:#6d1f2f;display:grid;place-items:center}.wz-cover .go i svg{width:12px;height:12px;fill:#fff}
+.wz-cap{text-align:center;font-size:12.5px;color:#7a5b60;margin-top:8px;line-height:1.7}.wz-cap b{color:#6d1f2f}
+.wz-sum{margin-top:12px;background:#fffaf4;border-radius:18px;box-shadow:inset 0 0 0 1px rgba(201,168,140,.45);padding:4px 14px}
+.wz-sum h3{font-size:13px;color:#a08a8e;font-weight:600;margin:8px 0 2px}
+.wz-sum .sr{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid rgba(201,168,140,.3)}.wz-sum h3+.sr{border-top:0}
+.wz-sum .sr span{flex:1;min-width:0}.wz-sum small{display:block;font-size:11.5px;color:#a08a8e}.wz-sum .sr b{display:block;font-size:14px;color:#3d2228;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wz-sum button{font:inherit;font-size:12.5px;font-weight:700;color:#6d1f2f;border:0;padding:5px 12px;border-radius:99px;background:#f6ece6}
+.wz-bot{position:fixed;z-index:60;left:0;right:0;bottom:0;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#f7efe6 26%);transition:transform .2s}
+.wz-bot .r{max-width:560px;margin:0 auto;display:flex;gap:10px}
+.wz-prev{flex:none;width:96px;height:54px;border-radius:16px;border:1.2px solid #d9c3c6;background:#fffaf4;font:inherit;font-size:14.5px;font-weight:600;color:#7a4a54}
+.wz-next{flex:1;height:54px;border:0;border-radius:16px;font:inherit;font-size:16.5px;font-weight:700;color:#fff8ef;background:linear-gradient(180deg,#7d2236,#5a1424);box-shadow:inset 0 0 0 1.5px #d9b46e,0 12px 22px -12px rgba(90,20,36,.75)}
+.wz-next.dis{opacity:.5;box-shadow:none}
+.wz-bot .sv{display:flex;justify-content:center;align-items:center;gap:5px;margin-top:7px;font-size:12px;color:#8a7a7c}
+.wz-bot .sv svg{width:14px;height:14px;fill:none;stroke:#5f8a5a;stroke-width:2}
+body.wz-typing .wz-bot{transform:translateY(120%)}
+body.inviting .wz-bot,body:has(#sigView.on) .wz-bot,body:has(.mdl.on) .wz-bot,body:has(.mdl.open) .wz-bot{display:none}
+.wz-cbar{position:fixed;z-index:300;left:12px;right:12px;bottom:calc(14px + env(safe-area-inset-bottom));max-width:520px;margin:0 auto;display:flex;gap:8px;align-items:center;padding:8px 8px 8px 6px;border-radius:18px;background:rgba(255,250,244,.96);box-shadow:0 14px 30px -12px rgba(0,0,0,.5);transform:translateY(160%);transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.wz-cbar.on{transform:none}
+.wz-cbar p{flex:1;font-size:12px;color:#5a3a40;line-height:1.45;padding-inline-start:6px}.wz-cbar p b{display:block;font-size:13.5px;color:#3d2228}
+.wz-cbar button{flex:none;height:44px;padding:0 14px;border:0;border-radius:13px;font:inherit;font-size:14px;font-weight:700;color:#fff8ef;background:linear-gradient(180deg,#7d2236,#5a1424)}
+.wz-cbar .x{width:30px;padding:0;background:none;color:#8a6b6f;font-size:20px;height:30px}
+.wz-who label{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px;font-weight:600;color:#4a262d;margin:12px 0 5px}
+.wz-who label small{font-weight:400;font-size:12px;color:#8a6b6f}
+#getMdl em.rq{font-style:normal;font-size:11px;font-weight:600;color:#a0636f;background:#f6e9e6;padding:1px 8px;border-radius:99px}
+#getMdl #slugWrap label small{display:block;width:100%;font-weight:400;font-size:12px;color:#8a6b6f}
+#getMdl .pay{margin-top:14px}#getMdl .pay h4{font-size:14px;color:#3d2228;margin:0 0 6px}
+.wz-after{margin-top:12px;font-size:12.5px;color:#7a5b60;line-height:1.7;background:#fbf5ef;border-radius:14px;padding:10px 12px}
+#getErr.moved{display:none}
+.wz-test{position:fixed;z-index:400;top:0;left:0;right:0;text-align:center;font-size:11.5px;font-weight:700;color:#7a5414;background:#f6ead2;padding:3px 8px}
+.wz-test.in{position:static;border-radius:12px;margin:0 0 10px;padding:8px 10px;font-weight:600;line-height:1.6}
+
+html{scroll-padding-bottom:150px}
+.wz-step input,.wz-step textarea,.wz-step select{scroll-margin-bottom:150px}
+</style>
 </head>
 <body>
 
@@ -3476,7 +3566,7 @@ $("waLead").addEventListener("click",function(){
 $("previewBtn").onclick=()=>{const o=collect();
   let demo=false;
   ["groom","bride","venue","addr","date","time"].forEach(id=>{const d=$(id).dataset.demo;if(!o[id]&&d){o[id]=d;demo=true;}});
-  if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
+  if(!o.groom||(!o.bride&&!/اختياري/.test(($("lBride")||{}).textContent||""))){toast("اكتبي اسم العريس والعروسة الأول");return;}
   if(demo)setTimeout(()=>toast("دي معاينة بأسامي تجريبية، اكتبي تفاصيلك تحت ✏️"),400);
   if(o.music==="custom"&&!customUrl)toast("لسه ما اخترتيش ملف الأغنية");
   Music.stop();drawBuilder();showInvite(o,true);};
@@ -3510,7 +3600,7 @@ $("haveCode").onclick=()=>setMode(true);$("noCode").onclick=()=>setMode(false);
 if(window.FG&&FG.abroad){CFG.price=FG.label("basic");CFG.pricePremium=FG.label("premium");}
 function priceOf(o){if(o.tpl==="ssg"||o.tpl==="ssb")return window.FG&&FG.abroad?FG.label("sebouStory"):"١٩٩ جنيه";if(isRb(o.tpl))return window.FG&&FG.abroad?FG.label("milestone"):"٢٤٩ جنيه";if(isKid(o.tpl))return window.FG&&FG.abroad?FG.label("birthday"):"١٤٩ جنيه";return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
 $("linkBtn").onclick=()=>{const o=collect();
-  if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
+  if(!o.groom||(!o.bride&&!/اختياري/.test(($("lBride")||{}).textContent||""))){toast("اكتبي اسم العريس والعروسة الأول");return;}
   if(!o.date){toast("اختاري تاريخ المناسبة الأول 📅");$("date").scrollIntoView({behavior:"smooth",block:"center"});return;}
   px("InitiateCheckout",{value:parseInt((priceOf(o)||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)))||0,currency:"EGP"});
   $("getForm").hidden=false;$("getDone").hidden=true;$("getErr").textContent="";
@@ -3587,7 +3677,7 @@ $("saveBtn").onclick=async()=>{
 $("copyNum").onclick=async()=>{try{await navigator.clipboard.writeText(CFG.instapay);$("copyNum").textContent="اتنسخ ✅";setTimeout(()=>$("copyNum").textContent="نسخ",1500);}catch(e){toast("اضغطي مطوّل على الرقم وانسخيه");}};
 $("copyFinal").onclick=async()=>{try{await navigator.clipboard.writeText($("finalLink").textContent);toast("اتنسخ اللينك ✅");}catch(e){toast("اضغطي مطوّل على اللينك وانسخيه");}};
 $("viewFinal").onclick=()=>{closeM("getMdl");Music.stop();drawBuilder();showInvite(collect(),true);};
-$("editCodeBtn").onclick=()=>{$("editErr").textContent="";openM("editMdl");};
+$("editCodeBtn").onclick=()=>{$("editErr").textContent="";openM("editMdl");};if(location.hash==="#edit")setTimeout(()=>{try{$("editCodeBtn").click()}catch(e){}},400);
 $("loadBtn").onclick=()=>loadCode($("editCodeIn").value);
 async function loadCode(raw){
   const code=(raw||"").trim().toUpperCase(),err=$("editErr");err.textContent="";
@@ -3766,6 +3856,204 @@ sync();})();
   ["date","time"].forEach(id=>{const i=$(id),w=i.parentElement;const f=()=>w.classList.toggle("empty",!i.value);["input","change","blur"].forEach(e=>i.addEventListener(e,f));f();setTimeout(f,500);});
   const db=drawBuilder;drawBuilder=function(){db.apply(this,arguments);try{sync();["date","time"].forEach(id=>$(id).parentElement.classList.toggle("empty",!$(id).value))}catch(e){}};
   sync();setTimeout(()=>{sync();setIntro();},500);})();
+/* ===== Step-by-step studio (beta) ===== */
+(function(){
+const B=$("builder");if(!B)return;
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const IC={
+ txt:'<svg viewBox="0 0 24 24"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
+ mus:'<svg viewBox="0 0 24 24"><path d="M9 18V6l11-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></svg>',
+ dress:'<svg viewBox="0 0 24 24"><path d="M9 3l3 3 3-3M9 3L7.5 8 10 9.5 6 21h12l-4-11.5L16.5 8 15 3"/></svg>',
+ prog:'<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>',
+ rsvp:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.8 2.8L16.5 9.5"/></svg>',
+ ph:'<svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="2.5"/><circle cx="12" cy="13" r="3.5"/><path d="M8.5 6l1.5-2.5h4L15.5 6"/></svg>',
+ gift:'<svg viewBox="0 0 24 24"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M2.5 9h19V6.5h-19zM12 6.5V20"/></svg>',
+ set:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg>',
+ pin:'<svg viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 14.8 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg>',
+ en:'<b style="font-family:Georgia,serif;font-size:13px;color:#6d1f2f">EN</b>',
+ play:'<svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></svg>'};
+/* take a field + its label (or its wrapper inside a .row) */
+function take(id){const f=$(id);if(!f)return [];
+  const w=f.closest(".row>div");if(w)return [w];
+  const lb=B.querySelector('label[for="'+id+'"]');const d=f.closest(".dtw")||f;return lb?[lb,d]:[d];}
+function put(box,...ids){ids.forEach(id=>{(typeof id==="string"?take(id):[id]).forEach(n=>n&&box.appendChild(n))});return box}
+function tagReq(id,req){const lb=B.querySelector('label[for="'+id+'"]')||($(id)&&$(id).closest(".row>div")&&$(id).closest(".row>div").querySelector("label"));
+  if(!lb||lb.querySelector(".rq"))return;const t=lb.textContent.replace(/\s*\((اختياري)\)\s*/,"").trim();lb.textContent=t;lb.appendChild(el("em","rq"+(req?"":" op"),req?"مطلوب":"اختياري"));}
+function acc(k,title,sub,badge){const d=el("details","ac");d.dataset.k=k;
+  d.innerHTML='<summary><span class="ic">'+IC[k]+'</span><span class="t"><b>'+title+'</b><small>'+sub+'</small></span><em class="bd '+(badge==="auto"?"auto":badge==="rec"?"rec":"op")+'">'+(badge==="auto"?"مختارة تلقائيًا":badge==="rec"?"مقترح ✦":"اختياري")+'</em><i class="chev">▾</i></summary><div class="in"></div>';
+  return d}
+const IN=d=>d.querySelector(".in");
+
+/* ---------- shell ---------- */
+const STEPS=["tpl","s1","s2","s3","s4"],LBL=["حكايتكم","تفاصيل اليوم","لمستكم","شوفي دعوتك"];
+const top=el("div","wz-top",'<button type="button" class="wz-back" id="wzHome">‹ <span>التصميمات</span></button><b>فرحتنا</b><a class="wz-help" href="https://wa.me/'+CFG.whatsapp+'" target="_blank" rel="noopener" aria-label="مساعدة"><svg viewBox="0 0 24 24"><path d="M4.5 19.5l1.2-3.6A8 8 0 1 1 8.6 18.6z"/></svg></a>');
+const prog=el("div","wz-prog",'<div class="bars">'+LBL.map(()=>"<i></i>").join("")+'</div><div class="lbl">'+LBL.map(t=>"<span>"+t+"</span>").join("")+"</div>");
+const mini=el("div","wz-mini",'<button type="button" class="mh"><span class="th"></span><span class="tx"><small><span id="wzTn"></span> · معاينة تقريبية</small><b id="wzNm" class="ph">أساميكم هتظهر هنا</b><small id="wzDt"></small></span><span class="tg" id="wzTg">كبّري ▾</span></button><div class="mb"><span class="big"></span><p><b>معاينة تقريبية</b><br>بتوريكي أساميكم وتفاصيلكم وإنتي بتكتبي.<br>الدعوة النهائية <b>بالحركات والمزيكا</b> هتشوفيها في خطوة «شوفي دعوتك» ✨</p></div>');
+const steps={};STEPS.forEach(s=>{steps[s]=el("section","wz-step");steps[s].dataset.s=s});
+const head=(s,k,h,p)=>steps[s].appendChild(el("div","wz-h",'<div class="k">'+k+'</div><h1>'+h+'</h1><p>'+p+'</p>'));
+const bot=el("div","wz-bot",'<div class="r"><button type="button" class="wz-prev" id="wzPrev">→ السابق</button><button type="button" class="wz-next" id="wzNext">التالي</button></div><div class="sv"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>كل اللي بتكتبيه بيتحفظ تلقائي</div>');
+
+/* ---------- step 0: design ---------- */
+const tplSec=$("tpls").closest("section");
+head("tpl","ابدئي من هنا","اختاري التصميم","تقدري تغيّريه بعدين في أي وقت");
+steps.tpl.appendChild(tplSec);
+const lk=B.querySelector(".lk7");if(lk)steps.tpl.appendChild(lk);
+
+/* ---------- step 1 ---------- */
+head("s1","الخطوة ١ من ٤","حكايتكم","نبدأ بأهم حاجة… أساميكم 🤍");
+const s1=el("div","wz-body");steps.s1.appendChild(s1);
+const kl=B.querySelector('label[for="kind"]');s1.appendChild(kl);s1.appendChild($("kindChips"));s1.appendChild($("kind"));
+const nameRow=$("groom").closest(".row");s1.appendChild(nameRow);
+const enAcc=acc("en","الأسامي بالإنجليزي","بتظهر لما الضيف يختار English","op");enAcc.querySelector(".ic").innerHTML=IC.en;
+const ivy=$("ivyBox");const enNames=$("brideEn").closest(".row");IN(enAcc).appendChild(enNames);put(IN(enAcc),"mono");
+s1.appendChild(enAcc);put(s1,$("ilWrap"),$("surpWrap"));
+
+/* ---------- step 2 ---------- */
+head("s2","الخطوة ٢ من ٤ · فاضل خطوتين على دعوتك","تفاصيل اليوم","إمتى وفين؟ عشان ضيوفك يوصلولكم بسهولة");
+const s2=el("div","wz-body");steps.s2.appendChild(s2);
+s2.appendChild($("date").closest(".row"));put(s2,"venue","addr");
+const mapAcc=acc("pin","لينك اللوكيشن على الخريطة","جوجل ماب بضغطة للضيوف","op");put(IN(mapAcc),"map");
+IN(mapAcc).appendChild(el("p","hint","من جوجل ماب: دوسي على مكان القاعة ← <b>مشاركة</b> ← <b>نسخ الرابط</b>، والصقيه هنا."));s2.appendChild(mapAcc);
+const venEnAcc=acc("en","اسم القاعة بالإنجليزي","للنسخة الإنجليزي من الدعوة","op");venEnAcc.querySelector(".ic").innerHTML=IC.en;put(IN(venEnAcc),"venueEn");s2.appendChild(venEnAcc);
+
+/* ---------- step 3 ---------- */
+head("s3","الخطوة ٣ من ٤ · فاضل خطوة وتشوفي دعوتك","لمستكم","ضيفي اللي يعجبك… أو كمّلي على طول");
+steps.s3.appendChild(el("div","wz-note",'<svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.6L19.5 10l-5.7 1.6L12 17l-1.8-5.4L4.5 10l5.7-1.4z"/></svg>كل حاجة هنا اختيارية، والدعوة جاهزة من غيرها'));
+const s3=el("div","wz-grp");steps.s3.appendChild(s3);
+const aTxt=acc("txt","كلمة الدعوة","مكتوبة حسب المناسبة · تقدري تعدّليها","auto");put(IN(aTxt),"intro","poem","closing",$("sgaExtra"));
+const mus=$("tracks").closest("section");const aMus=acc("mus","المزيكا","مزيكا التصميم أو أغنيتك انتي","auto");[...mus.children].filter(c=>c.tagName!=="H2").forEach(c=>IN(aMus).appendChild(c));
+const aDress=acc("dress","الدريس كود","ألوان اللبس اللي تحبيها لضيوفك","rec");put(IN(aDress),B.querySelector('#dressPick').previousElementSibling,$("dressPick"),"dressNote",$("azlExtra"),"dressEn");
+const aProg=acc("prog","برنامج الفرح","المواعيد والفقرات بالترتيب","op");put(IN(aProg),"program",$("iltExtra"));
+const aRsvp=acc("rsvp","تأكيد الحضور","الردود بتوصلك على واتساب","rec");put(IN(aRsvp),"wa",$("h_rsvp").closest("label"),$("h_extra").closest("label"));
+const bab=$("babBox");const aPh=acc("ph","صوركم وقصتكم","صوركم بتظهر جوه الدعوة","op");[...bab.children].filter(c=>c.tagName!=="H2"&&!/Extra$/.test(c.id)).forEach(c=>IN(aPh).appendChild(c));
+const aGift=acc("gift","الهدايا","ملاحظة أو إنستاباي للهدايا","op");put(IN(aGift),"gift",$("tsnExtra"));
+const aSet=acc("set","ملاحظات وإعدادات العرض","ملاحظات للضيوف، العد التنازلي، الخريطة","op");put(IN(aSet),"notes",$("h_cd").closest("label"),$("h_map").closest("label"));
+[aTxt,aMus,aDress,aRsvp,aProg,aPh,aGift,aSet].forEach(a=>s3.appendChild(a));
+["dressNote","map","wa","gift","venueEn","mono","program","notes","story","dressEn"].forEach(id=>tagReq(id,false));
+
+/* ---------- step 4 ---------- */
+head("s4","الخطوة ٤ من ٤ · دعوتك جاهزة 🤍","شوفي دعوتك","افتحيها زي ما ضيوفك هيشوفوها بالظبط");
+steps.s4.appendChild(el("button","wz-cover",'<span class="img"></span><span class="go"><i>'+IC.play+'</i>افتحي دعوتك كاملة</span>'));
+steps.s4.appendChild(el("p","wz-cap","دي صورة الغلاف بس. <b>الدعوة الحقيقية بالحركات والمزيكا</b> بتفتح لما تدوسي."));
+const sum=el("div","wz-sum");steps.s4.appendChild(sum);
+steps.s4.appendChild(el("p","wz-cap","تقدري تعدّلي أي حاجة دلوقتي قبل ما تأكدي. وبعد النشر، بتعدّلي بـ<b>كود التعديل</b> اللي هيوصلك، واللينك بيفضل زي ما هو."));
+
+/* ---------- mount ---------- */
+const wrap=el("div","wz");wrap.append(top,prog,mini,...STEPS.map(s=>steps[s]));
+B.insertBefore(wrap,B.firstChild);document.body.appendChild(bot);document.body.classList.add("wz-on");
+/* old pieces we no longer show (kept in the DOM so nothing breaks) */
+[ivy,bab,$("secBox"),mus,$("groom").closest("section"),$("date").closest("section"),$("intro")&&$("program").closest("section")].forEach(s=>{if(s&&s.tagName==="SECTION"&&!wrap.contains(s))s.classList.add("wz-old")});
+B.querySelectorAll(":scope>section.card").forEach(s=>{if(!wrap.contains(s))s.classList.add("wz-old")});
+
+/* ---------- visibility follows the template ---------- */
+const H=(e,v)=>{if(e&&e.hidden!==!!v)e.hidden=!!v};
+let visQ=0;function visSoon(){if(visQ)return;visQ=requestAnimationFrame(()=>{visQ=0;vis()})}
+function vis(){const tp=state.tpl;["groom","date","time","venue","addr"].forEach(i=>tagReq(i,true));tagReq("bride",!/اختياري/.test(($("lBride")||{}).textContent||""));
+  const en=!ivy.hidden,mOn=!$("mono").hidden;
+  H(enAcc,!en&&!mOn);H(enNames,!en);H(venEnAcc,!en);take("dressEn").forEach(n=>H(n,!en));
+  const et=en?"الأسامي بالإنجليزي":"حروف الختم بالإنجليزي",es=en?"بتظهر لما الضيف يختار English":"زي K&S · بتتكتب على الختم";if(enAcc.querySelector(".t b").textContent!==et){enAcc.querySelector(".t b").textContent=et;enAcc.querySelector(".t small").textContent=es}
+  H(aPh,bab.hidden);
+  H(aDress,!["dressPick","dressNote","dressLadies","dressEn"].some(i=>{const e=$(i);return e&&!e.hidden&&!e.closest("[hidden]")}));
+  [...aSet.querySelectorAll(".sw2"),...aRsvp.querySelectorAll(".sw2")].forEach(l=>H(l,$("secBox").hidden));
+  const lb=$("lBride")&&$("lBride").textContent||"",bo=/اختياري/.test(lb)?"1":"";if($("bride").dataset.opt!==bo)$("bride").dataset.opt=bo;
+  const tn=(TPL[tp]&&TPL[tp].name)||"";$("wzTn").textContent=tn;
+  let src="";if(SIG[tp])src=SIG[tp].th;else{const t=document.querySelector('#tpls .tpl[aria-pressed="true"]');const im=t&&t.querySelector("image");if(im)src=im.getAttribute("href");else if(t&&t.querySelector("svg"))src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(new XMLSerializer().serializeToString(t.querySelector("svg")))}
+  const bg=src?'url("'+src+'")':"";wrap.querySelectorAll(".wz-mini .th,.wz-mini .big,.wz-cover .img").forEach(e=>{if(e.style.backgroundImage!==bg)e.style.backgroundImage=bg});
+  live();}
+new MutationObserver(visSoon).observe(B,{subtree:true,attributes:true,attributeFilter:["hidden","aria-pressed"]});
+
+/* ---------- live mini preview ---------- */
+const AR=n=>String(n).replace(/\d/g,d=>"٠١٢٣٤٥٦٧٨٩"[d]);
+function fmtD(v){if(!v)return"";const[y,m,d]=v.split("-");const M=["يناير","فبراير","مارس","أبريل","مايو","يونيو","يوليو","أغسطس","سبتمبر","أكتوبر","نوفمبر","ديسمبر"];return AR(+d)+" "+M[m-1]+" "+AR(y)}
+function fmtT(v){if(!v)return"";let[h,mi]=v.split(":");h=+h;const pm=h>=12;h=h%12||12;return AR(h)+(mi!=="00"?":"+AR(mi):"")+(pm?" مساءً":" صباحًا")}
+function live(){const g=$("groom").value.trim(),b=$("bride").value.trim(),n=$("wzNm");
+  if(g||b){n.textContent=b&&!$("bride").dataset.opt?(g||"…")+" & "+(b||"…"):(g||"…");n.classList.remove("ph")}else{n.textContent="أساميكم هتظهر هنا";n.classList.add("ph")}
+  $("wzDt").textContent=[fmtD($("date").value),fmtT($("time").value),$("venue").value.trim()].filter(Boolean).join(" · ");}
+$("wzTg").parentNode.onclick=()=>{const o=mini.classList.toggle("open");$("wzTg").textContent=o?"صغّري ▴":"كبّري ▾"};
+B.addEventListener("input",()=>{live();check()});B.addEventListener("change",()=>{live();check()});
+
+/* ---------- navigation ---------- */
+let cur="s1";
+function need(s){if(s==="s1"){const r=[$("groom")];if(!$("bride").dataset.opt)r.push($("bride"));return r}
+  if(s==="s2")return["date","time","venue","addr"].map($).filter(e=>e&&e.offsetParent!==null||cur!==s);return[]}
+function okStep(s){return need(s).every(e=>e.value.trim())}
+const NEXT={tpl:"التالي: حكايتكم",s1:"التالي: تفاصيل اليوم",s2:"التالي: لمستكم",s3:"التالي: شوفي دعوتك",s4:"عجبتك؟ أكدي طلبك 💌"};
+function check(){const ok=okStep(cur),nb=$("wzNext");nb.classList.toggle("dis",!ok);nb.setAttribute("aria-disabled",String(!ok))}
+function go(s,noScroll){cur=s;STEPS.forEach(k=>steps[k].hidden=k!==s);const i=STEPS.indexOf(s);
+  prog.hidden=s==="tpl";mini.hidden=s==="tpl"||s==="s4";$("wzHome").style.visibility=s==="tpl"?"hidden":"";
+  prog.querySelectorAll(".bars i").forEach((b,j)=>b.className=j<i-1?"done":j===i-1?"on":"");
+  prog.querySelectorAll(".lbl span").forEach((b,j)=>{b.className=j<i-1?"done":j===i-1?"on":"";b.textContent=LBL[j]+(j<i-1?" ✓":"")});
+  $("wzPrev").hidden=s==="tpl"||s==="s1";$("wzNext").textContent=NEXT[s];$("wzNext").classList.toggle("go",s==="s4");
+  if(s==="s4")buildSum();try{sessionStorage.setItem("wz_step",s)}catch(e){}check();vis();if(!noScroll)scrollTo(0,0);}
+$("wzNext").onclick=()=>{if(!okStep(cur)){const e=need(cur).find(x=>!x.value.trim());if(e){need(cur).filter(x=>!x.value.trim()).forEach(x=>showErr(x,"الخانة دي مطلوبة"));e.scrollIntoView({block:"center",behavior:"smooth"})}return}
+  if(cur==="s4"){$("linkBtn").click();return}go(STEPS[STEPS.indexOf(cur)+1])};
+$("wzPrev").onclick=()=>go(STEPS[Math.max(1,STEPS.indexOf(cur)-1)]);
+$("wzHome").onclick=()=>go("tpl");
+$("tpls").addEventListener("click",e=>{if(e.target.closest(".tpl")&&cur==="tpl")setTimeout(()=>go("s1"),250)});
+function showErr(inp,m){const box=inp.closest(".dtw")||inp;let e=box.nextElementSibling;if(!e||!e.classList.contains("ferr")){e=el("div","ferr");box.insertAdjacentElement("afterend",e)}
+  e.textContent="⚠ "+m;inp.classList.add("bad");const clr=()=>{e.remove();inp.classList.remove("bad");inp.removeEventListener("input",clr);inp.removeEventListener("change",clr)};inp.addEventListener("input",clr);inp.addEventListener("change",clr)}
+
+/* ---------- step 4 summary ---------- */
+function buildSum(){const o=collect(),tn=(TPL[o.tpl]&&TPL[o.tpl].name)||"";const nm=[o.groom,o.bride].filter(Boolean).join(" & ");
+  const ex=[aMus,aRsvp,aDress,aProg,aPh,aGift].filter(a=>!a.hidden&&[...IN(a).querySelectorAll("input,textarea")].some(i=>i.type!=="checkbox"&&i.type!=="file"&&i.value.trim())).map(a=>a.querySelector(".t b").textContent);
+  const row=(k,t,v,s)=>'<div class="sr"><span><small>'+t+'</small><b>'+v+'</b></span><button type="button" data-go="'+s+'">'+(s==="tpl"?"غيّري":"عدّلي")+'</button></div>';
+  sum.innerHTML='<h3>ملخص دعوتك</h3>'+row(1,"التصميم",tn+" · "+priceOf(o),"tpl")+row(2,"حكايتكم",(o.kind||"")+" · "+nm,"s1")+row(3,"تفاصيل اليوم",[fmtD(o.date),fmtT(o.time),o.venue].filter(Boolean).join(" · "),"s2")+row(4,"لمستكم",ex.length?ex.join(" · "):"الاختيارات التلقائية","s3");
+  sum.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));}
+steps.s4.querySelector(".wz-cover").onclick=()=>$("previewBtn").click();
+
+/* ---------- confirm bar on the full preview ---------- */
+const cb=el("div","wz-cbar",'<p><b>عجبتك؟ 😍</b>كل حاجة محفوظة، وتقدري ترجعي تعدّلي</p><button type="button">أكدي طلبك 💌</button><button type="button" class="x" aria-label="إخفاء">×</button>');
+document.body.appendChild(cb);let cbT;
+function showCb(){clearTimeout(cbT);cb.classList.remove("on");cbT=setTimeout(()=>cb.classList.add("on"),7000)}
+function hideCb(){clearTimeout(cbT);cb.classList.remove("on")}
+cb.querySelector(".x").onclick=hideCb;
+cb.querySelector("button").onclick=()=>{hideCb();const sv=$("sigView");if(sv&&sv.classList.contains("on"))sv.querySelector(".sigBack").click();else if(!$("backBtn").hidden)$("backBtn").click();go("s4");setTimeout(()=>$("linkBtn").click(),120)};
+new MutationObserver(()=>{const sv=$("sigView"),on=(sv&&sv.classList.contains("on"))||document.body.classList.contains("inviting");on?showCb():hideCb();if(sv&&!sv._w){sv._w=1;new MutationObserver(()=>{sv.classList.contains("on")?showCb():hideCb()}).observe(sv,{attributes:true})}}).observe(document.body,{attributes:true,attributeFilter:["class"],childList:true});
+
+/* ---------- order sheet: link → your details → payment ---------- */
+const ob=$("orderBox"),pay=ob.querySelector(".pay");const stps=[...pay.querySelectorAll(".stp")];
+const who=el("div","wz-who");who.append(el("label","",'اسمك <em class="rq">مطلوب</em>'),$("nameIn"),el("label","",'رقم موبايلك <em class="rq">مطلوب</em><small> علشان لو احتجنا نكلمك</small>'),$("phoneIn"));
+ob.insertBefore(who,pay);stps[2].remove();stps[3].remove();
+stps[0].querySelector("i").textContent="١";stps[1].querySelector("i").textContent="٢";
+pay.insertBefore(el("h4","","الدفع"),pay.firstChild);
+ob.after(el("p","wz-after","<b>بعد التأكيد:</b> هيظهرلك لينك دعوتك و<b>كود التعديل</b> على طول. بنراجع التحويل، وبعدها الدعوة بتتفعّل عند ضيوفك."));
+const sl=$("slugWrap").querySelector("label");if(sl)sl.innerHTML='اسم اللينك اللي هيتبعت لضيوفك <em class="rq">مطلوب</em><small> حروف إنجليزي وأرقام و - بس</small>';
+/* errors next to the field they belong to */
+const ge=$("getErr");
+new MutationObserver(()=>{const t=ge.textContent.trim();document.querySelectorAll("#getMdl .ferr").forEach(e=>e.remove());document.querySelectorAll("#getMdl .bad").forEach(e=>e.classList.remove("bad"));
+  if(!t){ge.classList.remove("moved");return}
+  let f=null;if(/صورة التحويل/.test(t))f=$("rcptLbl");else if(/اسمك/.test(t))f=$("nameIn");else if(/موبايل/.test(t))f=$("phoneIn");else if(/كود التفعيل/.test(t))f=$("codeIn");else if(/اللينك|الاسم ده|حروف|slug/i.test(t)&&!$("slugWrap").hidden)f=$("slugIn").closest(".slugrow");
+  if(f&&f.offsetParent!==null){const e=el("div","ferr","⚠ "+t);f.insertAdjacentElement("afterend",e);f.classList.add("bad");ge.classList.add("moved");f.scrollIntoView({block:"center",behavior:"smooth"})}else ge.classList.remove("moved")}).observe(ge,{childList:true,characterData:true,subtree:true});
+
+/* ---------- test mode (beta): the order is checked like the real one, but nothing is sent ---------- */
+const TEST=/[?&]test=1/.test(location.search);
+if(TEST){const tb=el("div","wz-test","🧪 نسخة تجريبية · الطلب مش هيتبعت ومفيش دعوة هتتفعّل");document.body.appendChild(tb);
+  $("getForm").insertBefore(el("div","wz-test in","🧪 وضع تجربة: لما تدوسي التأكيد، هنتأكد من البيانات بس، ومش هيتسجل طلب ولا هيتحوّل فلوس."),$("getForm").firstChild);
+  $("saveBtn").addEventListener("click",ev=>{ev.stopImmediatePropagation();ev.preventDefault();
+    const err=$("getErr");err.textContent="";const slug=edit.code?null:$("slugIn").value.trim();
+    if(!edit.code&&!slugOk(slug)){err.textContent=MSG.bad_slug;return}
+    if(!edit.code&&!useCode){const nm=$("nameIn").value.trim(),ph=$("phoneIn").value.replace(/\D/g,"");
+      if(nm.length<2){err.textContent="اكتبي اسمك";return}
+      if(ph.length<10){err.textContent="اكتبي رقم موبايلك";return}
+      if(!receiptData){err.textContent="ارفعي صورة التحويل الأول";return}}
+    else if(!edit.code&&$("codeIn").value.trim().length<6){err.textContent="اكتبي كود التفعيل";return}
+    const b=$("saveBtn"),t0=b.textContent;b.disabled=true;b.textContent="بيتحفظ…";
+    setTimeout(()=>{b.disabled=false;b.textContent=t0;showDone(slug||edit.slug||"test","TEST-1234",useCode?null:"0000");
+      $("getDone").insertBefore(el("div","wz-test in","🧪 دي نتيجة تجربة بس. مفيش طلب اتسجل، واللينك ده مش شغال."),$("getDone").firstChild)},700)},true);}
+
+/* clearer texts, no time promises */
+$("pendNote").textContent="⏳ بنراجع التحويل، وبعدها دعوتك بتتفعّل عند الضيوف. تقدري تبعتي اللينك من دلوقتي، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».";
+const gs=$("getSub");new MutationObserver(()=>{if(/في دقايق/.test(gs.textContent))gs.textContent="اختاري اسم اللينك، واكتبي بياناتك، وبعدها حوّلي وارفعي صورة التحويل."}).observe(gs,{childList:true,characterData:true,subtree:true});
+
+/* ---------- keyboard: hide the bottom bar while typing ---------- */
+const vv=window.visualViewport;if(vv){const kb=()=>document.body.classList.toggle("wz-typing",innerHeight-vv.height>150);vv.addEventListener("resize",kb);}
+
+/* ---------- start ---------- */
+let st="s1";try{st=sessionStorage.getItem("wz_step")||st}catch(e){}
+const hasT=/[#&]t=/.test(location.hash),hasDraft=(()=>{try{return!!localStorage.getItem("da3wati2")}catch(e){return false}})();
+if(!hasT&&!hasDraft)st="tpl";if(hasT&&st==="tpl")st="s1";if(!STEPS.includes(st))st="s1";
+go(st,true);vis();
+})();
 window.__test={showInvite,collect,state};
 })();
 </script>
