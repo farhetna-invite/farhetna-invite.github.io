@@ -1519,6 +1519,11 @@ body.inviting .wz-bot,body:has(#sigView.on) .wz-bot,body:has(.mdl.on) .wz-bot,bo
 #getMdl .pay{margin-top:14px}#getMdl .pay h4{font-size:14px;color:#3d2228;margin:0 0 6px}
 .wz-after{margin-top:12px;font-size:12.5px;color:#7a5b60;line-height:1.7;background:#fbf5ef;border-radius:14px;padding:10px 12px}
 #getErr.moved{display:none}
+.wz-test{position:fixed;z-index:400;top:0;left:0;right:0;text-align:center;font-size:11.5px;font-weight:700;color:#7a5414;background:#f6ead2;padding:3px 8px}
+.wz-test.in{position:static;border-radius:12px;margin:0 0 10px;padding:8px 10px;font-weight:600;line-height:1.6}
+body.wz-on{padding-top:18px}
+html{scroll-padding-bottom:150px}
+.wz-step input,.wz-step textarea,.wz-step select{scroll-margin-bottom:150px}
 </style>
 </head>
 <body>
@@ -3562,7 +3567,7 @@ $("waLead").addEventListener("click",function(){
 $("previewBtn").onclick=()=>{const o=collect();
   let demo=false;
   ["groom","bride","venue","addr","date","time"].forEach(id=>{const d=$(id).dataset.demo;if(!o[id]&&d){o[id]=d;demo=true;}});
-  if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
+  if(!o.groom||(!o.bride&&!/اختياري/.test(($("lBride")||{}).textContent||""))){toast("اكتبي اسم العريس والعروسة الأول");return;}
   if(demo)setTimeout(()=>toast("دي معاينة بأسامي تجريبية، اكتبي تفاصيلك تحت ✏️"),400);
   if(o.music==="custom"&&!customUrl)toast("لسه ما اخترتيش ملف الأغنية");
   Music.stop();drawBuilder();showInvite(o,true);};
@@ -3596,7 +3601,7 @@ $("haveCode").onclick=()=>setMode(true);$("noCode").onclick=()=>setMode(false);
 if(window.FG&&FG.abroad){CFG.price=FG.label("basic");CFG.pricePremium=FG.label("premium");}
 function priceOf(o){if(o.tpl==="ssg"||o.tpl==="ssb")return window.FG&&FG.abroad?FG.label("sebouStory"):"١٩٩ جنيه";if(isRb(o.tpl))return window.FG&&FG.abroad?FG.label("milestone"):"٢٤٩ جنيه";if(isKid(o.tpl))return window.FG&&FG.abroad?FG.label("birthday"):"١٤٩ جنيه";return CFG.premium.includes(o.tpl)?CFG.pricePremium:CFG.price;}
 $("linkBtn").onclick=()=>{const o=collect();
-  if(!o.groom||!o.bride){toast("اكتبي اسم العريس والعروسة الأول");return;}
+  if(!o.groom||(!o.bride&&!/اختياري/.test(($("lBride")||{}).textContent||""))){toast("اكتبي اسم العريس والعروسة الأول");return;}
   if(!o.date){toast("اختاري تاريخ المناسبة الأول 📅");$("date").scrollIntoView({behavior:"smooth",block:"center"});return;}
   px("InitiateCheckout",{value:parseInt((priceOf(o)||"").replace(/[٠-٩]/g,d=>"٠١٢٣٤٥٦٧٨٩".indexOf(d)))||0,currency:"EGP"});
   $("getForm").hidden=false;$("getDone").hidden=true;$("getErr").textContent="";
@@ -3901,7 +3906,7 @@ const s1=el("div","wz-body");steps.s1.appendChild(s1);
 const kl=B.querySelector('label[for="kind"]');s1.appendChild(kl);s1.appendChild($("kindChips"));s1.appendChild($("kind"));
 const nameRow=$("groom").closest(".row");s1.appendChild(nameRow);
 const enAcc=acc("en","الأسامي بالإنجليزي","بتظهر لما الضيف يختار English","op");enAcc.querySelector(".ic").innerHTML=IC.en;
-const ivy=$("ivyBox");IN(enAcc).appendChild($("brideEn").closest(".row"));put(IN(enAcc),"mono");
+const ivy=$("ivyBox");const enNames=$("brideEn").closest(".row");IN(enAcc).appendChild(enNames);put(IN(enAcc),"mono");
 s1.appendChild(enAcc);put(s1,$("ilWrap"),$("surpWrap"));
 
 /* ---------- step 2 ---------- */
@@ -3945,10 +3950,12 @@ B.querySelectorAll(":scope>section.card").forEach(s=>{if(!wrap.contains(s))s.cla
 const H=(e,v)=>{if(e&&e.hidden!==!!v)e.hidden=!!v};
 let visQ=0;function visSoon(){if(visQ)return;visQ=requestAnimationFrame(()=>{visQ=0;vis()})}
 function vis(){const tp=state.tpl;["groom","date","time","venue","addr"].forEach(i=>tagReq(i,true));tagReq("bride",!/اختياري/.test(($("lBride")||{}).textContent||""));
-  const en=!ivy.hidden;H(enAcc,!en);H(venEnAcc,!en);
+  const en=!ivy.hidden,mOn=!$("mono").hidden;
+  H(enAcc,!en&&!mOn);H(enNames,!en);H(venEnAcc,!en);take("dressEn").forEach(n=>H(n,!en));
+  const et=en?"الأسامي بالإنجليزي":"حروف الختم بالإنجليزي",es=en?"بتظهر لما الضيف يختار English":"زي K&S · بتتكتب على الختم";if(enAcc.querySelector(".t b").textContent!==et){enAcc.querySelector(".t b").textContent=et;enAcc.querySelector(".t small").textContent=es}
   H(aPh,bab.hidden);
-  H(aDress,getComputedStyle($("dressPick")).display==="none"&&!$("dressNote").value);
-  const sh=$("secBox").hidden?"none":"";[...aSet.querySelectorAll(".sw2"),...aRsvp.querySelectorAll(".sw2")].forEach(l=>{if(l.style.display!==sh)l.style.display=sh});
+  H(aDress,!["dressPick","dressNote","dressLadies","dressEn"].some(i=>{const e=$(i);return e&&!e.hidden&&!e.closest("[hidden]")}));
+  [...aSet.querySelectorAll(".sw2"),...aRsvp.querySelectorAll(".sw2")].forEach(l=>H(l,$("secBox").hidden));
   const lb=$("lBride")&&$("lBride").textContent||"",bo=/اختياري/.test(lb)?"1":"";if($("bride").dataset.opt!==bo)$("bride").dataset.opt=bo;
   const tn=(TPL[tp]&&TPL[tp].name)||"";$("wzTn").textContent=tn;
   let src="";if(SIG[tp])src=SIG[tp].th;else{const t=document.querySelector('#tpls .tpl[aria-pressed="true"]');const im=t&&t.querySelector("image");if(im)src=im.getAttribute("href");else if(t&&t.querySelector("svg"))src="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(new XMLSerializer().serializeToString(t.querySelector("svg")))}
@@ -4018,6 +4025,22 @@ new MutationObserver(()=>{const t=ge.textContent.trim();document.querySelectorAl
   if(!t){ge.classList.remove("moved");return}
   let f=null;if(/صورة التحويل/.test(t))f=$("rcptLbl");else if(/اسمك/.test(t))f=$("nameIn");else if(/موبايل/.test(t))f=$("phoneIn");else if(/كود التفعيل/.test(t))f=$("codeIn");else if(/اللينك|الاسم ده|حروف|slug/i.test(t)&&!$("slugWrap").hidden)f=$("slugIn").closest(".slugrow");
   if(f&&f.offsetParent!==null){const e=el("div","ferr","⚠ "+t);f.insertAdjacentElement("afterend",e);f.classList.add("bad");ge.classList.add("moved");f.scrollIntoView({block:"center",behavior:"smooth"})}else ge.classList.remove("moved")}).observe(ge,{childList:true,characterData:true,subtree:true});
+
+/* ---------- test mode (beta): the order is checked like the real one, but nothing is sent ---------- */
+const TEST=!/[?&]live=1/.test(location.search);
+if(TEST){const tb=el("div","wz-test","🧪 نسخة تجريبية · الطلب مش هيتبعت ومفيش دعوة هتتفعّل");document.body.appendChild(tb);
+  $("getForm").insertBefore(el("div","wz-test in","🧪 وضع تجربة: لما تدوسي التأكيد، هنتأكد من البيانات بس، ومش هيتسجل طلب ولا هيتحوّل فلوس."),$("getForm").firstChild);
+  $("saveBtn").addEventListener("click",ev=>{ev.stopImmediatePropagation();ev.preventDefault();
+    const err=$("getErr");err.textContent="";const slug=edit.code?null:$("slugIn").value.trim();
+    if(!edit.code&&!slugOk(slug)){err.textContent=MSG.bad_slug;return}
+    if(!edit.code&&!useCode){const nm=$("nameIn").value.trim(),ph=$("phoneIn").value.replace(/\D/g,"");
+      if(nm.length<2){err.textContent="اكتبي اسمك";return}
+      if(ph.length<10){err.textContent="اكتبي رقم موبايلك";return}
+      if(!receiptData){err.textContent="ارفعي صورة التحويل الأول";return}}
+    else if(!edit.code&&$("codeIn").value.trim().length<6){err.textContent="اكتبي كود التفعيل";return}
+    const b=$("saveBtn"),t0=b.textContent;b.disabled=true;b.textContent="بيتحفظ…";
+    setTimeout(()=>{b.disabled=false;b.textContent=t0;showDone(slug||edit.slug||"test","TEST-1234",useCode?null:"0000");
+      $("getDone").insertBefore(el("div","wz-test in","🧪 دي نتيجة تجربة بس. مفيش طلب اتسجل، واللينك ده مش شغال."),$("getDone").firstChild)},700)},true);}
 
 /* clearer texts, no time promises */
 $("pendNote").textContent="⏳ بنراجع التحويل، وبعدها دعوتك بتتفعّل عند الضيوف. تقدري تبعتي اللينك من دلوقتي، ولو حد فتحه قبل التفعيل هيلاقي «الدعوة قيد التجهيز».";
