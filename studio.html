@@ -1523,6 +1523,8 @@ body.inviting .wz-bot,body:has(#sigView.on) .wz-bot,body:has(.mdl.on) .wz-bot,bo
 
 html{scroll-padding-bottom:150px}
 .wz-step input,.wz-step textarea,.wz-step select{scroll-margin-bottom:150px}
+
+#haveCode[hidden]{display:none!important}
 </style>
 </head>
 <body>
@@ -4016,7 +4018,11 @@ const who=el("div","wz-who");who.append(el("label","",'اسمك <em class="rq">�
 ob.insertBefore(who,pay);stps[2].remove();stps[3].remove();
 stps[0].querySelector("i").textContent="١";stps[1].querySelector("i").textContent="٢";
 pay.insertBefore(el("h4","","الدفع"),pay.firstChild);
-ob.after(el("p","wz-after","<b>بعد التأكيد:</b> هيظهرلك لينك دعوتك و<b>كود التعديل</b> على طول. بنراجع التحويل، وبعدها الدعوة بتتفعّل عند ضيوفك."));
+$("codeBox").after(el("p","wz-after","<b>بعد التأكيد:</b> هيظهرلك على طول <b>لينك دعوتك</b> تبعتيه لضيوفك، و<b>كود التعديل</b> تعدّلي بيه في أي وقت. بنراجع التحويل وبعدها الدعوة بتتفعّل."));
+const wa=$("codeBox").nextElementSibling,waT=wa.innerHTML,syncWa=()=>{wa.innerHTML=$("codeBox").hidden?waT:"<b>بعد التأكيد:</b> هيظهرلك على طول <b>لينك دعوتك</b> و<b>كود التعديل</b>، ودعوتك بتتفعّل بالكود."};new MutationObserver(syncWa).observe($("codeBox"),{attributes:true,attributeFilter:["hidden"]});
+/* activation code: hidden unless the customer came from a #code link */
+const HAS_CODE=/[#&?]code\b/.test(location.hash+location.search);H($("haveCode"),!HAS_CODE);
+if(HAS_CODE){const gm=$("getMdl");let done=0;new MutationObserver(()=>{if(!done&&gm.classList.contains("open")&&!edit.code){done=1;setMode(true)}}).observe(gm,{attributes:true,attributeFilter:["class"]})}
 const sl=$("slugWrap").querySelector("label");if(sl)sl.innerHTML='اسم اللينك اللي هيتبعت لضيوفك <em class="rq">مطلوب</em><small> حروف إنجليزي وأرقام و - بس</small>';
 /* errors next to the field they belong to */
 const ge=$("getErr");
