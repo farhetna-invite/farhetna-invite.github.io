@@ -5,8 +5,9 @@
    The country comes from the phone's time zone (no network call); the visitor can change it from the small 🌍 switch.
    Rates are approximate (EGP per 1 unit) and only used for the "≈" label; update them from time to time. */
 (function(){
-  var PRICES={            // EGP: [Egypt, abroad]
-    basic:[250,599], premium:[350,749], custom:[450,999],
+  var PRICES={            // EGP: [Egypt, abroad, abroad price in SAR (optional: then every currency is worked out from this SAR price)]
+    basic:[299,575,39], premium:[299,575,39], custom:[450,999],
+    pkg5:[400,856,58], pkg10:[600,1298,88], pkg50:[899,1608,109],
     album:[399,799], albumAddon:[249,499], magazine:[299,599], birthday:[149,349], milestone:[249,599], sebouStory:[199,449]
   };
   var RATES_DATE="2026-11";
@@ -42,17 +43,20 @@
   var cur=abroad&&CUR[row[2]]?CUR[row[2]]:null;
   /* abroad EGP price -> clean local amount, always rounded UP: whole numbers under 20, then steps of 5 (no fractions) */
   function local(egp){var v=egp/cur[0],st=v<20?1:5;return Math.max(1,Math.ceil(v/st-1e-9)*st)}
+  /* price set in SAR: Saudi visitors see it as is, other currencies get the same value rounded UP to a whole unit (half units where the currency allows) */
+  function fromSar(sar){if(row[2]==="SAR")return sar;var v=sar*CUR.SAR[0]/cur[0],st=cur[2]?.5:1;return Math.max(st,Math.ceil(v/st-1e-9)*st)}
+  function loc(p){return p[2]?fromSar(p[2]):local(p[1])}
   function num(n){return ar(String(n).replace(".","٫"))}
   var FG={
     country:code, countryName:row[1], currency:row[2], abroad:abroad, ratesDate:RATES_DATE, ar:ar,
     price:function(k){var p=PRICES[k];return p?p[abroad?1:0]:null},
     curName:cur?cur[1]:"جنيه",
     /* the number the visitor sees (Arabic digits) and the full "number + currency" label */
-    money:function(k){var p=PRICES[k];if(!p)return "";return cur?num(local(p[1])):ar(p[0])},
+    money:function(k){var p=PRICES[k];if(!p)return "";return cur?num(loc(p)):ar(p[0])},
     label:function(k){var m=FG.money(k);return m?m+" "+FG.curName:""},
     /* local amount as a number, and what that comes to in EGP (what the card gateway will charge) */
-    local:function(k){var p=PRICES[k];return p&&cur?local(p[1]):null},
-    chargeEGP:function(k){var p=PRICES[k];if(!p)return null;return cur?Math.round(local(p[1])*cur[0]):p[0]},
+    local:function(k){var p=PRICES[k];return p&&cur?loc(p):null},
+    chargeEGP:function(k){var p=PRICES[k];if(!p)return null;return cur?Math.round(loc(p)*cur[0]):p[0]},
     /* swap the word "جنيه" for the visitor's currency inside an element */
     reword:function(root){if(!cur||!root)return;var w=document.createTreeWalker(root,4),n;
       while(n=w.nextNode())if(n.nodeValue.indexOf("جنيه")>-1)n.nodeValue=n.nodeValue.replace(/جنيه/g,cur[1])},
