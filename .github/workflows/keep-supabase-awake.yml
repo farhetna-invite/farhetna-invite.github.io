@@ -1,0 +1,20 @@
+name: Keep Supabase awake
+# يكلّم قاعدة البيانات كل ٣ أيام عشان Supabase ما يوقفش المشروع المجاني
+on:
+  schedule:
+    - cron: "17 9 */3 * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        env:
+          URL: https://fjoyqftndulavcjcxaya.supabase.co
+          KEY: sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" -X POST "$URL/storage/v1/object/list/photos" \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY" -H "Content-Type: application/json" \
+            -d '{"prefix":"","limit":1}')
+          echo "Supabase answered: $code"
+          if [ "$code" -ge 500 ] || [ "$code" = "000" ]; then echo "Supabase looks down or paused"; exit 1; fi
