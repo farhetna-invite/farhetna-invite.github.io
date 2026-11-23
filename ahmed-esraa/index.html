@@ -230,6 +230,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 
 
+<audio id="voice" src="voice.mp3" preload="auto" playsinline></audio>
+<button id="snd" class="muted" aria-label="الصوت"><svg viewBox="0 0 24 24"><g class="on"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></g><g class="off"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/></g></svg></button>
 <main class="col">
   <!-- ============ the hall ============ -->
   <section id="hallWrap" aria-label="القاعة">
@@ -389,7 +391,7 @@ function act(d,h){
     case"count":Snd.sparkle();var c=left();showPop(h,c>0?'<b>باقي '+ar(Math.ceil(c/864e5))+' '+(Math.ceil(c/864e5)>10?"يوم":"أيام")+'</b>':'<b>الفرح النهارده 🤍</b>');break;
     case"fanfare":Snd.fanfare();burstAt(h,60);showPop(h,'<b>🎺 ✨</b>');break;
     case"sparkle":Snd.giggle();burstAt(h,50);break;
-    case"music":burstAt(h,50);showPop(h,'<b>♪ ✨</b>');break;
+    case"music":var on=vToggle();showPop(h,'<b>'+(on?"♪ ♫ ♪":"🤫")+'</b>');break;
   }
 }
 function hideTapHint(){var t=document.querySelector(".hintL .tap");if(t)t.style.opacity="0"}
@@ -443,7 +445,14 @@ function cdTick(){var l=left();
   setN("cdD",Math.floor(l/864e5));setN("cdH",Math.floor(l/36e5)%24);setN("cdM",Math.floor(l/6e4)%60);setN("cdS",Math.floor(l/1e3)%60)}
 cdTick();setInterval(cdTick,1000);
 
-/* no sound in this invitation */
+/* the friend's voice message plays after the envelope opens (started by the guest's tap); no other sounds */
+var V=$("voice"),vWas=false;
+function vUi(){var b=$("snd");b.classList.toggle("muted",V.paused);b.classList.toggle("playing",!V.paused)}
+["play","pause","ended"].forEach(function(e){V.addEventListener(e,vUi)});
+function vPlay(){try{var p=V.play();if(p&&p.catch)p.catch(function(){})}catch(e){}}
+function vToggle(){if(V.paused){if(V.ended||V.currentTime>=V.duration-.2)V.currentTime=0;vPlay();return true}V.pause();return false}
+$("snd").addEventListener("click",vToggle);
+document.addEventListener("visibilitychange",function(){if(document.hidden){vWas=!V.paused;V.pause()}else if(vWas)vPlay()});
 var Snd={door:function(){},sparkle:function(){},giggle:function(){},fanfare:function(){},start:function(){},vis:function(){}};
 
 /* ---------- RSVP (saved to Farhetna; the couple read replies with their code) ---------- */
@@ -473,6 +482,7 @@ $("rf").onsubmit=function(e){e.preventDefault();var r={name:$("rn").value.trim()
 /* ---------- opening the envelope ---------- */
 var gate=$("gate"),img=scene.querySelector("img"),opened=false;
 function openEnv(){if(opened)return;opened=true;
+  vPlay();
   Snd.sparkle();setTimeout(Snd.door,300);
   var r=$("ebox").getBoundingClientRect();burst(r.left+r.width*.508,r.top+r.height*.52,46);
   gate.classList.add("s1");
@@ -482,7 +492,7 @@ function openEnv(){if(opened)return;opened=true;
   setTimeout(function(){gate.classList.add("s4");Snd.start()},300+980);
   setTimeout(function(){$("flash").classList.add("go");scene.classList.add("enter");scene.style.transform="translateY(-50%) scale(1)"},300+980+650);
   setTimeout(function(){gate.style.transition="opacity .8s ease";gate.style.opacity="0";gate.style.pointerEvents="none"},300+980+800);
-  setTimeout(function(){document.body.classList.remove("locked");entered=true;onScroll();},300+980+1300);
+  setTimeout(function(){document.body.classList.remove("locked");$("snd").classList.add("show");entered=true;onScroll();},300+980+1300);
   setTimeout(function(){scene.classList.remove("enter");gate.remove()},300+980+4200)}
 gate.addEventListener("click",openEnv);
 gate.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" ")openEnv()});
