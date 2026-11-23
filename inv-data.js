@@ -209,3 +209,49 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
   function go(){run();try{new MutationObserver(run).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]})}catch(e){}setTimeout(run,600);setTimeout(run,2000)}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",go);else go();
 })();
+
+/* «اعمل دعوتك مع فرحتنا» — a small, quiet line at the very end of real guest links only
+   (not in the studio preview, not in the public demos). It sits on its own little card so it reads on light and dark designs. */
+(function(){
+  if(window.farhetnaMode!=="live")return;
+  try{if(window.top!==window.self)return}catch(e){return}
+  var key=(location.pathname.split("/").filter(Boolean)[0]||"invite");
+  function el(){
+    var en=(document.documentElement.lang||"").slice(0,2)==="en";
+    var wa="https://wa.me/201280067110?text="+encodeURIComponent(en?"Hello Farhetna 🤍 I saw one of your invitations and I'd like one like it":"أهلًا فرحتنا 🤍 شفت دعوة من تصميمكم وعايز أعمل دعوة زيها");
+    var f=document.createElement("div");f.id="farhetnaMw";f.setAttribute("dir",en?"ltr":"rtl");
+    f.innerHTML='<style>#farhetnaMw{position:relative;z-index:1;clear:both;padding:26px 16px calc(34px + env(safe-area-inset-bottom));text-align:center;font-family:inherit}'+
+      '#farhetnaMw .c{display:inline-block;padding:14px 18px 12px;border-radius:22px;background:rgba(255,251,245,.9);color:#4a1f29;box-shadow:0 10px 26px -14px rgba(40,10,15,.55),inset 0 0 0 1px rgba(199,154,75,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}'+
+      '#farhetnaMw p{margin:0 0 8px;font-size:13.5px;opacity:.75}'+
+      '#farhetnaMw a{text-decoration:none;color:inherit}'+
+      '#farhetnaMw .b{display:inline-block;padding:9px 18px;border-radius:999px;background:linear-gradient(180deg,#7a2a36,#5a1420);color:#fbeedd;font-size:15px}'+
+      '#farhetnaMw .b b{font-weight:700}'+
+      '#farhetnaMw .w{display:flex;align-items:center;justify-content:center;gap:5px;margin-top:8px;font-size:12.5px;opacity:.8}'+
+      '#farhetnaMw svg{width:15px;height:15px}</style>'+
+      '<div class="c"><p>'+(en?"Loved this invitation?":"عجبتك الدعوة؟")+'</p>'+
+      '<a class="b" href="https://farhetnainvite.com/?utm_source=invite&amp;utm_medium=footer&amp;utm_campaign='+encodeURIComponent(key)+'" target="_blank" rel="noopener">'+(en?"Make yours with <b>Farhetna</b> ✨":"اعمل دعوتك مع <b>فرحتنا</b> ✨")+'</a>'+
+      '<a class="w" href="'+wa+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25a35a" d="M12 2.2A9.8 9.8 0 0 0 3.6 17l-1.3 4.8 4.9-1.3A9.8 9.8 0 1 0 12 2.2zm5.6 13.9c-.2.7-1.4 1.3-2 1.3-.5.1-1.2.1-1.9-.1a14 14 0 0 1-1.7-.6 13.5 13.5 0 0 1-5.2-4.6c-.4-.5-1.1-1.6-1.1-3s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.1 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l1.9.9c.3.1.5.2.5.3.1.1.1.7-.1 1.4z"/></svg>'+(en?"Chat with us on WhatsApp":"كلّمنا واتساب")+'</a></div>';
+    return f}
+  /* put it at the end of whatever actually scrolls (some designs scroll inside a box, not the page) */
+  function host(){
+    var best=null,bestA=0,vh=innerHeight;
+    document.querySelectorAll("body *").forEach(function(n){
+      if(n.id==="farhetnaMw")return;var cs=getComputedStyle(n);
+      if(!/(auto|scroll)/.test(cs.overflowY))return;if(n.scrollHeight<=n.clientHeight+40||n.clientHeight<vh*.5)return;
+      var a=n.clientWidth*n.clientHeight;if(a>bestA){bestA=a;best=n}});
+    return best||document.body}
+  /* designs that already end with «صمّمي دعوتك مع فرحتنا» keep their own line; we only add the WhatsApp link under it */
+  function waOnly(link){var en=(document.documentElement.lang||"").slice(0,2)==="en";
+    var w=document.createElement("a");w.id="farhetnaMw";w.target="_blank";w.rel="noopener";
+    w.href="https://wa.me/201280067110?text="+encodeURIComponent(en?"Hello Farhetna 🤍 I saw one of your invitations and I'd like one like it":"أهلًا فرحتنا 🤍 شفت دعوة من تصميمكم وعايز أعمل دعوة زيها");
+    w.style.cssText="display:block;width:max-content;margin:8px auto 0;font-size:.85em;opacity:.8;color:inherit;text-decoration:none";
+    w.textContent=en?"💬 Chat with us on WhatsApp":"💬 كلّمنا واتساب";
+    try{var u=new URL(link.href);u.searchParams.set("utm_source","invite");u.searchParams.set("utm_medium","footer");u.searchParams.set("utm_campaign",key);link.href=u.toString()}catch(e){}
+    link.parentNode.insertBefore(w,link.nextSibling)}
+  function place(){if(document.getElementById("farhetnaMw"))return;
+    try{var own=null;document.querySelectorAll('a[href^="https://farhetnainvite.com"]').forEach(function(a){if(!own&&!a.closest(".fhBar,#fhBack"))own=a});
+      if(own){waOnly(own);return}
+      host().appendChild(el())}catch(e){}}
+  function go(){setTimeout(place,1200)}
+  if(document.readyState==="complete")go();else addEventListener("load",go);
+})();
