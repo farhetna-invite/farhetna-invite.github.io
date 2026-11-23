@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#140709">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#e9cd8c;--gold2:#c79a4b;--gold3:#f8e7bd;--ink:#f6ead2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100svh;font-family:"Amiri",serif;color:var(--ink);background:radial-gradient(120% 60% at 50% 0%,#3a1218,#140709 60%) fixed;padding:28px 16px 60px}
+.w{max-width:460px;margin:0 auto}
+h1{font-family:"Aref Ruqaa",serif;font-size:34px;color:var(--gold);text-align:center;line-height:1.3}
+.sub{text-align:center;color:var(--gold3);opacity:.8;font-size:16px;margin:4px 0 22px}
+.card{padding:22px 18px;border-radius:22px;background:linear-gradient(180deg,rgba(70,22,28,.55),rgba(30,9,12,.75));border:1px solid rgba(233,205,140,.45);box-shadow:0 20px 40px rgba(0,0,0,.45)}
+label{display:block;font-size:16px;color:var(--gold3);margin-bottom:8px}
+input{width:100%;padding:14px;border-radius:14px;border:1px solid rgba(233,205,140,.5);background:rgba(15,5,7,.6);color:var(--ink);font:inherit;font-size:20px;text-align:center;letter-spacing:2px;direction:ltr;outline:none}
+input:focus{border-color:var(--gold)}
+.btn{display:block;width:100%;margin-top:14px;padding:14px;border:0;border-radius:999px;font:inherit;font-size:18px;font-weight:700;color:#3a1309;background:linear-gradient(180deg,#f8e2a6,#d8aa58 55%,#b98535);cursor:pointer}
+.btn:disabled{opacity:.6}
+.btn.g{background:none;border:1px solid rgba(233,205,140,.5);color:var(--gold3);font-weight:400;font-size:15px;padding:10px}
+.err{min-height:22px;margin-top:10px;text-align:center;color:#ffb4a8;font-size:15px}
+.ok{color:#bfe3b4}
+</style><title>تسجيل دعوة أحمد وإسراء</title></head><body><div class="w">
+<h1>تسجيل الدعوة</h1><p class="sub">د. أحمد &amp; الآنسة إسراء · مرة واحدة بس</p>
+<div class="card"><label for="c">الصقي كود التفعيل اللي عملتيه من لوحة الأدمن</label>
+<input id="c" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="الكود">
+<button class="btn" id="go">سجّلي الدعوة</button><p class="err" id="m"></p></div></div>
+<script>
+var SB={url:"https://fjoyqftndulavcjcxaya.supabase.co",key:"sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui"};function rpc(n,a){return fetch(SB.url+"/rest/v1/rpc/"+n,{method:"POST",headers:{"Content-Type":"application/json",apikey:SB.key,Authorization:"Bearer "+SB.key},body:JSON.stringify(a)}).then(function(r){return r.text().then(function(t){var j;try{j=JSON.parse(t)}catch(e){j=t}if(!r.ok)throw new Error((j&&j.message)||t||r.status);return j})})}
+var SLUG="ahmed-esraa",$=function(i){return document.getElementById(i)};
+var DATA={tpl:"custom",occasion:"wedding",groom:"د. أحمد",bride:"الآنسة إسراء",date:"2026-11-27",time:"19:00",venue:"The Palace",
+  addr:"٦ أكتوبر، طريق مصر إسكندرية الصحراوي، أمام مديرية أمن الجيزة",map:"https://maps.app.goo.gl/3DTCWN9WwDrp7U659?g_st=ic",_src:"custom:ahmed-esraa"};
+$("go").onclick=function(){var code=$("c").value.trim().toUpperCase(),m=$("m");m.className="err";m.textContent="";
+  if(code.length<6){m.textContent="الصقي الكود الأول";return}
+  var b=$("go");b.disabled=true;b.textContent="بيتسجل…";
+  rpc("check_code",{p_code:code,p_slug:SLUG}).then(function(r){r=r||"";
+    if(r==="bad_code")throw new Error("الكود ده مش صحيح، اتأكدي إنك نسختيه كامل");
+    if(r==="slug_taken"||r==="bad_slug")throw new Error("الاسم مستخدم ("+r+")، ابعتي الرسالة دي لكلود");
+    var slug=String(r).indexOf("edit:")===0?String(r).slice(5):SLUG;
+    return rpc("save_invite",{p_code:code,p_slug:slug,p_data:DATA}).then(function(s){return s||slug})})
+  .then(function(slug){m.className="err ok";m.textContent="تم التسجيل ✅ الكود ده هو كود العريس لصفحة الردود"+(slug!==SLUG?" · ("+slug+")":"");b.textContent="تم ✅"})
+  .catch(function(e){m.textContent="ماتسجلتش: "+(e.message||e);b.disabled=false;b.textContent="سجّلي الدعوة"})};
+</script></body></html>

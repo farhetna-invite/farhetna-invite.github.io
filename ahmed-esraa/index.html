@@ -196,7 +196,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .dBig{font-family:"Aref Ruqaa",serif;font-size:30px;color:var(--gold);line-height:1.4}
 .done p{font-size:16px;color:var(--ink);opacity:.85;margin-top:6px;line-height:1.8}
 .wnote{font-size:13.5px;line-height:1.7;color:var(--gold3);opacity:.75;text-align:center;margin-top:-2px}
-.wbtn{margin-top:14px;font-size:16px;padding:12px 26px}
+.wbtn{margin-top:14px;font-size:16px;padding:12px 26px;display:none}
+.rs.viaWa .wbtn{display:inline-flex}
 .edit{margin-top:14px;font-size:14.5px;color:var(--gold3);text-decoration:underline;text-underline-offset:4px}
 /* closing */
 .closing{padding:70px 22px 50px}
@@ -318,7 +319,6 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <textarea id="rm" class="fin" rows="2" placeholder="رسالة للعروسين (اختياري)" maxlength="300"></textarea>
         <p class="err" id="err"></p>
         <button class="mapbtn send" id="send" type="submit"><span>إرسال</span></button>
-        <p class="wnote">هيفتحلك واتساب برسالة جاهزة، دوس «إرسال» هناك عشان ردّك يوصل للعريس.</p>
       </form>
       <div class="done" id="done"><div class="dBig" id="dBig"></div><p id="dSub"></p><a class="mapbtn wbtn" id="dWa" href="#" target="_blank" rel="noopener">فتح واتساب</a><br><button type="button" class="edit" id="dEdit">تعديل الرد</button></div>
     </div>
@@ -475,7 +475,9 @@ document.addEventListener("visibilitychange",function(){if(document.hidden){vWas
 var Snd={door:function(){},sparkle:function(){},giggle:function(){},fanfare:function(){},start:function(){},vis:function(){}};
 
 /* ---------- RSVP (saved to Farhetna; the couple read replies with their code) ---------- */
-var WA="201128783342";  /* replies go to the groom on WhatsApp */
+var WA="201128783342",SLUG="ahmed-esraa";
+var SB={url:"https://fjoyqftndulavcjcxaya.supabase.co",key:"sb_publishable_RaxsucJi-Mlswbr0ZCQSKw_GAq79mui"};
+var DEV=(function(){try{var k="farhetna_dev",v=localStorage.getItem(k);if(!v){v=Math.random().toString(36).slice(2)+Date.now().toString(36);localStorage.setItem(k,v)}return v}catch(e){return""}})();
 var RK="farhetna_rsvp_ahmed_esraa",cntV=1;
 function att(){return document.querySelector('input[name=att]:checked').value==="1"}
 function showCnt(){$("cVal").textContent=ar(cntV)}
@@ -485,18 +487,22 @@ $("cPlus").onclick=function(){if(cntV<10){cntV++;showCnt()}};
 document.querySelectorAll('input[name=att]').forEach(function(i){i.onchange=attSync});
 function rsDone(r){var c=document.querySelector(".rs");c.classList.add("ok");
   $("dBig").textContent=r.yes?"في انتظارك 🤍":"هنفتقدك 🤍";
-  $("dSub").textContent="متنساش تدوس «إرسال» في الواتساب عشان ردّك يوصل للعريس. لو الواتساب ما اتفتحش، دوس الزرار ده:"}
+  var wa=c.classList.contains("viaWa");$("dSub").textContent=wa?"متنساش تدوس «إرسال» في الواتساب عشان ردّك يوصل للعريس. لو الواتساب ما اتفتحش، دوس الزرار ده:":(r.yes?"وصل ردك للعروسين، شكرًا لتأكيد حضورك.":"وصل ردك للعروسين، شكرًا إنك بلغتهم.")}
 $("dEdit").onclick=function(){document.querySelector(".rs").classList.remove("ok");$("rn").focus()};
 try{var prev=JSON.parse(localStorage.getItem(RK)||"null");if(prev){$("rn").value=prev.name;cntV=prev.count||1;showCnt();
   document.querySelector('input[name=att][value="'+(prev.yes?1:0)+'"]').checked=true;attSync();$("rm").value=prev.msg||""}}catch(e){}
 $("rf").onsubmit=function(e){e.preventDefault();var r={name:$("rn").value.trim(),yes:att(),count:att()?cntV:0,msg:$("rm").value.trim()};$("err").textContent="";
   if(r.name.length<2){$("err").textContent="اكتب اسمك من فضلك";$("rn").focus();return}
-  var btn=$("send"),lbl=btn.querySelector("span");btn.disabled=true;lbl.textContent="بيفتح واتساب…";
+  var btn=$("send"),lbl=btn.querySelector("span");btn.disabled=true;lbl.textContent="بيتبعت…";
   function fin(){btn.disabled=false;lbl.textContent="إرسال"}
   function ok(){try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}fin();rsDone(r);var b=btn.getBoundingClientRect();burst(b.left+b.width/2,b.top,40);if(navigator.vibrate)navigator.vibrate([8,30,8])}
   var msg="تأكيد حضور فرح د. أحمد & الآنسة إسراء 🤍\n"+"الاسم: "+r.name+"\n"+(r.yes?"الرد: هحضر بإذن الله 🤍\nالعدد: "+r.count:"الرد: مش هقدر أحضر")+(r.msg?"\nرسالة: "+r.msg:"");
   var url="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);$("dWa").href=url;
-  ok();setTimeout(function(){location.href=url},650)};
+  /* saved to the couple's replies page; if that ever fails, fall back to the groom's WhatsApp */
+  fetch(SB.url+"/rest/v1/rpc/add_rsvp",{method:"POST",headers:{"Content-Type":"application/json",apikey:SB.key,Authorization:"Bearer "+SB.key},
+    body:JSON.stringify({p_slug:SLUG,p_name:r.name,p_attending:r.yes,p_guests:r.count,p_note:r.msg,p_device:DEV})})
+  .then(function(res){if(!res.ok)throw new Error(res.status);document.querySelector(".rs").classList.remove("viaWa");ok()})
+  .catch(function(){document.querySelector(".rs").classList.add("viaWa");ok();setTimeout(function(){location.href=url},650)})};
 
 /* ---------- opening the envelope ---------- */
 var gate=$("gate"),img=scene.querySelector("img"),opened=false;
