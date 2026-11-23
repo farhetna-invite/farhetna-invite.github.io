@@ -1300,6 +1300,8 @@ body.inviting #builder{display:none}
 .rsd-dt{font-size:11.5px;color:#9a9784;margin-top:6px}
 .rsd-empty{text-align:center;color:var(--sg);font-size:14px;padding:16px}
 @media (prefers-reduced-motion:reduce){.rsd-it{animation:none}.rsd-ring .fg{transition:none}}
+.payhelp{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:2px 0 12px;padding:10px 12px;border-radius:14px;text-decoration:none;font-size:13.5px;line-height:1.5;color:#4a1f29;background:#eef7ee;box-shadow:inset 0 0 0 1px rgba(37,163,90,.35)}
+.payhelp b{white-space:nowrap;color:#1d7a43;font-size:14px}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
@@ -2335,6 +2337,7 @@ html{scroll-padding-bottom:150px}
         <div class="paynum"><span id="payNum"></span><button type="button" class="cp" id="copyNum">نسخ</button></div>
         <div class="stp"><i>٢</i> ارفعي صورة التحويل (سكرين شوت)</div>
         <label class="rcpt" id="rcptLbl"><input type="file" id="rcptIn" accept="image/*"><img id="rcptPrev" alt="" hidden><span id="rcptTxt">📎 اضغطي هنا واختاري صورة التحويل</span></label>
+        <a class="payhelp" href="https://wa.me/201280067110?text=%D8%A3%D9%87%D9%84%D9%8B%D8%A7%20%D9%81%D8%B1%D8%AD%D8%AA%D9%86%D8%A7%20%F0%9F%A4%8D%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B3%D8%A4%D8%A7%D9%84%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AA%D8%AD%D9%88%D9%8A%D9%84%20%D9%84%D8%B7%D9%84%D8%A8%20%D8%AF%D8%B9%D9%88%D8%AA%D9%8A" target="_blank" rel="noopener"><span>قلقانة من التحويل أو محتاجة مساعدة؟</span><b>كلّمينا واتساب 💬</b></a>
         <div class="stp"><i>٣</i> اسمك</div>
         <input id="nameIn" autocomplete="name" placeholder="اسمك" maxlength="60">
         <div class="stp"><i>٤</i> رقم موبايلك (علشان لو احتجنا نكلمك)</div>
