@@ -173,6 +173,31 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .mapbtn::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);animation:shine 3.2s ease-in-out infinite}
 @keyframes shine{0%,60%{left:-60%}100%{left:130%}}
 .mapbtn:active{transform:scale(.97)}
+/* rsvp */
+.rs form{display:flex;flex-direction:column;gap:12px;margin-top:8px;text-align:start}
+.fin{width:100%;padding:13px 15px;border-radius:14px;border:1px solid rgba(233,205,140,.45);background:rgba(15,5,7,.55);color:var(--ink);font:inherit;font-size:17px;outline:none;resize:none}
+.fin::placeholder{color:rgba(246,234,210,.45)}
+.fin:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(233,205,140,.15)}
+.yn{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.yn label{position:relative}
+.yn input{position:absolute;opacity:0;pointer-events:none}
+.yn span{display:block;padding:12px 6px;border-radius:14px;text-align:center;font-size:15.5px;border:1px solid rgba(233,205,140,.35);background:rgba(15,5,7,.45);color:rgba(246,234,210,.8);transition:.25s}
+.yn input:checked+span{background:linear-gradient(180deg,rgba(233,205,140,.28),rgba(199,154,75,.16));border-color:var(--gold);color:var(--gold3)}
+.cnt{display:flex;align-items:center;justify-content:space-between;padding:4px 4px 0;font-size:16px;color:var(--gold3);transition:opacity .25s}
+.cnt.off{opacity:.3;pointer-events:none}
+.stp{display:flex;align-items:center;gap:14px}
+.stp button{width:38px;height:38px;border-radius:50%;border:1px solid rgba(233,205,140,.5);color:var(--gold);font-size:22px;line-height:1}
+.stp b{min-width:22px;text-align:center;font-size:22px;color:var(--gold)}
+.err{min-height:1px;font-size:14px;color:#ffb4a8;text-align:center}
+.send{justify-content:center;width:100%}
+.send:disabled{opacity:.6}
+.done{display:none;padding:10px 0 4px}
+.rs.ok form{display:none}.rs.ok .done{display:block;animation:tick .6s var(--ease)}
+.dBig{font-family:"Aref Ruqaa",serif;font-size:30px;color:var(--gold);line-height:1.4}
+.done p{font-size:16px;color:var(--ink);opacity:.85;margin-top:6px;line-height:1.8}
+.wnote{font-size:13.5px;line-height:1.7;color:var(--gold3);opacity:.75;text-align:center;margin-top:-2px}
+.wbtn{margin-top:14px;font-size:16px;padding:12px 26px}
+.edit{margin-top:14px;font-size:14.5px;color:var(--gold3);text-decoration:underline;text-underline-offset:4px}
 /* closing */
 .closing{padding:70px 22px 90px}
 .arch{position:relative;width:min(70vw,280px);aspect-ratio:3/4;margin:0 auto 24px;border-radius:50% 50% 14px 14px/38% 38% 14px 14px;overflow:hidden;border:1px solid rgba(233,205,140,.6);box-shadow:0 0 0 6px rgba(20,7,9,.6),0 0 0 7px rgba(233,205,140,.3),0 26px 60px rgba(0,0,0,.6),0 0 60px rgba(233,180,100,.18)}
@@ -203,7 +228,7 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
   <div class="ghint"><span>المس الظرف لفتح الدعوة</span></div>
 </div>
 
-<button id="snd" aria-label="الصوت"><svg viewBox="0 0 24 24"><g class="on"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></g><g class="off"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M17 9l5 6M22 9l-5 6"/></g></svg></button>
+
 
 <main class="col">
   <!-- ============ the hall ============ -->
@@ -264,6 +289,27 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
       <div class="venue">The Palace</div>
       <p class="addr">٦ أكتوبر، طريق مصر إسكندرية الصحراوي، أمام مديرية أمن الجيزة</p>
       <a class="mapbtn" id="mapBtn" href="https://maps.app.goo.gl/3DTCWN9WwDrp7U659?g_st=ic" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>موقع الحفل</a>
+    </div>
+  </section>
+
+  <!-- ============ RSVP ============ -->
+  <section class="sec" aria-label="تأكيد الحضور" id="rsvpSec">
+    <svg class="orn rv" viewBox="0 0 150 22" aria-hidden="true"><use href="#orn"/></svg>
+    <div class="card rv d1 rs"><i class="candle"></i>
+      <div class="kicker">تأكيد الحضور</div>
+      <form id="rf" novalidate>
+        <input id="rn" class="fin" type="text" placeholder="اسمك" autocomplete="name" maxlength="60">
+        <div class="yn" role="radiogroup">
+          <label><input type="radio" name="att" value="1" checked><span>هحضر بإذن الله 🤍</span></label>
+          <label><input type="radio" name="att" value="0"><span>مش هقدر أحضر</span></label>
+        </div>
+        <div class="cnt" id="cntBox"><span>عدد الأفراد</span><div class="stp"><button type="button" id="cMinus" aria-label="أقل">−</button><b id="cVal">١</b><button type="button" id="cPlus" aria-label="أكتر">+</button></div></div>
+        <textarea id="rm" class="fin" rows="2" placeholder="رسالة للعروسين (اختياري)" maxlength="300"></textarea>
+        <p class="err" id="err"></p>
+        <button class="mapbtn send" id="send" type="submit"><span>إرسال</span></button>
+        <p class="wnote">هيفتحلك واتساب برسالة جاهزة، دوس «إرسال» هناك عشان ردّك يوصل للعريس.</p>
+      </form>
+      <div class="done" id="done"><div class="dBig" id="dBig"></div><p id="dSub"></p><a class="mapbtn wbtn" id="dWa" href="#" target="_blank" rel="noopener">فتح واتساب</a><br><button type="button" class="edit" id="dEdit">تعديل الرد</button></div>
     </div>
   </section>
 
@@ -343,7 +389,7 @@ function act(d,h){
     case"count":Snd.sparkle();var c=left();showPop(h,c>0?'<b>باقي '+ar(Math.ceil(c/864e5))+' '+(Math.ceil(c/864e5)>10?"يوم":"أيام")+'</b>':'<b>الفرح النهارده 🤍</b>');break;
     case"fanfare":Snd.fanfare();burstAt(h,60);showPop(h,'<b>🎺 ✨</b>');break;
     case"sparkle":Snd.giggle();burstAt(h,50);break;
-    case"music":var on=Snd.toggle();showPop(h,'<b>'+(on?"♪ ♫ ♪":"🤫")+'</b>');break;
+    case"music":burstAt(h,50);showPop(h,'<b>♪ ✨</b>');break;
   }
 }
 function hideTapHint(){var t=document.querySelector(".hintL .tap");if(t)t.style.opacity="0"}
@@ -397,57 +443,32 @@ function cdTick(){var l=left();
   setN("cdD",Math.floor(l/864e5));setN("cdH",Math.floor(l/36e5)%24);setN("cdM",Math.floor(l/6e4)%60);setN("cdS",Math.floor(l/1e3)%60)}
 cdTick();setInterval(cdTick,1000);
 
-/* ---------- music box (composed here, no copyright) ---------- */
-var Snd=(function(){
-  var ac=null,master,rev,musicGain,sfxGain,playing=false,muted=false,timer=null,nextT=0,step=0,wantMusic=true;
-  function init(){if(ac)return;var C=window.AudioContext||window.webkitAudioContext;if(!C)return;ac=new C();
-    master=ac.createGain();master.gain.value=.9;master.connect(ac.destination);
-    rev=ac.createConvolver();var len=ac.sampleRate*2.6,buf=ac.createBuffer(2,len,ac.sampleRate);
-    for(var c=0;c<2;c++){var d=buf.getChannelData(c);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.6)}rev.buffer=buf;
-    var rg=ac.createGain();rg.gain.value=.38;rev.connect(rg);rg.connect(master);
-    musicGain=ac.createGain();musicGain.gain.value=0;musicGain.connect(master);musicGain.connect(rev);
-    sfxGain=ac.createGain();sfxGain.gain.value=.55;sfxGain.connect(master);sfxGain.connect(rev)}
-  function hz(m){return 440*Math.pow(2,(m-69)/12)}
-  /* one music-box tine: bright attack, long soft ring */
-  function tine(m,t,v,out,dec){var f=hz(m);dec=dec||2.2;
-    [[1,1],[2.0,.18],[4.07,.1],[6.3,.04]].forEach(function(p){var o=ac.createOscillator(),g=ac.createGain();o.type="sine";o.frequency.value=f*p[0];
-      g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v*p[1],t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+dec/(p[0]*.6+.4));
-      o.connect(g);g.connect(out);o.start(t);o.stop(t+dec+.1)})}
-  /* waltz in D major, 3/4 — melody [midi, beats] per bar, chords as roots */
-  var MEL=[[[78,1.5],[76,.5],[74,1]],[[81,2],[78,1]],[[79,1],[78,1],[76,1]],[[78,3]],
-           [[76,1.5],[74,.5],[73,1]],[[76,2],[69,1]],[[71,1],[73,1],[74,1]],[[76,3]],
-           [[78,1.5],[76,.5],[74,1]],[[83,2],[81,1]],[[79,1],[83,1],[81,1]],[[78,2],[74,1]],
-           [[76,1],[79,1],[78,1]],[[76,1.5],[74,.5],[73,1]],[[76,1],[73,1],[69,1]],[[74,3]]];
-  var CH=[[50,57,62],[50,57,62],[43,55,59],[50,57,62],[45,52,61],[45,52,61],[43,55,59],[45,52,61],
-          [50,57,62],[43,55,59],[40,55,59],[50,57,62],[43,55,59],[45,52,61],[45,52,61],[50,57,62]];
-  var BEAT=60/76;
-  function bar(i,t){var m=MEL[i%16],c=CH[i%16],x=t;
-    m.forEach(function(n){tine(n[0],x,.22,musicGain,2.6);x+=n[1]*BEAT});
-    tine(c[0]+12,t,.10,musicGain,2.4);tine(c[1]+12,t+BEAT,.06,musicGain,1.6);tine(c[2]+12,t+2*BEAT,.06,musicGain,1.6)}
-  function sched(){while(nextT<ac.currentTime+1.2){bar(step,nextT);nextT+=3*BEAT;step++}}
-  function startMusic(){init();if(!ac)return;if(ac.state==="suspended")ac.resume();if(playing)return;playing=true;
-    nextT=ac.currentTime+.15;step=0;musicGain.gain.cancelScheduledValues(ac.currentTime);musicGain.gain.setValueAtTime(0,ac.currentTime);musicGain.gain.linearRampToValueAtTime(muted?0:.85,ac.currentTime+2.5);
-    sched();timer=setInterval(sched,300);ui()}
-  function stopMusic(){if(!ac||!playing)return;playing=false;clearInterval(timer);musicGain.gain.cancelScheduledValues(ac.currentTime);musicGain.gain.setTargetAtTime(0,ac.currentTime,.25);ui()}
-  function ui(){var b=$("snd");b.classList.toggle("muted",muted||!playing);b.classList.toggle("playing",playing&&!muted)}
-  function sfxOK(){init();if(!ac)return false;if(ac.state==="suspended")ac.resume();return !muted}
-  return{
-    door:function(){if(!sfxOK())return;var t=ac.currentTime;
-      [62,69,74,78].forEach(function(m,i){tine(m,t+i*.09,.18,sfxGain,3.2)});
-      var n=ac.createBufferSource(),b=ac.createBuffer(1,ac.sampleRate*1.6,ac.sampleRate),d=b.getChannelData(0);for(var i=0;i<d.length;i++)d[i]=Math.random()*2-1;n.buffer=b;
-      var f=ac.createBiquadFilter();f.type="bandpass";f.Q.value=.8;f.frequency.setValueAtTime(300,t);f.frequency.exponentialRampToValueAtTime(2400,t+1.4);
-      var g=ac.createGain();g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.4);g.gain.exponentialRampToValueAtTime(.001,t+1.6);n.connect(f);f.connect(g);g.connect(sfxGain);n.start(t)},
-    sparkle:function(){if(!sfxOK())return;var t=ac.currentTime;[86,90,93,98].forEach(function(m,i){tine(m,t+i*.06,.09,sfxGain,1.2)})},
-    giggle:function(){if(!sfxOK())return;var t=ac.currentTime;[81,85,83,88,86,93].forEach(function(m,i){tine(m,t+i*.075,.08,sfxGain,.9)})},
-    fanfare:function(){if(!sfxOK())return;var t=ac.currentTime;
-      [[62,0,.14],[66,.16,.14],[69,.32,.14],[74,.5,.7]].forEach(function(n){var o=ac.createOscillator(),f=ac.createBiquadFilter(),g=ac.createGain();o.type="sawtooth";o.frequency.value=hz(n[0]);
-        f.type="lowpass";f.frequency.value=1800;f.Q.value=1.2;var s=t+n[1];g.gain.setValueAtTime(0,s);g.gain.linearRampToValueAtTime(.09,s+.03);g.gain.setValueAtTime(.09,s+n[2]);g.gain.exponentialRampToValueAtTime(.001,s+n[2]+.25);
-        o.connect(f);f.connect(g);g.connect(sfxGain);o.start(s);o.stop(s+n[2]+.3)})},
-    start:startMusic,
-    toggle:function(){init();if(!playing){muted=false;startMusic();return true}muted=!muted;musicGain.gain.setTargetAtTime(muted?0:.85,ac.currentTime,.2);ui();return !muted},
-    vis:function(v){if(!ac)return;if(v){if(playing)ac.resume()}else ac.suspend()}
-  }})();
-$("snd").addEventListener("click",function(){Snd.toggle()});
+/* no sound in this invitation */
+var Snd={door:function(){},sparkle:function(){},giggle:function(){},fanfare:function(){},start:function(){},vis:function(){}};
+
+/* ---------- RSVP (saved to Farhetna; the couple read replies with their code) ---------- */
+var WA="201128783342";  /* replies go to the groom on WhatsApp */
+var RK="farhetna_rsvp_ahmed_esraa",cntV=1;
+function att(){return document.querySelector('input[name=att]:checked').value==="1"}
+function showCnt(){$("cVal").textContent=ar(cntV)}
+function attSync(){$("cntBox").classList.toggle("off",!att())}
+$("cMinus").onclick=function(){if(cntV>1){cntV--;showCnt()}};
+$("cPlus").onclick=function(){if(cntV<10){cntV++;showCnt()}};
+document.querySelectorAll('input[name=att]').forEach(function(i){i.onchange=attSync});
+function rsDone(r){var c=document.querySelector(".rs");c.classList.add("ok");
+  $("dBig").textContent=r.yes?"في انتظارك 🤍":"هنفتقدك 🤍";
+  $("dSub").textContent="متنساش تدوس «إرسال» في الواتساب عشان ردّك يوصل للعريس. لو الواتساب ما اتفتحش، دوس الزرار ده:"}
+$("dEdit").onclick=function(){document.querySelector(".rs").classList.remove("ok");$("rn").focus()};
+try{var prev=JSON.parse(localStorage.getItem(RK)||"null");if(prev){$("rn").value=prev.name;cntV=prev.count||1;showCnt();
+  document.querySelector('input[name=att][value="'+(prev.yes?1:0)+'"]').checked=true;attSync();$("rm").value=prev.msg||""}}catch(e){}
+$("rf").onsubmit=function(e){e.preventDefault();var r={name:$("rn").value.trim(),yes:att(),count:att()?cntV:0,msg:$("rm").value.trim()};$("err").textContent="";
+  if(r.name.length<2){$("err").textContent="اكتب اسمك من فضلك";$("rn").focus();return}
+  var btn=$("send"),lbl=btn.querySelector("span");btn.disabled=true;lbl.textContent="بيفتح واتساب…";
+  function fin(){btn.disabled=false;lbl.textContent="إرسال"}
+  function ok(){try{localStorage.setItem(RK,JSON.stringify(r))}catch(e){}fin();rsDone(r);var b=btn.getBoundingClientRect();burst(b.left+b.width/2,b.top,40);if(navigator.vibrate)navigator.vibrate([8,30,8])}
+  var msg="تأكيد حضور فرح د. أحمد & الآنسة إسراء 🤍\n"+"الاسم: "+r.name+"\n"+(r.yes?"الرد: هحضر بإذن الله 🤍\nالعدد: "+r.count:"الرد: مش هقدر أحضر")+(r.msg?"\nرسالة: "+r.msg:"");
+  var url="https://wa.me/"+WA+"?text="+encodeURIComponent(msg);$("dWa").href=url;
+  ok();setTimeout(function(){location.href=url},650)};
 
 /* ---------- opening the envelope ---------- */
 var gate=$("gate"),img=scene.querySelector("img"),opened=false;
@@ -461,7 +482,7 @@ function openEnv(){if(opened)return;opened=true;
   setTimeout(function(){gate.classList.add("s4");Snd.start()},300+980);
   setTimeout(function(){$("flash").classList.add("go");scene.classList.add("enter");scene.style.transform="translateY(-50%) scale(1)"},300+980+650);
   setTimeout(function(){gate.style.transition="opacity .8s ease";gate.style.opacity="0";gate.style.pointerEvents="none"},300+980+800);
-  setTimeout(function(){document.body.classList.remove("locked");$("snd").classList.add("show");entered=true;onScroll();},300+980+1300);
+  setTimeout(function(){document.body.classList.remove("locked");entered=true;onScroll();},300+980+1300);
   setTimeout(function(){scene.classList.remove("enter");gate.remove()},300+980+4200)}
 gate.addEventListener("click",openEnv);
 gate.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" ")openEnv()});
