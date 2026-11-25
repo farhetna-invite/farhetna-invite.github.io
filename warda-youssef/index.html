@@ -506,7 +506,7 @@ $("calM").textContent=monthName;$("calY").textContent=num(Y);
   for(let i=0;i<off;i++)h+="<span></span>";
   for(let d=1;d<=days;d++){const k=off+d-1;h+=d===Dd?`<span class="wed" style="transition-delay:${k*18}ms">${num(d)}<svg viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" transform="rotate(-70 23 23)"/></svg><svg class="hrt" viewBox="0 0 24 22"><path d="M12 21S1 14 1 7a5.5 5.5 0 0 1 11-1.5A5.5 5.5 0 0 1 23 7c0 7-11 14-11 14z"/></svg></span>`:`<span style="transition-delay:${k*18}ms">${num(d)}</span>`}
   $("calGrid").innerHTML=h})();
-$("fullDate").textContent=when.toLocaleDateString(loc,{weekday:"long",day:"numeric",month:"long",year:"numeric",...tz});
+$("fullDate").textContent=AR?(when.toLocaleDateString(loc,{weekday:"long",...tz})+"، "+when.toLocaleDateString(loc,{month:"long",...tz})+" "+when.toLocaleDateString(loc,{year:"numeric",...tz})+" "+when.toLocaleDateString(loc,{day:"numeric",...tz})):when.toLocaleDateString(loc,{weekday:"long",day:"numeric",month:"long",year:"numeric",...tz});
 function runDate(){const c=$("cal");if(c.classList.contains("open")){c.classList.remove("marked");void c.offsetWidth;setTimeout(()=>c.classList.add("marked"),60);return}
   c.classList.add("open");setTimeout(()=>c.classList.add("marked"),1100);$("s-date").classList.add("done")}
 $("calCover").onclick=runDate;$("calGrid").onclick=runDate;
