@@ -315,6 +315,13 @@ html[dir=rtl] .sheet h4{font:700 16px var(--ar)}
   .ttl{font-size:38px}.cal-body{min-height:228px}.cal-grid span{height:30px}.cal-hd{padding:12px 0 9px}.cal-hd b{font-size:30px}
   .st{min-height:58px}.rcv{padding:24px 18px 18px}.choice button{padding:13px}
 }
+#fullDate{display:flex;flex-direction:column;align-items:center;line-height:1.05;margin-top:6px}
+#fullDate .fdM{font-family:var(--ar);font-weight:700;font-size:40px;color:var(--burg)}
+#fullDate .fdY{font-family:var(--ar);font-weight:700;font-size:30px;color:var(--burg);letter-spacing:4px;margin-top:4px}
+#fullDate .fdD{display:flex;align-items:center;gap:12px;margin-top:6px}
+#fullDate .fdD b{font-family:var(--ar);font-weight:700;font-size:62px;color:var(--burg);line-height:1}
+#fullDate .fdD i{width:52px;height:1.5px;background:var(--burg);opacity:.85}
+#fullDate .fdD svg{width:20px;height:20px;fill:var(--burg)}
 </style>
 </head>
 <body>
@@ -506,7 +513,7 @@ $("calM").textContent=monthName;$("calY").textContent=num(Y);
   for(let i=0;i<off;i++)h+="<span></span>";
   for(let d=1;d<=days;d++){const k=off+d-1;h+=d===Dd?`<span class="wed" style="transition-delay:${k*18}ms">${num(d)}<svg viewBox="0 0 46 46"><circle cx="23" cy="23" r="20" transform="rotate(-70 23 23)"/></svg><svg class="hrt" viewBox="0 0 24 22"><path d="M12 21S1 14 1 7a5.5 5.5 0 0 1 11-1.5A5.5 5.5 0 0 1 23 7c0 7-11 14-11 14z"/></svg></span>`:`<span style="transition-delay:${k*18}ms">${num(d)}</span>`}
   $("calGrid").innerHTML=h})();
-$("fullDate").textContent=AR?(when.toLocaleDateString(loc,{weekday:"long",...tz})+"، "+when.toLocaleDateString(loc,{month:"long",...tz})+" "+when.toLocaleDateString(loc,{year:"numeric",...tz})+" "+when.toLocaleDateString(loc,{day:"numeric",...tz})):when.toLocaleDateString(loc,{weekday:"long",day:"numeric",month:"long",year:"numeric",...tz});
+$("fullDate").innerHTML=`<span class="fdM">${when.toLocaleDateString(loc,{month:"long",...tz})}</span><span class="fdY">${when.toLocaleDateString(loc,{year:"numeric",...tz})}</span><span class="fdD"><i></i><svg viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.6A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg><b>${when.toLocaleDateString(loc,{day:"numeric",...tz})}</b><svg viewBox="0 0 24 24"><path d="M12 21s-8-5-8-11a4.5 4.5 0 0 1 8-2.6A4.5 4.5 0 0 1 20 10c0 6-8 11-8 11z"/></svg><i></i></span>`;
 function runDate(){const c=$("cal");if(c.classList.contains("open")){c.classList.remove("marked");void c.offsetWidth;setTimeout(()=>c.classList.add("marked"),60);return}
   c.classList.add("open");setTimeout(()=>c.classList.add("marked"),1100);$("s-date").classList.add("done")}
 $("calCover").onclick=runDate;$("calGrid").onclick=runDate;
