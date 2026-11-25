@@ -790,6 +790,10 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 @media(min-width:700px){.fgrid{grid-template-columns:repeat(5,1fr);max-width:900px}}
 .js .feat .rvf{opacity:0;transform:translateY(18px);transition:opacity .9s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
 .js .feat .rvf.in{opacity:1;transform:none}
+.hdr .ib.shr{left:auto;right:19px;top:20px}
+.ib.shr svg{width:22px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.shToast{position:fixed;z-index:9999;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));transform:translate(-50%,20px);padding:10px 18px;border-radius:999px;background:#4a1f29;color:#fbeedd;font-size:14.5px;opacity:0;transition:.35s;pointer-events:none}
+.shToast.on{opacity:1;transform:translate(-50%,0)}
 </style>
 <script src="i18n.js" defer></script>
 <script src="fa.js" defer></script>
@@ -869,7 +873,7 @@ html:not(.js) .why .feat{opacity:1;transform:none}
 <div class="bar" id="bar" aria-hidden="true">
   <button class="ib" data-menu aria-label="القائمة" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg></button>
   <b data-no-i18n>فرحتنا</b>
-  <div><button class="ib lang" type="button" data-lang-btn tabindex="-1">EN</button><a class="ib" href="#signature" aria-label="التصاميم" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10C19.5 15.4 12 20 12 20z"/></svg></a></div>
+  <div><button class="ib shr" type="button" data-share aria-label="مشاركة" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M7 11H5.5v9.5h13V11H17"/></svg></button><button class="ib lang" type="button" data-lang-btn tabindex="-1">EN</button><a class="ib" href="#signature" aria-label="التصاميم" tabindex="-1"><svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10C19.5 15.4 12 20 12 20z"/></svg></a></div>
 </div>
 
 <div class="stage">
@@ -889,6 +893,7 @@ html:not(.js) .why .feat{opacity:1;transform:none}
         <svg class="fl" viewBox="0 0 250 22" aria-hidden="true"><path d="M4 12C40 12 70 14 98 12c10-1 14-8 22-8s10 9 5 11-9-4-3-6c10-3 18 4 26 4C178 14 210 12 246 12"/><path d="M110 15c4 3 9 3 13 0m4 0c4 3 9 3 13 0"/></svg>
         <small>FARHETNA</small>
       </a>
+      <button class="ib shr" type="button" data-share aria-label="مشاركة"><svg viewBox="0 0 24 24"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M7 11H5.5v9.5h13V11H17"/></svg></button>
       <a class="ib fav" href="#signature" aria-label="التصاميم"><svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.6 4.3 4.3 0 0 1 19.5 10C19.5 15.4 12 20 12 20z"/></svg></a>
       <a class="ib bag" href="studio.html" aria-label="اطلبي دعوتك"><svg viewBox="0 0 24 24"><path d="M5.5 8.5h13l-1 12h-11z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></svg></a>
     </div>
@@ -1599,5 +1604,12 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
  document.querySelectorAll(".chips button[data-f]").forEach(function(c){c.childNodes.forEach(function(n){if(n.nodeType===3)n.textContent=n.textContent.replace("٣٥٠",G.money("premium")).replace("٢٥٠",G.money("basic"))})});
  document.querySelectorAll("[data-price]").forEach(function(a){var v=a.getAttribute("data-price");if(v==="299"||v==="250")a.setAttribute("data-price",G.price("basic"));else if(v==="350")a.setAttribute("data-price",G.price("premium"))});
 })();</script>
+<script>
+/* share the site: the phone's share sheet, or copy the link */
+(function(){function toast(t){var e=document.createElement("div");e.className="shToast";e.textContent=t;document.body.appendChild(e);requestAnimationFrame(function(){e.classList.add("on")});setTimeout(function(){e.classList.remove("on");setTimeout(function(){e.remove()},400)},2200)}
+  document.addEventListener("click",function(ev){var b=ev.target.closest&&ev.target.closest("[data-share]");if(!b)return;ev.preventDefault();
+    var url="https://farhetnainvite.com/",d={title:"فرحتنا · دعوات أفراح إلكترونية",text:"شوفي دعوات فرحتنا 🤍",url:url};
+    if(navigator.share){navigator.share(d).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(url).then(function(){toast("اتنسخ لينك الموقع ✓")},function(){prompt("انسخي اللينك",url)})}else prompt("انسخي اللينك",url)})})();
+</script>
 </body>
 </html>

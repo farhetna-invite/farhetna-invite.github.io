@@ -259,3 +259,24 @@ if(mode){document.addEventListener("DOMContentLoaded",function(){
   function go(){setTimeout(place,1200)}
   if(document.readyState==="complete")go();else addEventListener("load",go);
 })();
+
+/* «شاركي الدعوة» — a small round share button on every invitation, shown once the guest has opened it */
+(function(){
+  try{if(window.top!==window.self)return}catch(e){return}
+  function go(){
+    if(document.getElementById("fhShare"))return;
+    var en=(document.documentElement.lang||"").slice(0,2)==="en";
+    var b=document.createElement("button");b.id="fhShare";b.type="button";b.setAttribute("aria-label",en?"Share":"مشاركة");
+    b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3.5M7.5 8 12 3.5 16.5 8"/><path d="M7 11H5.5v9.5h13V11H17"/></svg>';
+    var st=document.createElement("style");st.textContent='#fhShare{position:fixed;z-index:2147483000;right:max(12px,env(safe-area-inset-right));bottom:calc(84px + env(safe-area-inset-bottom));width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:rgba(40,20,24,.42);color:#fff;display:grid;place-items:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 6px 16px rgba(0,0,0,.25);opacity:0;transform:scale(.8);transition:opacity .5s,transform .5s;cursor:pointer;padding:0}#fhShare.on{opacity:.92;transform:none}#fhShare svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}#fhToast{position:fixed;z-index:2147483001;left:50%;bottom:calc(30px + env(safe-area-inset-bottom));transform:translateX(-50%);padding:9px 16px;border-radius:999px;background:rgba(40,20,24,.9);color:#fff;font:14px/1.4 system-ui,sans-serif;opacity:0;transition:opacity .3s;pointer-events:none}#fhToast.on{opacity:1}';
+    document.head.appendChild(st);document.body.appendChild(b);
+    b.addEventListener("click",function(e){e.stopPropagation();
+      var url=location.href,t=document.title.replace(/\s*[|·].*$/,"")||"دعوة";
+      if(navigator.share){navigator.share({title:t,text:en?"You're invited 🤍":"دعوة ليك 🤍",url:url}).catch(function(){})}
+      else{var done=function(){var x=document.getElementById("fhToast")||document.createElement("div");x.id="fhToast";x.textContent=en?"Link copied ✓":"اتنسخ لينك الدعوة ✓";document.body.appendChild(x);x.classList.add("on");setTimeout(function(){x.classList.remove("on")},2000)};
+        if(navigator.clipboard)navigator.clipboard.writeText(url).then(done,function(){prompt("",url)});else prompt("",url)}});
+    /* appear after the guest's first tap (the opening) or a few seconds */
+    var show=function(){b.classList.add("on")};document.addEventListener("pointerdown",function(){setTimeout(show,4500)},{once:true});setTimeout(show,9000);
+  }
+  if(document.readyState==="complete")go();else addEventListener("load",go);
+})();
