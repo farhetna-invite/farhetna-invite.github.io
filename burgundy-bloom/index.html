@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#3e0610">
 <title>Burgundy Bloom · Interactive · فرحتنا (معاينة)</title>
-<link rel="preload" as="image" href="img/top.webp">
-<link rel="preload" as="image" href="img/bot.webp">
+<link rel="preload" as="image" href="img/top.webp?v=4">
+<link rel="preload" as="image" href="img/bot.webp?v=4">
 <link rel="preload" as="image" href="img/seal.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +15,7 @@
 :root{
   --burg:#640b15;--burg2:#7a1424;--deep:#3e0610;--paper:#f4e2d4;--ivory:#fbf3ea;--ivory2:#f8ece2;--line:rgba(100,11,21,.5);--cream:#f6e6d8;
   --script:"Pinyon Script",cursive;--serif:"Cormorant Garamond",Georgia,serif;--ar:"Noto Naskh Arabic","Amiri",serif;--ruq:"Aref Ruqaa",serif;
-  --i-top:url(img/top.webp);--i-bot:url(img/bot.webp);--i-seal:url(img/seal.webp);--i-card:url(img/card.webp);
+  --i-top:url(img/top.webp?v=4);--i-bot:url(img/bot.webp?v=4);--i-seal:url(img/seal.webp);--i-card:url(img/card.webp);
   --i-paper:url(img/paper.webp);--i-velvet:url(img/velvet.webp);--i-ltl:url(img/leaf-tl.webp);--i-lbr:url(img/leaf-br.webp);
   --ease:cubic-bezier(.22,.7,.2,1);
 }
@@ -42,8 +42,8 @@ img{display:block;max-width:100%}
 .pnl.top{top:0;height:calc(854 / 1672 * 100%);background-image:var(--i-top);z-index:3}
 .pnl.bot{top:calc(804 / 1672 * 100%);height:calc(868 / 1672 * 100%);background-image:var(--i-bot);z-index:4}
 .pnl.top::before,.pnl.bot::after{content:"";position:absolute;left:0;right:0;height:60vh;background-image:inherit;background-size:100% auto}
-.pnl.top::before{bottom:calc(100% - 1px);background:url(img/ext-top.webp) center bottom/42vw auto repeat,#3e0610}
-.pnl.bot::after{top:calc(100% - 1px);background:url(img/ext-bot.webp) center top/42vw auto repeat,#3e0610}
+.pnl.top::before{bottom:calc(100% - 1px);background:url(img/ext-top.webp?v=4) center bottom/42vw auto repeat,#3e0610}
+.pnl.bot::after{top:calc(100% - 1px);background:url(img/ext-bot.webp?v=4) center top/42vw auto repeat,#3e0610}
 .gseal{position:absolute;z-index:6;left:calc(284 / 941 * 100%);top:calc(667 / 1672 * 100%);width:calc(331 / 941 * 100%);aspect-ratio:331/322;background:var(--i-seal) center/100% 100% no-repeat;filter:drop-shadow(0 7px 9px rgba(40,4,10,.45));transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
 .gtap{position:absolute;z-index:8;left:50%;top:calc(828 / 1672 * 100%);width:calc(420 / 941 * 100%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%}
 .gring{position:absolute;z-index:5;left:50%;top:calc(828 / 1672 * 100%);width:calc(340 / 941 * 100%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;animation:ring 3.4s ease-in-out 1.6s infinite}
