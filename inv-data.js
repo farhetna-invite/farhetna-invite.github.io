@@ -124,6 +124,10 @@ window.farhetnaData=function(key){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",mono:o.mono||"",date:o.date||"",time:base.time,
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",addrEn:o.addrEn||"",map:o.map||"",intro:o.intro||"",kind:o.kind||"",
       bism:o.bism!=="off",music:mu||null,slug:String(o._slug||"").toLowerCase()};}
+  if(key==="yqt"){
+    var yh=(o.photos&&/^(https?:|data:|blob:)/.test(o.photos.hero||""))?o.photos.hero:"";
+    return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",date:o.date||"",time:base.time,venue:o.venue||"",addr:o.addr||"",map:o.map||"",
+      wa:base.wa,intro:o.intro||"",program:prog,hero:yh,album:album,music:mu||"",slug:String(o._slug||"").toLowerCase(),lang:"ar"};}
   if(key==="sgp"||key==="rvl"){
     return{groom:o.groom||"",bride:o.bride||"",groomEn:o.groomEn||"",brideEn:o.brideEn||"",mono:o.mono||"",date:o.date||"",time:base.time,
       venue:o.venue||"",venueEn:o.venueEn||"",addr:o.addr||"",map:o.map||"",wa:base.wa,intro:o.intro||"",program:prog,
