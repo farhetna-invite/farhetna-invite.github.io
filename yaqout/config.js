@@ -8,5 +8,5 @@ window.FARHETNA_CONFIG={
   cardLine:"You are invited",     // last line on the glass card
   venue:"Royal Hall", addr:"التجمع الخامس، القاهرة", map:"",
   program:[["20:00","استقبال الضيوف"],["21:00","زفة العروسين"],["22:30","العشاء"]],
-  music:"music.mp3"
+  music:"music2.mp3"
 };
