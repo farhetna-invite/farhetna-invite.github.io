@@ -422,7 +422,7 @@ function play(){if(playing)return;playing=true;$("hint").classList.add("gone");$
   T0=null;lastT=0;burst=[];drift=[];setTimeout(mkBurst,3550);raf=requestAnimationFrame(frame)}
 view.addEventListener("click",play);view.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" ")play()});
 $("again").onclick=function(e){e.stopPropagation();cancelAnimationFrame(raf);playing=false;$("again").classList.remove("show");$("scrollHint").classList.remove("on");scrollTo(0,0);document.body.classList.add("locked");render(0);setTimeout(play,450)};
-au.src=C.music||"music.mp3";
+au.src=C.music||"music2.mp3";
 function muUi(){$("mu").classList.toggle("paused",au.paused)}["play","pause"].forEach(function(e){au.addEventListener(e,muUi)});
 $("mu").onclick=function(e){e.stopPropagation();if(au.paused){var p=au.play();if(p&&p.catch)p.catch(function(){})}else au.pause()};
 document.addEventListener("visibilitychange",function(){if(document.hidden)au.pause()});
