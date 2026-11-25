@@ -464,7 +464,7 @@ const D={
   show:{date:true,time:true,venue:true,timeline:true,story:true,rsvp:true,thanks:true},
   look:{env:"burgundy",seal:"orig"}
 };
-(()=>{try{const L=window.farhetnaData&&farhetnaData("bbl");if(L){Object.assign(D,L);D.show={date:true,time:false,venue:false,timeline:false,story:false,rsvp:false,thanks:true};const au=document.querySelector("audio");if(au&&D.music){if(D.music==="none")au.removeAttribute("src");else au.src=D.music}return}if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
+(()=>{try{const L=window.farhetnaData&&farhetnaData("bbl");if(L){const _EN={welcome:D.welcome,thanks:D.thanks};Object.assign(D,L);D.show={date:true,time:false,venue:false,timeline:false,story:false,rsvp:false,thanks:true};if(new URLSearchParams(location.search).get("lang")==="en")Object.assign(D,{lang:"en",groom:"Youssef",bride:"Warda",welcome:_EN.welcome,thanks:_EN.thanks});const au=document.querySelector("audio");if(au&&D.music){if(D.music==="none")au.removeAttribute("src");else au.src=D.music}return}if(!/[?&]demo=1/.test(location.search))return;const x=JSON.parse(localStorage.getItem("farhetna_demo")||"null");if(!x)return;
   Object.keys(x).forEach(k=>{const v=x[k];if(v===""||v==null||(Array.isArray(v)&&!v.length))return;D[k]=v});
   if(D.music){const au=document.getElementById("aud");if(D.music==="none")au.removeAttribute("src");else au.src=D.music}
   document.getElementById("demoFlag").textContent="معاينة";}catch(e){}})();
@@ -485,7 +485,7 @@ const T=AR?{hint:"المسي الختم لفتح الدعوة",lead:"بكل ال
   name:"الاسم",cnt:"عدد الأفراد",msg:"رسالة للعروسين (اختياري)",send:"تأكيد",change:"تغيير الرد",ty:"شكرًا",replay:"شوفوا الدعوة من الأول",
   okY:n=>`مستنيينك يا ${n} 🤍`,okYp:"ردك وصل للعروسين… هنفرح بيك جدًا",okN:n=>`شكرًا يا ${n}`,okNp:"هنفتقدك، ورسالتك وصلت للعروسين بكل حب",
   next:["التاريخ","الوقت","المكان","برنامج اليوم","حكايتنا","تأكيد الحضور","رسالة شكر"],discover:"اكتشفوا تفاصيل يومنا",q:{date:"التاريخ",time:"الوقت",venue:"المكان",rsvp:"الحضور"},needName:"اكتبي اسمك الأول"}
- :{hint:"Tap the seal to open",lead:"With joy in our hearts",dateK:"Save our date",dateT:"The Day",dateTap:"Tap the calendar",addCal:"Add to my calendar",calApple:"iPhone / Android (calendar file)",close:"Close",
+ :{hint:"Tap the seal to open",lead:"With love, we invite you to our engagement",dateK:"Save our date",dateT:"The Day",dateTap:"Tap the calendar",addCal:"Add to my calendar",calApple:"iPhone / Android (calendar file)",close:"Close",
   timeK:"The moment",timeT:"The Hour",timeTap:"Tap the clock",d:"Days",h:"Hours",m:"Minutes",venK:"The venue",venT:"Where we celebrate",venTap:"Tap the card to open",map:"Open in Google Maps",
   tlK:"Wedding timeline",tlT:"Our Evening",tlTap:"Tap any moment",stK:"Our story",stT:"Our Moments",rsK:"Kindly reply",rsT:"Will you join us?",rsQ:"We'd love to know if you can make it",yes:"Joyfully accept",no:"Regretfully decline",
   name:"Your name",cnt:"Number of guests",msg:"A note for the couple (optional)",send:"Send reply",change:"Change my reply",ty:"Thank you",replay:"Watch from the start",
@@ -641,5 +641,8 @@ $("gtap").addEventListener("click",()=>{if(opened)return;opened=true;
   S("st-fade",4200);setTimeout(()=>{gate.classList.add("gone");document.body.classList.add("deck-on")},4900)});
 mute.onclick=()=>{if(aud.paused){aud.play().catch(()=>{});$("mW").style.display=""}else{aud.pause();$("mW").style.display="none"}};
 </script>
+<button id="lngSw" type="button" style="position:fixed;z-index:60;top:max(12px,env(safe-area-inset-top));right:12px;padding:7px 14px;border-radius:999px;border:1px solid rgba(100,11,21,.35);background:rgba(251,243,234,.9);color:#640b15;font:600 14px 'Cormorant Garamond',Georgia,serif;letter-spacing:.04em;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)"></button>
+<script>(function(){var b=document.getElementById("lngSw"),en=new URLSearchParams(location.search).get("lang")==="en";b.textContent=en?"عربي":"English";
+b.onclick=function(e){e.stopPropagation();location.href=location.pathname+(en?"":"?lang=en")+location.hash}})();</script>
 </body>
 </html>
